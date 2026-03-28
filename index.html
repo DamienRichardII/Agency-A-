@@ -17,19 +17,19 @@
 
 :root {
     /* — Colors — */
-    --terracotta: #c06949;
-    --terracotta-light: #d4836a;
-    --rose-brun: #a6686e;
-    --chocolat: #3f0d00;
-    --bleu-gris: #405b66;
-    --bleu-nuit: #183749;
-    --beige-rose: #f2e2ce;
-    --beige-light: #f8f0e6;
-    --cream: #faf6f1;
-    --noir: #0a0a0a;
+    --terracotta: #a87456;
+    --terracotta-light: #c39679;
+    --rose-brun: #8e6f61;
+    --chocolat: #211816;
+    --bleu-gris: #51606b;
+    --bleu-nuit: #102634;
+    --beige-rose: #e8dccb;
+    --beige-light: #f4ede4;
+    --cream: #f7f3ed;
+    --noir: #0a0f14;
     --blanc: #ffffff;
-    --gris: #8a8a8a;
-    --gris-light: #c4c4c4;
+    --gris: #707b84;
+    --gris-light: #b8bfc5;
 
     /* — Typography — */
     --font-display: 'Cormorant Garamond', Georgia, serif;
@@ -126,13 +126,17 @@ button {
 }
 
 .loader-logo {
-    font-family: var(--font-body);
-    font-weight: 300;
-    font-size: clamp(28px, 4vw, 48px);
-    letter-spacing: 0.3em;
-    color: var(--beige-rose);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 40px;
-    text-transform: uppercase;
+}
+
+.loader-logo-img {
+    width: min(360px, 72vw);
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.18));
 }
 
 .loader-bar {
@@ -1510,6 +1514,933 @@ button {
     }
 }
 
+
+
+/* ============================================
+   V2 REFINEMENTS — Minimal luxe / segmentation
+   ============================================ */
+:root {
+    --terracotta: #b07a58;
+    --terracotta-light: #c29678;
+    --rose-brun: #8e6c63;
+    --chocolat: #2e1d15;
+    --bleu-gris: #49606e;
+    --bleu-nuit: #102634;
+    --beige-rose: #e8dccb;
+    --beige-light: #f4ede4;
+    --cream: #f7f3ed;
+    --gris: #6f6d6a;
+    --gris-light: #d6cec4;
+}
+
+body {
+    background:
+        radial-gradient(circle at top, rgba(255,255,255,0.6), transparent 32%),
+        linear-gradient(180deg, #f7f3ed 0%, #f3eee7 100%);
+    color: #111111;
+}
+
+::selection {
+    background: rgba(176, 122, 88, 0.92);
+}
+
+.header.scrolled {
+    background: rgba(247, 243, 237, 0.92);
+    box-shadow: 0 10px 40px rgba(16, 38, 52, 0.08);
+}
+
+.section {
+    position: relative;
+}
+
+.section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: clamp(24px, 4vw, 64px);
+    right: clamp(24px, 4vw, 64px);
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(16,38,52,0.08), transparent);
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 180px;
+    background: linear-gradient(180deg, rgba(247,243,237,0) 0%, rgba(247,243,237,0.96) 100%);
+    pointer-events: none;
+}
+
+.hero-overline,
+.section-label,
+.stat-plus,
+.service-number,
+.gallery-item-category,
+.footer-col h4 {
+    color: var(--terracotta);
+}
+
+.about,
+.services,
+.booking {
+    background: linear-gradient(180deg, rgba(255,255,255,0.22), rgba(255,255,255,0));
+}
+
+.portfolio,
+.testimonials,
+.footer {
+    background: linear-gradient(180deg, rgba(16,38,52,0.015), rgba(16,38,52,0));
+}
+
+.services-grid {
+    gap: 24px;
+}
+
+.service-card {
+    background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(244,237,228,0.85));
+    border: 1px solid rgba(16,38,52,0.08);
+    box-shadow: 0 18px 40px rgba(16,38,52,0.06);
+}
+
+.service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 60px rgba(16,38,52,0.10);
+    border-color: rgba(176,122,88,0.24);
+}
+
+.service-card:last-child {
+    background: linear-gradient(135deg, rgba(16,38,52,0.98), rgba(27,41,52,0.96));
+    color: var(--beige-light);
+}
+
+.service-card:last-child .service-number,
+.service-card:last-child .service-tags span {
+    color: var(--beige-light);
+    border-color: rgba(232,220,203,0.24);
+}
+
+.service-card:last-child .service-desc {
+    color: rgba(244,237,228,0.82);
+}
+
+.portfolio-header,
+.booking-grid,
+.footer-top {
+    align-items: start;
+}
+
+.portfolio {
+    padding-top: calc(var(--section-padding) * 0.9);
+}
+
+.portfolio-filters {
+    gap: 10px;
+}
+
+.filter-btn {
+    background: rgba(255,255,255,0.78);
+    border: 1px solid rgba(16,38,52,0.08);
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+    background: var(--bleu-nuit);
+    color: var(--beige-light);
+    border-color: var(--bleu-nuit);
+}
+
+.segmentation,
+.models,
+.prints {
+    padding: clamp(72px, 9vw, 132px) 0;
+}
+
+.segmentation {
+    background: linear-gradient(180deg, rgba(255,255,255,0.55), rgba(244,237,228,0.75));
+}
+
+.segmentation-grid,
+.models-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+}
+
+.segment-card,
+.model-card,
+.prints-panel {
+    position: relative;
+    overflow: hidden;
+    border-radius: 28px;
+    border: 1px solid rgba(16,38,52,0.08);
+    box-shadow: 0 18px 44px rgba(16,38,52,0.07);
+}
+
+.segment-card {
+    background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(244,237,228,0.94));
+    padding: 30px;
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.segment-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, rgba(176,122,88,0.08), transparent 42%);
+    pointer-events: none;
+}
+
+.segment-kicker,
+.model-kicker,
+.prints-kicker {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 18px;
+}
+
+.segment-title,
+.models-title,
+.prints-title {
+    font-family: var(--font-display);
+    font-size: clamp(38px, 5vw, 60px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+}
+
+.segment-card h3,
+.model-name,
+.prints-panel h3 {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3vw, 38px);
+    font-weight: 500;
+    line-height: 1;
+    margin-bottom: 14px;
+}
+
+.segment-card p,
+.model-role,
+.model-meta,
+.prints-text,
+.models-intro,
+.segmentation-intro {
+    color: rgba(16,38,52,0.72);
+}
+
+.segment-card ul,
+.model-details {
+    list-style: none;
+    display: grid;
+    gap: 10px;
+    margin: 20px 0 28px;
+}
+
+.segment-card li,
+.model-details li {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    color: rgba(16,38,52,0.82);
+}
+
+.segment-card li::before,
+.model-details li::before {
+    content: "•";
+    color: var(--terracotta);
+}
+
+.models {
+    background: linear-gradient(180deg, rgba(16,38,52,0.02), rgba(255,255,255,0.38));
+}
+
+.models-header,
+.segmentation-header,
+.prints-header {
+    max-width: 920px;
+}
+
+.models-grid {
+    align-items: stretch;
+}
+
+.model-card {
+    background: linear-gradient(180deg, rgba(255,255,255,0.99), rgba(244,237,228,0.92));
+}
+
+.model-visual {
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(16,38,52,0.95), rgba(176,122,88,0.85));
+}
+
+.model-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.model-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-family: var(--font-display);
+    font-size: clamp(32px, 5vw, 56px);
+    color: rgba(244,237,228,0.92);
+    letter-spacing: 0.1em;
+}
+
+.model-content {
+    padding: 28px;
+}
+
+.model-role {
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    color: var(--terracotta);
+}
+
+.model-meta {
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.prints {
+    background: linear-gradient(135deg, #0f2230 0%, #111111 55%, #1e1916 100%);
+    color: var(--beige-light);
+}
+
+.prints::before {
+    background: linear-gradient(90deg, transparent, rgba(232,220,203,0.15), transparent);
+}
+
+.prints .section-label,
+.prints .prints-kicker,
+.prints .prints-text,
+.prints .segmentation-intro,
+.prints .prints-panel ul,
+.prints .prints-panel li,
+.prints .prints-panel p {
+    color: rgba(244,237,228,0.8);
+}
+
+.prints-panel {
+    margin-top: 40px;
+    padding: clamp(28px, 4vw, 42px);
+    background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+    border-color: rgba(232,220,203,0.14);
+}
+
+.prints-panel-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 28px;
+}
+
+.prints-panel ul {
+    list-style: none;
+    display: grid;
+    gap: 12px;
+    margin: 22px 0 30px;
+}
+
+.prints-panel li {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.prints-panel li::before {
+    content: "◆";
+    color: var(--terracotta-light);
+    margin-top: 1px;
+}
+
+.prints-aside {
+    padding: 24px;
+    border-radius: 24px;
+    background: linear-gradient(180deg, rgba(232,220,203,0.08), rgba(232,220,203,0.02));
+    border: 1px solid rgba(232,220,203,0.12);
+}
+
+.prints-actions,
+.segment-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.btn.btn-secondary {
+    border: 1px solid rgba(232,220,203,0.18);
+    color: var(--beige-light);
+    background: rgba(255,255,255,0.04);
+}
+
+.btn.btn-secondary:hover {
+    background: rgba(255,255,255,0.10);
+}
+
+.booking-form {
+    background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(244,237,228,0.9));
+    border: 1px solid rgba(16,38,52,0.08);
+    box-shadow: 0 20px 60px rgba(16,38,52,0.08);
+}
+
+.booking-info-item a,
+.booking-info-item span {
+    color: rgba(16,38,52,0.82);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    border-color: rgba(16,38,52,0.12);
+    background: rgba(255,255,255,0.8);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: rgba(176,122,88,0.55);
+    box-shadow: 0 0 0 4px rgba(176,122,88,0.10);
+}
+
+.form-hint {
+    margin-top: 16px;
+    font-size: 13px;
+    color: rgba(16,38,52,0.56);
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+
+.portfolio-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.booking-form-premium {
+    padding: clamp(24px, 3vw, 34px);
+    border-radius: 28px;
+}
+
+.booking-form-shell {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-intro {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(16,38,52,0.08);
+}
+
+.form-kicker {
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: rgba(16,38,52,0.48);
+}
+
+.booking-form-premium .form-row {
+    gap: 18px;
+}
+
+.booking-form-premium .form-group {
+    gap: 10px;
+}
+
+.booking-form-premium .form-group label {
+    color: rgba(16,38,52,0.68);
+    letter-spacing: 0.18em;
+}
+
+.booking-form-premium .form-group input,
+.booking-form-premium .form-group select,
+.booking-form-premium .form-group textarea {
+    min-height: 54px;
+    padding: 16px 18px;
+    border-radius: 18px;
+    border: 1px solid rgba(16,38,52,0.10);
+    background: rgba(255,255,255,0.92);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.4);
+}
+
+.booking-form-premium .form-group textarea {
+    min-height: 152px;
+}
+
+.booking-form-premium .form-group input[type="file"] {
+    padding-top: 14px;
+    padding-bottom: 14px;
+}
+
+.booking-form-premium .btn-full {
+    margin-top: 8px;
+    min-height: 56px;
+    border-radius: 999px;
+}
+
+@media (max-width: 767px) {
+    .portfolio-actions {
+        flex-direction: column;
+    }
+
+    .portfolio-actions .btn {
+        width: 100%;
+    }
+
+    .booking-form-premium {
+        padding: 20px;
+        border-radius: 22px;
+    }
+}
+
+.footer {
+    background: linear-gradient(180deg, #0f2230 0%, #090909 100%);
+}
+
+.footer-logo-band {
+    margin-top: 40px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(232,220,203,0.12);
+    display: flex;
+    justify-content: center;
+}
+
+.footer-logo-band .footer-logo {
+    opacity: 0.92;
+    max-width: 240px;
+}
+
+.footer-col .social-icons {
+    display: flex;
+    gap: 14px;
+    margin-top: 14px;
+}
+
+.social-icon {
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid rgba(232,220,203,0.16);
+    background: rgba(255,255,255,0.03);
+    color: var(--beige-light);
+}
+
+.social-icon:hover {
+    color: var(--blanc);
+    border-color: rgba(176,122,88,0.55);
+    background: rgba(176,122,88,0.14);
+}
+
+.mobile-socials {
+    display: grid;
+    grid-template-columns: repeat(4, 40px);
+    gap: 10px;
+}
+
+.mobile-socials a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.02);
+}
+
+@media (max-width: 1023px) {
+    .segmentation-grid,
+    .models-grid,
+    .prints-panel-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .segment-card,
+    .model-card {
+        min-height: auto;
+    }
+}
+
+@media (max-width: 767px) {
+    .section::before {
+        left: 24px;
+        right: 24px;
+    }
+
+    .segmentation,
+    .models,
+    .prints {
+        padding: 64px 0;
+    }
+
+    .segment-card,
+    .model-content,
+    .prints-panel,
+    .prints-aside {
+        padding: 22px;
+        border-radius: 22px;
+    }
+
+    .segment-actions,
+    .prints-actions {
+        flex-direction: column;
+    }
+
+    .mobile-socials {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+
+
+/* ============================================
+   V3 REFINEMENTS
+   ============================================ */
+body {
+    background: linear-gradient(180deg, #f7f3ed 0%, #f5efe6 100%);
+}
+
+.section {
+    position: relative;
+}
+
+.section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: clamp(24px, 4vw, 64px);
+    right: clamp(24px, 4vw, 64px);
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(16,38,52,0.14), transparent);
+}
+
+.about::before,
+.hero::before,
+.footer::before,
+.portfolio::before {
+    display: none;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 140px;
+    background: linear-gradient(180deg, transparent, rgba(16,38,52,0.28));
+    pointer-events: none;
+}
+
+.hero-title,
+.portfolio-title,
+.services-title,
+.booking-title,
+.segment-title,
+.models-title,
+.prints-title {
+    letter-spacing: -0.03em;
+}
+
+.segmentation,
+.models,
+.prints {
+    padding: clamp(56px, 6vw, 88px) 0;
+}
+
+.segmentation-header,
+.models-header,
+.prints-header {
+    max-width: 880px;
+}
+
+.segmentation-intro,
+.models-intro,
+.prints-text {
+    max-width: 720px;
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+.segmentation-grid {
+    margin-top: 28px;
+    gap: 18px;
+}
+
+.segment-card {
+    min-height: 0;
+    padding: 26px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(244,237,228,0.86));
+    border-color: rgba(16,38,52,0.06);
+    box-shadow: 0 16px 36px rgba(16,38,52,0.06);
+}
+
+.segment-card h3 {
+    font-size: clamp(24px, 2.2vw, 31px);
+}
+
+.segment-card ul {
+    margin: 16px 0 22px;
+    gap: 8px;
+}
+
+.segment-actions,
+.prints-actions {
+    gap: 12px;
+}
+
+.models-grid {
+    grid-template-columns: 1.15fr 1fr 1fr;
+    gap: 18px;
+    margin-top: 28px;
+}
+
+.model-card {
+    background: rgba(255,255,255,0.86);
+    border-color: rgba(16,38,52,0.07);
+}
+
+.model-visual {
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background: linear-gradient(145deg, rgba(16,38,52,0.92), rgba(46,58,66,0.82));
+}
+
+.model-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.model-placeholder {
+    display: grid;
+    place-items: center;
+    height: 100%;
+    font-family: var(--font-display);
+    font-size: clamp(40px, 4vw, 64px);
+    color: rgba(232,220,203,0.85);
+    letter-spacing: 0.08em;
+}
+
+.model-content {
+    padding: 24px;
+}
+
+.prints {
+    background: linear-gradient(180deg, rgba(16,38,52,0.05), rgba(16,38,52,0.01));
+}
+
+.prints-panel {
+    background: linear-gradient(145deg, #102634 0%, #0a0f14 100%);
+    color: var(--beige-light);
+    border-color: rgba(232,220,203,0.1);
+    box-shadow: 0 26px 60px rgba(10,15,20,0.24);
+}
+
+.prints-panel h3,
+.prints-panel p,
+.prints-panel li,
+.prints-aside p {
+    color: var(--beige-light);
+}
+
+.prints-panel ul {
+    list-style: none;
+    display: grid;
+    gap: 10px;
+    margin: 18px 0 24px;
+}
+
+.prints-panel li::before {
+    content: "•";
+    color: var(--terracotta-light);
+    margin-right: 10px;
+}
+
+.portfolio {
+    background: linear-gradient(180deg, #0a0f14 0%, #102634 100%);
+}
+
+.filter-btn {
+    border-radius: 999px;
+    padding-inline: 18px;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background: rgba(168,116,86,0.92);
+    border-color: rgba(168,116,86,0.92);
+}
+
+.services {
+    background: linear-gradient(180deg, rgba(255,255,255,0.45), rgba(244,237,228,0.86));
+}
+
+.services-grid {
+    gap: 20px;
+}
+
+.service-card {
+    background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(244,237,228,0.94));
+    border-radius: 24px;
+    border: 1px solid rgba(16,38,52,0.08);
+    box-shadow: 0 18px 46px rgba(16,38,52,0.06);
+}
+
+.service-card::before {
+    height: 3px;
+    background: linear-gradient(90deg, var(--terracotta), rgba(16,38,52,0.95));
+}
+
+.service-number {
+    color: rgba(16,38,52,0.14);
+    font-size: clamp(54px, 5vw, 72px);
+    margin-bottom: 18px;
+}
+
+.service-name {
+    font-size: clamp(24px, 2vw, 32px);
+    margin-bottom: 14px;
+}
+
+.service-desc {
+    color: rgba(16,38,52,0.76);
+}
+
+.service-tags span {
+    border-radius: 999px;
+    padding: 6px 12px;
+    border-color: rgba(168,116,86,0.24);
+    color: var(--chocolat);
+    background: rgba(168,116,86,0.07);
+}
+
+.booking {
+    background: linear-gradient(180deg, #102634 0%, #0f2230 100%);
+}
+
+.booking-grid {
+    gap: clamp(32px, 4vw, 56px);
+}
+
+.booking-right {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(232,220,203,0.1);
+    border-radius: 28px;
+    padding: clamp(22px, 3vw, 34px);
+    box-shadow: 0 20px 48px rgba(10,15,20,0.2);
+}
+
+.form-row {
+    gap: 16px;
+}
+
+.form-group label {
+    color: rgba(232,220,203,0.72);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    color: var(--beige-light);
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(232,220,203,0.14);
+    border-radius: 16px;
+    padding: 16px 18px;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: rgba(195,150,121,0.95);
+    box-shadow: 0 0 0 4px rgba(168,116,86,0.12);
+}
+
+.form-help,
+.form-note {
+    font-size: 12px;
+    color: rgba(232,220,203,0.62);
+}
+
+.form-note {
+    margin-top: -4px;
+}
+
+.btn {
+    border-radius: 999px;
+}
+
+.btn-primary {
+    background: var(--terracotta);
+    border-color: var(--terracotta);
+}
+
+.btn-primary:hover {
+    background: #8f624a;
+    border-color: #8f624a;
+}
+
+.btn-secondary,
+.btn-outline {
+    border-radius: 999px;
+}
+
+.footer-logo-band {
+    padding-top: 36px;
+    margin-top: 52px;
+}
+
+.footer-logo-band .footer-logo {
+    max-width: 220px;
+    filter: drop-shadow(0 8px 20px rgba(0,0,0,0.18));
+}
+
+@media (max-width: 1023px) {
+    .models-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 767px) {
+    .section::before {
+        left: 20px;
+        right: 20px;
+    }
+
+    .segment-card,
+    .model-content,
+    .prints-panel,
+    .prints-aside,
+    .booking-right {
+        padding: 20px;
+        border-radius: 22px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}
+
 </style>
 </head>
 <body>
@@ -1517,7 +2448,7 @@ button {
     <!-- LOADER -->
     <div id="loader" class="loader">
         <div class="loader-inner">
-            <div class="loader-logo">AGENCY A</div>
+            <div class="loader-logo"><img src="assets/logo/logo-white-transparent.png" alt="Agency A" class="loader-logo-img"></div>
             <div class="loader-bar"><div class="loader-progress"></div></div>
         </div>
     </div>
@@ -1563,8 +2494,10 @@ button {
             </nav>
             <div class="mobile-menu-footer">
                 <div class="mobile-socials">
-                    <a href="https://www.instagram.com/agency_a__" target="_blank" rel="noopener">Instagram — @agency_a__</a>
-                    <a href="https://www.instagram.com/agency_a_produits" target="_blank" rel="noopener">Instagram — @agency_a_produits</a>
+                    <a href="https://www.instagram.com/agency_a__" target="_blank" rel="noopener" aria-label="Instagram Portfolio"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+                    <a href="https://www.instagram.com/agency_a_produits" target="_blank" rel="noopener" aria-label="Instagram Produits"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+                    <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M15 3h-2.5A4.5 4.5 0 0 0 8 7.5V10H5v4h3v7h4v-7h3l1-4h-4V7.8c0-1 .3-1.8 1.7-1.8H16V3z"/></svg></a>
+                    <a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4V9h4v2"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2" fill="currentColor" stroke="none"/></svg></a>
                 </div>
                 <p class="mobile-email">anais@agency-a.fr</p>
             </div>
@@ -1606,24 +2539,6 @@ button {
     </section>
 
     <!-- MARQUEE -->
-    <div class="marquee" aria-hidden="true">
-        <div class="marquee-track">
-            <span>Mode</span><span class="marquee-dot">◆</span>
-            <span>Fashion Week</span><span class="marquee-dot">◆</span>
-            <span>Produit</span><span class="marquee-dot">◆</span>
-            <span>Culinaire</span><span class="marquee-dot">◆</span>
-            <span>Défilé</span><span class="marquee-dot">◆</span>
-            <span>Sport</span><span class="marquee-dot">◆</span>
-            <span>Reportage</span><span class="marquee-dot">◆</span>
-            <span>Mode</span><span class="marquee-dot">◆</span>
-            <span>Fashion Week</span><span class="marquee-dot">◆</span>
-            <span>Produit</span><span class="marquee-dot">◆</span>
-            <span>Culinaire</span><span class="marquee-dot">◆</span>
-            <span>Défilé</span><span class="marquee-dot">◆</span>
-            <span>Sport</span><span class="marquee-dot">◆</span>
-            <span>Reportage</span><span class="marquee-dot">◆</span>
-        </div>
-    </div>
 
     <!-- ABOUT -->
     <section id="about" class="section about">
@@ -1651,6 +2566,68 @@ button {
         </div>
     </section>
 
+    <!-- SEGMENTATION -->
+    <section class="section segmentation" id="expertises">
+        <div class="container">
+            <div class="section-label">02 — Parcours</div>
+            <div class="segmentation-header">
+                <div class="segment-kicker">Parcours dédiés</div>
+                <h2 class="segment-title" data-animate="fade-in">Trois univers clairs, lisibles et immédiatement identifiables.</h2>
+                <p class="segmentation-intro" data-animate="fade-in">Une lecture plus nette et plus haut de gamme : chaque cible identifie son univers, son niveau d’accompagnement et le bon point de contact sans sensation de page trop longue.</p>
+            </div>
+            <div class="segmentation-grid">
+                <article class="segment-card" data-animate="fade-in">
+                    <div>
+                        <div class="segment-kicker">Vous êtes mannequin</div>
+                        <h3>Book, test & présence éditoriale</h3>
+                        <p>Un accompagnement pensé pour les profils qui veulent enrichir leur image, construire un book cohérent et valoriser leur singularité.</p>
+                        <ul>
+                            <li>Portraits éditoriaux et tests agence</li>
+                            <li>Direction d’image et sélection des visuels</li>
+                            <li>Préparation aux castings et mises à jour portfolio</li>
+                        </ul>
+                    </div>
+                    <div class="segment-actions">
+                        <a href="#models" class="btn btn-outline">Voir les profils</a>
+                        <a href="#booking" class="btn btn-primary">Me présenter</a>
+                    </div>
+                </article>
+                <article class="segment-card" data-animate="fade-in">
+                    <div>
+                        <div class="segment-kicker">Vous êtes une entreprise</div>
+                        <h3>Images de marque & production premium</h3>
+                        <p>Pour les maisons, studios, marques et agences qui recherchent une direction artistique forte, lisible et haut de gamme.</p>
+                        <ul>
+                            <li>Campagnes, lookbooks et contenus social media</li>
+                            <li>Packshots premium, éditorial, reportage événementiel</li>
+                            <li>Organisation de production et rendu maîtrisé</li>
+                        </ul>
+                    </div>
+                    <div class="segment-actions">
+                        <a href="#portfolio" class="btn btn-outline">Voir le portfolio</a>
+                        <a href="#booking" class="btn btn-primary">Demander un devis</a>
+                    </div>
+                </article>
+                <article class="segment-card" data-animate="fade-in">
+                    <div>
+                        <div class="segment-kicker">Vous êtes un particulier</div>
+                        <h3>Portraits, moments clés & commandes privées</h3>
+                        <p>Une approche plus intime, élégante et sur-mesure pour celles et ceux qui veulent des images sensibles, fortes et durables.</p>
+                        <ul>
+                            <li>Portraits personnels ou professionnels</li>
+                            <li>Commandes sur mesure et événements privés</li>
+                            <li>Possibilité d’orienter vers la boutique de tirages</li>
+                        </ul>
+                    </div>
+                    <div class="segment-actions">
+                        <a href="#prints" class="btn btn-outline">Découvrir les tirages</a>
+                        <a href="#booking" class="btn btn-primary">Prendre contact</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
     <!-- PORTFOLIO -->
     <section id="portfolio" class="section portfolio">
         <div class="container">
@@ -1664,13 +2641,13 @@ button {
                     <button class="filter-btn" data-filter="produit" data-i18n="filter_product">Produit</button>
                     <button class="filter-btn" data-filter="culinaire" data-i18n="filter_culinary">Culinaire</button>
                     <button class="filter-btn" data-filter="mode" data-i18n="filter_fashion">Mode</button>
-                    <button class="filter-btn" data-filter="ventes" data-i18n="filter_sales">Ventes</button>
                     <button class="filter-btn" data-filter="sport" data-i18n="filter_sport">Sport</button>
                 </div>
             </div>
             <div class="gallery-grid" id="galleryGrid"></div>
-            <div class="portfolio-cta" data-animate="fade-in">
+            <div class="portfolio-cta portfolio-actions" data-animate="fade-in">
                 <a href="#booking" class="btn btn-primary" data-i18n="portfolio_cta">Discutons de votre projet</a>
+                <a href="javascript:void(0)" class="btn btn-secondary" aria-disabled="true">Ventes</a>
             </div>
         </div>
     </section>
@@ -1678,7 +2655,7 @@ button {
     <!-- SERVICES -->
     <section id="services" class="section services">
         <div class="container">
-            <div class="section-label" data-i18n="services_label">03 — Services</div>
+            <div class="section-label" data-i18n="services_label">05 — Services</div>
             <h2 class="services-title" data-animate="fade-in" data-i18n="services_title">Ce que nous créons</h2>
             <div class="services-grid">
                 <div class="service-card" data-animate="fade-in"><span class="service-number">01</span><h3 class="service-name" data-i18n="service1_name">Shooting Mode & Éditorial</h3><p class="service-desc" data-i18n="service1_desc">Direction artistique complète pour vos campagnes mode, lookbooks et éditos. Du moodboard au rendu final.</p><div class="service-tags"><span>Lookbook</span><span>Éditorial</span><span>Campagne</span></div></div>
@@ -1691,10 +2668,99 @@ button {
         </div>
     </section>
 
+    <!-- MODELS -->
+    <section class="section models" id="models">
+        <div class="container">
+            <div class="section-label">03 — Profils</div>
+            <div class="models-header">
+                <div class="model-kicker">Galerie mannequins</div>
+                <h2 class="models-title" data-animate="fade-in">Une galerie mannequins plus sélective, plus éditoriale, plus premium.</h2>
+                <p class="models-intro" data-animate="fade-in">Un bloc plus concis et plus statutaire pour présenter les profils, rassurer les marques et donner immédiatement un niveau de standing.</p>
+            </div>
+            <div class="models-grid">
+                <article class="model-card" data-animate="fade-in">
+                    <div class="model-visual"><img src="assets/portraits/Anais-22.jpg" alt="Profil mannequin éditorial"></div>
+                    <div class="model-content">
+                        <div class="model-kicker">Profil éditorial</div>
+                        <h3 class="model-name">Anaïs</h3>
+                        <div class="model-role">Mannequin / image de marque</div>
+                        <ul class="model-details">
+                            <li>Éditorial mode, portrait premium, direction artistique</li>
+                            <li>À l’aise en studio, campagne et contenus social media</li>
+                            <li>Univers : luxe discret, attitude, présence visuelle</li>
+                        </ul>
+                        <p class="model-meta">Disponible pour tests, campagnes, looks premium et productions ciblées.</p>
+                    </div>
+                </article>
+                <article class="model-card" data-animate="fade-in">
+                    <div class="model-visual"><div class="model-placeholder">A / C</div></div>
+                    <div class="model-content">
+                        <div class="model-kicker">Profil comédien</div>
+                        <h3 class="model-name">Comédien & portrait narration</h3>
+                        <div class="model-role">Casting / contenus incarnés</div>
+                        <ul class="model-details">
+                            <li>Portraits expressifs, book comédien, image identité</li>
+                            <li>Direction douce, précise et orientée présence caméra</li>
+                            <li>Formats adaptés aux profils agence et communication</li>
+                        </ul>
+                        <p class="model-meta">Bloc pensé pour accueillir d’autres profils dès réception des assets finaux.</p>
+                    </div>
+                </article>
+                <article class="model-card" data-animate="fade-in">
+                    <div class="model-visual"><div class="model-placeholder">B / T</div></div>
+                    <div class="model-content">
+                        <div class="model-kicker">Profil brand talent</div>
+                        <h3 class="model-name">Entreprise, campagne, collaboration</h3>
+                        <div class="model-role">Marques & visuels dirigés</div>
+                        <ul class="model-details">
+                            <li>Mise en valeur de silhouettes, gestes, produits et attitude</li>
+                            <li>Adapté aux campagnes, lookbooks et lancements premium</li>
+                            <li>Présentation claire pour distinguer mannequins et clients finaux</li>
+                        </ul>
+                        <p class="model-meta">La galerie peut évoluer facilement vers une vraie base de profils détaillés.</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRINTS -->
+    <section class="section prints" id="prints">
+        <div class="container">
+            <div class="section-label">06 — Tirages</div>
+            <div class="prints-header">
+                <div class="prints-kicker">Boutique visuelle</div>
+                <h2 class="prints-title" data-animate="fade-in">Un espace séparé pour la vente de tirages.</h2>
+                <p class="prints-text" data-animate="fade-in">Cette offre est volontairement séparée du reste des prestations pour créer une lecture plus boutique, plus sélective et plus cohérente avec une autre clientèle.</p>
+            </div>
+            <div class="prints-panel" data-animate="fade-in">
+                <div class="prints-panel-grid">
+                    <div>
+                        <h3>Collection de tirages d’art</h3>
+                        <p>Une présentation pensée comme un mini-espace shopping : plus contemplative, plus sélective, plus distincte du reste des services photo.</p>
+                        <ul>
+                            <li>Éditions limitées et formats sélectionnés</li>
+                            <li>Approche plus galerie / collection que prestation de service</li>
+                            <li>Accès direct à la sélection dédiée dans le portfolio</li>
+                        </ul>
+                        <div class="prints-actions">
+                            <a href="javascript:void(0)" class="btn btn-primary" aria-disabled="true">Voir la sélection tirages</a>
+                            <a href="#booking" class="btn btn-secondary">Poser une question</a>
+                        </div>
+                    </div>
+                    <aside class="prints-aside">
+                        <div class="prints-kicker">Expérience</div>
+                        <p>Le bloc reste cohérent avec la marque, mais son ambiance est volontairement plus sombre et plus boutique pour distinguer cette cible du corporate, du mannequinat et du particulier.</p>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- TESTIMONIALS -->
     <section class="section testimonials">
         <div class="container">
-            <div class="section-label" data-i18n="testimonials_label">04 — Ils m'ont fait confiance</div>
+            <div class="section-label" data-i18n="testimonials_label">06 — Ils m'ont fait confiance</div>
             <div class="testimonials-track">
                 <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"Un regard unique et une sensibilité rare. Anaïs a su capturer exactement l'essence de notre collection."</p><div class="testimonial-author"><span class="testimonial-name">— Maison Monteiro</span><span class="testimonial-role">Créateur de mode</span></div></div>
                 <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"Professionnalisme exemplaire et résultat au-delà de nos attentes. Nous recommandons Agency A sans hésitation."</p><div class="testimonial-author"><span class="testimonial-name">— Studio Élégance</span><span class="testimonial-role">Agence de mannequins</span></div></div>
@@ -1706,7 +2772,7 @@ button {
     <!-- BOOKING -->
     <section id="booking" class="section booking">
         <div class="container">
-            <div class="section-label" data-i18n="booking_label">05 — Réserver</div>
+            <div class="section-label" data-i18n="booking_label">07 — Réserver</div>
             <div class="booking-grid">
                 <div class="booking-left">
                     <h2 class="booking-title" data-animate="fade-in"><span data-i18n="booking_title1">Créons ensemble</span><br><em data-i18n="booking_title2">votre prochain</em><br><span data-i18n="booking_title3">projet visuel.</span></h2>
@@ -1718,20 +2784,65 @@ button {
                     </div>
                 </div>
                 <div class="booking-right">
-                    <div class="booking-form" id="bookingForm" data-animate="fade-in">
-                        <div class="form-row">
-                            <div class="form-group"><label data-i18n="form_name">Nom complet</label><input type="text" id="bookName" required></div>
-                            <div class="form-group"><label data-i18n="form_email">Email</label><input type="email" id="bookEmail" required></div>
+                    <form class="booking-form booking-form-premium" id="bookingForm" data-animate="fade-in" action="https://formsubmit.co/anais@agency-a.fr" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="_subject" value="Nouvelle demande — Agency A">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_template" value="table">
+                        <input type="hidden" name="_next" value="#booking">
+                        <div class="booking-form-shell">
+                        <div class="form-intro">
+                            <span class="form-kicker">Réservation</span>
+                            <p class="form-note">Un formulaire repensé pour un rendu plus éditorial, plus fluide et plus haut de gamme.</p>
                         </div>
-                        <div class="form-group"><label data-i18n="form_service">Type de prestation</label><select id="bookService" required><option value="" data-i18n="form_select">Sélectionner</option><option value="mode">Shooting Mode & Éditorial</option><option value="produit">Photographie Produit</option><option value="event">Événementiel & Reportage</option><option value="culinaire">Photographie Culinaire</option><option value="sport">Photographie Sportive</option><option value="tirage">Achat de Tirages</option><option value="autre" data-i18n="form_other">Autre</option></select></div>
-                        <div class="form-group"><label data-i18n="form_date">Date souhaitée</label><input type="date" id="bookDate"></div>
-                        <div class="form-group"><label data-i18n="form_message">Décrivez votre projet</label><textarea id="bookMessage" rows="5" required></textarea></div>
-                        <button type="button" class="btn btn-primary btn-full" id="submitBtn" data-i18n="form_submit">Envoyer la demande</button>
+                        <div class="form-row">
+                            <div class="form-group"><label for="bookFirstName">Prénom</label><input type="text" id="bookFirstName" name="prenom" required></div>
+                            <div class="form-group"><label for="bookLastName">Nom</label><input type="text" id="bookLastName" name="nom" required></div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group"><label for="bookProfile">Fonction / profil</label><select id="bookProfile" name="profil" required><option value="">Sélectionner</option><option value="mannequin">Mannequin</option><option value="comedien">Comédien</option><option value="entreprise">Entreprise</option><option value="particulier">Particulier</option><option value="autre">Autre</option></select></div>
+                            <div class="form-group"><label for="bookEmail" data-i18n="form_email">Email</label><input type="email" id="bookEmail" name="email" required></div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group"><label for="bookService" data-i18n="form_service">Type de prestation</label><select id="bookService" name="prestation" required><option value="" data-i18n="form_select">Sélectionner</option><option value="mode">Shooting Mode & Éditorial</option><option value="produit">Photographie Produit</option><option value="event">Événementiel & Reportage</option><option value="culinaire">Photographie Culinaire</option><option value="sport">Photographie Sportive</option><option value="tirage">Achat de Tirages</option><option value="autre" data-i18n="form_other">Autre</option></select></div>
+                            <div class="form-group"><label for="bookDate" data-i18n="form_date">Date souhaitée</label><input type="date" id="bookDate" name="date"></div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group"><label for="bookUsage">Destination des photos</label><input type="text" id="bookUsage" name="destination_photos" placeholder="Campagne, réseaux sociaux, portfolio, site…"></div>
+                            <div class="form-group"><label for="bookDuration">Durée de prise de vue</label><input type="text" id="bookDuration" name="duree" placeholder="Ex. 2h, demi-journée, journée complète"></div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group"><label for="bookQuantity">Nombre de photos souhaité</label><input type="text" id="bookQuantity" name="nombre_photos" placeholder="Ex. 10, 25, sélection ouverte"></div>
+                            <div class="form-group"><label for="bookFiles">Pièces jointes</label><input type="file" id="bookFiles" name="pieces_jointes" multiple></div>
+                        </div>
+                        <div class="form-group full-width"><label for="bookMessage" data-i18n="form_message">Décrivez votre projet</label><textarea id="bookMessage" name="description" rows="5" required></textarea></div>
+                        <p class="form-hint">Formulaire plus complet, mais toujours pensé pour rester rapide à remplir et facile à relire côté cliente.</p>
+                        <button type="submit" class="btn btn-primary btn-full" id="submitBtn" data-i18n="form_submit">Envoyer la demande</button>
+                        </div>
+                    </form>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <div class="marquee" aria-hidden="true">
+        <div class="marquee-track">
+            <span>Mode</span><span class="marquee-dot">◆</span>
+            <span>Fashion Week</span><span class="marquee-dot">◆</span>
+            <span>Produit</span><span class="marquee-dot">◆</span>
+            <span>Culinaire</span><span class="marquee-dot">◆</span>
+            <span>Défilé</span><span class="marquee-dot">◆</span>
+            <span>Sport</span><span class="marquee-dot">◆</span>
+            <span>Reportage</span><span class="marquee-dot">◆</span>
+            <span>Mode</span><span class="marquee-dot">◆</span>
+            <span>Fashion Week</span><span class="marquee-dot">◆</span>
+            <span>Produit</span><span class="marquee-dot">◆</span>
+            <span>Culinaire</span><span class="marquee-dot">◆</span>
+            <span>Défilé</span><span class="marquee-dot">◆</span>
+            <span>Sport</span><span class="marquee-dot">◆</span>
+            <span>Reportage</span><span class="marquee-dot">◆</span>
+        </div>
+    </div>
 
     <!-- FOOTER -->
     <footer id="contact" class="footer">
@@ -1743,9 +2854,12 @@ button {
                 </div>
                 <div class="footer-links">
                     <div class="footer-col"><h4 data-i18n="footer_nav">Navigation</h4><a href="#about" data-i18n="nav_about">À propos</a><a href="#portfolio" data-i18n="nav_portfolio">Portfolio</a><a href="#services" data-i18n="nav_services">Services</a><a href="#booking" data-i18n="nav_booking">Réserver</a></div>
-                    <div class="footer-col"><h4 data-i18n="footer_social">Réseaux</h4><a href="https://www.instagram.com/agency_a__" target="_blank" rel="noopener">Instagram — Portfolio</a><a href="https://www.instagram.com/agency_a_produits" target="_blank" rel="noopener">Instagram — Produits</a></div>
-                    <div class="footer-col"><h4>Contact</h4><a href="mailto:anais@agency-a.fr">anais@agency-a.fr</a><a href="tel:+33633262178">+33 6 33 26 21 78</a><span>Pau, France</span></div>
+                    <div class="footer-col"><h4 data-i18n="footer_social">Réseaux</h4><a href="https://www.instagram.com/agency_a__" target="_blank" rel="noopener">Instagram — Portfolio</a><a href="https://www.instagram.com/agency_a_produits" target="_blank" rel="noopener">Instagram — Produits</a><div class="social-icons"><a class="social-icon" href="https://www.instagram.com/agency_a__" target="_blank" rel="noopener" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a><a class="social-icon" href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M15 3h-2.5A4.5 4.5 0 0 0 8 7.5V10H5v4h3v7h4v-7h3l1-4h-4V7.8c0-1 .3-1.8 1.7-1.8H16V3z"/></svg></a><a class="social-icon" href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4V9h4v2"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2" fill="currentColor" stroke="none"/></svg></a></div></div>
+                    <div class="footer-col"><h4>Contact</h4><a href="mailto:anais@agency-a.fr">anais@agency-a.fr</a><a href="tel:+33633262178">+33 6 33 26 21 78</a><span>Paris, France</span></div>
                 </div>
+            </div>
+            <div class="footer-logo-band">
+                <img src="assets/logo/logo-white-transparent.png" alt="Agency A" class="footer-logo">
             </div>
             <div class="footer-bottom">
                 <p>© 2025 Agency A — Tous droits réservés</p>
@@ -2171,34 +3285,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ── Booking form ──
     const bookingForm = document.getElementById('bookingForm');
-    bookingForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-
-        const formData = new FormData(bookingForm);
-        const data = Object.fromEntries(formData);
-
-        // Simulate submission
-        const btn = bookingForm.querySelector('button[type="submit"]');
-        const originalText = btn.textContent;
-        btn.textContent = 'Envoi en cours...';
-        btn.disabled = true;
-
-        setTimeout(() => {
-            btn.textContent = '✓ Demande envoyée';
-            btn.style.background = '#2a6e4e';
-            btn.style.borderColor = '#2a6e4e';
-
-            setTimeout(() => {
-                btn.textContent = originalText;
-                btn.style.background = '';
-                btn.style.borderColor = '';
-                btn.disabled = false;
-                bookingForm.reset();
-            }, 3000);
-        }, 1500);
-
-        console.log('Booking request:', data);
-    });
+    if (bookingForm) {
+        bookingForm.addEventListener('submit', () => {
+            const btn = bookingForm.querySelector('button[type="submit"]');
+            if (!btn) return;
+            btn.textContent = 'Envoi en cours...';
+            btn.disabled = true;
+            btn.setAttribute('aria-busy', 'true');
+        });
+    }
 
     // ── Language Toggle (FR/EN) ──
     const langToggle = document.getElementById('langToggle');
