@@ -885,6 +885,17 @@ button {
     padding: 20px;
 }
 
+.gallery-item.img-error .gallery-item-inner {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gallery-item.img-error .gallery-item-overlay {
+    opacity: 0.4;
+}
+
 @keyframes galleryFadeIn {
     to {
         opacity: 1;
@@ -1768,6 +1779,9 @@ button {
     transform: scale(1.04);
 }
 
+.mannequin-card { background: transparent; }
+.mannequin-photo { border-radius: 2px; }
+
 .mannequin-photo-placeholder {
     font-size: 10px;
     letter-spacing: 0.15em;
@@ -2024,6 +2038,13 @@ button {
     font-size: 13px !important;
 }
 
+.booking-status {
+    min-height: 20px;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: rgba(242,226,206,0.72);
+}
+
 /* ============================================
    FOOTER LOGO AREA — premium placement
    ============================================ */
@@ -2218,7 +2239,6 @@ button {
                     <button class="filter-btn" data-filter="produit" data-i18n="filter_product">Produit</button>
                     <button class="filter-btn" data-filter="culinaire" data-i18n="filter_culinary">Culinaire</button>
                     <button class="filter-btn" data-filter="mode" data-i18n="filter_fashion">Mode</button>
-                    <button class="filter-btn" data-filter="ventes" data-i18n="filter_sales">Ventes</button>
                     <button class="filter-btn" data-filter="sport" data-i18n="filter_sport">Sport</button>
                 </div>
             </div>
@@ -2261,27 +2281,11 @@ button {
                     <div class="mannequin-photo">
                         <span class="mannequin-photo-placeholder">Photo<br>à venir</span>
                     </div>
-                    <div class="mannequin-info">
-                        <div class="mannequin-name">Léa M.</div>
-                        <div class="mannequin-specs">
-                            <div class="mannequin-spec"><span class="mannequin-spec-label">Taille</span>178 cm</div>
-                            <div class="mannequin-spec"><span class="mannequin-spec-label">Tour</span>87–60–90</div>
-                            <div class="mannequin-spec"><span class="mannequin-spec-label">Yeux</span>Noisette</div>
-                        </div>
-                    </div>
                 </div>
                 <!-- Mannequin 2 -->
                 <div class="mannequin-card" data-animate="fade-in" style="transition-delay:0.1s">
                     <div class="mannequin-photo">
                         <span class="mannequin-photo-placeholder">Photo<br>à venir</span>
-                    </div>
-                    <div class="mannequin-info">
-                        <div class="mannequin-name">Sofia R.</div>
-                        <div class="mannequin-specs">
-                            <div class="mannequin-spec"><span class="mannequin-spec-label">Taille</span>175 cm</div>
-                            <div class="mannequin-spec"><span class="mannequin-spec-label">Tour</span>84–58–88</div>
-                            <div class="mannequin-spec"><span class="mannequin-spec-label">Yeux</span>Verts</div>
-                        </div>
                     </div>
                 </div>
                 <!-- Mannequin 3 -->
@@ -2289,27 +2293,11 @@ button {
                     <div class="mannequin-photo">
                         <span class="mannequin-photo-placeholder">Photo<br>à venir</span>
                     </div>
-                    <div class="mannequin-info">
-                        <div class="mannequin-name">Nadia K.</div>
-                        <div class="mannequin-specs">
-                            <div class="mannequin-spec"><span class="mannequin-spec-label">Taille</span>180 cm</div>
-                            <div class="mannequin-spec"><span class="mannequin-spec-label">Tour</span>86–61–91</div>
-                            <div class="mannequin-spec"><span class="mannequin-spec-label">Yeux</span>Marron</div>
-                        </div>
-                    </div>
                 </div>
                 <!-- Mannequin 4 -->
                 <div class="mannequin-card" data-animate="fade-in" style="transition-delay:0.3s">
                     <div class="mannequin-photo">
                         <span class="mannequin-photo-placeholder">Photo<br>à venir</span>
-                    </div>
-                    <div class="mannequin-info">
-                        <div class="mannequin-name">Amara T.</div>
-                        <div class="mannequin-specs">
-                            <div class="mannequin-spec"><span class="mannequin-spec-label">Taille</span>177 cm</div>
-                            <div class="mannequin-spec"><span class="mannequin-spec-label">Tour</span>88–62–92</div>
-                            <div class="mannequin-spec"><span class="mannequin-spec-label">Yeux</span>Noirs</div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -2406,6 +2394,7 @@ button {
                         <div class="form-group"><label>Nombre de photos souhaitées</label><select id="bookPhotos" name="photos"><option value="">Non défini</option><option value="10-20">10 à 20 photos</option><option value="20-50">20 à 50 photos</option><option value="50-100">50 à 100 photos</option><option value="100+">Plus de 100 photos</option></select></div>
                         <div class="form-group"><label>Pièces jointes (optionnel)</label><input type="file" id="bookAttachment" name="attachment" accept=".jpg,.jpeg,.png,.pdf" class="form-file-input" multiple></div>
                         <button type="button" class="btn btn-primary btn-full" id="submitBtn" data-i18n="form_submit">Envoyer la demande</button>
+                        <p id="bookingStatus" class="booking-status" aria-live="polite"></p>
                     </div>
                 </div>
             </div>
@@ -2535,7 +2524,8 @@ button {
         <div class="lightbox-info"><span class="lightbox-title" id="lightboxTitle"></span><span class="lightbox-counter" id="lightboxCounter"></span></div>
     </div>
 
-    <script>
+    <script src="./supabase/config.js"></script>
+<script>
 /* ============================================
    AGENCY A — Gallery Configuration
    ============================================
@@ -2556,80 +2546,143 @@ button {
 const GALLERY_DATA = {
 
     // ─── PARIS FASHION WEEK 2025 ───
-    // Dossier : assets/photos/paris-fashion-week/
     "pfw": {
         name: "Paris Fashion Week 2025",
         nameEN: "Paris Fashion Week 2025",
         items: [
-            // ↓ AJOUTER VOS PHOTOS ICI ↓
-            // { src: "assets/photos/paris-fashion-week/backstage-01.jpg", title: "Backstage PFW", tall: true },
-            // { src: "assets/photos/paris-fashion-week/runway-01.jpg", title: "Défilé — Collection SS25" },
+            { src: "assets/photos/paris-fashion-week/PFW25-11MARS-32.JPG",      title: "Paris Fashion Week — Ouverture",        tall: true  },
+            { src: "assets/photos/paris-fashion-week/PFW-25-7mars-71.JPG",      title: "Paris Fashion Week — 7 Mars",           tall: false },
+            { src: "assets/photos/paris-fashion-week/PFW25-11MARS-89.JPG",      title: "Paris Fashion Week — Backstage",        tall: false },
+            { src: "assets/photos/paris-fashion-week/PFW25-11MARS-90.JPG",      title: "Paris Fashion Week — Défilé I",         tall: true  },
+            { src: "assets/photos/paris-fashion-week/PFW25-11MARS-110.JPG",     title: "Paris Fashion Week — Runway",           tall: false },
+            { src: "assets/photos/paris-fashion-week/PFW25-11MARS-111.JPG",     title: "Paris Fashion Week — Look 11 Mars",     tall: true  },
+            { src: "assets/photos/paris-fashion-week/pfw25-11mars-111-2.jpg",   title: "Paris Fashion Week — Portrait I",       tall: false },
+            { src: "assets/photos/paris-fashion-week/pfw25-11mars-112-2.jpg",   title: "Paris Fashion Week — Portrait II",      tall: false },
+            { src: "assets/photos/paris-fashion-week/PFW25-11MARS-130.JPG",     title: "Paris Fashion Week — Final Walk",       tall: true  },
+            { src: "assets/photos/paris-fashion-week/pfw25-11mars-116-2.jpg",   title: "Paris Fashion Week — Coulisses",        tall: false },
+            { src: "assets/photos/paris-fashion-week/pfw25-11mars-126-2.jpg",   title: "Paris Fashion Week — Ambiance",         tall: false },
+            { src: "assets/photos/paris-fashion-week/PFW25-11MARS-167.JPG",     title: "Paris Fashion Week — Clôture",          tall: true  },
+            { src: "assets/photos/paris-fashion-week/PFW-25-7mars-76.JPG",      title: "Paris Fashion Week — Street Style",     tall: false }
         ]
     },
 
     // ─── DÉFILÉ MONTEIRO ───
-    // Dossier : assets/photos/defile-monteiro/
     "defile-monteiro": {
         name: "Défilé Monteiro",
         nameEN: "Monteiro Fashion Show",
         items: [
-            // ↓ AJOUTER VOS PHOTOS ICI ↓
-            // { src: "assets/photos/defile-monteiro/look-01.jpg", title: "Collection Monteiro — Look 1", tall: true },
+            { src: "assets/photos/defile-monteiro/defile-mars-2025-426.jpg", title: "Collection Monteiro — Look 1",      tall: true  },
+            { src: "assets/photos/defile-monteiro/defile-mars-2025-427.jpg", title: "Collection Monteiro — Look 2",      tall: false },
+            { src: "assets/photos/defile-monteiro/defile-mars-2025-428.jpg", title: "Collection Monteiro — Look 3",      tall: false },
+            { src: "assets/photos/defile-monteiro/defile-mars-2025-429.jpg", title: "Collection Monteiro — Look 4",      tall: true  },
+            { src: "assets/photos/defile-monteiro/defile-mars-2025-433.jpg", title: "Collection Monteiro — Détails",     tall: false },
+            { src: "assets/photos/defile-monteiro/defile-mars-2025-434.jpg", title: "Collection Monteiro — Runway I",    tall: false },
+            { src: "assets/photos/defile-monteiro/defile-mars-2025-435.jpg", title: "Collection Monteiro — Runway II",   tall: true  },
+            { src: "assets/photos/defile-monteiro/defile-mars-2025-436.jpg", title: "Collection Monteiro — Runway III",  tall: false },
+            { src: "assets/photos/defile-monteiro/defile-mars-2025-437.jpg", title: "Collection Monteiro — Mouvement",   tall: false },
+            { src: "assets/photos/defile-monteiro/defile-mars-2025-438.jpg", title: "Collection Monteiro — Silhouette",  tall: true  },
+            { src: "assets/photos/defile-monteiro/defile-mars-2025-439.jpg", title: "Collection Monteiro — Matière",     tall: false },
+            { src: "assets/photos/defile-monteiro/defile-mars-2025-440.jpg", title: "Collection Monteiro — Look 12",     tall: false },
+            { src: "assets/photos/defile-monteiro/defile-mars-2025-441.jpg", title: "Collection Monteiro — Look 13",     tall: true  },
+            { src: "assets/photos/defile-monteiro/defile-mars-2025-442.jpg", title: "Collection Monteiro — Backstage I", tall: false },
+            { src: "assets/photos/defile-monteiro/defile-mars-2025-443.jpg", title: "Collection Monteiro — Backstage II",tall: false },
+            { src: "assets/photos/defile-monteiro/defile-mars-2025-444.jpg", title: "Collection Monteiro — Final Walk",  tall: true  },
+            { src: "assets/photos/defile-monteiro/defile-mars-2025-445.jpg", title: "Collection Monteiro — Clap Final",  tall: false },
+            { src: "assets/photos/defile-monteiro/defile-mars-2025-446.jpg", title: "Collection Monteiro — Ambiance I",  tall: false },
+            { src: "assets/photos/defile-monteiro/defile-mars-2025-447.jpg", title: "Collection Monteiro — Ambiance II", tall: true  },
+            { src: "assets/photos/defile-monteiro/defile-mars-2025-448.jpg", title: "Collection Monteiro — Portrait",    tall: false },
+            { src: "assets/photos/defile-monteiro/defile-mars-2025-456.jpg", title: "Collection Monteiro — Closing",     tall: false }
         ]
     },
 
     // ─── PRODUIT ───
-    // Dossier : assets/photos/produit/
     "produit": {
         name: "Produit",
         nameEN: "Product",
         items: [
-            // ↓ AJOUTER VOS PHOTOS ICI ↓
-            // { src: "assets/photos/produit/cosmetique-01.jpg", title: "Cosmétique — Ambiance" },
+            { src: "assets/photos/produit/BVLGARI-rose-goldea_AnaisDescomps_AgencyA_0.jpg", title: "Bulgari — Rose Goldea",       tall: false },
+            { src: "assets/photos/produit/rouge-a-levre-chanel.jpg",                        title: "Chanel — Rouge à Lèvres",     tall: false },
+            { src: "assets/photos/produit/26-01-12_wisky_Anais-Descomps.JPG",               title: "Packshot — Whisky Ambiance",  tall: false }
         ]
     },
 
     // ─── CULINAIRE ───
-    // Dossier : assets/photos/culinaire/
     "culinaire": {
         name: "Culinaire",
         nameEN: "Culinary",
         items: [
-            // ↓ AJOUTER VOS PHOTOS ICI ↓
-            // { src: "assets/photos/culinaire/gastronomie-01.jpg", title: "Haute Gastronomie", tall: true },
+            { src: "assets/photos/culinaire/AnaisDescomps_AgencyA_Culinaire_0.jpg",    title: "Gastronomie — Mise en scène I",  tall: true  },
+            { src: "assets/photos/culinaire/AnaisDescomps_AgencyA_Culinaire_0-9.jpg",  title: "Gastronomie — Mise en scène II", tall: false },
+            { src: "assets/photos/culinaire/AnaisDescomps_AgencyA_Culinaire--5.jpg",   title: "Gastronomie — Plat Signature I", tall: false },
+            { src: "assets/photos/culinaire/AnaisDescomps_AgencyA_Culinaire--7.jpg",   title: "Gastronomie — Textures",         tall: false },
+            { src: "assets/photos/culinaire/AnaisDescomps_AgencyA_Culinaire--8.jpg",   title: "Gastronomie — Plat Signature II",tall: false },
+            { src: "assets/photos/culinaire/AnaisDescomps_AgencyA_Culinaire--9.jpg",   title: "Gastronomie — Ambiance",         tall: false },
+            { src: "assets/photos/culinaire/AnaisDescomps_AgencyA_Culinaire--10.jpg",  title: "Gastronomie — Détail",           tall: false },
+            { src: "assets/photos/culinaire/AnaisDescomps_AgencyA_Culinaire--11.jpg",  title: "Gastronomie — Clôture",          tall: false }
         ]
     },
 
     // ─── MODE ───
-    // Dossier : assets/photos/mode/
     "mode": {
         name: "Mode",
         nameEN: "Fashion",
         items: [
-            // ↓ AJOUTER VOS PHOTOS ICI ↓
-            // { src: "assets/photos/mode/editorial-01.jpg", title: "Éditorial — Série I", tall: true },
+            { src: "assets/photos/mode/IMG_0108-Modifier.JPG",                               title: "Mode — Portrait I",            tall: true  },
+            { src: "assets/photos/mode/IMG_0217-Modifier.JPG",                               title: "Mode — Portrait II",           tall: true  },
+            { src: "assets/photos/mode/IMG_0571-Modifier.JPG",                               title: "Mode — Éditorial I",           tall: false },
+            { src: "assets/photos/mode/IMG_0578-Modifier.JPG",                               title: "Mode — Éditorial II",          tall: true  },
+            { src: "assets/photos/mode/IMG_0583-Modifier.JPG",                               title: "Mode — Lookbook I",            tall: false },
+            { src: "assets/photos/mode/IMG_0584-Modifier.JPG",                               title: "Mode — Lookbook II",           tall: true  },
+            { src: "assets/photos/mode/IMG_3574.JPG",                                        title: "Mode — Studio",                tall: false },
+            { src: "assets/photos/mode/IMG_9548-Modifier.JPG",                               title: "Mode — Campagne I",            tall: true  },
+            { src: "assets/photos/mode/IMG_9684-Modifier.JPG",                               title: "Mode — Campagne II",           tall: false },
+            { src: "assets/photos/mode/IMG_9801-Modifier.JPG",                               title: "Mode — Série N&B I",           tall: true  },
+            { src: "assets/photos/mode/IMG_9816-Modifier.JPG",                               title: "Mode — Série N&B II",          tall: false },
+            { src: "assets/photos/mode/2025-11-03_Chaimaa_mannequin_agence_mademoiselle_01.jpg", title: "Chaimaa — Portrait",       tall: true  },
+            { src: "assets/photos/mode/2025-11-03_Chaimaa_mannequin_agence_mademoiselle_04.jpg", title: "Chaimaa — Éditorial",      tall: false },
+            { src: "assets/photos/mode/2025-11-03_Chaimaa_mannequin_agence_mademoiselle_05.jpg", title: "Chaimaa — Studio",         tall: false },
+            { src: "assets/photos/mode/081225_Elfie_AgencyA_Nocollection0-21.jpg",           title: "Elfie — No Collection I",      tall: true  },
+            { src: "assets/photos/mode/081225_elfie_agencya_nocollection0-2-2.jpg",          title: "Elfie — No Collection II",     tall: false },
+            { src: "assets/photos/mode/081225_elfie_agencya_nocollection0-3-2.jpg",          title: "Elfie — No Collection III",    tall: false },
+            { src: "assets/photos/mode/081225_elfie_agencya_nocollection0-4-2.jpg",          title: "Elfie — No Collection IV",     tall: true  }
         ]
     },
 
     // ─── VENTES (Tirages d'Art) ───
-    // Dossier : assets/photos/ventes/
     "ventes": {
         name: "Ventes — Tirages d'Art",
         nameEN: "Art Prints — Sales",
         items: [
-            // ↓ AJOUTER VOS PHOTOS ICI ↓
-            // { src: "assets/photos/ventes/tirage-01.jpg", title: "Tirage I — Édition limitée", tall: true },
+            // Ajouter les tirages d'art ici lorsque les fichiers seront disponibles
         ]
     },
 
     // ─── SPORT ───
-    // Dossier : assets/photos/sport/
     "sport": {
         name: "Sport",
         nameEN: "Sport",
         items: [
-            // ↓ AJOUTER VOS PHOTOS ICI ↓
-            // { src: "assets/photos/sport/action-01.jpg", title: "Action — Mouvement", tall: true },
+            { src: "assets/photos/sport/NM1-28MARS.JPG",              title: "NM1 — Match 28 Mars",           tall: true  },
+            { src: "assets/photos/sport/NM1-28MARS-3.JPG",            title: "NM1 — Action I",                tall: false },
+            { src: "assets/photos/sport/NM1-28MARS-45.JPG",           title: "NM1 — Action II",               tall: false },
+            { src: "assets/photos/sport/NM1-28MARS-46.JPG",           title: "NM1 — Intensité I",             tall: true  },
+            { src: "assets/photos/sport/NM1-28MARS-47.JPG",           title: "NM1 — Intensité II",            tall: false },
+            { src: "assets/photos/sport/NM1-LEVALLOIS-HAVRE-14.JPG",  title: "NM1 Levallois — Havre I",       tall: false },
+            { src: "assets/photos/sport/NM1-LEVALLOIS-HAVRE-15.JPG",  title: "NM1 Levallois — Havre II",      tall: true  },
+            { src: "assets/photos/sport/NM1-LEVALLOIS-HAVRE-16.JPG",  title: "NM1 Levallois — Havre III",     tall: false },
+            { src: "assets/photos/sport/NM1-LEVALLOIS-HAVRE-26.JPG",  title: "NM1 Levallois — Duel",          tall: false },
+            { src: "assets/photos/sport/NM1-LEVALLOIS-HAVRE-27.JPG",  title: "NM1 Levallois — Momentum",      tall: true  },
+            { src: "assets/photos/sport/NM1-LEVALLOIS-HAVRE-31.JPG",  title: "NM1 Levallois — Drive",         tall: false },
+            { src: "assets/photos/sport/NM1-LEVALLOIS-HAVRE-33.JPG",  title: "NM1 Levallois — Contact",       tall: false },
+            { src: "assets/photos/sport/NM1-LEVALLOIS-HAVRE-40.JPG",  title: "NM1 Levallois — Victory",       tall: true  },
+            { src: "assets/photos/sport/NM1-LEVALLOIS-HAVRE-42.JPG",  title: "NM1 Levallois — Portrait",      tall: false },
+            { src: "assets/photos/sport/NM1-LEVALLOIS-HAVRE-47.JPG",  title: "NM1 Levallois — Célébration",   tall: false },
+            { src: "assets/photos/sport/NM1-LEVALLOIS-SCABB-12.jpg",  title: "NM1 Levallois — SCABB I",       tall: true  },
+            { src: "assets/photos/sport/NM1-LEVALLOIS-SCABB-13.jpg",  title: "NM1 Levallois — SCABB II",      tall: false },
+            { src: "assets/photos/sport/NM1-LEVALLOIS-SCABB-44.jpg",  title: "NM1 Levallois — SCABB III",     tall: false },
+            { src: "assets/photos/sport/NM1-LEVALLOIS-SCABB-46.jpg",  title: "NM1 Levallois — SCABB IV",      tall: true  },
+            { src: "assets/photos/sport/NM1-LEVALLOIS-SCABB-79.jpg",  title: "NM1 Levallois — SCABB V",       tall: false },
+            { src: "assets/photos/sport/NM1-LEVALLOIS-SCABB-115.jpg", title: "NM1 Levallois — SCABB VI",      tall: false }
         ]
     }
 };
@@ -2724,7 +2777,7 @@ const GalleryManager = (() => {
             if (item.src === 'placeholder') {
                 el.innerHTML = '<div class="gallery-item-inner gallery-placeholder" style="background:' + getGrad() + '"><div><div style="font-size:28px;margin-bottom:12px;opacity:0.3">◇</div><div>' + item.title + '</div></div></div>';
             } else {
-                el.innerHTML = '<div class="gallery-item-inner"><img src="' + item.src + '" alt="' + item.title + '" loading="lazy"><div class="gallery-item-overlay"><div class="gallery-item-info"><div class="gallery-item-title">' + item.title + '</div><div class="gallery-item-category">' + getCatName(item.categoryKey) + '</div></div></div></div>';
+                el.innerHTML = '<div class="gallery-item-inner"><img src="' + item.src + '" alt="' + item.title + '" loading="lazy" onerror="this.closest(\'.gallery-item\').classList.add(\'img-error\');this.style.display=\'none\'"><div class="gallery-item-overlay"><div class="gallery-item-info"><div class="gallery-item-title">' + item.title + '</div><div class="gallery-item-category">' + getCatName(item.categoryKey) + '</div></div></div></div>';
                 el.addEventListener('click', () => openLightbox(index));
             }
             gridEl.appendChild(el);
@@ -2952,46 +3005,187 @@ document.addEventListener('DOMContentLoaded', () => {
     // ── Booking form ──
     const bookingForm = document.getElementById('bookingForm');
     const submitBtn = document.getElementById('submitBtn');
+    const bookingStatus = document.getElementById('bookingStatus');
+    const supabaseConfig = window.AGENCY_A_SUPABASE_CONFIG || {};
 
-    submitBtn.addEventListener('click', () => {
-        const lastName = document.getElementById('bookLastName').value.trim();
-        const email = document.getElementById('bookEmail').value.trim();
-        const service = document.getElementById('bookService').value;
+    const setBookingStatus = (message, isError = false) => {
+        if (!bookingStatus) return;
+        bookingStatus.textContent = message;
+        bookingStatus.style.color = isError ? 'rgba(255, 173, 173, 0.95)' : 'rgba(242, 226, 206, 0.78)';
+    };
 
-        if (!lastName || !email || !service) {
-            // Highlight missing fields
-            [document.getElementById('bookLastName'), document.getElementById('bookEmail'), document.getElementById('bookService')].forEach(el => {
-                if (!el.value.trim()) {
-                    el.style.borderColor = 'rgba(192,105,73,0.8)';
-                    setTimeout(() => { el.style.borderColor = ''; }, 2000);
-                }
+    const isSupabaseReady = () => Boolean(
+        supabaseConfig.url &&
+        supabaseConfig.anonKey &&
+        !String(supabaseConfig.url).includes('YOUR_SUPABASE_URL') &&
+        !String(supabaseConfig.anonKey).includes('YOUR_SUPABASE_ANON_KEY')
+    );
+
+    const normalizeServiceLabel = (value) => ({
+        mode: 'Shooting Mode & Éditorial',
+        produit: 'Photographie Produit',
+        event: 'Événementiel & Reportage',
+        culinaire: 'Photographie Culinaire',
+        sport: 'Photographie Sportive',
+        tirage: 'Achat de Tirages',
+        autre: 'Autre'
+    }[value] || value || 'Non renseigné');
+
+    const uploadAttachments = async (quoteId, files) => {
+        if (!files || !files.length) return [];
+        const uploaded = [];
+
+        for (const file of Array.from(files)) {
+            const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, '-');
+            const objectPath = `${quoteId}/${Date.now()}-${safeName}`;
+            const uploadResponse = await fetch(`${supabaseConfig.url}/storage/v1/object/quote-attachments/${objectPath}`, {
+                method: 'POST',
+                headers: {
+                    apikey: supabaseConfig.anonKey,
+                    Authorization: `Bearer ${supabaseConfig.anonKey}`,
+                    'x-upsert': 'false',
+                    'Content-Type': file.type || 'application/octet-stream'
+                },
+                body: file
             });
+
+            if (!uploadResponse.ok) {
+                const errorText = await uploadResponse.text();
+                throw new Error(`Upload impossible pour ${file.name}: ${errorText}`);
+            }
+
+            uploaded.push({
+                name: file.name,
+                path: objectPath,
+                size: file.size,
+                type: file.type || 'application/octet-stream'
+            });
+        }
+
+        return uploaded;
+    };
+
+    const sendClientNotification = async (quotePayload) => {
+        const response = await fetch(`${supabaseConfig.url}/functions/v1/send-quote-notification`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                apikey: supabaseConfig.anonKey,
+                Authorization: `Bearer ${supabaseConfig.anonKey}`
+            },
+            body: JSON.stringify({ quote: quotePayload })
+        });
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(errorText || 'Notification email impossible');
+        }
+    };
+
+    const resetBookingFields = () => {
+        ['bookLastName','bookFirstName','bookProfile','bookEmail','bookService','bookMessage','bookDestination','bookDuration','bookPhotos'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.value = '';
+        });
+        const attachmentInput = document.getElementById('bookAttachment');
+        if (attachmentInput) attachmentInput.value = '';
+    };
+
+    submitBtn.addEventListener('click', async () => {
+        const requiredFields = [
+            document.getElementById('bookLastName'),
+            document.getElementById('bookEmail'),
+            document.getElementById('bookService')
+        ];
+
+        const invalidFields = requiredFields.filter(el => !el || !String(el.value).trim());
+        if (invalidFields.length) {
+            invalidFields.forEach(el => {
+                el.style.borderColor = 'rgba(192,105,73,0.8)';
+                setTimeout(() => { el.style.borderColor = ''; }, 2000);
+            });
+            setBookingStatus('Merci de compléter les champs obligatoires.', true);
+            return;
+        }
+
+        if (!isSupabaseReady()) {
+            setBookingStatus('Configuration Supabase manquante. Renseignez supabase/config.js avant test.', true);
             return;
         }
 
         const originalText = submitBtn.textContent;
         submitBtn.textContent = 'Envoi en cours…';
         submitBtn.disabled = true;
+        setBookingStatus('Transmission du devis en cours…');
 
-        setTimeout(() => {
+        const quoteId = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : `quote-${Date.now()}`;
+        const attachmentInput = document.getElementById('bookAttachment');
+
+        const quotePayload = {
+            quote_id: quoteId,
+            last_name: document.getElementById('bookLastName').value.trim(),
+            first_name: document.getElementById('bookFirstName').value.trim(),
+            profile: document.getElementById('bookProfile').value || null,
+            email: document.getElementById('bookEmail').value.trim(),
+            service: document.getElementById('bookService').value || null,
+            service_label: normalizeServiceLabel(document.getElementById('bookService').value),
+            description: document.getElementById('bookMessage').value.trim(),
+            destination: document.getElementById('bookDestination').value.trim() || null,
+            duration: document.getElementById('bookDuration').value || null,
+            photos_requested: document.getElementById('bookPhotos').value || null,
+            attachments: []
+        };
+
+        try {
+            if (attachmentInput && attachmentInput.files && attachmentInput.files.length) {
+                quotePayload.attachments = await uploadAttachments(quoteId, attachmentInput.files);
+            }
+
+            const insertResponse = await fetch(`${supabaseConfig.url}/rest/v1/quotes`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    apikey: supabaseConfig.anonKey,
+                    Authorization: `Bearer ${supabaseConfig.anonKey}`,
+                    Prefer: 'return=representation'
+                },
+                body: JSON.stringify(quotePayload)
+            });
+
+            if (!insertResponse.ok) {
+                const errorText = await insertResponse.text();
+                throw new Error(errorText || 'Insertion Supabase impossible');
+            }
+
+            const [savedQuote] = await insertResponse.json();
+
+            try {
+                await sendClientNotification(savedQuote || quotePayload);
+            } catch (emailError) {
+                console.warn('Notification email non envoyée :', emailError);
+            }
+
             submitBtn.textContent = '✓ Demande envoyée';
             submitBtn.style.background = '#183749';
             submitBtn.style.borderColor = '#183749';
+            setBookingStatus('Votre devis a bien été transmis.');
+            resetBookingFields();
 
             setTimeout(() => {
                 submitBtn.textContent = originalText;
                 submitBtn.style.background = '';
                 submitBtn.style.borderColor = '';
                 submitBtn.disabled = false;
-                // Reset form fields
-                ['bookLastName','bookFirstName','bookProfile','bookEmail','bookService','bookMessage','bookDestination','bookDuration','bookPhotos'].forEach(id => {
-                    const el = document.getElementById(id);
-                    if (el) el.value = el.tagName === 'SELECT' ? '' : '';
-                });
+                setBookingStatus('');
             }, 3500);
-        }, 1500);
-
-        console.log('Booking request submitted');
+        } catch (error) {
+            console.error('Booking request submission failed:', error);
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+            submitBtn.style.background = '';
+            submitBtn.style.borderColor = '';
+            setBookingStatus('Envoi impossible pour le moment. Vérifiez la configuration Supabase.', true);
+        }
     });
 
     // ── Language Toggle (FR/EN) ──
