@@ -220,6 +220,33 @@ const GalleryManager = (() => {
         }));
     };
 
+    // Retourne une cover (première image) par catégorie non vide
+    const getCoverItems = () => {
+        const covers = [];
+        Object.keys(GALLERY_DATA).forEach(k => {
+            const cat = GALLERY_DATA[k];
+            if (cat.items && cat.items.length > 0) {
+                covers.push({
+                    ...cat.items[0],
+                    categoryKey: k,
+                    isCover: true,
+                    tall: false  // hauteur uniforme en vue "Tous"
+                });
+            }
+        });
+        return covers;
+    };
+
+    // Active le bouton filtre et relance le rendu de la catégorie
+    const activateFilter = (catKey) => {
+        const btn = filtersEl.querySelector('[data-filter="' + catKey + '"]');
+        if (btn) {
+            filtersEl.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            render(catKey);
+        }
+    };
+
     const render = (filter = 'all') => {
         currentFilter = filter;
         gridEl.innerHTML = '';
@@ -227,31 +254,47 @@ const GalleryManager = (() => {
 
         let items;
         if (filter === 'all') {
-            items = allItems.length > 0 ? allItems : [];
-            if (items.length === 0) {
-                Object.keys(GALLERY_DATA).forEach(k => {
-                    items = items.concat(getPlaceholders(k, 2));
-                });
-            }
+            // Vue "Tous" : une seule cover par thème
+            items = getCoverItems();
+            lightboxItems = []; // pas de lightbox en vue covers
         } else {
+            // Vue filtrée : toutes les images du thème
             const catItems = allItems.filter(i => i.categoryKey === filter);
             items = catItems.length > 0 ? catItems : getPlaceholders(filter, 6);
+            lightboxItems = items;
         }
-
-        lightboxItems = items;
 
         items.forEach((item, index) => {
             const el = document.createElement('div');
-            el.className = 'gallery-item' + (item.tall ? ' tall' : '');
-            el.style.animationDelay = (index * 0.05) + 's';
-            el.dataset.index = index;
 
-            if (item.src === 'placeholder') {
+            if (item.isCover) {
+                // Carte cover — clic = activation du filtre thème
+                el.className = 'gallery-item gallery-item--cover';
+                el.style.animationDelay = (index * 0.05) + 's';
+                const catName = getCatName(item.categoryKey);
+                const catCount = GALLERY_DATA[item.categoryKey].items.length;
+                el.innerHTML = '<div class="gallery-item-inner">'
+                    + '<img src="' + item.src + '" alt="' + catName + '" loading="lazy" onerror="this.closest(\'.gallery-item\').classList.add(\'img-error\');this.style.display=\'none\'">'
+                    + '<div class="gallery-item-overlay gallery-cover-overlay">'
+                    + '<div class="gallery-item-info">'
+                    + '<div class="gallery-cover-label">' + catName + '</div>'
+                    + '<div class="gallery-cover-count">' + catCount + ' photo' + (catCount > 1 ? 's' : '') + '</div>'
+                    + '</div></div></div>';
+                el.addEventListener('click', () => activateFilter(item.categoryKey));
+
+            } else if (item.src === 'placeholder') {
+                el.className = 'gallery-item' + (item.tall ? ' tall' : '');
+                el.style.animationDelay = (index * 0.05) + 's';
                 el.innerHTML = '<div class="gallery-item-inner gallery-placeholder" style="background:' + getGrad() + '"><div><div style="font-size:28px;margin-bottom:12px;opacity:0.3">◇</div><div>' + item.title + '</div></div></div>';
+
             } else {
+                el.className = 'gallery-item' + (item.tall ? ' tall' : '');
+                el.style.animationDelay = (index * 0.05) + 's';
+                el.dataset.index = index;
                 el.innerHTML = '<div class="gallery-item-inner"><img src="' + item.src + '" alt="' + item.title + '" loading="lazy" onerror="this.closest(\'.gallery-item\').classList.add(\'img-error\');this.style.display=\'none\'"><div class="gallery-item-overlay"><div class="gallery-item-info"><div class="gallery-item-title">' + item.title + '</div><div class="gallery-item-category">' + getCatName(item.categoryKey) + '</div></div></div></div>';
                 el.addEventListener('click', () => openLightbox(index));
             }
+
             gridEl.appendChild(el);
         });
     };

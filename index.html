@@ -918,6 +918,47 @@ button {
     margin-top: clamp(48px, 5vw, 80px);
 }
 
+/* ── Covers Portfolio (vue "Tous") ── */
+.gallery-item--cover {
+    cursor: pointer;
+}
+
+.gallery-item--cover .gallery-item-inner {
+    min-height: 320px;
+}
+
+.gallery-cover-overlay {
+    opacity: 1 !important;
+    background: linear-gradient(to top, rgba(10, 10, 10, 0.82) 0%, rgba(10,10,10,0.18) 55%, transparent 100%) !important;
+    display: flex;
+    align-items: flex-end;
+    padding: 28px 24px;
+}
+
+.gallery-cover-label {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--beige-rose);
+    line-height: 1.2;
+    margin-bottom: 6px;
+}
+
+.gallery-cover-count {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(242, 226, 206, 0.5);
+}
+
+.gallery-item--cover:hover .gallery-cover-overlay {
+    background: linear-gradient(to top, rgba(10, 10, 10, 0.92) 0%, rgba(10,10,10,0.30) 55%, transparent 100%) !important;
+}
+
+.gallery-item--cover:hover img {
+    transform: scale(1.07);
+}
+
 /* ============================================
    SERVICES
    ============================================ */
@@ -1282,22 +1323,6 @@ button {
     color: var(--gris);
     padding: clamp(60px, 8vw, 100px) 0 40px;
 }
-.btn-boutique-cta {
-    background: transparent;
-    color: var(--bleu-nuit);
-    border: 1px solid rgba(24, 55, 73, 0.3);
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    padding: 16px 36px;
-}
-
-.btn-boutique-cta:hover {
-    background: var(--bleu-nuit);
-    color: var(--beige-rose);
-    border-color: var(--bleu-nuit);
-}
-
-
 .footer-top {
     display: grid;
     grid-template-columns: 1fr 2fr;
@@ -1753,8 +1778,10 @@ button {
 
 .mannequins-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 .mannequin-card {
@@ -1776,7 +1803,7 @@ button {
 }
 
 .mannequin-card:hover .mannequin-photo {
-    transform: scale(1.04);
+    /* Le zoom est géré sur l'img directement */
 }
 
 .mannequin-card { background: transparent; }
@@ -1788,6 +1815,28 @@ button {
     text-transform: uppercase;
     color: rgba(255,255,255,0.2);
     text-align: center;
+}
+
+.mannequin-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+    transition: transform 0.6s var(--ease-expo);
+}
+
+.mannequin-card:hover .mannequin-photo img {
+    transform: scale(1.04);
+}
+
+.mannequin-caption {
+    margin-top: 10px;
+    font-size: 11px;
+    letter-spacing: 0.09em;
+    line-height: 2;
+    text-transform: uppercase;
+    color: var(--gris);
 }
 
 .mannequin-info {
@@ -1844,190 +1893,6 @@ button {
     border-color: var(--beige-rose);
 }
 
-/* ============================================
-   BOUTIQUE TIRAGES — Espace Shopping
-   ============================================ */
-.boutique {
-    background: var(--cream);
-    position: relative;
-}
-
-.boutique-header-band {
-    background: var(--bleu-nuit);
-    padding: 16px 0;
-    margin-bottom: 0;
-}
-
-.boutique-header-band-inner {
-    max-width: var(--container-width);
-    margin: 0 auto;
-    padding: 0 clamp(24px, 4vw, 64px);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-}
-
-.boutique-band-label {
-    font-size: 10px;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: rgba(242, 226, 206, 0.6);
-}
-
-.boutique-band-title {
-    font-family: var(--font-display);
-    font-size: 18px;
-    font-style: italic;
-    color: var(--beige-rose);
-    font-weight: 300;
-}
-
-.boutique-band-tagline {
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: rgba(242, 226, 206, 0.4);
-}
-
-.boutique-content {
-    padding: var(--section-padding) 0;
-}
-
-.boutique-intro {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: clamp(40px, 6vw, 100px);
-    align-items: start;
-    margin-bottom: clamp(48px, 6vw, 80px);
-    padding-bottom: clamp(48px, 6vw, 80px);
-    border-bottom: 1px solid rgba(0,0,0,0.06);
-}
-
-.boutique-title {
-    font-family: var(--font-display);
-    font-size: clamp(36px, 4vw, 56px);
-    font-weight: 300;
-    color: var(--bleu-nuit);
-    line-height: 1.15;
-}
-
-.boutique-title em {
-    font-style: italic;
-    color: var(--bleu-gris);
-}
-
-.boutique-desc {
-    font-size: 15px;
-    line-height: 1.8;
-    color: var(--bleu-gris);
-    margin-bottom: 32px;
-}
-
-.boutique-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-}
-
-.boutique-item {
-    position: relative;
-    background: var(--blanc);
-    overflow: hidden;
-    cursor: pointer;
-    transition: transform 0.5s var(--ease-expo), box-shadow 0.5s;
-}
-
-.boutique-item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 24px 64px rgba(0,0,0,0.08);
-}
-
-.boutique-item-photo {
-    aspect-ratio: 3/4;
-    background: linear-gradient(135deg, #e8e4de 0%, #f0ece6 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    position: relative;
-}
-
-.boutique-item-photo-placeholder {
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: rgba(24,55,73,0.2);
-    text-align: center;
-}
-
-.boutique-badge {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    background: var(--bleu-nuit);
-    color: var(--beige-rose);
-    font-size: 9px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    padding: 6px 12px;
-}
-
-.boutique-item-info {
-    padding: 20px;
-    border-top: 1px solid rgba(0,0,0,0.06);
-}
-
-.boutique-item-title {
-    font-family: var(--font-display);
-    font-size: 20px;
-    font-weight: 400;
-    color: var(--bleu-nuit);
-    margin-bottom: 4px;
-}
-
-.boutique-item-edition {
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--gris);
-    margin-bottom: 12px;
-}
-
-.boutique-item-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 16px;
-    padding-top: 16px;
-    border-top: 1px solid rgba(0,0,0,0.05);
-}
-
-.boutique-item-price {
-    font-family: var(--font-display);
-    font-size: 22px;
-    color: var(--bleu-nuit);
-}
-
-.boutique-item-cta {
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--bleu-gris);
-    border-bottom: 1px solid rgba(64,91,102,0.3);
-    padding-bottom: 2px;
-    transition: color 0.3s, border-color 0.3s;
-}
-
-.boutique-item:hover .boutique-item-cta {
-    color: var(--bleu-nuit);
-    border-color: var(--bleu-nuit);
-}
-
-.boutique-cta {
-    text-align: center;
-    margin-top: clamp(40px, 5vw, 64px);
-}
 
 /* ============================================
    FORM FILE INPUT
@@ -2063,27 +1928,15 @@ button {
     }
     .mannequins-grid {
         grid-template-columns: repeat(2, 1fr);
-    }
-    .boutique-intro {
-        grid-template-columns: 1fr;
-    }
-    .boutique-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .boutique-header-band-inner {
-        flex-direction: column;
-        text-align: center;
-        gap: 8px;
+        max-width: 100%;
     }
 }
 
 @media (max-width: 640px) {
     .mannequins-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 8px;
-    }
-    .boutique-grid {
-        grid-template-columns: 1fr;
+        gap: 12px;
+        max-width: 100%;
     }
     .mannequins-header {
         flex-direction: column;
@@ -2094,9 +1947,7 @@ button {
 @media (max-width: 480px) {
     .mannequins-grid {
         grid-template-columns: 1fr;
-    }
-    .boutique-header-band-inner {
-        padding: 0 24px;
+        gap: 16px;
     }
     .segmentation-card {
         padding: 36px 28px;
@@ -2245,7 +2096,6 @@ button {
             <div class="gallery-grid" id="galleryGrid"></div>
             <div class="portfolio-cta portfolio-actions" data-animate="fade-in">
                 <a href="#booking" class="btn btn-primary" data-i18n="portfolio_cta">Discutons de votre projet</a>
-                <a href="#boutique" class="btn btn-secondary">Voir les tirages</a>
             </div>
         </div>
     </section>
@@ -2276,28 +2126,30 @@ button {
                 <p class="mannequins-intro" data-animate="fade-in">Découvrez nos mannequins sélectionnés avec soin — femmes et hommes aux profils variés, disponibles pour vos shootings, défilés et campagnes.</p>
             </div>
             <div class="mannequins-grid">
-                <!-- Mannequin 1 -->
+                <!-- Céline Polas -->
                 <div class="mannequin-card" data-animate="fade-in">
                     <div class="mannequin-photo">
-                        <span class="mannequin-photo-placeholder">Photo<br>à venir</span>
+                        <img src="assets/nos%20talents%20-%20galerie/celine-polas-25.jpg" alt="Céline Polas" loading="lazy" onerror="this.style.display='none';this.nextElementSibling&&this.nextElementSibling.remove();this.closest('.mannequin-photo').style.background='linear-gradient(135deg,#1a1a1a,#2d2d2d)'">
+                    </div>
+                    <div class="mannequin-info">
+                        <p class="mannequin-name">Céline Polas</p>
+                        <p class="mannequin-caption">
+                            1m76 &middot; 87 &middot; 62 &middot; 88 &middot; P.39<br>
+                            Yeux marron &middot; Cheveux noir
+                        </p>
                     </div>
                 </div>
-                <!-- Mannequin 2 -->
-                <div class="mannequin-card" data-animate="fade-in" style="transition-delay:0.1s">
+                <!-- Elfie Daniel -->
+                <div class="mannequin-card" data-animate="fade-in" style="transition-delay:0.12s">
                     <div class="mannequin-photo">
-                        <span class="mannequin-photo-placeholder">Photo<br>à venir</span>
+                        <img src="assets/nos%20talents%20-%20galerie/29012026_Elfie_AnaisDescomps_AgencyA_-9.jpg" alt="Elfie Daniel" loading="lazy" onerror="this.style.display='none';this.nextElementSibling&&this.nextElementSibling.remove();this.closest('.mannequin-photo').style.background='linear-gradient(135deg,#1a1a1a,#2d2d2d)'">
                     </div>
-                </div>
-                <!-- Mannequin 3 -->
-                <div class="mannequin-card" data-animate="fade-in" style="transition-delay:0.2s">
-                    <div class="mannequin-photo">
-                        <span class="mannequin-photo-placeholder">Photo<br>à venir</span>
-                    </div>
-                </div>
-                <!-- Mannequin 4 -->
-                <div class="mannequin-card" data-animate="fade-in" style="transition-delay:0.3s">
-                    <div class="mannequin-photo">
-                        <span class="mannequin-photo-placeholder">Photo<br>à venir</span>
+                    <div class="mannequin-info">
+                        <p class="mannequin-name">Elfie Daniel</p>
+                        <p class="mannequin-caption">
+                            1m80 &middot; 86 &middot; 67 &middot; 96 &middot; P.39-40<br>
+                            Yeux vert &middot; Cheveux châtain
+                        </p>
                     </div>
                 </div>
             </div>
@@ -2402,78 +2254,6 @@ button {
     </section>
 
 
-    <!-- BOUTIQUE TIRAGES -->
-    <div class="boutique-header-band">
-        <div class="boutique-header-band-inner">
-            <span class="boutique-band-label">Espace boutique</span>
-            <span class="boutique-band-title">La Galerie — Agency A</span>
-            <span class="boutique-band-tagline">Tirages d'art en édition limitée</span>
-        </div>
-    </div>
-    <section id="boutique" class="boutique">
-        <div class="boutique-content">
-            <div class="container">
-                <div class="boutique-intro" data-animate="fade-in">
-                    <div>
-                        <h2 class="boutique-title">Posséder<br><em>une image.</em></h2>
-                    </div>
-                    <div>
-                        <p class="boutique-desc">Chaque tirage est une pièce unique, imprimée sur papier baryté 300 g, numérotée et signée. Une invitation à habiller vos espaces avec une photographie qui vous ressemble.</p>
-                        <p class="boutique-desc" style="opacity:0.7;">Formats disponibles sur demande · Livraison soignée · Certificat d'authenticité inclus</p>
-                    </div>
-                </div>
-                <div class="boutique-grid">
-                    <div class="boutique-item" data-animate="fade-in">
-                        <div class="boutique-item-photo">
-                            <div class="boutique-badge">Édition limitée</div>
-                            <span class="boutique-item-photo-placeholder">Tirage I<br>à venir</span>
-                        </div>
-                        <div class="boutique-item-info">
-                            <div class="boutique-item-title">Lumière dorée</div>
-                            <div class="boutique-item-edition">Édition de 10 exemplaires</div>
-                            <div class="boutique-item-footer">
-                                <span class="boutique-item-price">Sur devis</span>
-                                <span class="boutique-item-cta">Demander</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="boutique-item" data-animate="fade-in" style="transition-delay:0.1s">
-                        <div class="boutique-item-photo">
-                            <div class="boutique-badge">Édition limitée</div>
-                            <span class="boutique-item-photo-placeholder">Tirage II<br>à venir</span>
-                        </div>
-                        <div class="boutique-item-info">
-                            <div class="boutique-item-title">Nuit de Paris</div>
-                            <div class="boutique-item-edition">Édition de 15 exemplaires</div>
-                            <div class="boutique-item-footer">
-                                <span class="boutique-item-price">Sur devis</span>
-                                <span class="boutique-item-cta">Demander</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="boutique-item" data-animate="fade-in" style="transition-delay:0.1s">
-                        <div class="boutique-item-photo">
-                            <div class="boutique-badge">Édition limitée</div>
-                            <span class="boutique-item-photo-placeholder">Tirage III<br>à venir</span>
-                        </div>
-                        <div class="boutique-item-info">
-                            <div class="boutique-item-title">Mouvement</div>
-                            <div class="boutique-item-edition">Édition de 8 exemplaires</div>
-                            <div class="boutique-item-footer">
-                                <span class="boutique-item-price">Sur devis</span>
-                                <span class="boutique-item-cta">Demander</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="boutique-cta" data-animate="fade-in">
-                    <a href="#booking" class="btn btn-boutique-cta">Renseignements &amp; commandes</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
 <!-- MARQUEE -->
     <div class="marquee" aria-hidden="true">
         <div class="marquee-track">
@@ -2503,7 +2283,7 @@ button {
                     <p class="footer-tagline" data-i18n="footer_tagline">Donner vie aux images qui racontent votre univers.</p>
                 </div>
                 <div class="footer-links">
-                    <div class="footer-col"><h4 data-i18n="footer_nav">Navigation</h4><a href="#about" data-i18n="nav_about">À propos</a><a href="#portfolio" data-i18n="nav_portfolio">Portfolio</a><a href="#services" data-i18n="nav_services">Services</a><a href="#booking" data-i18n="nav_booking">Réserver</a><a href="#boutique">Boutique</a></div>
+                    <div class="footer-col"><h4 data-i18n="footer_nav">Navigation</h4><a href="#about" data-i18n="nav_about">À propos</a><a href="#portfolio" data-i18n="nav_portfolio">Portfolio</a><a href="#services" data-i18n="nav_services">Services</a><a href="#booking" data-i18n="nav_booking">Réserver</a></div>
                     <div class="footer-col"><h4 data-i18n="footer_social">Réseaux</h4><a href="https://www.instagram.com/agency_a__" target="_blank" rel="noopener">Instagram — Portfolio</a><a href="https://www.instagram.com/agency_a_produits" target="_blank" rel="noopener">Instagram — Produits</a><a href="https://www.facebook.com" target="_blank" rel="noopener">Facebook</a><a href="https://www.linkedin.com" target="_blank" rel="noopener">LinkedIn</a></div>
                     <div class="footer-col"><h4>Contact</h4><a href="mailto:anais@agency-a.fr">anais@agency-a.fr</a><a href="tel:+33633262178">+33 6 33 26 21 78</a><span>Paris, France</span></div>
                 </div>
@@ -2747,6 +2527,28 @@ const GalleryManager = (() => {
         }));
     };
 
+    // Une cover (1re image) par thème non vide — vue "Tous"
+    const getCoverItems = () => {
+        const covers = [];
+        Object.keys(GALLERY_DATA).forEach(k => {
+            const cat = GALLERY_DATA[k];
+            if (cat.items && cat.items.length > 0) {
+                covers.push({ ...cat.items[0], categoryKey: k, isCover: true, tall: false });
+            }
+        });
+        return covers;
+    };
+
+    // Active le filtre correspondant et recharge la galerie du thème
+    const activateFilter = (catKey) => {
+        const btn = filtersEl.querySelector('[data-filter="' + catKey + '"]');
+        if (btn) {
+            filtersEl.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            render(catKey);
+        }
+    };
+
     const render = (filter = 'all') => {
         currentFilter = filter;
         gridEl.innerHTML = '';
@@ -2754,32 +2556,47 @@ const GalleryManager = (() => {
 
         let items;
         if (filter === 'all') {
-            items = allItems.length > 0 ? allItems : [];
-            // If all empty, show placeholders from each category
-            if (items.length === 0) {
-                Object.keys(GALLERY_DATA).forEach(k => {
-                    items = items.concat(getPlaceholders(k, 2));
-                });
-            }
+            // Vue "Tous" : une seule cover par thème
+            items = getCoverItems();
+            lightboxItems = []; // pas de lightbox en vue covers
         } else {
+            // Vue filtrée : toutes les photos du thème
             const catItems = allItems.filter(i => i.categoryKey === filter);
             items = catItems.length > 0 ? catItems : getPlaceholders(filter, 6);
+            lightboxItems = items;
         }
-
-        lightboxItems = items;
 
         items.forEach((item, index) => {
             const el = document.createElement('div');
-            el.className = 'gallery-item' + (item.tall ? ' tall' : '');
-            el.style.animationDelay = (index * 0.05) + 's';
-            el.dataset.index = index;
 
-            if (item.src === 'placeholder') {
+            if (item.isCover) {
+                // Cover thème : clic = active le filtre, pas de lightbox
+                el.className = 'gallery-item gallery-item--cover';
+                el.style.animationDelay = (index * 0.05) + 's';
+                const catName = getCatName(item.categoryKey);
+                const catCount = GALLERY_DATA[item.categoryKey].items.length;
+                el.innerHTML = '<div class="gallery-item-inner">'
+                    + '<img src="' + item.src + '" alt="' + catName + '" loading="lazy" onerror="this.closest(\'.gallery-item\').classList.add(\'img-error\');this.style.display=\'none\'">'
+                    + '<div class="gallery-item-overlay gallery-cover-overlay"><div class="gallery-item-info">'
+                    + '<div class="gallery-cover-label">' + catName + '</div>'
+                    + '<div class="gallery-cover-count">' + catCount + ' photo' + (catCount > 1 ? 's' : '') + '</div>'
+                    + '</div></div></div>';
+                el.addEventListener('click', () => activateFilter(item.categoryKey));
+
+            } else if (item.src === 'placeholder') {
+                el.className = 'gallery-item' + (item.tall ? ' tall' : '');
+                el.style.animationDelay = (index * 0.05) + 's';
                 el.innerHTML = '<div class="gallery-item-inner gallery-placeholder" style="background:' + getGrad() + '"><div><div style="font-size:28px;margin-bottom:12px;opacity:0.3">◇</div><div>' + item.title + '</div></div></div>';
+
             } else {
+                // Photo normale : clic = lightbox
+                el.className = 'gallery-item' + (item.tall ? ' tall' : '');
+                el.style.animationDelay = (index * 0.05) + 's';
+                el.dataset.index = index;
                 el.innerHTML = '<div class="gallery-item-inner"><img src="' + item.src + '" alt="' + item.title + '" loading="lazy" onerror="this.closest(\'.gallery-item\').classList.add(\'img-error\');this.style.display=\'none\'"><div class="gallery-item-overlay"><div class="gallery-item-info"><div class="gallery-item-title">' + item.title + '</div><div class="gallery-item-category">' + getCatName(item.categoryKey) + '</div></div></div></div>';
                 el.addEventListener('click', () => openLightbox(index));
             }
+
             gridEl.appendChild(el);
         });
     };
@@ -3262,7 +3079,6 @@ document.addEventListener('DOMContentLoaded', () => {
             footer_social: "Social",
             footer_credit: "Website by <a href='https://dam-company.vercel.app' target='_blank' rel='noopener'>DamCompany</a>",
             nav_mannequins: "Models",
-            nav_boutique: "Shop",
         }
     };
 
@@ -3320,3 +3136,4 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
