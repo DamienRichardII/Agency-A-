@@ -259,6 +259,105 @@
         [data-animate] { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
         [data-animate].visible { opacity: 1; transform: none; }
     </style>
+
+    <\!-- PREMIUM UPGRADE CSS -->
+    <style>
+    /* PAGE REVEAL */
+    body { opacity: 0; animation: pageReveal 0.75s cubic-bezier(0.16,1,0.3,1) forwards; }
+    @keyframes pageReveal { to { opacity: 1; } }
+
+    /* CUSTOM CURSOR */
+    .cursor-dot {
+        position: fixed; top: 0; left: 0; width: 6px; height: 6px;
+        background: var(--terracotta, #c06949); border-radius: 50%;
+        pointer-events: none; z-index: 9999;
+        transform: translate(-50%,-50%);
+        transition: transform 0.1s ease, background 0.2s;
+    }
+    .cursor-ring {
+        position: fixed; top: 0; left: 0; width: 32px; height: 32px;
+        border: 1px solid rgba(192,105,73,0.45); border-radius: 50%;
+        pointer-events: none; z-index: 9998;
+        transform: translate(-50%,-50%);
+        transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), width 0.3s, height 0.3s, border-color 0.3s;
+    }
+    body:has(a:hover) .cursor-ring,
+    body:has(button:hover) .cursor-ring {
+        width: 52px; height: 52px;
+        border-color: rgba(192,105,73,0.7);
+    }
+
+    /* GHOST TEXT HERO */
+    .page-hero { position: relative; overflow: hidden; }
+    .page-hero-ghost {
+        position: absolute; inset: 0;
+        display: flex; align-items: center; justify-content: center;
+        pointer-events: none; z-index: 0;
+    }
+    .page-hero-ghost-text {
+        font-family: var(--font-display, 'Cormorant Garamond', serif);
+        font-size: clamp(80px, 18vw, 240px);
+        font-weight: 700; font-style: italic;
+        letter-spacing: -0.03em;
+        color: transparent;
+        -webkit-text-stroke: 1px rgba(10,10,10,0.055);
+        white-space: nowrap;
+        user-select: none;
+    }
+    .page-hero > *:not(.page-hero-ghost) { position: relative; z-index: 1; }
+
+    /* SCROLL REVEAL */
+    .sr { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .sr.visible { opacity: 1; transform: translateY(0); }
+    .sr-delay-1 { transition-delay: 0.1s; }
+    .sr-delay-2 { transition-delay: 0.2s; }
+    .sr-delay-3 { transition-delay: 0.3s; }
+    .sr-delay-4 { transition-delay: 0.4s; }
+
+    /* SECTION COUNTER */
+    .section-label-wrap { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+    .section-counter {
+        font-size: 9px; letter-spacing: 0.35em; text-transform: uppercase;
+        color: var(--terracotta, #c06949); font-family: var(--font-sans, 'Helvetica Neue', sans-serif);
+    }
+    .section-line {
+        flex: 1; max-width: 48px; height: 1px;
+        background: var(--terracotta, #c06949); opacity: 0.45;
+    }
+
+    /* KPI HOVER (a-propos) */
+    .kpi-card { position: relative; overflow: hidden; transition: box-shadow 0.35s; }
+    .kpi-card::before {
+        content: ''; position: absolute; inset: 0;
+        background: linear-gradient(135deg, rgba(192,105,73,0.06) 0%, transparent 70%);
+        transform: scaleX(0); transform-origin: left;
+        transition: transform 0.45s cubic-bezier(0.16,1,0.3,1);
+    }
+    .kpi-card:hover::before { transform: scaleX(1); }
+    .kpi-card:hover { box-shadow: 0 12px 40px rgba(192,105,73,0.12); }
+
+    /* SERVICE / PRESTATION CARD HOVER */
+    .service-card, .prestation-card {
+        transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s;
+    }
+    .service-card:hover, .prestation-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 48px rgba(10,10,10,0.1);
+    }
+
+    /* TALENT CARD HOVER (mannequins) */
+    .talent-card img { transition: transform 0.65s cubic-bezier(0.16,1,0.3,1); }
+    .talent-card:hover img { transform: scale(1.04); }
+
+    /* PRINT CARD HOVER (boutique) */
+    .print-card { transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s; }
+    .print-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(10,10,10,0.12); }
+
+    /* CONTACT TYPE CARD ACTIVE STATE */
+    .contact-type-card { transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s; }
+    .contact-type-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(192,105,73,0.12); }
+    </style>
+
 </head>
 <body>
 
@@ -300,8 +399,8 @@
 <main>
     <!-- PAGE HERO -->
     <section class="page-hero">
-        <p class="page-hero-label">Agency A</p>
-        <h1 class="page-hero-title">À propos</h1>
+        <p class="page-hero-label sr">Agency A</p>
+        <h1 class="page-hero-title sr sr-delay-1">À propos</h1>
     </section>
 
     <!-- PORTRAIT + INTRO -->
@@ -312,7 +411,7 @@
         </div>
         <div class="about-text-col">
             <p class="about-pretitle" data-animate>Fondatrice &amp; directrice artistique</p>
-            <h2 class="about-name" data-animate>Anaïs<br><em>Descomps</em></h2>
+            <h2 class="sr" class="about-name" data-animate>Anaïs<br><em>Descomps</em></h2>
             <p class="about-bio" data-animate>
                 Photographe éditoriale et directrice artistique basée à Paris, Anaïs Descomps fonde Agency A avec une conviction : chaque image doit raconter une histoire, incarner un univers, et servir une vision. Formée aux arts visuels et à la direction de mode, elle développe un regard à la fois précis et sensible, entre documentaire de terrain et composition éditoriale.
             </p>
@@ -325,7 +424,11 @@
     <!-- PARCOURS -->
     <section class="parcours-section">
         <div class="parcours-inner">
-            <h2 class="parcours-title" data-animate>Parcours &amp; formations</h2>
+            <div class="section-label-wrap sr">
+                <span class="section-counter">01</span>
+                <span class="section-line"></span>
+            </div>
+            <h2 class="sr" class="parcours-title" data-animate>Parcours &amp; formations</h2>
             <div class="parcours-grid">
                 <div class="parcours-item" data-animate>
                     <p class="parcours-year">Formation</p>
@@ -365,19 +468,19 @@
     <section class="kpi-section">
         <div class="kpi-inner">
             <div class="kpi-grid">
-                <div class="kpi-card" data-animate>
+                <div class="kpi-card sr" data-animate>
                     <div class="kpi-number">+200</div>
                     <div class="kpi-label">Séances réalisées</div>
                 </div>
-                <div class="kpi-card" data-animate style="transition-delay:0.1s">
+                <div class="kpi-card sr" data-animate style="transition-delay:0.1s">
                     <div class="kpi-number">6+</div>
                     <div class="kpi-label">Univers photographiques</div>
                 </div>
-                <div class="kpi-card" data-animate style="transition-delay:0.2s">
+                <div class="kpi-card sr" data-animate style="transition-delay:0.2s">
                     <div class="kpi-number">3</div>
                     <div class="kpi-label">Saisons Fashion Week</div>
                 </div>
-                <div class="kpi-card" data-animate style="transition-delay:0.3s">
+                <div class="kpi-card sr" data-animate style="transition-delay:0.3s">
                     <div class="kpi-number">12+</div>
                     <div class="kpi-label">Mannequins accompagnés</div>
                 </div>
@@ -390,7 +493,11 @@
         <div class="services-inner">
             <div class="services-header">
                 <p class="services-pretitle" data-animate>Notre savoir-faire</p>
-                <h2 class="services-title" data-animate>Ce que nous créons</h2>
+                <div class="section-label-wrap sr">
+                <span class="section-counter">02</span>
+                <span class="section-line"></span>
+            </div>
+            <h2 class="sr" class="services-title" data-animate>Ce que nous créons</h2>
             </div>
             <div class="services-grid">
                 <div class="service-card" data-animate>
@@ -498,5 +605,37 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.08 });
 document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
 </script>
+
+    <\!-- PREMIUM UPGRADE JS -->
+    <script>
+    (function() {
+        'use strict';
+        // Custom cursor
+        const dot = document.querySelector('.cursor-dot');
+        const ring = document.querySelector('.cursor-ring');
+        if (dot && ring) {
+            let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+            let rx = mx, ry = my;
+            document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+            (function tick() {
+                rx += (mx - rx) * 0.28;
+                ry += (my - ry) * 0.28;
+                dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+                ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+                requestAnimationFrame(tick);
+            })();
+            document.querySelectorAll('a,button,[role="button"]').forEach(el => {
+                el.addEventListener('mouseenter', () => dot.style.transform = 'translate(-50%,-50%) scale(2.2)');
+                el.addEventListener('mouseleave', () => dot.style.transform = 'translate(-50%,-50%) scale(1)');
+            });
+        }
+        // Scroll reveal
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.sr').forEach(el => observer.observe(el));
+    })();
+    </script>
+
 </body>
 </html>   

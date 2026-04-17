@@ -191,6 +191,105 @@
         [data-animate].visible { opacity: 1; transform: none; }
         .footer { background: var(--noir); color: var(--beige-rose); }
     </style>
+
+    <\!-- PREMIUM UPGRADE CSS -->
+    <style>
+    /* PAGE REVEAL */
+    body { opacity: 0; animation: pageReveal 0.75s cubic-bezier(0.16,1,0.3,1) forwards; }
+    @keyframes pageReveal { to { opacity: 1; } }
+
+    /* CUSTOM CURSOR */
+    .cursor-dot {
+        position: fixed; top: 0; left: 0; width: 6px; height: 6px;
+        background: var(--terracotta, #c06949); border-radius: 50%;
+        pointer-events: none; z-index: 9999;
+        transform: translate(-50%,-50%);
+        transition: transform 0.1s ease, background 0.2s;
+    }
+    .cursor-ring {
+        position: fixed; top: 0; left: 0; width: 32px; height: 32px;
+        border: 1px solid rgba(192,105,73,0.45); border-radius: 50%;
+        pointer-events: none; z-index: 9998;
+        transform: translate(-50%,-50%);
+        transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), width 0.3s, height 0.3s, border-color 0.3s;
+    }
+    body:has(a:hover) .cursor-ring,
+    body:has(button:hover) .cursor-ring {
+        width: 52px; height: 52px;
+        border-color: rgba(192,105,73,0.7);
+    }
+
+    /* GHOST TEXT HERO */
+    .page-hero { position: relative; overflow: hidden; }
+    .page-hero-ghost {
+        position: absolute; inset: 0;
+        display: flex; align-items: center; justify-content: center;
+        pointer-events: none; z-index: 0;
+    }
+    .page-hero-ghost-text {
+        font-family: var(--font-display, 'Cormorant Garamond', serif);
+        font-size: clamp(80px, 18vw, 240px);
+        font-weight: 700; font-style: italic;
+        letter-spacing: -0.03em;
+        color: transparent;
+        -webkit-text-stroke: 1px rgba(10,10,10,0.055);
+        white-space: nowrap;
+        user-select: none;
+    }
+    .page-hero > *:not(.page-hero-ghost) { position: relative; z-index: 1; }
+
+    /* SCROLL REVEAL */
+    .sr { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .sr.visible { opacity: 1; transform: translateY(0); }
+    .sr-delay-1 { transition-delay: 0.1s; }
+    .sr-delay-2 { transition-delay: 0.2s; }
+    .sr-delay-3 { transition-delay: 0.3s; }
+    .sr-delay-4 { transition-delay: 0.4s; }
+
+    /* SECTION COUNTER */
+    .section-label-wrap { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+    .section-counter {
+        font-size: 9px; letter-spacing: 0.35em; text-transform: uppercase;
+        color: var(--terracotta, #c06949); font-family: var(--font-sans, 'Helvetica Neue', sans-serif);
+    }
+    .section-line {
+        flex: 1; max-width: 48px; height: 1px;
+        background: var(--terracotta, #c06949); opacity: 0.45;
+    }
+
+    /* KPI HOVER (a-propos) */
+    .kpi-card { position: relative; overflow: hidden; transition: box-shadow 0.35s; }
+    .kpi-card::before {
+        content: ''; position: absolute; inset: 0;
+        background: linear-gradient(135deg, rgba(192,105,73,0.06) 0%, transparent 70%);
+        transform: scaleX(0); transform-origin: left;
+        transition: transform 0.45s cubic-bezier(0.16,1,0.3,1);
+    }
+    .kpi-card:hover::before { transform: scaleX(1); }
+    .kpi-card:hover { box-shadow: 0 12px 40px rgba(192,105,73,0.12); }
+
+    /* SERVICE / PRESTATION CARD HOVER */
+    .service-card, .prestation-card {
+        transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s;
+    }
+    .service-card:hover, .prestation-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 48px rgba(10,10,10,0.1);
+    }
+
+    /* TALENT CARD HOVER (mannequins) */
+    .talent-card img { transition: transform 0.65s cubic-bezier(0.16,1,0.3,1); }
+    .talent-card:hover img { transform: scale(1.04); }
+
+    /* PRINT CARD HOVER (boutique) */
+    .print-card { transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s; }
+    .print-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(10,10,10,0.12); }
+
+    /* CONTACT TYPE CARD ACTIVE STATE */
+    .contact-type-card { transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s; }
+    .contact-type-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(192,105,73,0.12); }
+    </style>
+
 </head>
 <body>
 
@@ -227,16 +326,16 @@
 
 <main>
     <section class="page-hero">
-        <p class="page-hero-label">Agency A</p>
-        <h1 class="page-hero-title">Boutique</h1>
-        <p class="page-hero-sub">Tirages d'art numérotés et signés — éditions limitées disponibles à l'acquisition.</p>
+        <p class="page-hero-label sr">Agency A</p>
+        <h1 class="page-hero-title sr sr-delay-1">Boutique</h1>
+        <p class="page-hero-sub sr sr-delay-2">Tirages d'art numérotés et signés — éditions limitées disponibles à l'acquisition.</p>
     </section>
 
     <section class="prints-section">
         <div class="prints-inner">
             <div class="prints-grid">
 
-                <div class="print-card" data-animate style="transition-delay:0.00s">
+                <div class="print-card sr" data-animate style="transition-delay:0.00s">
                     <div class="print-photo-wrap">
                         <img src="assets/photos/paris-fashion-week/PFW25-11MARS-32.JPG" alt="Paris Fashion Week I" loading="lazy" onerror="this.style.display='none'">
                         <div class="print-overlay">
@@ -257,7 +356,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="print-card" data-animate style="transition-delay:0.08s">
+                <div class="print-card sr" data-animate style="transition-delay:0.08s">
                     <div class="print-photo-wrap">
                         <img src="assets/photos/defile-monteiro/defile-mars-2025-426.jpg" alt="Monteiro — Mars 2025" loading="lazy" onerror="this.style.display='none'">
                         <div class="print-overlay">
@@ -278,7 +377,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="print-card" data-animate style="transition-delay:0.16s">
+                <div class="print-card sr" data-animate style="transition-delay:0.16s">
                     <div class="print-photo-wrap">
                         <img src="assets/photos/mode/AgencyA_Mode-1.JPG" alt="Portrait Mode I" loading="lazy" onerror="this.style.display='none'">
                         <div class="print-overlay">
@@ -299,7 +398,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="print-card" data-animate style="transition-delay:0.24s">
+                <div class="print-card sr" data-animate style="transition-delay:0.24s">
                     <div class="print-photo-wrap">
                         <img src="assets/photos/culinaire/AnaisDescomps_AgencyA_Culinaire--10.jpg" alt="Still Life I" loading="lazy" onerror="this.style.display='none'">
                         <div class="print-overlay">
@@ -320,7 +419,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="print-card" data-animate style="transition-delay:0.32s">
+                <div class="print-card sr" data-animate style="transition-delay:0.32s">
                     <div class="print-photo-wrap">
                         <img src="assets/photos/paris-fashion-week/PFW-25-7mars-71.JPG" alt="Paris Fashion Week II" loading="lazy" onerror="this.style.display='none'">
                         <div class="print-overlay">
@@ -341,7 +440,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="print-card" data-animate style="transition-delay:0.40s">
+                <div class="print-card sr" data-animate style="transition-delay:0.40s">
                     <div class="print-photo-wrap">
                         <img src="assets/photos/culinaire/AnaisDescomps_AgencyA_Culinaire--9.jpg" alt="Still Life II" loading="lazy" onerror="this.style.display='none'">
                         <div class="print-overlay">
@@ -400,7 +499,7 @@
         <div class="modal-img-wrap"><img id="modalImg" src="" alt=""></div>
         <div class="modal-content">
             <p class="modal-serie">Tirage d'art</p>
-            <h2 class="modal-title" id="modalTitle"></h2>
+            <h2 class="sr" class="modal-title" id="modalTitle"></h2>
             <p class="modal-edition" id="modalEdition"></p>
             <p class="modal-price" id="modalPrice"></p>
             <p class="modal-desc">Tirage d'art Fine Art sur papier Hahnemühle Photo Rag, impression Giclée. Numéroté, signé et accompagné de son certificat d'authenticité.</p>
@@ -488,5 +587,37 @@ function contactForPurchase() {
     window.location.href = 'contact.html';
 }
 </script>
+
+    <\!-- PREMIUM UPGRADE JS -->
+    <script>
+    (function() {
+        'use strict';
+        // Custom cursor
+        const dot = document.querySelector('.cursor-dot');
+        const ring = document.querySelector('.cursor-ring');
+        if (dot && ring) {
+            let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+            let rx = mx, ry = my;
+            document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+            (function tick() {
+                rx += (mx - rx) * 0.28;
+                ry += (my - ry) * 0.28;
+                dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+                ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+                requestAnimationFrame(tick);
+            })();
+            document.querySelectorAll('a,button,[role="button"]').forEach(el => {
+                el.addEventListener('mouseenter', () => dot.style.transform = 'translate(-50%,-50%) scale(2.2)');
+                el.addEventListener('mouseleave', () => dot.style.transform = 'translate(-50%,-50%) scale(1)');
+            });
+        }
+        // Scroll reveal
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.sr').forEach(el => observer.observe(el));
+    })();
+    </script>
+
 </body>
 </html>
