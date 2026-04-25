@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mon espace — Agency A</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/shared.css">
+  <style>
+    /* ── Layout global dashboard ── */
+    .db-shell {
+      display: flex;
+      min-height: 100vh;
+      background: var(--cream);
+    }
+
+    /* ── Sidebar desktop ── */
+    .db-sidebar {
+      width: 240px;
+      flex-shrink: 0;
+      background: var(--ink);
+      color: var(--cream);
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+    .db-sidebar-head {
+      padding: 28px 24px 20px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .db-sidebar-head .brand-logo { height: 28px; opacity: .9; }
+    .db-sidebar-user {
+      padding: 20px 24px 4px;
+    }
+    .db-sidebar-user .eyebrow { color: var(--sand); margin-bottom: 4px; }
+    .db-sidebar-user h4 { font-family: var(--display); font-size: 18px; font-weight: 400; color: var(--cream); margin: 0 0 4px; }
+    .db-sidebar-user .access-badge {
+      display: inline-block;
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 20px;
+      border: 1px solid rgba(212,184,155,.35);
+      color: var(--sand);
+      margin-top: 4px;
+    }
+    .db-nav { padding: 20px 0; flex: 1; }
+    .db-nav a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 24px;
+      font-family: var(--body);
+      font-size: 13px;
+      font-weight: 400;
+      color: rgba(248,242,234,.55);
+      text-decoration: none;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      transition: color .2s, background .2s;
+      border-left: 2px solid transparent;
+    }
+    .db-nav a:hover,
+    .db-nav a.active {
+      color: var(--cream);
+      background: rgba(255,255,255,.04);
+      border-left-color: var(--sand);
+    }
+    .db-nav a svg { opacity: .5; flex-shrink: 0; }
+    .db-nav a.active svg, .db-nav a:hover svg { opacity: 1; }
+
+    .db-logout {
+      padding: 16px 24px 24px;
+      border-top: 1px solid rgba(255,255,255,.08);
+    }
+    .db-logout button {
+      background: none;
+      border: 1px solid rgba(234,217,199,.2);
+      border-radius: 5px;
+      color: rgba(248,242,234,.5);
+      font-family: var(--body);
+      font-size: 12px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 8px 14px;
+      cursor: pointer;
+      transition: all .2s;
+      width: 100%;
+    }
+    .db-logout button:hover {
+      border-color: rgba(234,217,199,.5);
+      color: var(--cream);
+    }
+
+    /* ── Main content ── */
+    .db-main {
+      flex: 1;
+      overflow-y: auto;
+      padding: 36px 40px;
+      min-width: 0;
+    }
+
+    /* ── Mobile tab bar ── */
+    .db-tabs {
+      display: none;
+      background: var(--ink);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .db-tabs::-webkit-scrollbar { display: none; }
+    .db-tabs-inner {
+      display: flex;
+      padding: 0 4px;
+      min-width: max-content;
+    }
+    .db-tabs a {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 14px 16px;
+      font-family: var(--body);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      color: rgba(248,242,234,.5);
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      white-space: nowrap;
+      transition: color .2s, border-color .2s;
+    }
+    .db-tabs a.active,
+    .db-tabs a:hover {
+      color: var(--cream);
+      border-bottom-color: var(--sand);
+    }
+
+    /* ── Mobile header ── */
+    .db-mobile-header {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 20px;
+      background: var(--ink);
+      color: var(--cream);
+    }
+    .db-mobile-header .brand-logo { height: 24px; }
+    .db-mobile-header button {
+      background: none;
+      border: none;
+      color: rgba(248,242,234,.6);
+      font-family: var(--body);
+      font-size: 11px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      padding: 6px 0;
+    }
+
+    /* ── Section panels ── */
+    .db-panel { display: none; }
+    .db-panel.active { display: block; }
+
+    /* ── Cards ── */
+    .db-card {
+      background: #fff;
+      border: 1px solid rgba(212,184,155,.2);
+      border-radius: 10px;
+      padding: 24px 28px;
+      margin-bottom: 20px;
+    }
+    .db-card h3 {
+      font-family: var(--display);
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--ink);
+      margin: 0 0 4px;
+    }
+    .db-card .eyebrow { color: var(--muted); margin-bottom: 6px; }
+
+    /* ── Stat cards ── */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .stat-card {
+      background: #fff;
+      border: 1px solid rgba(212,184,155,.2);
+      border-radius: 10px;
+      padding: 20px 22px;
+    }
+    .stat-card .eyebrow { color: var(--muted); font-size: 10px; margin-bottom: 6px; }
+    .stat-card h3 {
+      font-family: var(--display);
+      font-size: 26px;
+      font-weight: 400;
+      color: var(--ink);
+      margin: 0 0 2px;
+    }
+    .stat-card p { font-size: 12px; color: var(--muted); margin: 0; }
+
+    .status-badge {
+      display: inline-block;
+      padding: 4px 11px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+    .status-en_cours    { background: #fef3c7; color: #92400e; }
+    .status-en_retouche { background: #dbeafe; color: #1e40af; }
+    .status-livraison   { background: #d1fae5; color: #065f46; }
+    .status-termine     { background: #f3f4f6; color: #374151; }
+    .status-archive     { background: #f3f4f6; color: #9ca3af; }
+
+    /* ── Gallery ── */
+    .db-gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .db-gallery-tile {
+      position: relative;
+      aspect-ratio: 1;
+      border-radius: 7px;
+      overflow: hidden;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: border-color .2s;
+    }
+    .db-gallery-tile img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .db-gallery-tile.selected { border-color: var(--sand); }
+    .db-gallery-tile .tile-check {
+      position: absolute;
+      top: 7px; right: 7px;
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.85);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+      color: transparent;
+      border: 2px solid rgba(0,0,0,.15);
+      transition: all .15s;
+    }
+    .db-gallery-tile.selected .tile-check {
+      background: var(--sand);
+      border-color: var(--sand);
+      color: #fff;
+    }
+    .gallery-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+    }
+    .selection-count {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    /* ── Messages ── */
+    .msg-thread {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 16px;
+      max-height: 360px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+    .msg-bubble {
+      max-width: 80%;
+    }
+    .msg-bubble.mine { align-self: flex-end; }
+    .msg-bubble .msg-meta {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .msg-bubble.mine .msg-meta { text-align: right; }
+    .msg-bubble .msg-body {
+      background: var(--beige);
+      border-radius: 10px 10px 2px 10px;
+      padding: 11px 15px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--ink-soft);
+    }
+    .msg-bubble.mine .msg-body {
+      background: var(--ink);
+      color: var(--cream);
+      border-radius: 10px 10px 10px 2px;
+    }
+    .msg-form {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .msg-form textarea {
+      flex: 1;
+      border: 1px solid rgba(212,184,155,.4);
+      border-radius: 7px;
+      padding: 10px 14px;
+      font-family: var(--body);
+      font-size: 13px;
+      resize: none;
+      min-height: 56px;
+      background: #fff;
+      color: var(--ink);
+      outline: none;
+      transition: border-color .2s;
+    }
+    .msg-form textarea:focus { border-color: var(--sand); }
+    .msg-form button {
+      align-self: flex-end;
+      background: var(--ink);
+      color: var(--cream);
+      border: none;
+      border-radius: 7px;
+      padding: 10px 18px;
+      font-family: var(--body);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .msg-form button:hover { background: var(--ink-soft); }
+
+    /* ── Documents ── */
+    .doc-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(212,184,155,.15);
+    }
+    .doc-row:last-child { border-bottom: none; }
+    .doc-icon {
+      width: 38px; height: 38px;
+      background: var(--beige);
+      border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      color: var(--muted);
+    }
+    .doc-info { flex: 1; min-width: 0; }
+    .doc-info strong { font-size: 13px; font-weight: 500; color: var(--ink); display: block; }
+    .doc-info span { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+    .doc-dl {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 12px;
+      padding: 6px 12px;
+      border: 1px solid rgba(212,184,155,.4);
+      border-radius: 5px;
+      transition: all .2s;
+      white-space: nowrap;
+    }
+    .doc-dl:hover { border-color: var(--sand); color: var(--ink); }
+
+    /* ── Fiche client ── */
+    .fiche-table {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      margin-top: 14px;
+      border: 1px solid rgba(212,184,155,.2);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .fiche-row {
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(212,184,155,.15);
+      background: #fff;
+    }
+    .fiche-row:last-child, .fiche-row:nth-last-child(2):not(.full) { border-bottom: none; }
+    .fiche-row.full { grid-column: 1 / -1; }
+    .fiche-row label {
+      display: block;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--muted);
+      margin-bottom: 3px;
+    }
+    .fiche-row span { font-size: 14px; color: var(--ink); }
+
+    /* ── Empty / loading states ── */
+    .db-empty {
+      text-align: center;
+      padding: 48px 20px;
+      color: var(--muted);
+    }
+    .db-empty svg { opacity: .3; margin-bottom: 12px; }
+    .db-empty p { font-size: 14px; margin: 0; }
+
+    .db-loading {
+      text-align: center;
+      padding: 64px 20px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* ── Access expiry warning ── */
+    .access-warning {
+      background: #fef9ec;
+      border: 1px solid #f5d68a;
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 13px;
+      color: #7a5c10;
+      margin-bottom: 20px;
+    }
+    .access-warning strong { font-weight: 600; }
+
+    /* ── Page title ── */
+    .db-page-title {
+      margin: 0 0 28px;
+    }
+    .db-page-title .eyebrow { color: var(--muted); margin-bottom: 6px; }
+    .db-page-title h2 {
+      font-family: var(--display);
+      font-size: 32px;
+      font-weight: 400;
+      color: var(--ink);
+      margin: 0;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .db-sidebar { display: none; }
+      .db-tabs { display: block; }
+      .db-mobile-header { display: flex; }
+      .db-main { padding: 20px 16px 40px; }
+    }
+
+    @media (max-width: 600px) {
+      .stat-grid { grid-template-columns: 1fr 1fr; }
+      .db-gallery-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+      .fiche-table { grid-template-columns: 1fr; }
+      .fiche-row.full { grid-column: auto; }
+      .msg-bubble { max-width: 92%; }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;background:var(--cream)">
+
+<!-- ── Mobile header ── -->
+<div class="db-mobile-header" id="mobileHeader">
+  <img src="assets/logo/logo-white-transparent.png" alt="Agency A" class="brand-logo">
+  <button id="mobileLogout">Déconnexion</button>
+</div>
+
+<!-- ── Mobile tab bar ── -->
+<nav class="db-tabs" id="dbTabs" aria-label="Navigation tableau de bord">
+  <div class="db-tabs-inner">
+    <a href="#overview"   class="active" data-panel="overview">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Vue d'ensemble
+    </a>
+    <a href="#gallery"  data-panel="gallery">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      Galerie
+    </a>
+    <a href="#messages" data-panel="messages">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Messages
+    </a>
+    <a href="#documents" data-panel="documents">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      Documents
+    </a>
+    <a href="#profile"  data-panel="profile">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      Mon profil
+    </a>
+  </div>
+</nav>
+
+<!-- ── Shell ── -->
+<div class="db-shell">
+
+  <!-- Sidebar desktop -->
+  <aside class="db-sidebar">
+    <div class="db-sidebar-head">
+      <a href="index.html"><img src="assets/logo/logo-white-transparent.png" alt="Agency A" class="brand-logo"></a>
+    </div>
+    <div class="db-sidebar-user">
+      <p class="eyebrow" style="font-size:10px">Espace client</p>
+      <h4 id="sidebarName">Chargement…</h4>
+      <div id="sidebarAccess" class="access-badge"></div>
+    </div>
+    <nav class="db-nav">
+      <a href="#overview"   class="active" data-panel="overview">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        Vue d'ensemble
+      </a>
+      <a href="#gallery"  data-panel="gallery">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        Galerie privée
+      </a>
+      <a href="#messages" data-panel="messages">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Messagerie
+      </a>
+      <a href="#documents" data-panel="documents">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Documents
+      </a>
+      <a href="#profile"  data-panel="profile">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Mon profil
+      </a>
+    </nav>
+    <div class="db-logout">
+      <button id="sidebarLogout">Déconnexion</button>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main class="db-main" id="dbMain">
+    <div class="db-loading" id="dbLoading">Chargement de votre espace…</div>
+    <div id="dbContent" style="display:none">
+
+      <!-- ── Vue d'ensemble ── -->
+      <section class="db-panel active" id="panel-overview">
+        <div class="db-page-title">
+          <p class="eyebrow">Tableau de bord</p>
+          <h2 id="overviewTitle">Bonjour</h2>
+        </div>
+        <div id="accessWarning"></div>
+        <div class="stat-grid" id="statGrid">
+          <div class="stat-card"><p class="eyebrow">Statut</p><h3 id="statStatus">—</h3><p id="statStatusLabel">—</p></div>
+          <div class="stat-card"><p class="eyebrow">Date de séance</p><h3 id="statDate">—</h3><p id="statType">—</p></div>
+          <div class="stat-card"><p class="eyebrow">Images sélectionnées</p><h3 id="statImages">—</h3><p id="statImagesLabel">sur <span id="statImagesTotal">0</span> disponibles</p></div>
+          <div class="stat-card"><p class="eyebrow">Accès expire</p><h3 id="statExpiry">—</h3><p id="statExpiryLabel">—</p></div>
+        </div>
+        <div class="db-card">
+          <p class="eyebrow">Projet en cours</p>
+          <h3 id="projectTitle">—</h3>
+          <p style="font-size:13px;color:var(--muted);margin:6px 0 0" id="projectNotes"></p>
+        </div>
+      </section>
+
+      <!-- ── Galerie ── -->
+      <section class="db-panel" id="panel-gallery">
+        <div class="db-page-title">
+          <p class="eyebrow">Galerie privée</p>
+          <h2>Sélectionnez vos images</h2>
+        </div>
+        <div class="db-card">
+          <div class="gallery-bar">
+            <p style="font-size:13px;color:var(--muted);margin:0">Cliquez sur une image pour la sélectionner. Votre sélection est sauvegardée automatiquement.</p>
+            <span class="selection-count" id="selectionCount">0 image sélectionnée</span>
+          </div>
+          <div class="db-gallery-grid" id="galleryGrid">
+            <div class="db-empty" style="grid-column:1/-1">
+              <p>Votre galerie sera disponible dès que l'équipe Agency A aura importé vos photos.</p>
+            </div>
+          </div>
+          <div style="margin-top:20px" id="selectionSubmitWrap" style="display:none">
+            <button class="btn btn-primary" id="submitSelectionBtn">Envoyer ma sélection à Agency A</button>
+            <p id="selectionFeedback" style="font-size:12px;color:var(--muted);margin-top:8px;display:none"></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Messages ── -->
+      <section class="db-panel" id="panel-messages">
+        <div class="db-page-title">
+          <p class="eyebrow">Messagerie</p>
+          <h2>Échanger avec Agency A</h2>
+        </div>
+        <div class="db-card">
+          <div class="msg-thread" id="msgThread">
+            <div class="db-empty"><p>Aucun message pour l'instant.</p></div>
+          </div>
+          <form class="msg-form" id="msgForm">
+            <textarea id="msgInput" placeholder="Votre message…" rows="2"></textarea>
+            <button type="submit">Envoyer</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- ── Documents ── -->
+      <section class="db-panel" id="panel-documents">
+        <div class="db-page-title">
+          <p class="eyebrow">Documents</p>
+          <h2>Contrats &amp; livrables</h2>
+        </div>
+        <div class="db-card">
+          <div id="docList">
+            <div class="db-empty"><p>Aucun document disponible pour l'instant.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Profil ── -->
+      <section class="db-panel" id="panel-profile">
+        <div class="db-page-title">
+          <p class="eyebrow">Mon profil</p>
+          <h2>Vos informations</h2>
+        </div>
+        <div class="db-card">
+          <p style="font-size:13px;color:var(--muted);margin:0 0 4px">Pour toute modification, contactez Agency A.</p>
+          <div class="fiche-table" id="ficheTable"></div>
+        </div>
+      </section>
+
+    </div><!-- /dbContent -->
+  </main>
+
+</div><!-- /db-shell -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase/config.js"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/dashboard-client.js"></script>
+</body>
+</html>

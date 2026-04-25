@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Administration — Agency A</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/shared.css">
+  <style>
+    * { box-sizing: border-box; }
+
+    body { margin: 0; background: #f5f0ea; font-family: var(--body); }
+
+    /* ── Admin shell ── */
+    .admin-shell { display: flex; min-height: 100vh; }
+
+    /* ── Sidebar ── */
+    .admin-sidebar {
+      width: 220px;
+      flex-shrink: 0;
+      background: var(--ink);
+      color: var(--cream);
+      display: flex;
+      flex-direction: column;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+    .admin-sidebar-head {
+      padding: 24px 20px 18px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .admin-sidebar-head img { height: 26px; opacity: .9; }
+    .admin-sidebar-head .admin-badge {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--sand);
+    }
+    .admin-nav { padding: 16px 0; flex: 1; }
+    .admin-nav a {
+      display: block;
+      padding: 10px 20px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: rgba(248,242,234,.5);
+      text-decoration: none;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+    }
+    .admin-nav a:hover, .admin-nav a.active {
+      color: var(--cream);
+      background: rgba(255,255,255,.04);
+      border-left-color: var(--sand);
+    }
+    .admin-logout {
+      padding: 14px 20px 20px;
+      border-top: 1px solid rgba(255,255,255,.08);
+    }
+    .admin-logout button {
+      width: 100%;
+      background: none;
+      border: 1px solid rgba(234,217,199,.2);
+      border-radius: 4px;
+      color: rgba(248,242,234,.45);
+      font-size: 11px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 7px 12px;
+      cursor: pointer;
+      font-family: var(--body);
+      transition: all .2s;
+    }
+    .admin-logout button:hover { border-color: rgba(234,217,199,.5); color: var(--cream); }
+
+    /* ── Main ── */
+    .admin-main { flex: 1; padding: 32px 36px; min-width: 0; overflow-y: auto; }
+
+    .admin-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 28px;
+    }
+    .admin-topbar h1 {
+      font-family: var(--display);
+      font-size: 28px;
+      font-weight: 400;
+      color: var(--ink);
+      margin: 0;
+    }
+
+    /* ── Cards ── */
+    .a-card {
+      background: #fff;
+      border: 1px solid rgba(212,184,155,.25);
+      border-radius: 10px;
+      padding: 22px 26px;
+      margin-bottom: 20px;
+    }
+    .a-card h3 {
+      font-family: var(--display);
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--ink);
+      margin: 0 0 14px;
+    }
+
+    /* ── Stats overview ── */
+    .admin-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+    .stat-box {
+      background: #fff;
+      border: 1px solid rgba(212,184,155,.25);
+      border-radius: 10px;
+      padding: 18px 22px;
+    }
+    .stat-box .eyebrow { color: var(--muted); font-size: 10px; margin-bottom: 6px; }
+    .stat-box h2 {
+      font-family: var(--display);
+      font-size: 34px;
+      font-weight: 400;
+      color: var(--ink);
+      margin: 0 0 2px;
+    }
+    .stat-box p { font-size: 12px; color: var(--muted); margin: 0; }
+
+    /* ── Table ── */
+    .a-table { width: 100%; border-collapse: collapse; }
+    .a-table th {
+      text-align: left;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 0 12px 10px;
+      border-bottom: 1px solid rgba(212,184,155,.2);
+    }
+    .a-table td {
+      padding: 12px 12px;
+      border-bottom: 1px solid rgba(212,184,155,.1);
+      font-size: 13px;
+      color: var(--ink-soft);
+      vertical-align: middle;
+    }
+    .a-table tr:last-child td { border-bottom: none; }
+    .a-table tr:hover td { background: rgba(212,184,155,.06); }
+    .a-table .action-btn {
+      background: none;
+      border: 1px solid rgba(212,184,155,.4);
+      border-radius: 5px;
+      padding: 5px 12px;
+      font-size: 11px;
+      font-family: var(--body);
+      font-weight: 500;
+      color: var(--ink);
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .a-table .action-btn:hover { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+    .a-table .action-btn.danger { color: #b91c1c; border-color: rgba(185,28,28,.3); }
+    .a-table .action-btn.danger:hover { background: #b91c1c; color: #fff; }
+
+    /* ── Status badge ── */
+    .s-badge {
+      display: inline-block;
+      padding: 3px 9px;
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .s-en_cours    { background: #fef3c7; color: #92400e; }
+    .s-en_retouche { background: #dbeafe; color: #1e40af; }
+    .s-livraison   { background: #d1fae5; color: #065f46; }
+    .s-termine     { background: #f3f4f6; color: #374151; }
+    .s-archive     { background: #f3f4f6; color: #9ca3af; }
+
+    /* ── Forms ── */
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .form-row.full { grid-template-columns: 1fr; }
+    .f-field label {
+      display: block;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: var(--muted);
+      margin-bottom: 5px;
+    }
+    .f-field input,
+    .f-field select,
+    .f-field textarea {
+      width: 100%;
+      border: 1px solid rgba(212,184,155,.4);
+      border-radius: 6px;
+      padding: 9px 12px;
+      font-family: var(--body);
+      font-size: 13px;
+      color: var(--ink);
+      background: #fff;
+      outline: none;
+      transition: border-color .2s;
+    }
+    .f-field input:focus,
+    .f-field select:focus,
+    .f-field textarea:focus { border-color: var(--sand); }
+    .f-field textarea { resize: vertical; min-height: 70px; }
+
+    .btn-primary-sm {
+      background: var(--ink);
+      color: var(--cream);
+      border: none;
+      border-radius: 6px;
+      padding: 10px 20px;
+      font-family: var(--body);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .btn-primary-sm:hover { background: var(--ink-soft); }
+    .btn-secondary-sm {
+      background: none;
+      border: 1px solid rgba(212,184,155,.5);
+      border-radius: 6px;
+      padding: 9px 18px;
+      font-family: var(--body);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      color: var(--ink);
+      transition: all .2s;
+    }
+    .btn-secondary-sm:hover { border-color: var(--sand); }
+
+    /* ── Panels ── */
+    .admin-panel { display: none; }
+    .admin-panel.active { display: block; }
+
+    /* ── Modal ── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(17,17,17,.55);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-box {
+      background: #fff;
+      border-radius: 12px;
+      padding: 28px 32px;
+      width: 100%;
+      max-width: 560px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0,0,0,.18);
+      position: relative;
+    }
+    .modal-box h3 {
+      font-family: var(--display);
+      font-size: 22px;
+      font-weight: 400;
+      margin: 0 0 20px;
+    }
+    .modal-close {
+      position: absolute;
+      top: 16px; right: 18px;
+      background: none;
+      border: none;
+      font-size: 22px;
+      color: var(--muted);
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    /* ── Feedback inline ── */
+    .inline-feedback {
+      font-size: 12px;
+      margin-top: 8px;
+    }
+    .inline-feedback.ok  { color: #059669; }
+    .inline-feedback.err { color: #dc2626; }
+
+    /* ── Upload zone ── */
+    .upload-drop {
+      border: 2px dashed rgba(212,184,155,.5);
+      border-radius: 8px;
+      padding: 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      transition: border-color .2s, background .2s;
+      cursor: pointer;
+    }
+    .upload-drop:hover { border-color: var(--sand); background: rgba(212,184,155,.04); }
+    .upload-drop input[type="file"] { display: none; }
+
+    /* ── Project detail ── */
+    .project-detail-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+    }
+    .project-detail-header h2 {
+      font-family: var(--display);
+      font-size: 26px;
+      font-weight: 400;
+      margin: 0 0 6px;
+    }
+
+    /* ── Messages admin ── */
+    .msg-thread {
+      max-height: 340px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding-right: 4px;
+    }
+    .msg-row { display: flex; flex-direction: column; }
+    .msg-row .msg-meta { font-size: 11px; color: var(--muted); margin-bottom: 3px; }
+    .msg-row .msg-body {
+      background: var(--beige);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--ink-soft);
+      max-width: 85%;
+    }
+    .msg-row.mine .msg-body {
+      background: var(--ink);
+      color: var(--cream);
+      align-self: flex-end;
+    }
+    .msg-row.mine .msg-meta { text-align: right; }
+    .msg-input-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .msg-input-row textarea {
+      flex: 1;
+      border: 1px solid rgba(212,184,155,.4);
+      border-radius: 6px;
+      padding: 9px 12px;
+      font-family: var(--body);
+      font-size: 13px;
+      resize: none;
+      min-height: 50px;
+      outline: none;
+      transition: border-color .2s;
+    }
+    .msg-input-row textarea:focus { border-color: var(--sand); }
+    .msg-input-row button {
+      align-self: flex-end;
+      background: var(--ink);
+      color: var(--cream);
+      border: none;
+      border-radius: 6px;
+      padding: 9px 16px;
+      font-size: 12px;
+      font-family: var(--body);
+      font-weight: 500;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    /* ── Image grid admin ── */
+    .img-grid-admin {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .img-thumb {
+      position: relative;
+      aspect-ratio: 1;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .img-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .img-thumb button {
+      position: absolute;
+      top: 4px; right: 4px;
+      background: rgba(185,28,28,.85);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 22px; height: 22px;
+      font-size: 14px;
+      line-height: 1;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .img-sel-badge {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: rgba(17,17,17,.65);
+      color: #fff;
+      font-size: 10px;
+      text-align: center;
+      padding: 3px;
+    }
+
+    /* ── Doc list admin ── */
+    .doc-row-admin {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 0;
+      border-bottom: 1px solid rgba(212,184,155,.12);
+    }
+    .doc-row-admin:last-child { border-bottom: none; }
+    .doc-name { flex: 1; font-size: 13px; font-weight: 500; color: var(--ink); }
+    .doc-type-label { font-size: 11px; color: var(--muted); }
+
+    /* ── Tabs inside project detail ── */
+    .proj-tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid rgba(212,184,155,.25);
+      margin-bottom: 20px;
+    }
+    .proj-tabs button {
+      padding: 10px 18px;
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      font-family: var(--body);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all .2s;
+      margin-bottom: -1px;
+    }
+    .proj-tabs button.active {
+      color: var(--ink);
+      border-bottom-color: var(--sand);
+    }
+    .proj-tab-panel { display: none; }
+    .proj-tab-panel.active { display: block; }
+
+    .empty-state {
+      padding: 32px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 860px) {
+      .admin-sidebar { display: none; }
+      .admin-main { padding: 18px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="admin-shell">
+
+  <!-- ── Sidebar ── -->
+  <aside class="admin-sidebar">
+    <div class="admin-sidebar-head">
+      <a href="index.html"><img src="assets/logo/logo-white-transparent.png" alt="Agency A"></a>
+      <div class="admin-badge">Administration</div>
+    </div>
+    <nav class="admin-nav">
+      <a href="#overview" data-panel="overview" class="active">Vue d'ensemble</a>
+      <a href="#clients"  data-panel="clients">Clients</a>
+      <a href="#projects" data-panel="projects">Projets</a>
+      <a href="#messages" data-panel="messages">Messages</a>
+      <a href="#access"   data-panel="access">Accès</a>
+    </nav>
+    <div class="admin-logout">
+      <button id="adminLogout">Déconnexion</button>
+    </div>
+  </aside>
+
+  <!-- ── Main ── -->
+  <main class="admin-main">
+
+    <!-- Chargement -->
+    <div id="adminLoading" style="text-align:center;padding:80px;color:var(--muted);font-size:13px">
+      Chargement de l'administration…
+    </div>
+
+    <div id="adminContent" style="display:none">
+
+      <!-- ── Vue d'ensemble ── -->
+      <section class="admin-panel active" id="panel-overview">
+        <div class="admin-topbar">
+          <h1>Tableau de bord</h1>
+          <span id="adminName" style="font-size:13px;color:var(--muted)"></span>
+        </div>
+        <div class="admin-stats">
+          <div class="stat-box"><p class="eyebrow">Clients</p><h2 id="countClients">—</h2><p>comptes actifs</p></div>
+          <div class="stat-box"><p class="eyebrow">Projets</p><h2 id="countProjects">—</h2><p>en cours</p></div>
+          <div class="stat-box"><p class="eyebrow">Images</p><h2 id="countImages">—</h2><p>importées</p></div>
+          <div class="stat-box"><p class="eyebrow">Messages</p><h2 id="countMessages">—</h2><p>non lus</p></div>
+        </div>
+        <div class="a-card">
+          <h3>Activité récente</h3>
+          <div id="recentActivity">
+            <div class="empty-state">Aucune activité récente.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Clients ── -->
+      <section class="admin-panel" id="panel-clients">
+        <div class="admin-topbar">
+          <h1>Clients</h1>
+          <button class="btn-primary-sm" id="newClientBtn">+ Nouveau client</button>
+        </div>
+        <div class="a-card">
+          <table class="a-table">
+            <thead><tr>
+              <th>Nom</th>
+              <th>Email</th>
+              <th>Projets</th>
+              <th>Inscrit le</th>
+              <th></th>
+            </tr></thead>
+            <tbody id="clientsTableBody">
+              <tr><td colspan="5" class="empty-state">Chargement…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ── Projets ── -->
+      <section class="admin-panel" id="panel-projects">
+        <div class="admin-topbar">
+          <h1 id="projectsTitle">Projets</h1>
+          <button class="btn-primary-sm" id="newProjectBtn">+ Nouveau projet</button>
+        </div>
+        <!-- Liste des projets -->
+        <div id="projectsListView">
+          <div class="a-card">
+            <table class="a-table">
+              <thead><tr>
+                <th>Projet</th>
+                <th>Client</th>
+                <th>Statut</th>
+                <th>Date séance</th>
+                <th></th>
+              </tr></thead>
+              <tbody id="projectsTableBody">
+                <tr><td colspan="5" class="empty-state">Chargement…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- Détail d'un projet -->
+        <div id="projectDetailView" style="display:none">
+          <div style="margin-bottom:18px">
+            <button class="btn-secondary-sm" id="backToProjectsBtn">← Retour aux projets</button>
+          </div>
+          <div class="project-detail-header">
+            <div>
+              <p class="eyebrow" id="detailClient" style="margin-bottom:4px"></p>
+              <h2 id="detailTitle"></h2>
+              <span class="s-badge" id="detailStatus"></span>
+            </div>
+            <button class="btn-secondary-sm" id="editProjectBtn">Modifier le projet</button>
+          </div>
+          <!-- Tabs -->
+          <div class="proj-tabs">
+            <button class="active" data-tab="images">Images</button>
+            <button data-tab="documents">Documents</button>
+            <button data-tab="messages">Messages</button>
+            <button data-tab="access">Accès</button>
+          </div>
+          <!-- Tab: images -->
+          <div class="proj-tab-panel active" id="tab-images">
+            <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap">
+              <label class="upload-drop" id="uploadImgLabel" style="flex:1;min-width:200px">
+                <input type="file" id="uploadImgInput" multiple accept="image/*">
+                <div>
+                  <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" style="margin-bottom:8px"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
+                  <p style="margin:0;font-size:13px">Cliquez ou glissez vos images ici</p>
+                  <p style="margin:4px 0 0;font-size:11px;color:var(--muted)">JPG, PNG, WEBP — max 20 Mo par fichier</p>
+                </div>
+              </label>
+            </div>
+            <div id="uploadProgress" style="display:none;font-size:12px;color:var(--muted);margin-bottom:10px"></div>
+            <div class="img-grid-admin" id="projectImagesGrid">
+              <div class="empty-state" style="grid-column:1/-1">Aucune image importée.</div>
+            </div>
+          </div>
+          <!-- Tab: documents -->
+          <div class="proj-tab-panel" id="tab-documents">
+            <div style="margin-bottom:16px">
+              <button class="btn-primary-sm" id="uploadDocBtn">+ Ajouter un document</button>
+            </div>
+            <div id="projectDocsList">
+              <div class="empty-state">Aucun document.</div>
+            </div>
+          </div>
+          <!-- Tab: messages -->
+          <div class="proj-tab-panel" id="tab-messages">
+            <div class="msg-thread" id="adminMsgThread">
+              <div class="empty-state">Aucun message.</div>
+            </div>
+            <div class="msg-input-row">
+              <textarea id="adminMsgInput" placeholder="Votre message au client…" rows="2"></textarea>
+              <button id="adminMsgSend">Envoyer</button>
+            </div>
+          </div>
+          <!-- Tab: access -->
+          <div class="proj-tab-panel" id="tab-access">
+            <div class="a-card">
+              <h3>Gestion de l'accès client</h3>
+              <div class="form-row">
+                <div class="f-field">
+                  <label>Début de l'accès</label>
+                  <input type="date" id="accessStart">
+                </div>
+                <div class="f-field">
+                  <label>Fin de l'accès</label>
+                  <input type="date" id="accessEnd">
+                </div>
+              </div>
+              <button class="btn-primary-sm" id="saveAccessBtn">Enregistrer</button>
+              <div id="accessFeedback" class="inline-feedback"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Messages (vue globale) ── -->
+      <section class="admin-panel" id="panel-messages">
+        <div class="admin-topbar"><h1>Messages</h1></div>
+        <div class="a-card">
+          <div id="allMessagesList">
+            <div class="empty-state">Aucun message.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Accès ── -->
+      <section class="admin-panel" id="panel-access">
+        <div class="admin-topbar"><h1>Gestion des accès</h1></div>
+        <div class="a-card">
+          <table class="a-table">
+            <thead><tr>
+              <th>Client</th>
+              <th>Projet</th>
+              <th>Début</th>
+              <th>Expiration</th>
+              <th>Statut</th>
+              <th></th>
+            </tr></thead>
+            <tbody id="accessTableBody">
+              <tr><td colspan="6" class="empty-state">Chargement…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </div><!-- /adminContent -->
+  </main>
+</div><!-- /admin-shell -->
+
+<!-- ── Modals ── -->
+
+<!-- Nouveau client -->
+<div class="modal-overlay" id="modalNewClient">
+  <div class="modal-box">
+    <button class="modal-close" data-close="modalNewClient">×</button>
+    <h3>Nouveau client</h3>
+    <p style="font-size:13px;color:var(--muted);margin:0 0 18px">Un email de confirmation sera envoyé au client. Il devra définir son mot de passe en cliquant sur le lien.</p>
+    <form id="newClientForm">
+      <div class="form-row">
+        <div class="f-field"><label>Prénom</label><input type="text" id="nc_first_name" required></div>
+        <div class="f-field"><label>Nom</label><input type="text" id="nc_last_name" required></div>
+      </div>
+      <div class="form-row full">
+        <div class="f-field"><label>Adresse email *</label><input type="email" id="nc_email" required></div>
+      </div>
+      <div class="form-row">
+        <div class="f-field"><label>Téléphone</label><input type="text" id="nc_phone"></div>
+        <div class="f-field"><label>Société</label><input type="text" id="nc_company"></div>
+      </div>
+      <div style="margin-top:16px;display:flex;gap:10px">
+        <button type="submit" class="btn-primary-sm">Créer le compte</button>
+        <button type="button" class="btn-secondary-sm" data-close="modalNewClient">Annuler</button>
+      </div>
+      <div id="newClientFeedback" class="inline-feedback"></div>
+    </form>
+  </div>
+</div>
+
+<!-- Nouveau projet -->
+<div class="modal-overlay" id="modalNewProject">
+  <div class="modal-box">
+    <button class="modal-close" data-close="modalNewProject">×</button>
+    <h3>Nouveau projet</h3>
+    <form id="newProjectForm">
+      <div class="form-row full">
+        <div class="f-field"><label>Client *</label>
+          <select id="np_client" required><option value="">Sélectionner un client…</option></select>
+        </div>
+      </div>
+      <div class="form-row full">
+        <div class="f-field"><label>Titre du projet *</label><input type="text" id="np_title" placeholder="Portrait lifestyle — Paris" required></div>
+      </div>
+      <div class="form-row">
+        <div class="f-field"><label>Type de séance</label><input type="text" id="np_type" placeholder="Portrait, Mode, Culinaire…"></div>
+        <div class="f-field"><label>Date de séance</label><input type="date" id="np_date"></div>
+      </div>
+      <div class="form-row full">
+        <div class="f-field"><label>Lieu</label><input type="text" id="np_location" placeholder="Paris 10e"></div>
+      </div>
+      <div class="form-row full">
+        <div class="f-field"><label>Statut</label>
+          <select id="np_status">
+            <option value="en_cours">En cours</option>
+            <option value="en_retouche">En retouche</option>
+            <option value="livraison">Livraison</option>
+            <option value="termine">Terminé</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row full">
+        <div class="f-field"><label>Notes internes</label><textarea id="np_notes" placeholder="Instructions, rappels…"></textarea></div>
+      </div>
+      <div style="margin-top:16px;display:flex;gap:10px">
+        <button type="submit" class="btn-primary-sm">Créer le projet</button>
+        <button type="button" class="btn-secondary-sm" data-close="modalNewProject">Annuler</button>
+      </div>
+      <div id="newProjectFeedback" class="inline-feedback"></div>
+    </form>
+  </div>
+</div>
+
+<!-- Modifier projet -->
+<div class="modal-overlay" id="modalEditProject">
+  <div class="modal-box">
+    <button class="modal-close" data-close="modalEditProject">×</button>
+    <h3>Modifier le projet</h3>
+    <form id="editProjectForm">
+      <input type="hidden" id="ep_id">
+      <div class="form-row full">
+        <div class="f-field"><label>Titre</label><input type="text" id="ep_title" required></div>
+      </div>
+      <div class="form-row">
+        <div class="f-field"><label>Type de séance</label><input type="text" id="ep_type"></div>
+        <div class="f-field"><label>Date de séance</label><input type="date" id="ep_date"></div>
+      </div>
+      <div class="form-row full">
+        <div class="f-field"><label>Lieu</label><input type="text" id="ep_location"></div>
+      </div>
+      <div class="form-row full">
+        <div class="f-field"><label>Statut</label>
+          <select id="ep_status">
+            <option value="en_cours">En cours</option>
+            <option value="en_retouche">En retouche</option>
+            <option value="livraison">Livraison</option>
+            <option value="termine">Terminé</option>
+            <option value="archive">Archivé</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row full">
+        <div class="f-field"><label>Notes internes</label><textarea id="ep_notes"></textarea></div>
+      </div>
+      <div style="margin-top:16px;display:flex;gap:10px">
+        <button type="submit" class="btn-primary-sm">Enregistrer</button>
+        <button type="button" class="btn-secondary-sm" data-close="modalEditProject">Annuler</button>
+      </div>
+      <div id="editProjectFeedback" class="inline-feedback"></div>
+    </form>
+  </div>
+</div>
+
+<!-- Upload document -->
+<div class="modal-overlay" id="modalUploadDoc">
+  <div class="modal-box">
+    <button class="modal-close" data-close="modalUploadDoc">×</button>
+    <h3>Ajouter un document</h3>
+    <form id="uploadDocForm">
+      <div class="form-row full">
+        <div class="f-field"><label>Titre du document *</label><input type="text" id="doc_title" placeholder="Contrat de séance" required></div>
+      </div>
+      <div class="form-row full">
+        <div class="f-field"><label>Type</label>
+          <select id="doc_type">
+            <option value="contrat">Contrat</option>
+            <option value="droit_image">Droit à l'image</option>
+            <option value="livraison">Livraison</option>
+            <option value="facture">Facture</option>
+            <option value="other">Autre</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row full">
+        <div class="f-field">
+          <label>Fichier *</label>
+          <input type="file" id="doc_file" accept=".pdf,.doc,.docx,.jpg,.png" required style="border:1px solid rgba(212,184,155,.4);border-radius:6px;padding:8px;width:100%;font-size:13px">
+        </div>
+      </div>
+      <div style="margin-top:16px;display:flex;gap:10px">
+        <button type="submit" class="btn-primary-sm">Envoyer le document</button>
+        <button type="button" class="btn-secondary-sm" data-close="modalUploadDoc">Annuler</button>
+      </div>
+      <div id="uploadDocFeedback" class="inline-feedback"></div>
+    </form>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase/config.js"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

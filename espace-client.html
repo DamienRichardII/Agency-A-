@@ -9,6 +9,80 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/shared.css">
+  <style>
+    .login-error {
+      display: none;
+      background: rgba(180,40,40,.08);
+      border: 1px solid rgba(180,40,40,.25);
+      color: #a83232;
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-size: 13px;
+      margin-top: 14px;
+      line-height: 1.5;
+    }
+    .login-error.visible { display: block; }
+
+    .btn-loading {
+      opacity: .6;
+      pointer-events: none;
+      cursor: not-allowed;
+    }
+    .btn-loading::after {
+      content: ' …';
+    }
+
+    .login-block .field label {
+      display: block;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      margin-bottom: 6px;
+      opacity: .65;
+    }
+    .login-block .field input {
+      width: 100%;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(234,217,199,.3);
+      border-radius: 5px;
+      padding: 10px 13px;
+      font-family: var(--body);
+      font-size: 14px;
+      color: var(--cream);
+      outline: none;
+      transition: border-color .2s;
+      box-sizing: border-box;
+    }
+    .login-block .field input:focus {
+      border-color: rgba(234,217,199,.7);
+    }
+    .login-block .field input::placeholder { opacity: .4; }
+
+    .forgot-link {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--sand);
+      opacity: .7;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      font-family: var(--body);
+      transition: opacity .2s;
+    }
+    .forgot-link:hover { opacity: 1; }
+
+    .reset-success {
+      display: none;
+      color: #4caf86;
+      font-size: 13px;
+      margin-top: 10px;
+    }
+    .reset-success.visible { display: block; }
+  </style>
 </head>
 <body>
 <div class="page-shell">
@@ -18,13 +92,15 @@
     <a href="index.html" class="brand" aria-label="Agency A">
       <img src="assets/logo/logo-dark-transparent.png" alt="Agency A" class="brand-logo">
     </a>
-    <div class="nav-links"><a href="portfolio.html" class="">Portfolio</a>
-<a href="a-propos.html" class="">À propos</a>
-<a href="tarifs.html" class="">Tarifs</a>
-<a href="mannequins.html" class="">Talents</a>
-<a href="boutique.html" class="">Boutique</a>
-<a href="espace-client.html" class="active">Connexion client</a>
-<a href="contact.html" class="">Contact</a></div>
+    <div class="nav-links">
+      <a href="portfolio.html">Portfolio</a>
+      <a href="a-propos.html">À propos</a>
+      <a href="tarifs.html">Tarifs</a>
+      <a href="mannequins.html">Talents</a>
+      <a href="boutique.html">Boutique</a>
+      <a href="espace-client.html" class="active">Connexion client</a>
+      <a href="contact.html">Contact</a>
+    </div>
     <button class="hamburger" id="menuToggle" aria-label="Ouvrir le menu">
       <svg width="28" height="18" viewBox="0 0 28 18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 1h26M1 9h26M1 17h26"/></svg>
     </button>
@@ -34,16 +110,15 @@
   <div class="mobile-menu-inner">
     <div class="mobile-menu-head"><button class="menu-close" id="menuClose" aria-label="Fermer" style="display:block;color:var(--cream);font-size:34px">×</button></div>
     <a href="index.html" class="mobile-nav-link">Accueil</a>
-<a href="portfolio.html" class="mobile-nav-link">Portfolio</a>
-<a href="a-propos.html" class="mobile-nav-link">À propos</a>
-<a href="tarifs.html" class="mobile-nav-link">Tarifs</a>
-<a href="mannequins.html" class="mobile-nav-link">Talents</a>
-<a href="boutique.html" class="mobile-nav-link">Boutique</a>
-<a href="espace-client.html" class="mobile-nav-link">Connexion client</a>
-<a href="contact.html" class="mobile-nav-link">Contact</a>
+    <a href="portfolio.html" class="mobile-nav-link">Portfolio</a>
+    <a href="a-propos.html" class="mobile-nav-link">À propos</a>
+    <a href="tarifs.html" class="mobile-nav-link">Tarifs</a>
+    <a href="mannequins.html" class="mobile-nav-link">Talents</a>
+    <a href="boutique.html" class="mobile-nav-link">Boutique</a>
+    <a href="espace-client.html" class="mobile-nav-link">Connexion client</a>
+    <a href="contact.html" class="mobile-nav-link">Contact</a>
   </div>
 </div>
-
 
 <main>
   <section class="page-hero">
@@ -55,110 +130,63 @@
       </div>
       <aside class="page-hero-aside reveal">
         <p class="kicker">Accès sécurisé</p>
-        <div class="stats-inline"><span>Accès sécurisé</span><span>Galerie privée</span><span>Documents</span><span>Suivi de projet</span></div>
+        <div class="stats-inline">
+          <span>Accès sécurisé</span>
+          <span>Galerie privée</span>
+          <span>Documents</span>
+          <span>Suivi de projet</span>
+        </div>
       </aside>
     </div>
   </section>
 
-
-  <section class="section" style="padding-top:0;padding-bottom:32px">
+  <section class="section" style="padding-top:0;padding-bottom:64px">
     <div class="container login-grid">
+
+      <!-- Bloc connexion -->
       <div class="login-block dark reveal">
-        <p class="eyebrow">Déjà client ?</p>
+        <p class="eyebrow">Déjà client ?</p>
         <h3>Connectez-vous</h3>
-        <p class="lead">Votre accès a été transmis par Agency A après votre séance. Utilisez votre identifiant et mot de passe, ou le code d’accès reçu par email.</p>
-        <div class="form-grid" style="margin-top:22px">
-          <div class="field"><label>Identifiant</label><input type="email" placeholder="vous@email.com"></div>
-          <div class="field"><label>Mot de passe ou code</label><input type="password" placeholder="········"></div>
-        </div>
-        <div style="margin-top:20px"><button type="button" class="btn" style="border-color:rgba(234,217,199,.45);color:#ead9c7">Accéder à mon espace</button></div>
+        <p class="lead">Votre accès vous a été transmis par Agency A après votre séance. Utilisez l'adresse email et le mot de passe communiqués.</p>
+
+        <form id="loginForm" style="margin-top:22px" novalidate>
+          <div class="form-grid">
+            <div class="field">
+              <label for="loginEmail">Adresse email</label>
+              <input type="email" id="loginEmail" name="email" placeholder="vous@email.com" autocomplete="email" required>
+            </div>
+            <div class="field">
+              <label for="loginPassword">Mot de passe</label>
+              <input type="password" id="loginPassword" name="password" placeholder="········" autocomplete="current-password" required>
+            </div>
+          </div>
+
+          <div id="loginError" class="login-error" role="alert"></div>
+
+          <div style="margin-top:20px;display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+            <button type="submit" id="loginBtn" class="btn" style="border-color:rgba(234,217,199,.45);color:#ead9c7">
+              Accéder à mon espace
+            </button>
+            <button type="button" id="forgotBtn" class="forgot-link">Mot de passe oublié ?</button>
+          </div>
+          <div id="resetSuccess" class="reset-success">Un lien de réinitialisation a été envoyé à votre adresse email.</div>
+        </form>
       </div>
+
+      <!-- Bloc contact -->
       <div class="login-block reveal">
-        <p class="eyebrow">Pas encore d’accès ?</p>
+        <p class="eyebrow">Pas encore d'accès ?</p>
         <h3>Contactez Agency A</h3>
-        <p class="lead">L’espace client est réservé aux personnes déjà accompagnées par le studio. Si vous avez récemment réalisé une séance, votre accès vous sera transmis par email dans les 48h.</p>
-        <p class="lead" style="margin-top:12px">Vous êtes prospect ? Votre démarche commence par le formulaire de contact — nous reviendrons vers vous rapidement.</p>
-        <div style="margin-top:24px"><a href="contact.html" class="btn btn-primary">Prendre contact</a></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" style="padding-top:24px;border-top:1px solid var(--line)">
-    <div class="container" style="margin-bottom:24px">
-      <p class="eyebrow">Aperçu de l'espace client</p>
-      <p style="font-size:13px;color:var(--muted);max-width:560px;line-height:1.7">Voici un aperçu de ce à quoi ressemble votre tableau de bord une fois connecté. Vos données réelles et votre galerie seront disponibles après votre séance.</p>
-    </div>
-    <div class="container dashboard-shell">
-      <aside class="sidebar reveal">
-        <p class="eyebrow">Connexion</p>
-        <h3>Bonjour, Sophie</h3>
-        <p class="lead">Session ouverte pour votre shoot portrait. Accès restant : <strong>30 jours</strong>.</p>
-        <div class="sidebar-nav">
-          <a href="#dashboard">Vue d’ensemble</a>
-          <a href="#galerie">Galerie privée</a>
-          <a href="#documents">Documents</a>
-          <a href="#messages">Messagerie</a>
+        <p class="lead">L'espace client est réservé aux personnes déjà accompagnées par le studio. Si vous avez récemment réalisé une séance, votre accès vous sera transmis par email dans les 48h.</p>
+        <p class="lead" style="margin-top:12px">Vous êtes prospect ? Votre démarche commence par le formulaire de contact — nous reviendrons vers vous rapidement.</p>
+        <div style="margin-top:24px">
+          <a href="contact.html" class="btn btn-primary">Prendre contact</a>
         </div>
-      </aside>
-      <div class="dashboard-main">
-        <section class="dash-grid" id="dashboard" style="grid-template-columns:repeat(4,1fr)">
-          <article class="dash-card reveal"><p class="eyebrow">Statut du projet</p><h3>En retouche</h3><p class="lead">Phase de sélection finale en cours.</p></article>
-          <article class="dash-card reveal"><p class="eyebrow">Date de séance</p><h3>14 avril 2026</h3><p class="lead">Portrait — Paris 10e.</p></article>
-          <article class="dash-card reveal"><p class="eyebrow">Images</p><h3>12 / 30</h3><p class="lead">12 sélectionnées · 18 restantes à valider.</p></article>
-          <article class="dash-card reveal"><p class="eyebrow">Accès expire</p><h3>17 mai 2026</h3><p class="lead">Accès limité dans le temps pour sécuriser vos fichiers.</p></article>
-        </section>
-
-        <!-- Fiche client -->
-        <section class="dash-card reveal">
-          <p class="eyebrow">Fiche client</p>
-          <h3>Vos informations</h3>
-          <p class="lead" style="margin-bottom:0">Toute modification doit être signalée à Agency A pour maintenir vos informations à jour.</p>
-          <div class="fiche-grid">
-            <div class="fiche-field"><label>Nom</label><span>Dupont</span></div>
-            <div class="fiche-field"><label>Prénom</label><span>Sophie</span></div>
-            <div class="fiche-field"><label>Société</label><span>—</span></div>
-            <div class="fiche-field"><label>SIRET</label><span>—</span></div>
-            <div class="fiche-field"><label>Email</label><span>sophie@email.com</span></div>
-            <div class="fiche-field"><label>Téléphone</label><span>06 ·· ·· ·· ··</span></div>
-            <div class="fiche-field" style="grid-column:1/-1"><label>Adresse</label><span>Paris, France</span></div>
-          </div>
-        </section>
-
-        <section class="dash-card reveal" id="galerie">
-          <div style="display:flex;justify-content:space-between;gap:12px;align-items:end;flex-wrap:wrap;margin-bottom:16px">
-            <div><p class="eyebrow">Galerie privée</p><h3 style="margin:0">Sélectionner vos images</h3></div>
-            <span class="chip active" data-selection-count>0 image</span>
-          </div>
-          <div class="gallery-grid">
-            <figure class="gallery-tile"><img src="assets/photos/culinaire/AnaisDescomps_AgencyA_Culinaire_0.jpg" alt="Image privée 1"><button type="button">+</button></figure><figure class="gallery-tile"><img src="assets/photos/culinaire/AnaisDescomps_AgencyA_Culinaire--7.jpg" alt="Image privée 2"><button type="button">+</button></figure><figure class="gallery-tile"><img src="assets/photos/produit/BVLGARI-rose-goldea_AnaisDescomps_AgencyA_0.jpg" alt="Image privée 3"><button type="button">+</button></figure><figure class="gallery-tile"><img src="assets/photos/produit/rouge-a-levre-chanel.jpg" alt="Image privée 4"><button type="button">+</button></figure><figure class="gallery-tile"><img src="assets/nos talents - galerie/celine-polas-25.jpg" alt="Image privée 5"><button type="button">+</button></figure><figure class="gallery-tile"><img src="assets/nos talents - galerie/29012026_Elfie_AnaisDescomps_AgencyA_-9.jpg" alt="Image privée 6"><button type="button">+</button></figure><figure class="gallery-tile"><img src="assets/photos/mode/081225_Elfie_AgencyA_Nocollection0-21.jpg" alt="Image privée 7"><button type="button">+</button></figure><figure class="gallery-tile"><img src="assets/portraits/Anais-22.jpg" alt="Image privée 8"><button type="button">+</button></figure>
-          </div>
-          <div style="margin-top:18px"><button class="btn btn-primary">Transmettre ma sélection</button></div>
-        </section>
-
-        <section class="grid-2">
-          <article class="dash-card reveal" id="messages">
-            <p class="eyebrow">Messagerie</p>
-            <h3>Échanger avec Anaïs</h3>
-            <div class="message-list">
-              <div class="message-item"><strong>Anaïs — Agency A</strong><p class="lead">Bonjour Sophie, votre galerie est prête. Vous pouvez consulter vos images et effectuer votre sélection directement depuis cet espace.</p><span class="text-muted">14 avril 2026 · 10h32</span></div>
-              <div class="message-item"><strong>Vous</strong><p class="lead">Merci, les visuels sont superbes. Je vous envoie ma sélection aujourd’hui.</p><span class="text-muted">14 avril 2026 · 14h18</span></div>
-            </div>
-          </article>
-          <article class="dash-card reveal" id="documents">
-            <p class="eyebrow">Documents</p>
-            <h3>Contrats & livrables</h3>
-            <div class="doc-list">
-              <div class="doc-item"><strong>Contrat de séance</strong><p class="lead">Version signée, disponible au téléchargement.</p></div>
-              <div class="doc-item"><strong>Droit à l’image</strong><p class="lead">Document validé, archivé dans votre espace privé.</p></div>
-              <div class="doc-item"><strong>Dossier de livraison finale</strong><p class="lead">Disponible après validation de la sélection.</p></div>
-            </div>
-          </article>
-        </section>
       </div>
+
     </div>
   </section>
 </main>
-
 
 <div class="marquee-band" aria-hidden="true">
   <div class="marquee-track">
@@ -173,7 +201,37 @@
         <div class="brand" style="margin-bottom:16px"><img src="assets/logo/logo-white-transparent.png" alt="Agency A" class="brand-logo-footer"></div>
         <p>Donner vie aux images qui racontent votre univers. Studio visuel premium, direction artistique et accompagnement sensible des talents.</p>
       </div>
-      <div class="footer-columns"><div><h4 class="footer-title">Navigation</h4><div class="footer-links"><a href="index.html">Accueil</a><a href="portfolio.html">Portfolio</a><a href="a-propos.html">À propos</a><a href="tarifs.html">Tarifs</a></div></div><div><h4 class="footer-title">Informations</h4><div class="footer-links"><a href="mannequins.html">Talents</a><a href="boutique.html">Boutique</a><a href="espace-client.html">Connexion client</a><a href="contact.html">Contact</a><a href="faq.html">FAQ</a><a href="mentions-legales.html">Mentions légales</a><a href="cgv.html">CGV</a></div></div><div><h4 class="footer-title">Réseaux</h4><div class="footer-links"><a href="https://www.instagram.com/agencya_paris/" target="_blank" rel="noopener">Instagram</a><a href="https://www.instagram.com/agency_a__/" target="_blank" rel="noopener">Instagram ②</a><a href="https://www.linkedin.com/company/agency-a-paris" target="_blank" rel="noopener">LinkedIn</a></div></div></div>
+      <div class="footer-columns">
+        <div>
+          <h4 class="footer-title">Navigation</h4>
+          <div class="footer-links">
+            <a href="index.html">Accueil</a>
+            <a href="portfolio.html">Portfolio</a>
+            <a href="a-propos.html">À propos</a>
+            <a href="tarifs.html">Tarifs</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-title">Informations</h4>
+          <div class="footer-links">
+            <a href="mannequins.html">Talents</a>
+            <a href="boutique.html">Boutique</a>
+            <a href="espace-client.html">Connexion client</a>
+            <a href="contact.html">Contact</a>
+            <a href="faq.html">FAQ</a>
+            <a href="mentions-legales.html">Mentions légales</a>
+            <a href="cgv.html">CGV</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-title">Réseaux</h4>
+          <div class="footer-links">
+            <a href="https://www.instagram.com/agencya_paris/" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://www.instagram.com/agency_a__/" target="_blank" rel="noopener">Instagram ②</a>
+            <a href="https://www.linkedin.com/company/agency-a-paris" target="_blank" rel="noopener">LinkedIn</a>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="footer-bottom">
       <span>© Agency A · Tous droits réservés</span>
@@ -181,8 +239,84 @@
     </div>
   </div>
 </footer>
-<script src="js/shared.js"></script>
 
+<script src="js/shared.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase/config.js"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/auth.js"></script>
+<script>
+(async function () {
+  // Redirige vers dashboard si déjà connecté
+  await Auth.redirectIfLoggedIn();
+
+  const form     = document.getElementById('loginForm');
+  const btn      = document.getElementById('loginBtn');
+  const errBox   = document.getElementById('loginError');
+  const forgotBtn = document.getElementById('forgotBtn');
+  const resetMsg  = document.getElementById('resetSuccess');
+
+  function showError(msg) {
+    errBox.textContent = msg;
+    errBox.classList.add('visible');
+  }
+  function clearError() {
+    errBox.classList.remove('visible');
+    errBox.textContent = '';
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    clearError();
+
+    const email    = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value;
+
+    if (!email || !password) {
+      showError('Veuillez renseigner votre email et votre mot de passe.');
+      return;
+    }
+
+    btn.classList.add('btn-loading');
+    btn.textContent = 'Connexion en cours';
+
+    try {
+      await Auth.login(email, password);
+      // Auth.login redirige — on n'arrive pas ici en cas de succès
+    } catch (err) {
+      btn.classList.remove('btn-loading');
+      btn.textContent = 'Accéder à mon espace';
+
+      if (err.message?.includes('Invalid login credentials')) {
+        showError('Identifiants incorrects. Vérifiez votre email et votre mot de passe.');
+      } else if (err.message?.includes('Email not confirmed')) {
+        showError('Votre compte n\'est pas encore confirmé. Vérifiez votre boîte mail.');
+      } else if (err.message?.includes('Too many requests')) {
+        showError('Trop de tentatives. Veuillez patienter quelques minutes avant de réessayer.');
+      } else {
+        showError('Une erreur est survenue. Veuillez réessayer ou contacter Agency A.');
+      }
+    }
+  });
+
+  forgotBtn.addEventListener('click', async () => {
+    const email = document.getElementById('loginEmail').value.trim();
+    if (!email) {
+      showError('Saisissez votre adresse email dans le champ ci-dessus, puis cliquez sur « Mot de passe oublié ».');
+      return;
+    }
+    clearError();
+    try {
+      await window.sb.auth.resetPasswordForEmail(email, {
+        redirectTo: window.location.origin + '/espace-client.html'
+      });
+      resetMsg.classList.add('visible');
+    } catch (err) {
+      showError('Impossible d\'envoyer l\'email de réinitialisation. Réessayez plus tard.');
+    }
+  });
+})();
+</script>
 </div>
 </body>
 </html>
