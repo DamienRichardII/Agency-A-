@@ -31,12 +31,17 @@ const filterButtons = document.querySelectorAll('[data-filter]');
 const filterItems = document.querySelectorAll('[data-category]');
 filterButtons.forEach(btn => btn.addEventListener('click', () => {
   const value = btn.dataset.filter;
+  const wasActive = btn.classList.contains('active');
   filterButtons.forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  filterItems.forEach(item => {
-    const show = value === 'all' || item.dataset.category.split(' ').includes(value);
-    item.style.display = show ? '' : 'none';
-  });
+  if (wasActive) {
+    filterItems.forEach(item => item.style.display = '');
+  } else {
+    btn.classList.add('active');
+    filterItems.forEach(item => {
+      const show = value === 'all' || item.dataset.category.split(' ').includes(value);
+      item.style.display = show ? '' : 'none';
+    });
+  }
 }));
 
 // Portfolio modal

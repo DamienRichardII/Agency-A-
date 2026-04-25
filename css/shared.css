@@ -197,3 +197,66 @@ main{display:block}
 .brand-logo{height:44px;width:auto;display:block;object-fit:contain}
 .brand-logo-footer{height:38px;width:auto;display:block;object-fit:contain;opacity:.92}
 .hero-logo-img{height:auto;width:min(360px,62vw);display:block;margin:0 auto}
+
+/* ── Marquee bande déroulante ──────────────────────── */
+.marquee-band{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:24px 0;background:var(--cream);user-select:none}
+.marquee-track{display:flex;white-space:nowrap;width:max-content;animation:marqueeScroll 34s linear infinite}
+.marquee-band:hover .marquee-track{animation-play-state:paused}
+.marquee-track span{font-family:var(--display);font-size:clamp(22px,2.8vw,36px);font-style:italic;font-weight:300;letter-spacing:.04em;color:var(--ink);padding:0 20px}
+.marquee-sep{color:var(--sand)!important;font-style:normal!important;padding:0 6px!important}
+@keyframes marqueeScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ── Portfolio univers bande pleine largeur ────────── */
+.portfolio-univers-band{border-top:1px solid var(--line);margin-top:32px;padding-top:28px}
+.univers-row{display:flex;flex-wrap:wrap;align-items:center;margin-top:14px}
+.univers-row span{font-family:var(--display);font-size:clamp(20px,2.6vw,38px);font-style:italic;font-weight:300;letter-spacing:.02em}
+.univers-sep{color:var(--sand)!important;padding:0 16px!important;font-style:normal!important}
+
+/* ── Upload zone (candidature talents) ────────────── */
+.upload-zone{position:relative;border:1px dashed rgba(17,17,17,.22);padding:26px 18px;text-align:center;cursor:pointer;transition:.2s;background:rgba(255,255,255,.35)}
+.upload-zone:hover{border-color:var(--ink);background:rgba(255,255,255,.6)}
+.upload-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.upload-zone span{font-size:11px;letter-spacing:.14em;color:var(--muted);pointer-events:none}
+
+/* ── Reviews / avis (tarifs) ──────────────────────── */
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.review-card{padding:36px 30px 30px;background:rgba(255,255,255,.42);border:1px solid rgba(17,17,17,.08);box-shadow:var(--shadow);position:relative}
+.review-card::before{content:'“';font-family:var(--display);font-size:80px;line-height:.7;color:var(--sand);position:absolute;top:18px;left:24px;font-style:italic;pointer-events:none}
+.review-text{font-family:var(--display);font-size:clamp(16px,1.7vw,21px);font-style:italic;font-weight:300;line-height:1.65;color:var(--ink);margin:0 0 22px;padding-top:36px}
+.review-author{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+.review-role{display:block;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--sand);margin-top:4px}
+
+/* ── Parcours cards (a-propos) ────────────────────── */
+.parcours-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.parcours-card{padding:28px 22px;border-left:2px solid var(--sand);background:rgba(255,255,255,.38)}
+.pc-index{font-family:var(--display);font-size:42px;font-style:italic;color:var(--sand);font-weight:300;display:block;margin-bottom:12px;line-height:1}
+.parcours-card h4{margin:0 0 10px;font-family:var(--display);font-size:20px;font-weight:400}
+
+/* ── Fiche client (espace client) ─────────────────── */
+.fiche-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:20px}
+.fiche-field{display:flex;flex-direction:column;gap:6px;padding:14px 18px;background:rgba(255,255,255,.38);border:1px solid rgba(17,17,17,.07)}
+.fiche-field label{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted)}
+.fiche-field span{font-family:var(--display);font-size:18px;font-style:italic;color:var(--ink-soft)}
+
+/* ── Login blocks (espace client) ─────────────────── */
+.login-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.login-block{padding:40px 34px;border:1px solid rgba(17,17,17,.1);background:rgba(255,255,255,.45)}
+.login-block.dark{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.login-block.dark .eyebrow{color:#cda78c}
+.login-block.dark .lead{color:rgba(234,217,199,.8)}
+.login-block h3{margin:0 0 14px;font-family:var(--display);font-size:clamp(26px,2.8vw,36px);font-weight:300;font-style:italic}
+.login-block .field input{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18);color:#ead9c7}
+.login-block .field input::placeholder{color:rgba(234,217,199,.38)}
+.login-block .field label{color:rgba(234,217,199,.55)}
+
+/* ── Responsive additions ─────────────────────────── */
+@media(max-width:1120px){
+  .reviews-grid{grid-template-columns:repeat(2,1fr)}
+  .parcours-grid{grid-template-columns:repeat(2,1fr)}
+  .login-grid{grid-template-columns:1fr}
+}
+@media(max-width:760px){
+  .reviews-grid,.parcours-grid,.fiche-grid{grid-template-columns:1fr}
+  .login-grid{grid-template-columns:1fr}
+  .univers-row span{font-size:18px}
+}
