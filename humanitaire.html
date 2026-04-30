@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Humanitaire — Agency A</title>
+  <meta name="description" content="Agency A accompagne les associations, ONG et projets solidaires dans la création d'images sensibles, utiles et respectueuses des personnes photographiées.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/shared.css">
+  <style>
+    /* ── Hero éditorial ── */
+    .hum-hero {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+    .hum-hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 88vh;
+    }
+    .hum-hero-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(48px, 7vw, 96px) clamp(32px, 5vw, 72px) clamp(48px, 7vw, 96px) clamp(24px, 6vw, 96px);
+    }
+    .hum-hero-text h1 {
+      margin: 12px 0 20px;
+      max-width: 500px;
+    }
+    .hum-hero-text .lead {
+      max-width: 420px;
+      margin-bottom: 32px;
+    }
+    .hum-hero-ctas {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .hum-hero-visual {
+      position: relative;
+      overflow: hidden;
+      background: var(--ink);
+    }
+    .hum-hero-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      opacity: .88;
+      transition: transform 6s ease;
+    }
+    .hum-hero-visual:hover img {
+      transform: scale(1.03);
+    }
+    .hum-hero-caption {
+      position: absolute;
+      bottom: 24px;
+      left: 24px;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: rgba(248,242,234,.55);
+      font-family: var(--body);
+    }
+
+    /* ── Section titre avec filet ── */
+    .hum-section-head {
+      max-width: 580px;
+      margin-bottom: 48px;
+    }
+    .hum-section-head h2 {
+      margin: 8px 0 0;
+    }
+
+    /* ── Bloc éditorial gauche ── */
+    .hum-editorial-quote {
+      padding-right: clamp(0px, 4vw, 48px);
+    }
+    .hum-editorial-quote blockquote {
+      font-family: var(--display);
+      font-size: clamp(22px, 2.6vw, 34px);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.35;
+      color: var(--ink);
+      margin: 0 0 28px;
+      padding: 0;
+      border: none;
+    }
+    .hum-editorial-quote p {
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--ink-soft);
+      max-width: 480px;
+    }
+
+    /* ── Pour qui ── */
+    .pour-qui-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .pour-qui-card {
+      background: var(--beige);
+      border-radius: 10px;
+      padding: 24px 22px;
+      border: 1px solid transparent;
+      transition: border-color .2s, background .2s;
+    }
+    .pour-qui-card:hover {
+      border-color: var(--sand);
+      background: #fff;
+    }
+    .pour-qui-card .eyebrow {
+      margin-bottom: 8px;
+    }
+    .pour-qui-card h4 {
+      font-family: var(--display);
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--ink);
+      margin: 0 0 6px;
+    }
+    .pour-qui-card p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* ── Missions ── */
+    .missions-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(212,184,155,.25);
+      border: 1px solid rgba(212,184,155,.25);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .mission-card {
+      background: var(--cream);
+      padding: 32px 28px;
+      transition: background .2s;
+    }
+    .mission-card:hover {
+      background: #fff;
+    }
+    .mission-num {
+      font-family: var(--display);
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--sand);
+      letter-spacing: .08em;
+      margin-bottom: 12px;
+      display: block;
+    }
+    .mission-card h3 {
+      font-family: var(--display);
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--ink);
+      margin: 0 0 10px;
+    }
+    .mission-card p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    /* ── Approche ── */
+    .approach-card {
+      padding: 32px 28px;
+      border-top: 2px solid var(--sand);
+      background: var(--cream);
+    }
+    .approach-num {
+      font-family: var(--display);
+      font-size: 40px;
+      font-weight: 300;
+      color: rgba(17,17,17,.1);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+    .approach-card h3 {
+      font-family: var(--display);
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--ink);
+      margin: 0 0 14px;
+    }
+    .approach-card p {
+      font-size: 14px;
+      color: var(--ink-soft);
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    /* ── Galerie éditoriale ── */
+    .hum-gallery-bento {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: 340px 220px;
+      gap: 8px;
+    }
+    .hum-gal-item {
+      overflow: hidden;
+      border-radius: 8px;
+      position: relative;
+      background: var(--ink);
+    }
+    .hum-gal-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .5s ease, opacity .3s;
+      opacity: .9;
+    }
+    .hum-gal-item:hover img {
+      transform: scale(1.04);
+      opacity: 1;
+    }
+    .hum-gal-main {
+      grid-row: 1 / 3;
+    }
+    .hum-gal-label {
+      position: absolute;
+      bottom: 14px;
+      left: 16px;
+      font-family: var(--body);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      color: rgba(248,242,234,.65);
+      background: rgba(17,17,17,.35);
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    /* ── Livrables ── */
+    .livrables-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .livrable-card {
+      background: #fff;
+      border: 1px solid rgba(212,184,155,.3);
+      border-radius: 10px;
+      padding: 26px 24px;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .livrable-card:hover {
+      border-color: var(--sand);
+      box-shadow: 0 4px 20px rgba(212,184,155,.15);
+    }
+    .livrable-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--beige);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+      color: var(--muted);
+    }
+    .livrable-card h4 {
+      font-family: var(--display);
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--ink);
+      margin: 0 0 6px;
+    }
+    .livrable-card p {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* ── CTA final ── */
+    .hum-cta-section {
+      background: var(--ink);
+      color: var(--cream);
+      overflow: hidden;
+    }
+    .hum-cta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 460px;
+    }
+    .hum-cta-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(48px, 7vw, 88px) clamp(32px, 5vw, 72px) clamp(48px, 7vw, 88px) clamp(24px, 6vw, 96px);
+    }
+    .hum-cta-text h2 {
+      font-family: var(--display);
+      font-size: clamp(26px, 3.2vw, 44px);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--cream);
+      margin: 0 0 20px;
+    }
+    .hum-cta-text .lead {
+      color: rgba(248,242,234,.65);
+      max-width: 420px;
+      margin-bottom: 32px;
+    }
+    .hum-cta-image {
+      position: relative;
+      overflow: hidden;
+    }
+    .hum-cta-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      opacity: .55;
+      mix-blend-mode: luminosity;
+    }
+
+    /* ── Dark section ── */
+    .section-dark {
+      background: var(--beige);
+    }
+
+    /* ── Divider line ── */
+    .hum-divider {
+      border: none;
+      border-top: 1px solid rgba(212,184,155,.3);
+      margin: 0;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 1000px) {
+      .missions-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .livrables-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .hum-gallery-bento {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 260px 200px 200px;
+      }
+      .hum-gal-main {
+        grid-column: 1 / 3;
+        grid-row: 1 / 2;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .hum-hero-grid {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+      .hum-hero-text {
+        padding: 56px 24px 40px;
+      }
+      .hum-hero-visual {
+        height: 60vw;
+        min-height: 260px;
+      }
+      .hum-hero-visual img {
+        position: absolute;
+        inset: 0;
+      }
+      .pour-qui-grid {
+        grid-template-columns: 1fr;
+      }
+      .missions-grid {
+        grid-template-columns: 1fr;
+        border-radius: 10px;
+      }
+      .hum-gallery-bento {
+        grid-template-columns: 1fr;
+        grid-template-rows: 72vw 56vw 56vw 56vw;
+      }
+      .hum-gal-main {
+        grid-column: auto;
+        grid-row: auto;
+      }
+      .hum-gal-item:nth-child(5) {
+        display: none;
+      }
+      .livrables-grid {
+        grid-template-columns: 1fr;
+      }
+      .hum-cta-grid {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+      .hum-cta-text {
+        padding: 56px 24px 40px;
+      }
+      .hum-cta-image {
+        height: 56vw;
+        min-height: 200px;
+      }
+      .hum-editorial-quote {
+        padding-right: 0;
+        margin-bottom: 32px;
+      }
+      .approach-card {
+        padding: 24px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="page-shell">
+
+<header class="header">
+  <nav class="nav">
+    <a href="index.html" class="brand" aria-label="Agency A">
+      <img src="assets/logo/logo-dark-transparent.png" alt="Agency A" class="brand-logo">
+    </a>
+    <div class="nav-links">
+      <a href="portfolio.html" class="">Portfolio</a>
+      <a href="a-propos.html" class="">À propos</a>
+      <a href="tarifs.html" class="">Tarifs</a>
+      <a href="humanitaire.html" class="active">Humanitaire</a>
+      <a href="mannequins.html" class="">Talents</a>
+      <a href="boutique.html" class="">Boutique</a>
+      <a href="espace-client.html" class="">Connexion client</a>
+      <a href="contact.html" class="">Contact</a>
+    </div>
+    <button class="hamburger" id="menuToggle" aria-label="Ouvrir le menu">
+      <svg width="28" height="18" viewBox="0 0 28 18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 1h26M1 9h26M1 17h26"/></svg>
+    </button>
+  </nav>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-inner">
+    <div class="mobile-menu-head"><button class="menu-close" id="menuClose" aria-label="Fermer" style="display:block;color:var(--cream);font-size:34px">×</button></div>
+    <a href="index.html" class="mobile-nav-link">Accueil</a>
+    <a href="portfolio.html" class="mobile-nav-link">Portfolio</a>
+    <a href="a-propos.html" class="mobile-nav-link">À propos</a>
+    <a href="tarifs.html" class="mobile-nav-link">Tarifs</a>
+    <a href="humanitaire.html" class="mobile-nav-link">Humanitaire</a>
+    <a href="mannequins.html" class="mobile-nav-link">Talents</a>
+    <a href="boutique.html" class="mobile-nav-link">Boutique</a>
+    <a href="espace-client.html" class="mobile-nav-link">Connexion client</a>
+    <a href="contact.html" class="mobile-nav-link">Contact</a>
+  </div>
+</div>
+
+<main>
+
+  <!-- ═══════════════════════════════════════
+       1. HERO ÉDITORIAL
+  ══════════════════════════════════════════ -->
+  <section class="hum-hero">
+    <div class="hum-hero-grid">
+      <div class="hum-hero-text reveal">
+        <p class="eyebrow">Humanitaire</p>
+        <h1 class="display-lg">Documenter les causes<br>avec justesse, dignité<br>et mémoire.</h1>
+        <p class="lead">Agency A accompagne les associations, ONG et projets solidaires dans la création d'images sensibles, utiles et respectueuses des personnes photographiées.</p>
+        <div class="hum-hero-ctas">
+          <a href="contact.html" class="btn btn-primary">Présenter une mission</a>
+          <a href="#approche" class="btn btn-secondary">Voir l'approche</a>
+        </div>
+      </div>
+      <div class="hum-hero-visual">
+        <img src="assets/photos/defile-monteiro/defile-mars-2025-456.jpg" alt="Reportage documentaire — Agency A" loading="eager">
+        <span class="hum-hero-caption">Reportage documentaire · Agency A</span>
+      </div>
+    </div>
+  </section>
+
+  <hr class="hum-divider">
+
+  <!-- ═══════════════════════════════════════
+       2. ÉDITORIAL + POUR QUI
+  ══════════════════════════════════════════ -->
+  <section class="section">
+    <div class="container grid-2">
+
+      <div class="hum-editorial-quote reveal">
+        <blockquote>
+          "Une image humanitaire ne doit jamais prendre plus qu'elle ne donne."
+        </blockquote>
+        <p>Travailler pour une cause, c'est accepter une responsabilité particulière vis-à-vis des personnes photographiées. Chaque mission commence par une phase d'écoute et de préparation : comprendre le contexte, les personnes, ce qu'elles acceptent de montrer et ce qu'elles souhaitent préserver.</p>
+        <p style="margin-top:16px">Les images produites ont une vocation documentaire, mémorielle et parfois militante. Elles servent des rapports d'activité, des campagnes de sensibilisation, des dossiers de mécénat, des archives institutionnelles. Elles doivent être utiles, durables et respectueuses.</p>
+      </div>
+
+      <div class="reveal">
+        <p class="eyebrow" style="margin-bottom:16px">Pour qui</p>
+        <div class="pour-qui-grid">
+          <div class="pour-qui-card">
+            <p class="eyebrow">01</p>
+            <h4>Associations</h4>
+            <p>Petites structures ou réseaux nationaux, avec ou sans budget communication structuré.</p>
+          </div>
+          <div class="pour-qui-card">
+            <p class="eyebrow">02</p>
+            <h4>ONG</h4>
+            <p>Organisations de terrain, missions de coopération, urgence ou développement.</p>
+          </div>
+          <div class="pour-qui-card">
+            <p class="eyebrow">03</p>
+            <h4>Fondations</h4>
+            <p>Fondations d'entreprise, fonds de dotation, acteurs du mécénat culturel ou social.</p>
+          </div>
+          <div class="pour-qui-card">
+            <p class="eyebrow">04</p>
+            <h4>Collectifs & projets solidaires</h4>
+            <p>Initiatives citoyennes, projets de territoire, collectifs engagés à toute échelle.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       3. MISSIONS COUVERTES
+  ══════════════════════════════════════════ -->
+  <section class="section section-dark">
+    <div class="container">
+      <div class="hum-section-head reveal">
+        <p class="eyebrow">Ce que nous couvrons</p>
+        <h2 class="display-lg">Missions couvertes.</h2>
+      </div>
+      <div class="missions-grid reveal">
+        <div class="mission-card">
+          <span class="mission-num">01</span>
+          <h3>Reportage terrain</h3>
+          <p>Couverture de missions à Paris ou en déplacement. Présence discrète, regard documentaire, restitution fidèle des réalités de terrain.</p>
+        </div>
+        <div class="mission-card">
+          <span class="mission-num">02</span>
+          <h3>Portraits bénéficiaires & équipes</h3>
+          <p>Portraits réalisés avec soin, en concertation avec les personnes photographiées. Dignité, consentement et récit juste.</p>
+        </div>
+        <div class="mission-card">
+          <span class="mission-num">03</span>
+          <h3>Vie associative</h3>
+          <p>Ateliers, formations, réunions, événements internes — documenter le quotidien d'une structure pour en raconter la vitalité.</p>
+        </div>
+        <div class="mission-card">
+          <span class="mission-num">04</span>
+          <h3>Événements solidaires</h3>
+          <p>Collectes, campagnes, galas, manifestations citoyennes. Restituer l'énergie collective et les visages de l'engagement.</p>
+        </div>
+        <div class="mission-card">
+          <span class="mission-num">05</span>
+          <h3>Campagnes de sensibilisation</h3>
+          <p>Images conçues pour des prises de parole publiques, des affiches, des dispositifs web ou des supports de plaidoyer.</p>
+        </div>
+        <div class="mission-card">
+          <span class="mission-num">06</span>
+          <h3>Archives & mémoire de projet</h3>
+          <p>Constitution d'un fonds photographique sur la durée d'un projet, pour tracer, valoriser et transmettre une action dans le temps.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       4. NOTRE APPROCHE
+  ══════════════════════════════════════════ -->
+  <section class="section" id="approche">
+    <div class="container">
+      <div class="hum-section-head reveal">
+        <p class="eyebrow">Notre approche</p>
+        <h2 class="display-lg">Photographier avec soin.</h2>
+      </div>
+      <div class="grid-3 reveal">
+        <div class="approach-card">
+          <div class="approach-num">01</div>
+          <h3>Préparer sans imposer</h3>
+          <p>Avant toute mission, un temps d'échange approfondi avec l'organisation, les référents terrain et, si possible, les personnes concernées. Comprendre les sensibilités, les contraintes, les refus. Préparer un cadre clair pour que chacun sache ce qui sera fait des images.</p>
+        </div>
+        <div class="approach-card">
+          <div class="approach-num">02</div>
+          <h3>Photographier sans voler l'intime</h3>
+          <p>Présence longue, posture effacée, patience. Pas d'image prise sans accord réel. Jamais une photo qui réduit une personne à sa vulnérabilité. Le sujet n'est pas un objet de compassion — c'est un acteur de sa propre histoire.</p>
+        </div>
+        <div class="approach-card">
+          <div class="approach-num">03</div>
+          <h3>Livrer des images utiles et durables</h3>
+          <p>Sélection éditoriale pensée pour vos usages réels : web, presse, réseaux, rapport annuel, dossier mécénat. Légendes préparées, droits clairs, formats adaptés. Des images qui servent votre mission sur le long terme, pas juste le post du lendemain.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       5. GALERIE ÉDITORIALE
+  ══════════════════════════════════════════ -->
+  <section class="section" style="padding-top:0;padding-bottom:0">
+    <div class="container" style="padding-left:0;padding-right:0;max-width:100%">
+      <div class="hum-gallery-bento" style="padding:0 clamp(16px,4vw,64px)">
+        <div class="hum-gal-item hum-gal-main">
+          <img src="assets/photos/defile-monteiro/defile-mars-2025-426.jpg" alt="Reportage — Agency A" loading="lazy">
+          <span class="hum-gal-label">Terrain</span>
+        </div>
+        <div class="hum-gal-item">
+          <img src="assets/photos/defile-monteiro/defile-mars-2025-442.jpg" alt="Transmission — Agency A" loading="lazy">
+          <span class="hum-gal-label">Transmission</span>
+        </div>
+        <div class="hum-gal-item">
+          <img src="assets/portraits/Anais-22.jpg" alt="Présence — Agency A" loading="lazy">
+          <span class="hum-gal-label">Présence</span>
+        </div>
+        <div class="hum-gal-item">
+          <img src="assets/photos/defile-monteiro/defile-mars-2025-436.jpg" alt="Mémoire — Agency A" loading="lazy">
+          <span class="hum-gal-label">Mémoire</span>
+        </div>
+        <div class="hum-gal-item">
+          <img src="assets/photos/sport/NM1-28MARS-3.JPG" alt="Impact — Agency A" loading="lazy">
+          <span class="hum-gal-label">Impact</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       6. LIVRABLES
+  ══════════════════════════════════════════ -->
+  <section class="section section-dark">
+    <div class="container">
+      <div class="hum-section-head reveal">
+        <p class="eyebrow">Livrables</p>
+        <h2 class="display-lg">Ce que vous recevez.</h2>
+      </div>
+      <div class="livrables-grid reveal">
+        <div class="livrable-card">
+          <div class="livrable-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          </div>
+          <h4>Sélection éditoriale HD</h4>
+          <p>Images retouchées, calibrées, livrées en haute résolution pour tous vos usages.</p>
+        </div>
+        <div class="livrable-card">
+          <div class="livrable-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <h4>Galerie privée sécurisée</h4>
+          <p>Accès en ligne à votre espace client pour visualiser, sélectionner et télécharger.</p>
+        </div>
+        <div class="livrable-card">
+          <div class="livrable-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/></svg>
+          </div>
+          <h4>Usage web, presse, réseaux</h4>
+          <p>Droits clairs, formats adaptés à chaque support, légendes préparées.</p>
+        </div>
+        <div class="livrable-card">
+          <div class="livrable-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
+          <h4>Série documentaire complète</h4>
+          <p>Cohérence narrative et visuelle sur l'ensemble de la série, pensée comme un tout.</p>
+        </div>
+        <div class="livrable-card">
+          <div class="livrable-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          </div>
+          <h4>Option noir &amp; blanc</h4>
+          <p>Traitement en niveaux de gris sur demande, pour un rendu documentaire fort et intemporel.</p>
+        </div>
+        <div class="livrable-card">
+          <div class="livrable-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+          </div>
+          <h4>Livraison pour dossier mécénat</h4>
+          <p>Format et sélection adaptés aux rapports d'activité, dossiers de financement et bilans de projet.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       7. CTA FINAL
+  ══════════════════════════════════════════ -->
+  <section class="hum-cta-section">
+    <div class="hum-cta-grid">
+      <div class="hum-cta-text reveal">
+        <p class="eyebrow" style="color:var(--sand)">Vous portez une cause</p>
+        <h2>Les images doivent la servir avec justesse.</h2>
+        <p class="lead">Présentez votre mission, votre contexte et vos besoins. Agency A vous accompagne avec une approche sensible, préparée et respectueuse.</p>
+        <a href="contact.html" class="btn btn-primary">Échanger sur une mission humanitaire</a>
+      </div>
+      <div class="hum-cta-image reveal">
+        <img src="assets/photos/defile-monteiro/defile-mars-2025-447.jpg" alt="Mission humanitaire Agency A" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div class="marquee-band" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Humanitaire</span><span class="marquee-sep">·</span><span>Terrain</span><span class="marquee-sep">·</span><span>Associations</span><span class="marquee-sep">·</span><span>ONG</span><span class="marquee-sep">·</span><span>Mémoire</span><span class="marquee-sep">·</span><span>Dignité</span><span class="marquee-sep">·</span><span>Humanitaire</span><span class="marquee-sep">·</span><span>Terrain</span><span class="marquee-sep">·</span><span>Associations</span><span class="marquee-sep">·</span><span>ONG</span><span class="marquee-sep">·</span><span>Mémoire</span><span class="marquee-sep">·</span><span>Dignité</span><span class="marquee-sep">·</span>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="brand" style="margin-bottom:16px"><img src="assets/logo/logo-white-transparent.png" alt="Agency A" class="brand-logo-footer"></div>
+        <p>Donner vie aux images qui racontent votre univers. Studio visuel premium, direction artistique et accompagnement sensible des talents.</p>
+      </div>
+      <div class="footer-columns">
+        <div>
+          <h4 class="footer-title">Navigation</h4>
+          <div class="footer-links">
+            <a href="index.html">Accueil</a>
+            <a href="portfolio.html">Portfolio</a>
+            <a href="a-propos.html">À propos</a>
+            <a href="tarifs.html">Tarifs</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-title">Informations</h4>
+          <div class="footer-links">
+            <a href="humanitaire.html">Humanitaire</a>
+            <a href="mannequins.html">Talents</a>
+            <a href="boutique.html">Boutique</a>
+            <a href="espace-client.html">Connexion client</a>
+            <a href="contact.html">Contact</a>
+            <a href="faq.html">FAQ</a>
+            <a href="mentions-legales.html">Mentions légales</a>
+            <a href="cgv.html">CGV</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-title">Réseaux</h4>
+          <div class="footer-links">
+            <a href="https://www.instagram.com/agencya_paris/" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://www.instagram.com/agency_a__/" target="_blank" rel="noopener">Instagram ②</a>
+            <a href="https://www.linkedin.com/company/agency-a-paris" target="_blank" rel="noopener">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© Agency A · Tous droits réservés</span>
+      <span>Paris · Sur rendez-vous · Engagement éditorial & sensible</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/shared.js"></script>
+</div>
+</body>
+</html>
