@@ -716,6 +716,157 @@
   }
 
   // ════════════════════════════════════════
+  // INQUIRIES — Demandes (portfolio/talent/partner)
+  // ════════════════════════════════════════
+  const INQ_LABELS = { portfolio: 'Portfolio', talent: 'Talent', partner: 'Partenaires' };
+  const INQ_COLORS = {
+    portfolio: 'background:#dbeafe;color:#1e40af',
+    talent:    'background:#fef3c7;color:#92400e',
+    partner:   'background:#d1fae5;color:#065f46',
+  };
+  const STATUS_LABELS = { new:'Nouvelle', read:'Lue', replied:'Répondu', archived:'Archivée' };
+  const STATUS_COLORS = {
+    new:      'background:#fee2e2;color:#991b1b',
+    read:     'background:#fef3c7;color:#92400e',
+    replied:  'background:#d1fae5;color:#065f46',
+    archived: 'background:#f3f4f6;color:#9ca3af',
+  };
+
+  let allInquiries = [];
+  let inqActiveFilter = 'all';
+
+  async function loadInquiries() {
+    const { data } = await window.sb
+      .from('inquiries')
+      .select('*')
+      .order('created_at', { ascending: false });
+    allInquiries = data || [];
+    renderInquiries(allInquiries);
+    updateInquiryCounts(allInquiries);
+  }
+
+  function updateInquiryCounts(list) {
+    const cnt = (cat) => list.filter(i => i.category === cat).length;
+    const unread = list.filter(i => i.status === 'new').length;
+    document.getElementById('cntPortfolio')?.textContent !== undefined && (document.getElementById('cntPortfolio').textContent = cnt('portfolio'));
+    document.getElementById('cntTalent')?.textContent !== undefined   && (document.getElementById('cntTalent').textContent   = cnt('talent'));
+    document.getElementById('cntPartner')?.textContent !== undefined  && (document.getElementById('cntPartner').textContent  = cnt('partner'));
+    document.getElementById('cntUnread')?.textContent !== undefined   && (document.getElementById('cntUnread').textContent   = unread);
+    const el = document.getElementById('countInquiries');
+    if (el) el.textContent = unread;
+  }
+
+  function renderInquiries(list) {
+    document.getElementById('inqTableBody').innerHTML = !list.length
+      ? '<tr><td colspan="7" class="empty-state">Aucune demande.</td></tr>'
+      : list.map(i => {
+          const cat = INQ_LABELS[i.category] || i.category;
+          const name = [i.first_name, i.last_name].filter(Boolean).join(' ') || '—';
+          const subject = i.profile_type || i.talent_type || i.project_type || i.subject || '—';
+          return `<tr>
+            <td><span class="s-badge" style="${INQ_COLORS[i.category] || ''}">${cat}</span></td>
+            <td><strong>${esc(name)}</strong></td>
+            <td><a href="mailto:${esc(i.email)}" style="color:var(--sand)">${esc(i.email)}</a></td>
+            <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(subject)}</td>
+            <td>${fmtDate(i.created_at)}</td>
+            <td><span class="s-badge" style="${STATUS_COLORS[i.status] || ''}">${STATUS_LABELS[i.status] || i.status}</span></td>
+            <td>
+              <button class="action-btn" onclick="openInquiry('${i.id}')">Voir →</button>
+            </td>
+          </tr>`;
+        }).join('');
+  }
+
+  // Filtres catégorie
+  document.querySelectorAll('.inq-filter').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.inq-filter').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      inqActiveFilter = btn.dataset.cat;
+      const filtered = inqActiveFilter === 'all'
+        ? allInquiries
+        : allInquiries.filter(i => i.category === inqActiveFilter);
+      renderInquiries(filtered);
+    });
+  });
+
+  // Détail d'une inquiry
+  window.openInquiry = async function(id) {
+    const inq = allInquiries.find(i => i.id === id);
+    if (!inq) return;
+
+    // Marquer comme lue
+    if (inq.status === 'new') {
+      await window.sb.from('inquiries').update({ status: 'read' }).eq('id', id);
+      inq.status = 'read';
+      renderInquiries(inqActiveFilter === 'all' ? allInquiries : allInquiries.filter(i => i.category === inqActiveFilter));
+      updateInquiryCounts(allInquiries);
+    }
+
+    const fields = [
+      ['Catégorie',     INQ_LABELS[inq.category] || inq.category],
+      ['Statut',        STATUS_LABELS[inq.status] || inq.status],
+      ['Prénom',        inq.first_name],
+      ['Nom',           inq.last_name],
+      ['Email',         inq.email],
+      ['Téléphone',     inq.phone],
+      ['Société',       inq.company],
+      ['Profil',        inq.profile_type],
+      ['Type talent',   inq.talent_type],
+      ['Instagram',     inq.instagram],
+      ['Localisation',  inq.location],
+      ['Type projet',   inq.project_type],
+      ['Disponibilités',inq.availability],
+      ['Sujet',         inq.subject],
+      ['Message',       inq.message],
+      ['Reçu le',       fmtDate(inq.created_at)],
+      ['Page source',   inq.source_page],
+    ].filter(([, v]) => v);
+
+    const attachLinks = (inq.attachments || []).map((u, i) =>
+      `<a href="${esc(u)}" target="_blank" rel="noopener" class="action-btn" style="text-decoration:none;margin-right:6px">Photo ${i+1}</a>`
+    ).join('');
+
+    document.getElementById('inqDetailCard').innerHTML = `
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px;flex-wrap:wrap">
+        <h3 style="margin:0;font-family:var(--display);font-size:22px;font-weight:400">
+          ${esc([inq.first_name, inq.last_name].filter(Boolean).join(' ') || inq.email)}
+        </h3>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <select id="inqStatusSel" style="border:1px solid rgba(212,184,155,.4);border-radius:5px;padding:6px 10px;font-size:12px;font-family:var(--body)">
+            ${Object.entries(STATUS_LABELS).map(([v, l]) => `<option value="${v}"${inq.status===v?' selected':''}>${l}</option>`).join('')}
+          </select>
+          <button class="btn-primary-sm" id="saveInqStatus">Enregistrer</button>
+          <a href="mailto:${esc(inq.email)}" class="btn-secondary-sm" style="text-decoration:none">Répondre par email</a>
+        </div>
+      </div>
+      ${fields.map(([k,v]) => `
+        <div class="doc-row-admin">
+          <span style="font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);width:130px;flex-shrink:0">${k}</span>
+          <span style="font-size:14px;color:var(--ink);white-space:pre-wrap">${esc(String(v))}</span>
+        </div>`).join('')}
+      ${attachLinks ? `<div style="margin-top:16px"><p class="eyebrow" style="margin-bottom:8px">Photos jointes</p>${attachLinks}</div>` : ''}
+    `;
+
+    document.getElementById('saveInqStatus')?.addEventListener('click', async () => {
+      const newStatus = document.getElementById('inqStatusSel').value;
+      await window.sb.from('inquiries').update({ status: newStatus }).eq('id', id);
+      inq.status = newStatus;
+      renderInquiries(inqActiveFilter === 'all' ? allInquiries : allInquiries.filter(i => i.category === inqActiveFilter));
+      updateInquiryCounts(allInquiries);
+      feedback('', 'Statut mis à jour.', true);
+    });
+
+    document.getElementById('inqTableBody').closest('.a-card').style.display = 'none';
+    document.getElementById('inqDetail').style.display = 'block';
+  };
+
+  document.getElementById('backToInqBtn')?.addEventListener('click', () => {
+    document.getElementById('inqDetail').style.display = 'none';
+    document.getElementById('inqTableBody').closest('.a-card').style.display = 'block';
+  });
+
+  // ════════════════════════════════════════
   // INIT
   // ════════════════════════════════════════
   await Promise.all([
@@ -723,7 +874,8 @@
     loadClients(),
     loadProjects(),
     loadAllMessages(),
-    loadAllAccess()
+    loadAllAccess(),
+    loadInquiries()
   ]);
 
   // Realtime : nouveaux messages
@@ -731,12 +883,18 @@
     .channel('admin-messages')
     .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'project_messages' }, async () => {
       await loadAllMessages();
-      // Recharger les messages du projet actif si ouvert
       if (currentProjectId) await loadProjectMessages(currentProjectId, adminId);
-      // Mettre à jour le compteur
       const { count } = await window.sb
         .from('project_messages').select('id', { count: 'exact', head: true }).is('read_at', null);
       document.getElementById('countMessages').textContent = count ?? '—';
+    })
+    .subscribe();
+
+  // Realtime : nouvelles demandes (inquiries)
+  window.sb
+    .channel('admin-inquiries')
+    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'inquiries' }, async () => {
+      await loadInquiries();
     })
     .subscribe();
 
