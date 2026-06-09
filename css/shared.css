@@ -250,13 +250,14 @@ main{display:block}
 .login-block .field label{color:rgba(234,217,199,.55)}
 
 /* ── Reviews band défilante (toutes pages) ────────── */
-.reviews-band{overflow:hidden;border-top:1px solid var(--line);padding:22px 0;background:var(--ink);user-select:none}
-.reviews-band-track{display:flex;align-items:center;white-space:nowrap;width:max-content;animation:reviewsBandScroll 60s linear infinite}
+.reviews-band{overflow:hidden;border-top:1px solid rgba(212,184,155,.28);border-bottom:1px solid rgba(212,184,155,.28);padding:clamp(38px,5vw,64px) 0;background:var(--ink);user-select:none}
+.reviews-band-track{display:flex;align-items:center;white-space:nowrap;width:max-content;animation:reviewsBandScroll 75s linear infinite}
 .reviews-band:hover .reviews-band-track{animation-play-state:paused}
-.rb-item{display:inline-flex;align-items:center;gap:12px;padding:0 36px}
-.rb-quote{font-family:var(--display);font-size:clamp(14px,1.5vw,18px);font-style:italic;font-weight:300;color:var(--cream)}
-.rb-author{font-size:10px;text-transform:uppercase;letter-spacing:.16em;color:var(--sand);flex-shrink:0}
-.rb-dot{color:rgba(212,184,155,.3);padding:0 4px;font-size:18px;line-height:1}
+.rb-item{display:inline-flex;align-items:center;gap:18px;padding:0 clamp(32px,4vw,60px)}
+.rb-item::before{content:'★ ★ ★ ★ ★';font-size:10px;letter-spacing:2px;color:var(--sand);opacity:.72;flex-shrink:0}
+.rb-quote{font-family:var(--display);font-size:clamp(18px,2.2vw,27px);font-style:italic;font-weight:300;color:var(--cream);line-height:1.35}
+.rb-author{font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:var(--sand);flex-shrink:0}
+.rb-dot{color:rgba(212,184,155,.25);padding:0 6px;font-size:22px;line-height:1}
 @keyframes reviewsBandScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
 /* ── Tooltip hover (talents keywords) ────────────── */

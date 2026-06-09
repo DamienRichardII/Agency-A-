@@ -3,57 +3,122 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Collaborateurs &amp; Partenaires — Agency A</title>
-  <meta name="description" content="Agency A collabore avec des créatifs, marques, studios et structures culturelles partageant la même exigence éditoriale. Proposez un projet de collaboration.">
+  <title>Collaborateurs — Agency A</title>
+  <meta name="description" content="Le cercle créatif d'Agency A — mannequins, comédiens, photographes, stylistes et hair stylists qui collaborent avec le studio sur des projets éditoriaux exigeants.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/shared.css">
   <style>
-    /* ── Domaines grid ── */
-    .domains-grid {
+    /* ── Filters ── */
+    .collab-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 44px;
+    }
+
+    /* ── Profiles grid ── */
+    .collab-profiles-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1px;
-      background: rgba(212,184,155,.2);
-      border: 1px solid rgba(212,184,155,.2);
-      border-radius: 12px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    /* ── Profile card ── */
+    .cp-card {
+      background: rgba(255,255,255,.45);
+      border: 1px solid rgba(17,17,17,.08);
       overflow: hidden;
+      transition: box-shadow .28s ease, transform .28s ease;
     }
-    .domain-card {
-      background: var(--cream);
-      padding: 28px 24px;
-      transition: background .2s;
+    .cp-card:hover {
+      box-shadow: 0 14px 44px rgba(17,17,17,.1);
+      transform: translateY(-3px);
     }
-    .domain-card:hover { background: #fff; }
-    .domain-num {
+    .cp-card--hidden {
+      display: none !important;
+    }
+
+    /* ── Photo ── */
+    .cp-photo {
+      position: relative;
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      background: var(--beige);
+    }
+    .cp-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .65s ease;
+    }
+    .cp-card:hover .cp-photo img {
+      transform: scale(1.05);
+    }
+    .cp-photo--placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(155deg, #1c1916, #2c2420);
+    }
+    .cp-initial {
       font-family: var(--display);
-      font-size: 32px;
-      font-weight: 300;
+      font-size: 80px;
       font-style: italic;
-      color: rgba(17,17,17,.1);
+      font-weight: 300;
+      color: rgba(212,184,155,.18);
       line-height: 1;
-      margin-bottom: 12px;
+      user-select: none;
     }
-    .domain-card h3 {
+    .cp-coming-badge {
+      position: absolute;
+      bottom: 18px;
+      left: 18px;
+      background: rgba(17,17,17,.6);
+      color: rgba(248,242,234,.55);
+      font-family: var(--body);
+      font-size: 9px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border: 1px solid rgba(212,184,155,.2);
+    }
+
+    /* ── Card info ── */
+    .cp-info {
+      padding: 22px 22px 26px;
+    }
+    .cp-name {
       font-family: var(--display);
-      font-size: 19px;
+      font-size: 26px;
       font-weight: 400;
       color: var(--ink);
       margin: 0 0 8px;
     }
-    .domain-card p {
-      font-size: 12px;
+    .cp-desc {
+      font-size: 13px;
       color: var(--muted);
-      line-height: 1.65;
-      margin: 0;
+      line-height: 1.75;
+      margin: 0 0 16px;
+    }
+    .cp-tag {
+      display: inline-block;
+      font-family: var(--body);
+      font-size: 9px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid rgba(17,17,17,.14);
+      padding: 4px 12px;
     }
 
-    /* ── Proof points / collaborations passées ── */
+    /* ── Proof band ── */
     .collab-band {
       background: var(--ink);
       color: var(--cream);
-      padding: clamp(48px, 6vw, 80px) 0;
+      padding: clamp(52px, 6vw, 88px) 0;
     }
     .collab-band .container {
       display: grid;
@@ -66,7 +131,7 @@
       font-size: clamp(26px, 3vw, 42px);
       font-weight: 400;
       font-style: italic;
-      line-height: 1.25;
+      line-height: 1.2;
       color: var(--cream);
       margin: 0;
     }
@@ -81,7 +146,7 @@
       padding: 8px 18px;
       font-family: var(--body);
       font-size: 12px;
-      letter-spacing: .08em;
+      letter-spacing: .07em;
       color: rgba(248,242,234,.7);
       transition: border-color .2s, color .2s;
     }
@@ -90,40 +155,16 @@
       color: var(--cream);
     }
 
-    /* ── Ce qu'on propose ── */
-    .offer-band {
-      background: var(--beige);
-    }
-    .offer-card {
-      padding: 28px 24px;
-      border-top: 2px solid var(--sand);
-    }
-    .offer-card h3 {
-      font-family: var(--display);
-      font-size: 20px;
-      font-weight: 400;
-      color: var(--ink);
-      margin: 0 0 10px;
-    }
-    .offer-card p {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.7;
-      margin: 0;
-    }
-
-    /* ── Formulaire artistique ── */
-    .partner-form-section {
-      background: var(--cream);
-    }
-
     /* ── Responsive ── */
-    @media (max-width: 1000px) {
-      .domains-grid { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 1120px) {
+      .collab-profiles-grid { grid-template-columns: repeat(2, 1fr); }
+      .collab-band .container { grid-template-columns: 1fr; gap: 28px; }
     }
     @media (max-width: 760px) {
-      .domains-grid { grid-template-columns: 1fr; }
-      .collab-band .container { grid-template-columns: 1fr; }
+      .collab-profiles-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    }
+    @media (max-width: 480px) {
+      .collab-profiles-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -136,14 +177,14 @@
       <img src="assets/logo/logo-dark-transparent.png" alt="Agency A" class="brand-logo">
     </a>
     <div class="nav-links">
-      <a href="portfolio.html" class="">Portfolio</a>
-      <a href="a-propos.html" class="">À propos</a>
-      <a href="tarifs.html" class="">Tarifs</a>
-      <a href="humanitaire.html" class="">Humanitaire</a>
-      <a href="mannequins.html" class="">Talents</a>
-      <a href="boutique.html" class="">Boutique</a>
-      <a href="espace-client.html" class="">Connexion client</a>
-      <a href="contact.html" class="">Contact</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="a-propos.html">À propos</a>
+      <a href="tarifs.html">Tarifs</a>
+      <a href="humanitaire.html">Humanitaire</a><a href="collaborateurs-partenaires.html" class="active">Collaborateurs</a>
+      <a href="mannequins.html">Talents</a>
+      <a href="boutique.html">Boutique</a>
+      <a href="espace-client.html">Connexion client</a>
+      <a href="contact.html">Contact</a>
     </div>
     <button class="hamburger" id="menuToggle" aria-label="Ouvrir le menu">
       <svg width="28" height="18" viewBox="0 0 28 18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 1h26M1 9h26M1 17h26"/></svg>
@@ -160,7 +201,7 @@
     <a href="humanitaire.html" class="mobile-nav-link">Humanitaire</a>
     <a href="mannequins.html" class="mobile-nav-link">Talents</a>
     <a href="boutique.html" class="mobile-nav-link">Boutique</a>
-    <a href="collaborateurs-partenaires.html" class="mobile-nav-link">Collaborateurs</a>
+    <a href="collaborateurs-partenaires.html" class="mobile-nav-link active">Collaborateurs</a>
     <a href="espace-client.html" class="mobile-nav-link">Connexion client</a>
     <a href="contact.html" class="mobile-nav-link">Contact</a>
   </div>
@@ -174,111 +215,147 @@
   <section class="page-hero">
     <div class="container page-hero-grid">
       <div class="reveal">
-        <p class="eyebrow">Collaborateurs &amp; Partenaires</p>
-        <h1 class="display-lg">Travailler ensemble, avec la même exigence.</h1>
-        <p class="lead">Agency A collabore avec des créatifs, des marques, des studios et des structures culturelles qui partagent le même soin du détail, la même vision de l'image et la même ambition éditoriale.</p>
+        <p class="eyebrow">Collaborateurs Agency A</p>
+        <h1 class="display-lg">Le cercle créatif du studio.</h1>
+        <p class="lead">Mannequins, comédiens, photographes, stylistes, hair stylists — les profils qui font les projets d'Agency A. Sélectionnés pour leur sérieux, leur esthétique et leur engagement sur chaque mission.</p>
       </div>
       <aside class="page-hero-aside reveal">
-        <p class="kicker">Écosystème</p>
+        <p class="kicker">Réseau</p>
         <div class="stats-inline">
+          <span>Mannequins</span>
+          <span>Comédiens</span>
           <span>Créatifs</span>
-          <span>Marques</span>
-          <span>Studios</span>
-          <span>Culturel</span>
+          <span>Sur mesure</span>
         </div>
       </aside>
     </div>
   </section>
 
   <!-- ═══════════════════════════════════════
-       INTRO ÉDITORIALE
+       FILTRES + PROFILS
   ══════════════════════════════════════════ -->
-  <section class="section">
-    <div class="container grid-2">
-      <div class="reveal">
-        <p class="eyebrow">Pourquoi collaborer avec Agency A</p>
-        <h2 class="display-lg" style="max-width:440px">Un écosystème construit sur la confiance et le soin.</h2>
-      </div>
-      <div class="reveal">
-        <p class="lead">Agency A a été sollicitée sur des projets très différents : campagnes de marque, co-productions éditoriales, événements culturels, projets solidaires, créations artistiques partagées. Ce qui unit ces collaborations, c'est une même façon de travailler : lentement, sérieusement, avec intention.</p>
-        <p class="lead" style="margin-top:14px">Si vous portez un projet qui nécessite un regard photographique rigoureux, une direction artistique co-construite ou une présence visuelle forte, cette page est faite pour vous.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════
-       DOMAINES
-  ══════════════════════════════════════════ -->
-  <section class="section section-dark" style="--section-dark-bg:var(--beige)">
+  <section class="section" style="padding-top:8px">
     <div class="container">
-      <div class="reveal" style="max-width:560px;margin-bottom:40px">
-        <p class="eyebrow">Domaines de collaboration</p>
-        <h2 class="display-lg">Où Agency A a déjà fait la différence.</h2>
+
+      <div class="collab-filters reveal" role="group" aria-label="Filtrer par catégorie">
+        <button class="chip active" data-filter="all">Tous</button>
+        <button class="chip" data-filter="mannequin">Mannequins</button>
+        <button class="chip" data-filter="comedien">Comédiens</button>
+        <button class="chip" data-filter="photographe">Photographes</button>
+        <button class="chip" data-filter="styliste">Stylistes</button>
+        <button class="chip" data-filter="hair">Hair Stylists</button>
       </div>
-      <div class="domains-grid reveal">
-        <div class="domain-card">
-          <div class="domain-num">01</div>
-          <h3>Marques &amp; univers visuels</h3>
-          <p>Co-construction d'une identité visuelle cohérente et durable pour des marques émergentes ou en repositionnement.</p>
+
+      <div class="collab-profiles-grid reveal">
+
+        <!-- ── Mannequins ── -->
+        <div class="cp-card" data-cat="mannequin">
+          <div class="cp-photo">
+            <img src="assets/nos talents - galerie/29012026_Elfie_AnaisDescomps_AgencyA_-9.jpg" alt="Elfie Daniel — Mannequin Agency A" loading="lazy">
+          </div>
+          <div class="cp-info">
+            <h3 class="cp-name">Elfie Daniel</h3>
+            <p class="cp-desc">Mannequin signature d'Agency A depuis 2024. Polyvalente, rigoureuse et à l'aise devant l'objectif en éditorial comme en produit. 1m80 · yeux verts · cheveux châtain.</p>
+            <span class="cp-tag">Mannequin</span>
+          </div>
         </div>
-        <div class="domain-card">
-          <div class="domain-num">02</div>
-          <h3>Mode &amp; éditorial</h3>
-          <p>Collaborations avec des stylistes, directeurs artistiques, labels de mode ou plateformes de contenu éditorial haut de gamme.</p>
+
+        <div class="cp-card" data-cat="mannequin">
+          <div class="cp-photo">
+            <img src="assets/nos talents - galerie/celine-polas-25.jpg" alt="Céline Polas — Mannequin Agency A" loading="lazy">
+          </div>
+          <div class="cp-info">
+            <h3 class="cp-name">Céline Polas</h3>
+            <p class="cp-desc">Profil mode & éditorial au port naturel et à la présence affirmée. Collabore régulièrement avec Agency A sur des projets de campagne et de book. 1m76 · yeux marron.</p>
+            <span class="cp-tag">Mannequin</span>
+          </div>
         </div>
-        <div class="domain-card">
-          <div class="domain-num">03</div>
-          <h3>Culturel &amp; événementiel</h3>
-          <p>Couverture de vernissages, performances, festivals, lancements, événements artistiques ou institutionnels.</p>
+
+        <div class="cp-card" data-cat="mannequin">
+          <div class="cp-photo">
+            <img src="assets/photos/mode/2025-11-03_Chaimaa_mannequin_agence_mademoiselle_04.jpg" alt="Chaimaa — Mannequin Agency A" loading="lazy">
+          </div>
+          <div class="cp-info">
+            <h3 class="cp-name">Chaimaa</h3>
+            <p class="cp-desc">Mannequin représenté par l'agence Mademoiselle. Portfolio construit avec Agency A en 2025 — mode, beauté, digitals. Aisance naturelle et regard affirmé.</p>
+            <span class="cp-tag">Mannequin</span>
+          </div>
         </div>
-        <div class="domain-card">
-          <div class="domain-num">04</div>
-          <h3>Beauté &amp; cosmétique</h3>
-          <p>Séries produit, campagnes beauté, portraits de fondatrices, contenu éditorial pour des marques clean &amp; lifestyle.</p>
+
+        <!-- ── Comédiens ── -->
+        <div class="cp-card" data-cat="comedien">
+          <div class="cp-photo cp-photo--placeholder">
+            <span class="cp-initial">C</span>
+            <span class="cp-coming-badge">Profil à venir</span>
+          </div>
+          <div class="cp-info">
+            <h3 class="cp-name">Profils comédiens</h3>
+            <p class="cp-desc">Agency A intègre progressivement les comédiens du réseau. Les fiches sont en cours de constitution — revenez prochainement.</p>
+            <span class="cp-tag">Comédien</span>
+          </div>
         </div>
-        <div class="domain-card">
-          <div class="domain-num">05</div>
-          <h3>Gastronomie &amp; art de vivre</h3>
-          <p>Photographie culinaire, ambiance restaurant, contenu chef, produits artisanaux et maisons d'exception.</p>
+
+        <!-- ── Photographes ── -->
+        <div class="cp-card" data-cat="photographe">
+          <div class="cp-photo cp-photo--placeholder">
+            <span class="cp-initial">P</span>
+            <span class="cp-coming-badge">Profil à venir</span>
+          </div>
+          <div class="cp-info">
+            <h3 class="cp-name">Profils photographes</h3>
+            <p class="cp-desc">Photographes collaborateurs sur des projets de seconde équipe, couvertures d'événements ou co-productions. Fiches en cours d'intégration.</p>
+            <span class="cp-tag">Photographe</span>
+          </div>
         </div>
-        <div class="domain-card">
-          <div class="domain-num">06</div>
-          <h3>Architecture &amp; intérieur</h3>
-          <p>Documentation de réalisations, espaces de vie ou de travail, portfolios d'agences d'architecture et de décoration.</p>
+
+        <!-- ── Stylistes ── -->
+        <div class="cp-card" data-cat="styliste">
+          <div class="cp-photo cp-photo--placeholder">
+            <span class="cp-initial">S</span>
+            <span class="cp-coming-badge">Profil à venir</span>
+          </div>
+          <div class="cp-info">
+            <h3 class="cp-name">Profils stylistes</h3>
+            <p class="cp-desc">Direction artistique et habillage sur les productions Agency A. Les fiches des stylistes du réseau sont en cours de constitution.</p>
+            <span class="cp-tag">Styliste</span>
+          </div>
         </div>
-        <div class="domain-card">
-          <div class="domain-num">07</div>
-          <h3>Musique &amp; scène</h3>
-          <p>Portraits d'artistes, visuels de releases, couverture de concerts et de résidences, identité visuelle de projets musicaux.</p>
+
+        <!-- ── Hair Stylists ── -->
+        <div class="cp-card" data-cat="hair">
+          <div class="cp-photo cp-photo--placeholder">
+            <span class="cp-initial">H</span>
+            <span class="cp-coming-badge">Profil à venir</span>
+          </div>
+          <div class="cp-info">
+            <h3 class="cp-name">Profils hair stylists</h3>
+            <p class="cp-desc">Coiffure et coiffure artistique pour les productions du studio. Le réseau s'élargit progressivement selon les besoins des projets.</p>
+            <span class="cp-tag">Hair Stylist</span>
+          </div>
         </div>
-        <div class="domain-card">
-          <div class="domain-num">08</div>
-          <h3>Projets créatifs transversaux</h3>
-          <p>Co-productions artistiques, livres photo, expositions, projets hybrides alliant image, design et récit.</p>
-        </div>
+
       </div>
     </div>
   </section>
 
   <!-- ═══════════════════════════════════════
-       COLLABORATIONS — PROOF
+       PROOF BAND
   ══════════════════════════════════════════ -->
   <section class="collab-band">
     <div class="container">
-      <h2>Des univers variés,<br>une même exigence.</h2>
+      <h2>Un réseau construit<br>projet après projet.</h2>
       <div>
-        <p style="font-size:13px;color:rgba(248,242,234,.5);text-transform:uppercase;letter-spacing:.1em;margin:0 0 18px">Secteurs déjà couverts</p>
+        <p style="font-size:13px;color:rgba(248,242,234,.5);text-transform:uppercase;letter-spacing:.1em;margin:0 0 18px">Univers couverts ensemble</p>
         <div class="collab-tags">
-          <span class="collab-tag">Mode & Fashion</span>
-          <span class="collab-tag">Beauté & Cosmétique</span>
-          <span class="collab-tag">Gastronomie</span>
-          <span class="collab-tag">Art & Culture</span>
-          <span class="collab-tag">Musique</span>
-          <span class="collab-tag">Architecture</span>
-          <span class="collab-tag">Engagement solidaire</span>
+          <span class="collab-tag">Mode &amp; Fashion</span>
+          <span class="collab-tag">Beauté &amp; Cosmétique</span>
           <span class="collab-tag">Éditorial</span>
+          <span class="collab-tag">Art &amp; Culture</span>
+          <span class="collab-tag">Musique</span>
+          <span class="collab-tag">Défilé</span>
+          <span class="collab-tag">Campagne</span>
+          <span class="collab-tag">Book &amp; Portfolio</span>
           <span class="collab-tag">Sport</span>
-          <span class="collab-tag">Talents</span>
           <span class="collab-tag">Lifestyle</span>
           <span class="collab-tag">Événementiel</span>
         </div>
@@ -287,40 +364,14 @@
   </section>
 
   <!-- ═══════════════════════════════════════
-       CE QU'ON PROPOSE
+       FORMULAIRE — REJOINDRE LE RÉSEAU
   ══════════════════════════════════════════ -->
-  <section class="section offer-band">
-    <div class="container">
-      <div class="reveal" style="max-width:560px;margin-bottom:40px">
-        <p class="eyebrow">Ce que nous proposons</p>
-        <h2 class="display-lg">Les formats de collaboration possibles.</h2>
-      </div>
-      <div class="grid-3 reveal">
-        <div class="offer-card">
-          <h3>Co-production visuelle</h3>
-          <p>Construction d'un projet photo commun, de l'intention initiale à la livraison finale. Direction artistique partagée, crédit co-signé si pertinent.</p>
-        </div>
-        <div class="offer-card">
-          <h3>Partenariat de contenu</h3>
-          <p>Production de contenu régulier ou ponctuel pour vos plateformes, newsletters, campagnes ou supports print — avec la patte éditoriale d'Agency A.</p>
-        </div>
-        <div class="offer-card">
-          <h3>Collaboration ponctuelle</h3>
-          <p>Intervention sur un projet existant : une série manquante, un regard extérieur, une journée de shooting complémentaire ou un accompagnement artistique.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════
-       FORMULAIRE ARTISTIQUE
-  ══════════════════════════════════════════ -->
-  <section class="section partner-form-section">
+  <section class="section">
     <div class="container">
       <div class="form-card reveal">
-        <p class="eyebrow">Proposition artistique</p>
-        <h2 class="display-md">Soumettre un projet</h2>
-        <p class="lead" style="margin-top:10px;margin-bottom:28px">Ce formulaire est distinct du contact général et de la candidature talent. Il est réservé aux propositions de collaboration, partenariat ou co-production.</p>
+        <p class="eyebrow">Rejoindre le réseau</p>
+        <h2 class="display-md">Proposer votre profil</h2>
+        <p class="lead" style="margin-top:10px;margin-bottom:28px">Ce formulaire est destiné aux créatifs souhaitant collaborer avec Agency A — photographes, stylistes, hair stylists, comédiens et autres profils. Pour une candidature mannequin, utilisez la page Talents.</p>
         <form id="partnerForm" novalidate>
           <input type="hidden" name="source_page" value="collaborateurs-partenaires.html">
           <div class="form-grid">
@@ -329,32 +380,29 @@
             <div class="field"><label>Email *</label><input type="email" name="email" placeholder="vous@email.com" required></div>
             <div class="field"><label>Téléphone</label><input type="tel" name="phone" placeholder="06 ·· ·· ·· ··"></div>
             <div class="field" style="grid-column:1/-1">
-              <label>Structure ou projet</label>
-              <input type="text" name="company" placeholder="Nom de votre marque, studio, agence ou projet">
-            </div>
-            <div class="field" style="grid-column:1/-1">
-              <label>Type de collaboration souhaité</label>
+              <label>Votre métier / spécialisation</label>
               <select name="project_type">
-                <option value="">Sélectionner…</option>
-                <option value="co-production">Co-production visuelle</option>
-                <option value="partenariat-contenu">Partenariat de contenu</option>
-                <option value="collaboration-ponctuelle">Collaboration ponctuelle</option>
-                <option value="exposition">Exposition / projet culturel</option>
-                <option value="autre">Autre / à préciser</option>
+                <option value="">Sélectionner votre profil…</option>
+                <option value="photographe">Photographe</option>
+                <option value="styliste">Styliste</option>
+                <option value="hair-stylist">Hair Stylist / Coiffeur·se</option>
+                <option value="comedien">Comédien·ne</option>
+                <option value="mua">Maquilleur·se / MUA</option>
+                <option value="autre">Autre profil créatif</option>
               </select>
             </div>
             <div class="field" style="grid-column:1/-1">
-              <label>Décrivez votre projet</label>
-              <textarea name="message" rows="5" placeholder="Partagez l'essentiel : l'intention du projet, le contexte, le format souhaité, les délais envisagés et toute information utile pour comprendre votre démarche."></textarea>
+              <label>Lien portfolio ou Instagram</label>
+              <input type="url" name="company" placeholder="https://…">
             </div>
             <div class="field" style="grid-column:1/-1">
-              <label>Disponibilités ou calendrier indicatif</label>
-              <input type="text" name="availability" placeholder="Ex : disponible à partir de septembre, calendrier flexible, urgent…">
+              <label>Décrivez votre approche et vos disponibilités</label>
+              <textarea name="message" rows="5" placeholder="Partagez votre univers, vos expériences, les types de projets qui vous intéressent et vos disponibilités."></textarea>
             </div>
           </div>
           <div id="partnerFeedback" class="form-feedback"></div>
           <div style="margin-top:24px">
-            <button type="submit" id="partnerSubmitBtn" class="btn btn-primary">Soumettre ma proposition</button>
+            <button type="submit" id="partnerSubmitBtn" class="btn btn-primary">Envoyer mon profil</button>
           </div>
         </form>
       </div>
@@ -371,6 +419,7 @@
     <span class="rb-item"><span class="rb-quote">« Une expérience premium de bout en bout. Les photos ont transformé notre communication en quelques semaines. »</span><span class="rb-author">Thomas B. · Marque lifestyle</span></span><span class="rb-dot">·</span>
     <span class="rb-item"><span class="rb-quote">« Je n'avais jamais aimé me faire photographier. Agency A a changé ça. Je me suis sentie vue, pas exposée. »</span><span class="rb-author">Amélie S. · Portrait personnel</span></span><span class="rb-dot">·</span>
     <span class="rb-item"><span class="rb-quote">« Des images qui ont servi notre campagne de sensibilisation avec la justesse qu'elle méritait. »</span><span class="rb-author">Marc L. · Projet solidaire</span></span><span class="rb-dot">·</span>
+    <!-- Duplicate for infinite loop -->
     <span class="rb-item"><span class="rb-quote">« Anaïs a su me mettre à l'aise dès la première minute. Le résultat dépasse largement ce que j'espérais. »</span><span class="rb-author">Elfie D. · Book signature</span></span><span class="rb-dot">·</span>
     <span class="rb-item"><span class="rb-quote">« Les images racontent vraiment notre univers de marque — on les utilise sur tous nos supports depuis le lancement. »</span><span class="rb-author">Sarah M. · Image de marque</span></span><span class="rb-dot">·</span>
     <span class="rb-item"><span class="rb-quote">« Un regard juste, une préparation minutieuse. Ce n'est pas juste une séance photo — c'est une vraie direction artistique. »</span><span class="rb-author">Laura R. · Éditorial beauté</span></span><span class="rb-dot">·</span>
@@ -382,7 +431,7 @@
 
 <div class="marquee-band" aria-hidden="true">
   <div class="marquee-track">
-    <span>Collaboration</span><span class="marquee-sep">·</span><span>Partenariat</span><span class="marquee-sep">·</span><span>Co-production</span><span class="marquee-sep">·</span><span>Création</span><span class="marquee-sep">·</span><span>Éditorial</span><span class="marquee-sep">·</span><span>Confiance</span><span class="marquee-sep">·</span><span>Collaboration</span><span class="marquee-sep">·</span><span>Partenariat</span><span class="marquee-sep">·</span><span>Co-production</span><span class="marquee-sep">·</span><span>Création</span><span class="marquee-sep">·</span><span>Éditorial</span><span class="marquee-sep">·</span><span>Confiance</span><span class="marquee-sep">·</span>
+    <span>Mannequin</span><span class="marquee-sep">·</span><span>Comédien</span><span class="marquee-sep">·</span><span>Photographe</span><span class="marquee-sep">·</span><span>Styliste</span><span class="marquee-sep">·</span><span>Hair</span><span class="marquee-sep">·</span><span>Réseau</span><span class="marquee-sep">·</span><span>Mannequin</span><span class="marquee-sep">·</span><span>Comédien</span><span class="marquee-sep">·</span><span>Photographe</span><span class="marquee-sep">·</span><span>Styliste</span><span class="marquee-sep">·</span><span>Hair</span><span class="marquee-sep">·</span><span>Réseau</span><span class="marquee-sep">·</span>
   </div>
 </div>
 
@@ -438,6 +487,27 @@
 <script src="js/api-config.js"></script>
 <script src="js/forms.js"></script>
 <script>
+/* ── Filter logic ── */
+(function(){
+  var chips = document.querySelectorAll('.collab-filters .chip');
+  var cards = document.querySelectorAll('.cp-card');
+  chips.forEach(function(chip){
+    chip.addEventListener('click', function(){
+      chips.forEach(function(c){ c.classList.remove('active'); });
+      chip.classList.add('active');
+      var filter = chip.dataset.filter;
+      cards.forEach(function(card){
+        if (filter === 'all' || card.dataset.cat === filter) {
+          card.classList.remove('cp-card--hidden');
+        } else {
+          card.classList.add('cp-card--hidden');
+        }
+      });
+    });
+  });
+})();
+
+/* ── Partner form ── */
 (function(){
   var form = document.getElementById('partnerForm');
   var btn  = document.getElementById('partnerSubmitBtn');
