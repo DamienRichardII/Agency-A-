@@ -249,16 +249,20 @@ main{display:block}
 .login-block .field input::placeholder{color:rgba(234,217,199,.38)}
 .login-block .field label{color:rgba(234,217,199,.55)}
 
-/* ── Reviews band défilante (toutes pages) ────────── */
-.reviews-band{overflow:hidden;border-top:1px solid rgba(212,184,155,.22);border-bottom:1px solid rgba(212,184,155,.22);padding:clamp(52px,7vw,88px) 0;background:var(--ink);user-select:none}
-.reviews-band-track{display:flex;align-items:center;white-space:nowrap;width:max-content;animation:reviewsBandScroll 90s linear infinite}
-.reviews-band:hover .reviews-band-track{animation-play-state:paused}
-.rb-item{display:inline-flex;align-items:center;gap:24px;padding:0 clamp(44px,5vw,80px)}
-.rb-item::before{content:'★ ★ ★ ★ ★';font-size:11px;letter-spacing:3px;color:var(--sand);opacity:.85;flex-shrink:0}
-.rb-quote{font-family:var(--display);font-size:clamp(22px,2.6vw,34px);font-style:italic;font-weight:300;color:var(--cream);line-height:1.3;letter-spacing:.01em}
-.rb-author{font-size:10px;text-transform:uppercase;letter-spacing:.22em;color:var(--sand);opacity:.8;flex-shrink:0;padding-left:4px;border-left:1px solid rgba(212,184,155,.3);padding-left:14px}
-.rb-dot{color:rgba(212,184,155,.18);padding:0 4px;font-size:28px;line-height:1}
-@keyframes reviewsBandScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+/* ── Reviews cards (toutes pages) ────────────────── */
+.reviews-band{background:var(--ink);padding:clamp(60px,8vw,96px) 0}
+.reviews-band .container{max-width:1240px;margin:0 auto;padding:0 clamp(24px,4vw,60px)}
+.rv-header{margin-bottom:clamp(36px,5vw,56px);display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.rv-header .eyebrow{color:var(--sand)}
+.rv-total{font-family:var(--body);font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:rgba(212,184,155,.45)}
+.rv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(212,184,155,.1)}
+.rv-card{background:var(--ink);padding:clamp(28px,3.5vw,48px) clamp(22px,3vw,40px);display:flex;flex-direction:column;gap:20px;transition:background .25s}
+.rv-card:hover{background:#1a1714}
+.rv-stars{font-size:11px;letter-spacing:3px;color:var(--sand);opacity:.85}
+.rv-quote{font-family:var(--display);font-size:clamp(16px,1.6vw,21px);font-style:italic;font-weight:300;color:var(--cream);line-height:1.65;margin:0;flex:1}
+.rv-author{font-family:var(--body);font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:rgba(212,184,155,.6);border-top:1px solid rgba(212,184,155,.12);padding-top:16px;margin-top:auto}
+@media(max-width:860px){.rv-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.rv-grid{grid-template-columns:1fr}}
 
 /* ── Tooltip hover (talents keywords) ────────────── */
 .kw-wrap{position:relative;display:inline-block;cursor:help}
