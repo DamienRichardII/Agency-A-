@@ -15,304 +15,104 @@
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <style>
     /* ══════════════════════════════════════════
-       A-PROPOS — styles spécifiques à la page
+       A-PROPOS — styles spécifiques page
     ══════════════════════════════════════════ */
 
-    /* ── 1. HERO ── */
-    .ap-hero {
-      display: grid;
-      grid-template-columns: 45fr 55fr;
-      height: clamp(480px, 72vh, 800px);
-      overflow: hidden;
-    }
-    .ap-hero-text {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: clamp(40px, 5vw, 80px) clamp(32px, 5vw, 80px);
-      background: var(--cream);
-    }
-    .ap-hero-text .display-xl {
-      font-family: var(--display);
-      font-size: clamp(38px, 5.5vw, 76px);
-      font-weight: 400;
-      line-height: 1.08;
-      color: var(--ink);
-      margin: 14px 0 22px;
-    }
-    .ap-hero-text .lead {
-      max-width: 420px;
-      color: var(--ink-soft);
-      line-height: 1.85;
-    }
-    .ap-cta-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 36px;
-      font-family: var(--body);
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: .18em;
-      color: var(--ink);
-      text-decoration: none;
-      border-bottom: 1px solid var(--ink);
-      padding-bottom: 3px;
-      align-self: flex-start;
-      transition: opacity .2s;
-    }
-    .ap-cta-link:hover { opacity: .55; }
-    .ap-hero-visual {
-      overflow: hidden;
-      position: relative;
-    }
-    .ap-hero-visual img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
-      display: block;
-    }
+    .ap-accent{color:#bf7d4f}
 
-    /* ── 2. TIMELINE ── */
-    .ap-timeline {
-      padding: clamp(60px, 8vw, 96px) 0;
-      background: var(--cream);
-      border-top: 1px solid var(--beige);
-    }
-    .ap-timeline-inner {
-      max-width: 1240px;
-      margin: 0 auto;
-      padding: 0 clamp(24px, 4vw, 60px);
-      display: grid;
-      grid-template-columns: 160px 1fr;
-      gap: clamp(40px, 6vw, 80px);
-      align-items: start;
-    }
-    .ap-timeline-label p { color: var(--muted); }
-    .ap-timeline-track {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      position: relative;
-      padding-top: 0;
-    }
-    .ap-timeline-line {
-      position: absolute;
-      top: 18px;
-      left: calc(10% + 4px);
-      right: calc(10% + 4px);
-      height: 1px;
-      background: linear-gradient(to right, rgba(212,184,155,.3), rgba(212,184,155,.7), rgba(212,184,155,.3));
-    }
-    .ap-step {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      padding: 0 8px;
-      position: relative;
-    }
-    .ap-step-dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: var(--sand);
-      border: 2px solid var(--cream);
-      box-shadow: 0 0 0 1px var(--sand);
-      margin-bottom: 18px;
-      position: relative;
-      z-index: 1;
-      flex-shrink: 0;
-    }
-    .ap-year {
-      font-family: var(--display);
-      font-size: clamp(20px, 2.2vw, 30px);
-      font-weight: 400;
-      color: var(--ink);
-      line-height: 1;
-      margin-bottom: 12px;
-      display: block;
-    }
-    .ap-step p {
-      font-size: 12px;
-      line-height: 1.75;
-      color: var(--muted);
-      margin: 0;
-    }
+    /* ── HERO éditorial — 2 colonnes, sans photo ── */
+    .ap-hero{display:grid;grid-template-columns:52fr 48fr;min-height:clamp(440px,60vh,700px);background:var(--cream)}
+    .ap-hero-text{display:flex;flex-direction:column;justify-content:center;padding:clamp(60px,7vw,100px) clamp(28px,3.5vw,56px) clamp(60px,7vw,100px) clamp(40px,7vw,120px)}
+    .ap-hero-right{display:flex;flex-direction:column;justify-content:center;padding:clamp(60px,7vw,100px) clamp(40px,7vw,100px) clamp(60px,7vw,100px) clamp(28px,3.5vw,56px);border-left:1px solid rgba(17,17,17,.07)}
+    .ap-hero-name{font-family:var(--display);font-size:clamp(52px,6.5vw,96px);font-weight:300;letter-spacing:-.02em;color:var(--ink);line-height:.88;display:block;margin:24px 0 20px}
+    .ap-hero-desc{font-family:var(--body);font-size:14px;color:var(--muted);letter-spacing:.02em;line-height:1.85;max-width:360px;margin:0}
+    .ap-hero-letter{font-family:var(--display);font-size:clamp(110px,13vw,190px);font-weight:300;letter-spacing:-.04em;color:var(--ink);line-height:.85;display:block;margin-bottom:clamp(20px,2.5vw,36px)}
+    .ap-hero-signature{font-family:var(--body);font-size:11px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;line-height:1.7;margin:0}
 
-    /* ── 3. VALEURS — 4 VISUELS ── */
-    .ap-values {
-      background: var(--ink);
-    }
-    .ap-values-header {
-      padding: clamp(52px, 7vw, 80px) clamp(32px, 5vw, 80px) clamp(36px, 5vw, 56px);
-      display: flex;
-      align-items: flex-end;
-      gap: clamp(40px, 6vw, 100px);
-      flex-wrap: wrap;
-    }
-    .ap-values-header-left { flex: 0 0 auto; }
-    .ap-values-header-left .eyebrow { color: var(--sand); margin-bottom: 14px; }
-    .ap-values-title {
-      font-family: var(--display);
-      font-size: clamp(28px, 3.8vw, 52px);
-      font-weight: 400;
-      font-style: italic;
-      color: var(--cream);
-      line-height: 1.15;
-      margin: 0;
-    }
-    .ap-values-lead {
-      flex: 1;
-      min-width: 220px;
-    }
-    .ap-values-lead p {
-      font-size: 14px;
-      line-height: 1.85;
-      color: rgba(248,242,234,.55);
-      margin: 0 0 22px;
-    }
-    .ap-values-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-    }
-    .ap-val-card {
-      position: relative;
-      aspect-ratio: 3/4;
-      overflow: hidden;
-    }
-    .ap-val-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      display: block;
-      transition: transform .75s ease;
-      filter: brightness(.65);
-    }
-    .ap-val-card:hover img {
-      transform: scale(1.04);
-      filter: brightness(.72);
-    }
-    .ap-val-label {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 30px 22px 24px;
-      background: linear-gradient(to top, rgba(11,9,7,.8) 0%, rgba(11,9,7,.3) 60%, transparent 100%);
-    }
-    .ap-val-label .eyebrow {
-      color: var(--sand);
-      margin-bottom: 8px;
-      font-size: 9px;
-      letter-spacing: .2em;
-    }
-    .ap-val-label p {
-      font-family: var(--display);
-      font-style: italic;
-      font-size: clamp(14px, 1.4vw, 18px);
-      color: var(--cream);
-      line-height: 1.35;
-      margin: 0;
-    }
+    /* ── TIMELINE pleine largeur — frise équilibrée ── */
+    .ap-timeline{padding:clamp(48px,6vw,80px) 0;background:var(--cream);border-top:1px solid var(--beige)}
+    .ap-timeline-inner{width:100%;padding:0 clamp(28px,5vw,80px)}
+    .ap-timeline-label{margin-bottom:clamp(36px,5vw,56px)}
+    .ap-timeline-track{display:grid;grid-template-columns:repeat(5,1fr);position:relative;padding-top:22px}
+    .ap-timeline-line{position:absolute;top:26px;left:calc(10% + 4px);right:calc(10% + 4px);height:1px;background:linear-gradient(to right,rgba(212,184,155,.3),rgba(212,184,155,.7),rgba(212,184,155,.3))}
+    .ap-step{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 clamp(8px,1.5vw,24px);position:relative}
+    .ap-step-dot{width:10px;height:10px;border-radius:50%;background:var(--sand);border:2px solid var(--cream);box-shadow:0 0 0 1px var(--sand);margin-bottom:20px;position:relative;z-index:1;flex-shrink:0}
+    .ap-year{font-family:var(--display);font-size:clamp(24px,2.8vw,38px);font-weight:400;color:var(--ink);line-height:1;margin-bottom:12px;display:block}
+    .ap-step p{font-size:14px;line-height:1.75;color:var(--muted);margin:0}
 
-    /* ── 4. FONDATRICE ── */
-    .ap-founder {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: 80vh;
-    }
-    .ap-founder-visual {
-      overflow: hidden;
-      position: relative;
-    }
-    .ap-founder-visual img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
-      display: block;
-    }
-    .ap-founder-text {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: clamp(52px, 7vw, 100px) clamp(36px, 5vw, 80px);
-      background: #f0e8d8;
-    }
-    .ap-founder-text .eyebrow { margin-bottom: 14px; }
-    .ap-founder-text h2 {
-      font-family: var(--display);
-      font-size: clamp(30px, 3.5vw, 52px);
-      font-weight: 400;
-      color: var(--ink);
-      margin: 0 0 28px;
-      line-height: 1.1;
-    }
-    .ap-founder-text .lead {
-      color: var(--ink-soft);
-      line-height: 1.9;
-      margin-bottom: 18px;
-      max-width: 460px;
-    }
-    .ap-founder-quote {
-      font-family: var(--display);
-      font-style: italic;
-      font-size: clamp(17px, 1.8vw, 23px);
-      color: var(--ink-soft);
-      line-height: 1.5;
-      margin: 28px 0 32px;
-      padding-left: 20px;
-      border-left: 2px solid var(--sand);
-    }
+    /* ── VALEURS ── */
+    .ap-values{background:var(--ink)}
+    .ap-values-header{padding:clamp(52px,7vw,80px) clamp(32px,5vw,80px) clamp(36px,5vw,56px);display:flex;align-items:flex-end;gap:clamp(40px,6vw,100px);flex-wrap:wrap}
+    .ap-values-header-left{flex:0 0 auto}
+    .ap-values-header-left .eyebrow{color:var(--sand);margin-bottom:14px}
+    .ap-values-title{font-family:var(--display);font-size:clamp(28px,3.8vw,52px);font-weight:400;font-style:italic;color:var(--cream);line-height:1.15;margin:0}
+    .ap-values-lead{flex:1;min-width:220px}
+    .ap-values-lead p{font-size:15px;line-height:1.85;color:rgba(248,242,234,.55);margin:0 0 22px}
+    .ap-values-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+    .ap-val-card{position:relative;aspect-ratio:3/4;overflow:hidden}
+    .ap-val-card img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .75s ease;filter:brightness(.65)}
+    .ap-val-card:hover img{transform:scale(1.04);filter:brightness(.72)}
+    .ap-val-label{position:absolute;bottom:0;left:0;right:0;padding:30px 22px 24px;background:linear-gradient(to top,rgba(11,9,7,.8) 0%,rgba(11,9,7,.3) 60%,transparent 100%)}
+    .ap-val-label .eyebrow{color:var(--sand);margin-bottom:8px;font-size:9px;letter-spacing:.2em}
+    .ap-val-label p{font-family:var(--display);font-style:italic;font-size:clamp(15px,1.6vw,20px);color:var(--cream);line-height:1.35;margin:0}
 
-    /* ── 5. CE QUE VOUS POUVEZ ATTENDRE ── */
-    .ap-segments {
-      padding: clamp(60px, 8vw, 100px) 0;
-      background: linear-gradient(180deg, #fbf7f2 0%, #f4ece0 100%);
-    }
+    /* ── FONDATRICE fond bleu total ── */
+    .ap-founder{display:grid;grid-template-columns:1fr 1fr;min-height:80vh;background:#b5bee0}
+    .ap-founder-visual{overflow:hidden;position:relative;background:#b5bee0}
+    .ap-founder-visual img{width:100%;height:100%;object-fit:cover;object-position:center 15%;display:block}
+    .ap-founder-text{display:flex;flex-direction:column;justify-content:center;padding:clamp(52px,7vw,100px) clamp(36px,5vw,80px);background:#b5bee0}
+    .ap-founder-text .eyebrow{margin-bottom:14px;color:rgba(255,255,255,.7)}
+    .ap-founder-text h2{font-family:var(--display);font-size:clamp(30px,3.5vw,52px);font-weight:400;color:#fff;margin:0 0 28px;line-height:1.1}
+    .ap-founder-text .lead{font-size:16px;color:rgba(255,255,255,.85);line-height:1.9;margin-bottom:18px;max-width:460px}
+    .ap-founder-quote{font-family:var(--display);font-style:italic;font-size:clamp(17px,1.8vw,23px);color:rgba(255,255,255,.9);line-height:1.5;margin:28px 0 32px;padding-left:20px;border-left:2px solid rgba(255,255,255,.4)}
+    .ap-founder-cta{display:inline-flex;align-items:center;gap:10px;font-family:var(--body);font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.5);padding-bottom:3px;align-self:flex-start;transition:opacity .2s}
+    .ap-founder-cta:hover{opacity:.65}
+
+    /* ── SEGMENTS ── */
+    .ap-segments{padding:clamp(60px,8vw,100px) 0;background:linear-gradient(180deg,#fbf7f2 0%,#f4ece0 100%)}
+
+    /* ── REVIEWS défilants a-propos ── */
+    .ap-reviews{overflow:hidden}
+    .ap-reviews .rv-grid{display:none!important}
+    .ap-reviews .rv-header{margin-bottom:clamp(28px,4vw,44px)}
+    .ap-rv-overflow{overflow:hidden;padding-bottom:clamp(48px,6vw,72px)}
+    .ap-rv-track{display:flex;width:max-content;animation:ap-rv-move 55s linear infinite}
+    .ap-rv-track:hover{animation-play-state:paused}
+    @keyframes ap-rv-move{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    .ap-rv-item{flex:0 0 clamp(300px,30vw,420px);padding:clamp(32px,3.5vw,52px) clamp(28px,3vw,44px);border-right:1px solid rgba(212,184,155,.15);display:flex;flex-direction:column;gap:20px;transition:background .25s}
+    .ap-rv-item:hover{background:#1a1714}
+    .ap-rv-stars{font-size:11px;letter-spacing:3px;color:var(--sand);opacity:.85}
+    .ap-rv-quote{font-family:var(--display);font-size:clamp(17px,1.7vw,22px);font-style:italic;font-weight:300;color:var(--cream);line-height:1.65;margin:0;flex:1}
+    .ap-rv-author{font-family:var(--body);font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:rgba(212,184,155,.6);border-top:1px solid rgba(212,184,155,.12);padding-top:16px;margin-top:auto}
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 1024px) {
-      .ap-values-grid { grid-template-columns: repeat(2, 1fr); }
-      .ap-values-grid .ap-val-card { aspect-ratio: 4/3; }
-      .ap-timeline-track { grid-template-columns: repeat(3, 1fr); }
-      .ap-timeline-line { left: calc(17% + 4px); right: calc(17% + 4px); }
+    @media(max-width:1024px){
+      .ap-values-grid{grid-template-columns:repeat(2,1fr)}
+      .ap-values-grid .ap-val-card{aspect-ratio:4/3}
+      .ap-timeline-track{grid-template-columns:repeat(3,1fr)}
+      .ap-timeline-line{left:calc(17% + 4px);right:calc(17% + 4px)}
+      .ap-rv-item{flex:0 0 clamp(280px,42vw,400px)}
     }
-    @media (max-width: 860px) {
-      .ap-hero { grid-template-columns: 1fr; height: auto; }
-      .ap-hero-visual { height: 65vw; max-height: 460px; }
-      .ap-founder { grid-template-columns: 1fr; }
-      .ap-founder-visual { height: 72vw; max-height: 480px; }
-      .ap-timeline-inner { grid-template-columns: 1fr; gap: 28px; }
-      .ap-timeline-track {
-        grid-template-columns: 1fr;
-        padding-left: 28px;
-        gap: 24px;
-      }
-      .ap-timeline-line { display: none; }
-      .ap-step {
-        flex-direction: row;
-        text-align: left;
-        align-items: flex-start;
-        gap: 18px;
-      }
-      .ap-step-dot { margin-bottom: 0; margin-top: 5px; flex-shrink: 0; }
-      .ap-step::before {
-        content: '';
-        position: absolute;
-        left: -24px;
-        top: 0;
-        bottom: -24px;
-        width: 1px;
-        background: rgba(212,184,155,.3);
-      }
+    @media(max-width:860px){
+      .ap-hero{grid-template-columns:1fr}
+      .ap-hero-text{padding:clamp(48px,8vw,72px) clamp(28px,6vw,48px) clamp(28px,5vw,40px)}
+      .ap-hero-right{border-left:none;border-top:1px solid rgba(17,17,17,.07);padding:clamp(28px,5vw,44px) clamp(28px,6vw,48px) clamp(48px,8vw,72px)}
+      .ap-hero-letter{font-size:clamp(80px,18vw,130px)}
+      .ap-founder{grid-template-columns:1fr}
+      .ap-founder-visual{height:75vw;max-height:520px}
+      .ap-timeline-inner{padding:0 clamp(20px,4vw,48px)}
+      .ap-timeline-track{grid-template-columns:1fr;padding-left:28px;gap:24px}
+      .ap-timeline-line{display:none}
+      .ap-step{flex-direction:row;text-align:left;align-items:flex-start;gap:18px}
+      .ap-step-dot{margin-bottom:0;margin-top:5px;flex-shrink:0}
+      .ap-step::before{content:'';position:absolute;left:-24px;top:0;bottom:-24px;width:1px;background:rgba(212,184,155,.3)}
+      .ap-rv-item{flex:0 0 clamp(260px,72vw,360px)}
     }
-    @media (max-width: 600px) {
-      .ap-values-grid { grid-template-columns: 1fr 1fr; }
-      .ap-values-grid .ap-val-card { aspect-ratio: 2/3; }
-      .ap-values-header { flex-direction: column; gap: 20px; align-items: flex-start; }
+    @media(max-width:600px){
+      .ap-values-grid{grid-template-columns:1fr 1fr}
+      .ap-values-grid .ap-val-card{aspect-ratio:2/3}
+      .ap-values-header{flex-direction:column;gap:20px;align-items:flex-start}
+      .ap-rv-item{flex:0 0 82vw}
     }
   </style>
   <!-- Open Graph -->
@@ -367,19 +167,18 @@
 
 <main>
 
-  <!-- ═══════════════════════════════════════
-       1. HERO — agence + grande photo PJ2
+  <!-- ═════════════════════
+       1. HERO — éditorial sans photo, logo A
   ══════════════════════════════════════════ -->
   <section class="ap-hero">
     <div class="ap-hero-text reveal">
-      <p class="eyebrow">À propos</p>
-      <h1 class="display-xl">Plus qu'un studio,<br>une vision.</h1>
-      <p class="lead">Nous créons des images qui révèlent l'essence des marques et des talents. Une approche sur mesure, où exigence esthétique et intention stratégique ne font qu'un.</p>
-      <a href="portfolio.html" class="ap-cta-link">Découvrir notre portfolio &nbsp;→</a>
+      <p class="eyebrow"><span class="ap-accent">À</span> propos</p>
+      <span class="ap-hero-name">AGENCY</span>
+      <p class="ap-hero-desc">Agency pour &laquo;&nbsp;agence&nbsp;&raquo;&nbsp;— le studio parisien qui place l’image au cœur de chaque projet.</p>
     </div>
-    <!-- PJ2 : portrait Anaïs, bijoux dorés, fond lavande -->
-    <div class="ap-hero-visual">
-      <img src="assets/AnaisDescomps_AgencyA_CM-26.jpg" alt="Agency A — Studio photographique Paris" loading="eager">
+    <div class="ap-hero-right reveal">
+      <span class="ap-hero-letter">A</span>
+      <p class="ap-hero-signature">A pour la fondatrice, Anaïs.</p>
     </div>
   </section>
 
@@ -394,28 +193,28 @@
       <div class="ap-timeline-track reveal">
         <div class="ap-timeline-line" aria-hidden="true"></div>
         <div class="ap-step">
-          <span class="ap-year">2019</span>
           <div class="ap-step-dot" aria-hidden="true"></div>
+          <span class="ap-year">2019</span>
           <p>Bac pro photographie, Lycée des Métiers Molière, Orthez.</p>
         </div>
         <div class="ap-step">
-          <span class="ap-year">2021</span>
           <div class="ap-step-dot" aria-hidden="true"></div>
+          <span class="ap-year">2021</span>
           <p>Spécialisation infographie — design, regard, post-production.</p>
         </div>
         <div class="ap-step">
-          <span class="ap-year">2022</span>
           <div class="ap-step-dot" aria-hidden="true"></div>
+          <span class="ap-year">2022</span>
           <p>Bachelor photographie à l'école MJM Graphic Design, Paris.</p>
         </div>
         <div class="ap-step">
-          <span class="ap-year">2024</span>
           <div class="ap-step-dot" aria-hidden="true"></div>
+          <span class="ap-year">2024</span>
           <p>Création d'Agency A. Premiers clients, premiers projets.</p>
         </div>
         <div class="ap-step">
-          <span class="ap-year">2025</span>
           <div class="ap-step-dot" aria-hidden="true"></div>
+          <span class="ap-year">2025</span>
           <p>Extension du réseau créatif. Déploiement des offres marque.</p>
         </div>
       </div>
@@ -437,17 +236,17 @@
       </div>
     </div>
     <div class="ap-values-grid">
-      <!-- PJ3 : architecture, vision -->
+      <!-- Anaïs en mouvement, fond lavande -->
       <div class="ap-val-card reveal">
-        <img src="assets/IMG_1353.jpg" alt="Vision — Agency A" loading="lazy">
+        <img src="assets/AnaisDescomps_AgencyA_CM-6.jpg" alt="Mouvement — Agency A" loading="lazy" style="object-position:center center">
         <div class="ap-val-label">
-          <p class="eyebrow">Exigence</p>
-          <p>Le détail<br>fait la différence.</p>
+          <p class="eyebrow">Mouvement</p>
+          <p>Chaque image<br>raconte une histoire.</p>
         </div>
       </div>
       <!-- PJ4 : macro tissu, authenticité -->
       <div class="ap-val-card reveal">
-        <img src="assets/AnaisDescomps_AgencyA_CM-13.jpg" alt="Authenticité — Agency A" loading="lazy">
+        <img src="assets/AnaisDescomps_AgencyA_CM-13.jpg" alt="Authenticité — Agency A" loading="lazy" style="object-position:30% 8%">
         <div class="ap-val-label">
           <p class="eyebrow">Authenticité</p>
           <p>Des images vraies,<br>loin des artifices.</p>
@@ -476,16 +275,16 @@
        4. FONDATRICE — portrait PJ7
   ══════════════════════════════════════════ -->
   <section class="ap-founder">
-    <!-- PJ7 : Anaïs accroupie, appareil en main -->
+    <!-- PJ3 : portrait Anaïs assise, regard côté, bijoux dorés -->
     <div class="ap-founder-visual">
-      <img src="assets/AnaisDescomps_AgencyA_CM-9.jpg" alt="Anaïs Descomps — Fondatrice Agency A" loading="lazy">
+      <img src="assets/AnaisDescomps_AgencyA_CM-39.jpg" alt="Anaïs Descomps — Fondatrice Agency A" loading="lazy" style="object-position:center 20%">
     </div>
     <div class="ap-founder-text reveal">
       <p class="eyebrow">Fondatrice</p>
       <h2>Anaïs Descomps</h2>
-      <p class="lead">Photographe et directrice artistique, Anaïs a fondé Agency A avec la volonté de créer un lieu où l'image sert une intention. Arrivée seule à Paris, sans réseau, sans contacts, elle a construit un studio qui ressemble à sa vision : exigeant, humain, premium.</p>
-      <blockquote class="ap-founder-quote">« Une belle image attire l'œil.<br>Une image juste reste en mémoire. »</blockquote>
-      <a href="portfolio.html" class="ap-cta-link">Parcours complet &nbsp;→</a>
+      <p class="lead">Photographe et directrice artistique, Anaïs a fondé Agency A avec la volonté de créer un lieu où l'image sert une intention. Arrivée seule à Paris, sans réseau, sans contacts, elle a construit un studio qui ressemble à sa vision : exigeant, humain, premium.</p>
+      <blockquote class="ap-founder-quote">« Une belle image attire l'œil.<br>Une image juste reste en mémoire. »</blockquote>
+      <a class="ap-founder-cta" href="portfolio.html">Parcours complet  →</a>
     </div>
   </section>
 
@@ -525,47 +324,83 @@
 
 <script src="js/shared.js"></script>
 
-<div class="reviews-band" aria-label="Avis clients">
+<div class="reviews-band ap-reviews" aria-label="Avis clients">
   <div class="container">
     <div class="rv-header">
       <p class="eyebrow">Ce qu'ils disent</p>
       <span class="rv-total">Avis clients vérifiés</span>
     </div>
-    <div class="rv-grid">
-      <div class="rv-card">
-        <div class="rv-stars">★ ★ ★ ★ ★</div>
-        <p class="rv-quote">« Anaïs a su me mettre à l'aise dès la première seconde. Les photos ont dépassé toutes mes attentes — mon book a changé de niveau du jour au lendemain. »</p>
-        <span class="rv-author">Elfie · Book signature</span>
+    <!-- static grid caché par CSS ap-reviews -->
+    <div class="rv-grid"></div>
+  </div>
+  <!-- Bande défilante -->
+  <div class="ap-rv-overflow">
+    <div class="ap-rv-track">
+      <!-- Set 1 -->
+      <div class="ap-rv-item">
+        <div class="ap-rv-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+        <p class="ap-rv-quote">&#171;&nbsp;Anaïs a su me mettre à l'aise dès la première seconde. Les photos ont dépassé toutes mes attentes&nbsp;— mon book a changé de niveau du jour au lendemain.&nbsp;&#187;</p>
+        <span class="ap-rv-author">Elfie &middot; Book signature</span>
       </div>
-      <div class="rv-card">
-        <div class="rv-stars">★ ★ ★ ★ ★</div>
-        <p class="rv-quote">« Les images racontent notre univers de marque mieux qu'on ne l'aurait imaginé. On les utilise sur tous nos supports depuis le lancement — elles travaillent encore pour nous. »</p>
-        <span class="rv-author">Clémence · Image de marque</span>
+      <div class="ap-rv-item">
+        <div class="ap-rv-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+        <p class="ap-rv-quote">&#171;&nbsp;Les images racontent notre univers de marque mieux qu'on ne l'aurait imaginé. On les utilise sur tous nos supports depuis le lancement.&nbsp;&#187;</p>
+        <span class="ap-rv-author">Clémence &middot; Image de marque</span>
       </div>
-      <div class="rv-card">
-        <div class="rv-stars">★ ★ ★ ★ ★</div>
-        <p class="rv-quote">« Je ne m'étais jamais sentie aussi à l'aise devant un objectif. Le résultat est exactement moi — pas une version arrangée, la vraie. »</p>
-        <span class="rv-author">Léane · Portrait personnel</span>
+      <div class="ap-rv-item">
+        <div class="ap-rv-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+        <p class="ap-rv-quote">&#171;&nbsp;Je ne m'étais jamais sentie aussi à l'aise devant un objectif. Le résultat est exactement moi&nbsp;— pas une version arrangée, la vraie.&nbsp;&#187;</p>
+        <span class="ap-rv-author">Léane &middot; Portrait personnel</span>
       </div>
-      <div class="rv-card">
-        <div class="rv-stars">★ ★ ★ ★ ★</div>
-        <p class="rv-quote">« Un regard unique, une préparation sans faille. Ce n'est pas juste une séance photo — c'est une vraie direction artistique, du brief jusqu'à la livraison. »</p>
-        <span class="rv-author">Céline · Éditorial mode</span>
+      <div class="ap-rv-item">
+        <div class="ap-rv-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+        <p class="ap-rv-quote">&#171;&nbsp;Un regard unique, une préparation sans faille. Ce n'est pas juste une séance photo&nbsp;— c'est une vraie direction artistique, du brief jusqu'à la livraison.&nbsp;&#187;</p>
+        <span class="ap-rv-author">Céline &middot; Éditorial mode</span>
       </div>
-      <div class="rv-card">
-        <div class="rv-stars">★ ★ ★ ★ ★</div>
-        <p class="rv-quote">« Professionnelle, attentive, créative. Agency A a transformé notre communication visuelle en une seule séance. Je recommande les yeux fermés. »</p>
-        <span class="rv-author">Lucie · Campagne produit</span>
+      <div class="ap-rv-item">
+        <div class="ap-rv-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+        <p class="ap-rv-quote">&#171;&nbsp;Professionnelle, attentive, créative. Agency A a transformé notre communication visuelle en une seule séance. Je recommande les yeux fermés.&nbsp;&#187;</p>
+        <span class="ap-rv-author">Lucie &middot; Campagne produit</span>
       </div>
-      <div class="rv-card">
-        <div class="rv-stars">★ ★ ★ ★ ★</div>
-        <p class="rv-quote">« Une expérience premium de bout en bout. Anaïs écoute vraiment avant de cadrer — et ça change absolument tout au résultat final. »</p>
-        <span class="rv-author">Jade · Shooting marque</span>
+      <div class="ap-rv-item">
+        <div class="ap-rv-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+        <p class="ap-rv-quote">&#171;&nbsp;Une expérience premium de bout en bout. Anaïs écoute vraiment avant de cadrer&nbsp;— et ça change absolument tout au résultat final.&nbsp;&#187;</p>
+        <span class="ap-rv-author">Jade &middot; Shooting marque</span>
+      </div>
+      <!-- Set 2 — copie exacte pour boucle infinie -->
+      <div class="ap-rv-item">
+        <div class="ap-rv-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+        <p class="ap-rv-quote">&#171;&nbsp;Anaïs a su me mettre à l'aise dès la première seconde. Les photos ont dépassé toutes mes attentes&nbsp;— mon book a changé de niveau du jour au lendemain.&nbsp;&#187;</p>
+        <span class="ap-rv-author">Elfie &middot; Book signature</span>
+      </div>
+      <div class="ap-rv-item">
+        <div class="ap-rv-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+        <p class="ap-rv-quote">&#171;&nbsp;Les images racontent notre univers de marque mieux qu'on ne l'aurait imaginé. On les utilise sur tous nos supports depuis le lancement.&nbsp;&#187;</p>
+        <span class="ap-rv-author">Clémence &middot; Image de marque</span>
+      </div>
+      <div class="ap-rv-item">
+        <div class="ap-rv-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+        <p class="ap-rv-quote">&#171;&nbsp;Je ne m'étais jamais sentie aussi à l'aise devant un objectif. Le résultat est exactement moi&nbsp;— pas une version arrangée, la vraie.&nbsp;&#187;</p>
+        <span class="ap-rv-author">Léane &middot; Portrait personnel</span>
+      </div>
+      <div class="ap-rv-item">
+        <div class="ap-rv-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+        <p class="ap-rv-quote">&#171;&nbsp;Un regard unique, une préparation sans faille. Ce n'est pas juste une séance photo&nbsp;— c'est une vraie direction artistique, du brief jusqu'à la livraison.&nbsp;&#187;</p>
+        <span class="ap-rv-author">Céline &middot; Éditorial mode</span>
+      </div>
+      <div class="ap-rv-item">
+        <div class="ap-rv-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+        <p class="ap-rv-quote">&#171;&nbsp;Professionnelle, attentive, créative. Agency A a transformé notre communication visuelle en une seule séance. Je recommande les yeux fermés.&nbsp;&#187;</p>
+        <span class="ap-rv-author">Lucie &middot; Campagne produit</span>
+      </div>
+      <div class="ap-rv-item">
+        <div class="ap-rv-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+        <p class="ap-rv-quote">&#171;&nbsp;Une expérience premium de bout en bout. Anaïs écoute vraiment avant de cadrer&nbsp;— et ça change absolument tout au résultat final.&nbsp;&#187;</p>
+        <span class="ap-rv-author">Jade &middot; Shooting marque</span>
       </div>
     </div>
   </div>
-</div></div>
-
+</div>
 <div class="marquee-band" aria-hidden="true">
   <div class="marquee-track">
     <span>Mode</span><span class="marquee-sep">·</span><span>Produit</span><span class="marquee-sep">·</span><span>Beauté</span><span class="marquee-sep">·</span><span>Culinaire</span><span class="marquee-sep">·</span><span>Éditorial</span><span class="marquee-sep">·</span><span>Sport</span><span class="marquee-sep">·</span><span>Mode</span><span class="marquee-sep">·</span><span>Produit</span><span class="marquee-sep">·</span><span>Beauté</span><span class="marquee-sep">·</span><span>Culinaire</span><span class="marquee-sep">·</span><span>Éditorial</span><span class="marquee-sep">·</span><span>Sport</span><span class="marquee-sep">·</span>
