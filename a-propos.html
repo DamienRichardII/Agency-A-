@@ -62,6 +62,9 @@
     .ap-founder-text h2{font-family:var(--display);font-size:clamp(30px,3.5vw,52px);font-weight:400;color:#fff;margin:0 0 28px;line-height:1.1}
     .ap-founder-text .lead{font-size:18px;color:rgba(255,255,255,.85);line-height:1.9;margin-bottom:18px;max-width:460px}
     .ap-founder-quote{font-family:var(--display);font-style:italic;font-size:clamp(17px,1.8vw,23px);color:rgba(255,255,255,.9);line-height:1.5;margin:28px 0 32px;padding-left:20px;border-left:2px solid rgba(255,255,255,.4)}
+    .ap-fd-qr{margin:0 0 clamp(24px,3vw,36px);min-height:clamp(100px,12vh,160px);display:flex;flex-direction:column;justify-content:center}
+    .ap-fd-question{font-family:var(--body);font-size:11px;text-transform:uppercase;letter-spacing:.2em;color:rgba(17,17,17,.55);margin:0 0 16px;transition:opacity .9s ease;opacity:0}
+    .ap-fd-answer{font-family:var(--display);font-style:italic;font-size:clamp(17px,1.9vw,26px);color:var(--ink);line-height:1.55;margin:0;transition:opacity .9s ease;opacity:0}
     .ap-founder-cta{display:inline-flex;align-items:center;gap:10px;font-family:var(--body);font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.5);padding-bottom:3px;align-self:flex-start;transition:opacity .2s}
     .ap-founder-cta:hover{opacity:.65}
 
@@ -254,8 +257,10 @@
     <div class="ap-founder-text reveal">
       <p class="eyebrow">Fondatrice</p>
       <h2>Anaïs Descomps</h2>
-      <p class="lead">Photographe et directrice artistique, Anaïs a fondé Agency A avec la volonté de créer un lieu où l'image sert une intention. Arrivée seule à Paris, sans réseau, sans contacts, elle a construit un studio qui ressemble à sa vision : exigeant, humain, premium.</p>
-      <blockquote class="ap-founder-quote">« Une belle image attire l'œil.<br>Une image juste reste en mémoire. »</blockquote>
+      <div class="ap-fd-qr">
+        <p class="ap-fd-question" id="fdQrQ"></p>
+        <p class="ap-fd-answer" id="fdQrA"></p>
+      </div>
       <a class="ap-founder-cta" href="parcours.html">Parcours complet  →</a>
     </div>
   </section>
@@ -358,6 +363,31 @@
   }
   run();
 })();
+
+  /* ── Q/R fondatrice ── */
+  (function(){
+    var pairs=[
+      ['Comment tu te décrirais en 3 mots ?','Investie, déterminée, sensible, à l’écoute, passionée.'],
+      ['Ce qui te différencie des autres photographes ?','Mon travail c’est un échange — savoir ce que veut le client, ce qu’il aime. À partir de là, mettre mon identité et créer ensemble quelque chose qui nous ressemble.'],
+      ['Comment tu mets les gens à l’aise ?','Je prends le temps, j’écoute beaucoup. Durant le shooting, il y a toujours une conversation.'],
+      ['Ce qu’une photo réussie doit provoquer ?','De l’émotion, du naturel, de la nouveauté, du luxe.'],
+      ['Tu t’inspires de qui ou de quoi ?','De tout — les films, les balades, les réseaux, les expositions. Et je vais souvent à l’inverse des choses.']
+    ];
+    var j=0;
+    var qEl=document.getElementById('fdQrQ');
+    var aEl=document.getElementById('fdQrA');
+    if(!qEl||!aEl)return;
+    function runFd(){
+      var p=pairs[j%pairs.length];
+      qEl.style.opacity='0';aEl.style.opacity='0';
+      setTimeout(function(){qEl.textContent=p[0];aEl.textContent=p[1];},150);
+      setTimeout(function(){qEl.style.opacity='1';},300);
+      setTimeout(function(){aEl.style.opacity='1';},1900);
+      setTimeout(function(){qEl.style.opacity='0';aEl.style.opacity='0';},5800);
+      setTimeout(function(){j++;runFd();},7200);
+    }
+    runFd();
+  })();
 </script>
 
 <div class="reviews-band ap-reviews" aria-label="Avis clients">
