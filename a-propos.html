@@ -64,9 +64,9 @@
     .ap-founder-text h2{font-family:var(--display);font-size:clamp(30px,3.5vw,52px);font-weight:400;color:#fff;margin:0 0 28px;line-height:1.1}
     .ap-founder-text .lead{font-size:18px;color:rgba(255,255,255,.85);line-height:1.9;margin-bottom:18px;max-width:460px}
     .ap-founder-quote{font-family:var(--display);font-style:italic;font-size:clamp(17px,1.8vw,23px);color:rgba(255,255,255,.9);line-height:1.5;margin:28px 0 32px;padding-left:20px;border-left:2px solid rgba(255,255,255,.4)}
-    .ap-fd-qr{margin:0 0 clamp(24px,3vw,36px);min-height:clamp(100px,12vh,160px);display:flex;flex-direction:column;justify-content:center}
-    .ap-fd-question{font-family:var(--body);font-size:12px;text-transform:uppercase;letter-spacing:.2em;color:rgba(255,255,255,.75);margin:0 0 18px;transition:opacity .9s ease;opacity:0}
-    .ap-fd-answer{font-family:var(--display);font-style:italic;font-size:clamp(22px,2.6vw,36px);color:#fff;line-height:1.5;margin:0;transition:opacity .9s ease;opacity:0}
+    .ap-fd-static{display:flex;flex-direction:column;gap:22px;margin:0 0 clamp(24px,3vw,36px)}
+    .ap-fd-static-q{font-family:var(--body);font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:rgba(255,255,255,.55);margin:0 0 8px}
+    .ap-fd-static-a{font-family:var(--display);font-style:italic;font-size:clamp(15px,1.5vw,19px);color:rgba(255,255,255,.92);line-height:1.6;margin:0}
     .ap-founder-cta{display:inline-flex;align-items:center;gap:10px;font-family:var(--body);font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.5);padding-bottom:3px;align-self:flex-start;transition:opacity .2s}
     .ap-founder-cta:hover{opacity:.65}
 
@@ -87,12 +87,6 @@
     .ap-rv-quote{font-family:var(--display);font-size:clamp(17px,1.7vw,22px);font-style:italic;font-weight:300;color:var(--cream);line-height:1.65;margin:0;flex:1}
     .ap-rv-author{font-family:var(--body);font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:rgba(212,184,155,.6);border-top:1px solid rgba(212,184,155,.12);padding-top:16px;margin-top:auto}
 
-
-    /* ── Q/R ANIMATION ── */
-    .ap-qr{background:var(--ink);padding:clamp(56px,8vw,100px) clamp(32px,5vw,80px);display:flex;align-items:center;justify-content:center;min-height:clamp(200px,24vh,280px)}
-    .ap-qr-inner{max-width:680px;text-align:center}
-    .ap-qr-question{font-family:var(--body);font-size:11px;text-transform:uppercase;letter-spacing:.2em;color:var(--sand);margin:0 0 22px;transition:opacity .9s ease;opacity:0}
-    .ap-qr-answer{font-family:var(--display);font-style:italic;font-size:clamp(20px,2.4vw,32px);color:var(--cream);line-height:1.55;margin:0;transition:opacity .9s ease;opacity:0}
 
     /* ── RESPONSIVE ── */
     @media(max-width:1024px){
@@ -183,23 +177,15 @@
     <div class="ap-hero-text reveal">
       <p class="eyebrow"><span class="ap-accent">À</span> propos</p>
       <span class="ap-hero-name">AGENCY</span>
-      <p class="ap-hero-desc">Agency pour &laquo;&nbsp;agence&nbsp;&raquo;&nbsp;— le studio parisien qui place l’image au cœur de chaque projet.</p>
+      <p class="ap-hero-desc">Un studio parisien pour l’image, les talents et la direction artistique. Offrir des opportunités, faciliter la gestion, libérer la création.</p>
     </div>
     <div class="ap-hero-right reveal">
       <img src="assets/logo/logo-icon-square.png" class="ap-hero-logo-img" alt="" aria-hidden="true" role="presentation">
-      <p class="ap-hero-signature">A pour la fondatrice, Anaïs.<br>A pour la première lettre de l’alphabet.</p>
+      <p class="ap-hero-signature">A pour la fondatrice, Anaïs.<br>A pour la première lettre de l’alphabet — là où tout commence.</p>
     </div>
   </section>
 
-  <!-- ═════════════════════
-       2. ANIMATION Q/R
-  ══════════════════════ -->
-  <section class="ap-qr" aria-label="Agency A en questions">
-    <div class="ap-qr-inner">
-      <p class="ap-qr-question" id="apQrQ"></p>
-      <p class="ap-qr-answer" id="apQrA"></p>
-    </div>
-  </section>
+
 
   <!-- ═══════════════════════════════════════
        3. VALEURS — 4 VISUELS
@@ -259,18 +245,32 @@
     <div class="ap-founder-text reveal">
       <p class="eyebrow">Fondatrice</p>
       <h2>Anaïs Descomps</h2>
-      <div class="ap-fd-qr">
-        <p class="ap-fd-question" id="fdQrQ"></p>
-        <p class="ap-fd-answer" id="fdQrA"></p>
+      <div class="ap-fd-static">
+        <div>
+          <p class="ap-fd-static-q">La photographie dans ma vie</p>
+          <p class="ap-fd-static-a">« Au collège, on m’a proposé de couvrir un tournoi de basket. J’ai dit oui. À la fin de l’année, l’établissement a exposé mes photos — j’avais des étoiles plein les yeux. »</p>
+        </div>
+        <div>
+          <p class="ap-fd-static-q">Ce qui me différencie</p>
+          <p class="ap-fd-static-a">« Mon travail, c’est un échange. Savoir ce que veut le client, ce qu’il aime — puis y mettre mon identité et créer ensemble quelque chose qui nous ressemble. »</p>
+        </div>
+        <div>
+          <p class="ap-fd-static-q">Mon rapport aux sujets</p>
+          <p class="ap-fd-static-a">« Je prends le temps, j’écoute beaucoup. Durant chaque shooting, il y a toujours une conversation. »</p>
+        </div>
+        <div>
+          <p class="ap-fd-static-q">Ce qu’une photo réussie doit provoquer</p>
+          <p class="ap-fd-static-a">« De l’émotion, du naturel, de la nouveauté, du luxe. »</p>
+        </div>
       </div>
-      <a class="ap-founder-cta" href="parcours.html">Parcours complet  →</a>
+      <a class="ap-founder-cta" href="#ap-frise">Parcours complet  →</a>
     </div>
   </section>
 
   <!-- ═══════════════════════════════════════
        5. FRISE CHRONOLOGIQUE
   ══════════════════════════════════════════ -->
-  <section class="ap-timeline">
+  <section class="ap-timeline" id="ap-frise">
     <div class="ap-timeline-inner">
       <div class="ap-timeline-label reveal">
         <p class="eyebrow">Notre histoire</p>
@@ -341,56 +341,7 @@
 </main>
 
 <script src="js/shared.js"></script>
-<script>
-(function(){
-  var pairs=[
-    ['Pourquoi « Agency A » ?','Agency pour agence — l’ambition de devenir le studio incontournable de la photographie. A pour Anaïs, et pour la première lettre de l’alphabet, là où tout commence.'],
-    ['Quelle est la vision derrière le studio ?','Avoir tout à portée de main : des opportunités, une équipe, une direction artistique. Tout ce qu’on aurait aimé trouver en arrivant seule à Paris.'],
-    ['La promesse d’Agency A en une phrase ?','Offrir des opportunités. Faciliter la gestion. Libérer la création.'],
-    ['Quelles valeurs associe-t-on à Agency A ?','Confiance et sérénité. Toujours.'],
-    ['Dans 5 ans, Agency A c’est quoi ?','L’agence que l’on appelle pour la mode, les événements sportifs, les mariages — et les grandes soirées : Cannes, les Flammes, les Césars.']
-  ];
-  var i=0;
-  var qEl=document.getElementById('apQrQ');
-  var aEl=document.getElementById('apQrA');
-  if(!qEl||!aEl)return;
-  function run(){
-    var p=pairs[i%pairs.length];
-    qEl.style.opacity='0';aEl.style.opacity='0';
-    setTimeout(function(){qEl.textContent=p[0];aEl.textContent=p[1];},150);
-    setTimeout(function(){qEl.style.opacity='1';},300);
-    setTimeout(function(){aEl.style.opacity='1';},1900);
-    setTimeout(function(){qEl.style.opacity='0';aEl.style.opacity='0';},5800);
-    setTimeout(function(){i++;run();},7200);
-  }
-  run();
-})();
 
-  /* ── Q/R fondatrice ── */
-  (function(){
-    var pairs=[
-      ['Comment tu te décrirais en 3 mots ?','Investie, déterminée, sensible, à l’écoute, passionée.'],
-      ['Ce qui te différencie des autres photographes ?','Mon travail c’est un échange — savoir ce que veut le client, ce qu’il aime. À partir de là, mettre mon identité et créer ensemble quelque chose qui nous ressemble.'],
-      ['Comment tu mets les gens à l’aise ?','Je prends le temps, j’écoute beaucoup. Durant le shooting, il y a toujours une conversation.'],
-      ['Ce qu’une photo réussie doit provoquer ?','De l’émotion, du naturel, de la nouveauté, du luxe.'],
-      ['Tu t’inspires de qui ou de quoi ?','De tout — les films, les balades, les réseaux, les expositions. Et je vais souvent à l’inverse des choses.']
-    ];
-    var j=0;
-    var qEl=document.getElementById('fdQrQ');
-    var aEl=document.getElementById('fdQrA');
-    if(!qEl||!aEl)return;
-    function runFd(){
-      var p=pairs[j%pairs.length];
-      qEl.style.opacity='0';aEl.style.opacity='0';
-      setTimeout(function(){qEl.textContent=p[0];aEl.textContent=p[1];},150);
-      setTimeout(function(){qEl.style.opacity='1';},300);
-      setTimeout(function(){aEl.style.opacity='1';},1900);
-      setTimeout(function(){qEl.style.opacity='0';aEl.style.opacity='0';},5800);
-      setTimeout(function(){j++;runFd();},7200);
-    }
-    runFd();
-  })();
-</script>
 
 <div class="reviews-band ap-reviews" aria-label="Avis clients">
   <div class="container">
