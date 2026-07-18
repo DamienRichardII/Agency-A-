@@ -20,14 +20,14 @@
 
     .ap-accent{color:#bf7d4f}
 
-    /* ── HERO éditorial — 2 colonnes, sans photo ── */
-    .ap-hero{display:grid;grid-template-columns:52fr 48fr;min-height:clamp(440px,60vh,700px);background:var(--cream)}
-    .ap-hero-text{display:flex;flex-direction:column;justify-content:center;padding:clamp(60px,7vw,100px) clamp(28px,3.5vw,56px) clamp(60px,7vw,100px) clamp(40px,7vw,120px)}
-    .ap-hero-right{display:flex;flex-direction:column;justify-content:center;padding:clamp(60px,7vw,100px) clamp(40px,7vw,100px) clamp(60px,7vw,100px) clamp(28px,3.5vw,56px);border-left:1px solid rgba(17,17,17,.07)}
+    /* ── HERO éditorial — 2 colonnes recentrées, sans photo ── */
+    .ap-hero{display:grid;grid-template-columns:1fr 1fr;min-height:clamp(400px,52vh,620px);background:var(--cream)}
+    .ap-hero-text{display:flex;flex-direction:column;justify-content:center;padding:clamp(48px,5vw,80px) clamp(24px,3vw,44px) clamp(48px,5vw,80px) clamp(32px,5vw,72px)}
+    .ap-hero-right{display:flex;flex-direction:column;justify-content:center;padding:clamp(48px,5vw,80px) clamp(32px,5vw,72px) clamp(48px,5vw,80px) clamp(24px,3vw,44px);border-left:1px solid rgba(17,17,17,.07)}
     .ap-hero-name{font-family:var(--display);font-size:clamp(52px,6.5vw,96px);font-weight:300;letter-spacing:-.02em;color:var(--ink);line-height:.88;display:block;margin:24px 0 20px}
-    .ap-hero-desc{font-family:var(--body);font-size:14px;color:var(--muted);letter-spacing:.02em;line-height:1.85;max-width:360px;margin:0}
-    .ap-hero-letter{font-family:var(--display);font-size:clamp(110px,13vw,190px);font-weight:300;letter-spacing:-.04em;color:var(--ink);line-height:.85;display:block;margin-bottom:clamp(20px,2.5vw,36px)}
-    .ap-hero-signature{font-family:var(--body);font-size:11px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;line-height:1.7;margin:0}
+    .ap-hero-desc{font-family:var(--body);font-size:16px;color:var(--muted);letter-spacing:.02em;line-height:1.85;max-width:360px;margin:0}
+    .ap-hero-logo-img{width:clamp(90px,12vw,160px);display:block;filter:invert(1);margin-bottom:clamp(20px,2.5vw,32px)}
+    .ap-hero-signature{font-family:var(--body);font-size:12px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;line-height:1.85;margin:0}
 
     /* ── TIMELINE pleine largeur — frise équilibrée ── */
     .ap-timeline{padding:clamp(48px,6vw,80px) 0;background:var(--cream);border-top:1px solid var(--beige)}
@@ -38,23 +38,20 @@
     .ap-step{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 clamp(8px,1.5vw,24px);position:relative}
     .ap-step-dot{width:10px;height:10px;border-radius:50%;background:var(--sand);border:2px solid var(--cream);box-shadow:0 0 0 1px var(--sand);margin-bottom:20px;position:relative;z-index:1;flex-shrink:0}
     .ap-year{font-family:var(--display);font-size:clamp(24px,2.8vw,38px);font-weight:400;color:var(--ink);line-height:1;margin-bottom:12px;display:block}
-    .ap-step p{font-size:14px;line-height:1.75;color:var(--muted);margin:0}
+    .ap-step p{font-size:16px;line-height:1.8;color:var(--muted);margin:0}
 
     /* ── VALEURS ── */
     .ap-values{background:var(--ink)}
-    .ap-values-header{padding:clamp(52px,7vw,80px) clamp(32px,5vw,80px) clamp(36px,5vw,56px);display:flex;align-items:flex-end;gap:clamp(40px,6vw,100px);flex-wrap:wrap}
-    .ap-values-header-left{flex:0 0 auto}
+    .ap-values-header{padding:clamp(52px,7vw,80px) clamp(32px,5vw,80px) clamp(36px,5vw,56px);display:flex;justify-content:center;text-align:center}
     .ap-values-header-left .eyebrow{color:var(--sand);margin-bottom:14px}
-    .ap-values-title{font-family:var(--display);font-size:clamp(28px,3.8vw,52px);font-weight:400;font-style:italic;color:var(--cream);line-height:1.15;margin:0}
-    .ap-values-lead{flex:1;min-width:220px}
-    .ap-values-lead p{font-size:15px;line-height:1.85;color:rgba(248,242,234,.55);margin:0 0 22px}
+    .ap-values-title{font-family:var(--display);font-size:clamp(32px,4.5vw,62px);font-weight:400;font-style:italic;color:var(--cream);line-height:1.1;margin:0}
     .ap-values-grid{display:grid;grid-template-columns:repeat(4,1fr)}
     .ap-val-card{position:relative;aspect-ratio:3/4;overflow:hidden}
     .ap-val-card img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .75s ease;filter:brightness(.65)}
     .ap-val-card:hover img{transform:scale(1.04);filter:brightness(.72)}
     .ap-val-label{position:absolute;bottom:0;left:0;right:0;padding:30px 22px 24px;background:linear-gradient(to top,rgba(11,9,7,.8) 0%,rgba(11,9,7,.3) 60%,transparent 100%)}
     .ap-val-label .eyebrow{color:var(--sand);margin-bottom:8px;font-size:9px;letter-spacing:.2em}
-    .ap-val-label p{font-family:var(--display);font-style:italic;font-size:clamp(15px,1.6vw,20px);color:var(--cream);line-height:1.35;margin:0}
+    .ap-val-label p{font-family:var(--display);font-style:italic;font-size:clamp(17px,1.8vw,22px);color:var(--cream);line-height:1.35;margin:0}
 
     /* ── FONDATRICE fond bleu total ── */
     .ap-founder{display:grid;grid-template-columns:1fr 1fr;min-height:80vh;background:#b5bee0}
@@ -63,7 +60,7 @@
     .ap-founder-text{display:flex;flex-direction:column;justify-content:center;padding:clamp(52px,7vw,100px) clamp(36px,5vw,80px);background:#b5bee0}
     .ap-founder-text .eyebrow{margin-bottom:14px;color:rgba(255,255,255,.7)}
     .ap-founder-text h2{font-family:var(--display);font-size:clamp(30px,3.5vw,52px);font-weight:400;color:#fff;margin:0 0 28px;line-height:1.1}
-    .ap-founder-text .lead{font-size:16px;color:rgba(255,255,255,.85);line-height:1.9;margin-bottom:18px;max-width:460px}
+    .ap-founder-text .lead{font-size:18px;color:rgba(255,255,255,.85);line-height:1.9;margin-bottom:18px;max-width:460px}
     .ap-founder-quote{font-family:var(--display);font-style:italic;font-size:clamp(17px,1.8vw,23px);color:rgba(255,255,255,.9);line-height:1.5;margin:28px 0 32px;padding-left:20px;border-left:2px solid rgba(255,255,255,.4)}
     .ap-founder-cta{display:inline-flex;align-items:center;gap:10px;font-family:var(--body);font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.5);padding-bottom:3px;align-self:flex-start;transition:opacity .2s}
     .ap-founder-cta:hover{opacity:.65}
@@ -85,6 +82,13 @@
     .ap-rv-quote{font-family:var(--display);font-size:clamp(17px,1.7vw,22px);font-style:italic;font-weight:300;color:var(--cream);line-height:1.65;margin:0;flex:1}
     .ap-rv-author{font-family:var(--body);font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:rgba(212,184,155,.6);border-top:1px solid rgba(212,184,155,.12);padding-top:16px;margin-top:auto}
 
+
+    /* ── Q/R ANIMATION ── */
+    .ap-qr{background:var(--ink);padding:clamp(56px,8vw,100px) clamp(32px,5vw,80px);display:flex;align-items:center;justify-content:center;min-height:clamp(200px,24vh,280px)}
+    .ap-qr-inner{max-width:680px;text-align:center}
+    .ap-qr-question{font-family:var(--body);font-size:11px;text-transform:uppercase;letter-spacing:.2em;color:var(--sand);margin:0 0 22px;transition:opacity .9s ease;opacity:0}
+    .ap-qr-answer{font-family:var(--display);font-style:italic;font-size:clamp(20px,2.4vw,32px);color:var(--cream);line-height:1.55;margin:0;transition:opacity .9s ease;opacity:0}
+
     /* ── RESPONSIVE ── */
     @media(max-width:1024px){
       .ap-values-grid{grid-template-columns:repeat(2,1fr)}
@@ -95,9 +99,9 @@
     }
     @media(max-width:860px){
       .ap-hero{grid-template-columns:1fr}
-      .ap-hero-text{padding:clamp(48px,8vw,72px) clamp(28px,6vw,48px) clamp(28px,5vw,40px)}
-      .ap-hero-right{border-left:none;border-top:1px solid rgba(17,17,17,.07);padding:clamp(28px,5vw,44px) clamp(28px,6vw,48px) clamp(48px,8vw,72px)}
-      .ap-hero-letter{font-size:clamp(80px,18vw,130px)}
+      .ap-hero-text{padding:clamp(40px,7vw,64px) clamp(24px,5vw,44px) clamp(24px,4vw,36px)}
+      .ap-hero-right{border-left:none;border-top:1px solid rgba(17,17,17,.07);padding:clamp(24px,4vw,40px) clamp(24px,5vw,44px) clamp(40px,7vw,64px)}
+      .ap-hero-logo-img{width:clamp(72px,16vw,110px)}
       .ap-founder{grid-template-columns:1fr}
       .ap-founder-visual{height:75vw;max-height:520px}
       .ap-timeline-inner{padding:0 clamp(20px,4vw,48px)}
@@ -177,13 +181,87 @@
       <p class="ap-hero-desc">Agency pour &laquo;&nbsp;agence&nbsp;&raquo;&nbsp;— le studio parisien qui place l’image au cœur de chaque projet.</p>
     </div>
     <div class="ap-hero-right reveal">
-      <span class="ap-hero-letter">A</span>
-      <p class="ap-hero-signature">A pour la fondatrice, Anaïs.</p>
+      <img src="assets/logo/logo-icon-square.png" class="ap-hero-logo-img" alt="" aria-hidden="true" role="presentation">
+      <p class="ap-hero-signature">A pour la fondatrice, Anaïs.<br>A pour la première lettre de l’alphabet.</p>
+    </div>
+  </section>
+
+  <!-- ═════════════════════
+       2. ANIMATION Q/R
+  ══════════════════════ -->
+  <section class="ap-qr" aria-label="Agency A en questions">
+    <div class="ap-qr-inner">
+      <p class="ap-qr-question" id="apQrQ"></p>
+      <p class="ap-qr-answer" id="apQrA"></p>
     </div>
   </section>
 
   <!-- ═══════════════════════════════════════
-       2. FRISE CHRONOLOGIQUE
+       3. VALEURS — 4 VISUELS
+  ══════════════════════════════════════════ -->
+  <section class="ap-values">
+    <div class="ap-values-header reveal">
+      <div class="ap-values-header-left">
+        <p class="eyebrow">Nos valeurs</p>
+        <h2 class="ap-values-title">L'exigence guide<br>chaque image.</h2>
+      </div>
+
+    </div>
+    <div class="ap-values-grid">
+      <!-- CM-16 : portrait Anaïs — Confiance -->
+      <div class="ap-val-card reveal">
+        <img src="assets/AnaisDescomps_AgencyA_CM-16.jpg" alt="Confiance — Agency A" loading="lazy" style="object-position:center 12%">
+        <div class="ap-val-label">
+          <p class="eyebrow">Confiance</p>
+          <p>Des relations durables,<br>fondées sur l'écoute.</p>
+        </div>
+      </div>
+      <!-- PJ4 : macro tissu, authenticité -->
+      <div class="ap-val-card reveal">
+        <img src="assets/AnaisDescomps_AgencyA_CM-13.jpg" alt="Authenticité — Agency A" loading="lazy" style="object-position:30% 8%">
+        <div class="ap-val-label">
+          <p class="eyebrow">Authenticité</p>
+          <p>Des images vraies,<br>loin des artifices.</p>
+        </div>
+      </div>
+      <!-- PJ5 : iPhone Instagram, présence digitale -->
+      <div class="ap-val-card reveal">
+        <img src="assets/AnaisDescomps_AgencyA_CM-3.jpg" alt="Présence digitale — Agency A" loading="lazy">
+        <div class="ap-val-label">
+          <p class="eyebrow">Présence</p>
+          <p>L'identité<br>au bout des doigts.</p>
+        </div>
+      </div>
+      <!-- CM-6 : Anaïs en mouvement — Mouvement -->
+      <div class="ap-val-card reveal">
+        <img src="assets/AnaisDescomps_AgencyA_CM-6.jpg" alt="Mouvement — Agency A" loading="lazy" style="object-position:center center">
+        <div class="ap-val-label">
+          <p class="eyebrow">Mouvement</p>
+          <p>Chaque image<br>raconte une histoire.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       4. FONDATRICE
+  ══════════════════════════════════════════ -->
+  <section class="ap-founder">
+    <!-- PJ3 : portrait Anaïs assise, regard côté, bijoux dorés -->
+    <div class="ap-founder-visual">
+      <img src="assets/AnaisDescomps_AgencyA_CM-39.jpg" alt="Anaïs Descomps — Fondatrice Agency A" loading="lazy" style="object-position:center 20%">
+    </div>
+    <div class="ap-founder-text reveal">
+      <p class="eyebrow">Fondatrice</p>
+      <h2>Anaïs Descomps</h2>
+      <p class="lead">Photographe et directrice artistique, Anaïs a fondé Agency A avec la volonté de créer un lieu où l'image sert une intention. Arrivée seule à Paris, sans réseau, sans contacts, elle a construit un studio qui ressemble à sa vision : exigeant, humain, premium.</p>
+      <blockquote class="ap-founder-quote">« Une belle image attire l'œil.<br>Une image juste reste en mémoire. »</blockquote>
+      <a class="ap-founder-cta" href="parcours.html">Parcours complet  →</a>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       5. FRISE CHRONOLOGIQUE
   ══════════════════════════════════════════ -->
   <section class="ap-timeline">
     <div class="ap-timeline-inner">
@@ -195,7 +273,7 @@
         <div class="ap-step">
           <div class="ap-step-dot" aria-hidden="true"></div>
           <span class="ap-year">2019</span>
-          <p>Bac pro photographie, Lycée des Métiers Molière, Orthez.</p>
+          <p>Bac pro photographie, Lycée des Métiers Molière, Orthez. Meilleur apprenti de France — MAF.</p>
         </div>
         <div class="ap-step">
           <div class="ap-step-dot" aria-hidden="true"></div>
@@ -222,74 +300,7 @@
   </section>
 
   <!-- ═══════════════════════════════════════
-       3. VALEURS — 4 VISUELS (PJ3 à PJ6)
-  ══════════════════════════════════════════ -->
-  <section class="ap-values">
-    <div class="ap-values-header reveal">
-      <div class="ap-values-header-left">
-        <p class="eyebrow">Nos valeurs</p>
-        <h2 class="ap-values-title">L'exigence guide<br>chaque image.</h2>
-      </div>
-      <div class="ap-values-lead">
-        <p>Chaque projet naît d'une conviction : une image doit provoquer quelque chose. De l'émotion, de la reconnaissance, du désir. Agency A construit ses images à partir de cette exigence.</p>
-        <a href="portfolio.html" class="ap-cta-link" style="color:var(--cream);border-color:rgba(248,242,234,.35)">En savoir plus &nbsp;→</a>
-      </div>
-    </div>
-    <div class="ap-values-grid">
-      <!-- Anaïs en mouvement, fond lavande -->
-      <div class="ap-val-card reveal">
-        <img src="assets/AnaisDescomps_AgencyA_CM-6.jpg" alt="Mouvement — Agency A" loading="lazy" style="object-position:center center">
-        <div class="ap-val-label">
-          <p class="eyebrow">Mouvement</p>
-          <p>Chaque image<br>raconte une histoire.</p>
-        </div>
-      </div>
-      <!-- PJ4 : macro tissu, authenticité -->
-      <div class="ap-val-card reveal">
-        <img src="assets/AnaisDescomps_AgencyA_CM-13.jpg" alt="Authenticité — Agency A" loading="lazy" style="object-position:30% 8%">
-        <div class="ap-val-label">
-          <p class="eyebrow">Authenticité</p>
-          <p>Des images vraies,<br>loin des artifices.</p>
-        </div>
-      </div>
-      <!-- PJ5 : iPhone Instagram, présence digitale -->
-      <div class="ap-val-card reveal">
-        <img src="assets/AnaisDescomps_AgencyA_CM-3.jpg" alt="Présence digitale — Agency A" loading="lazy">
-        <div class="ap-val-label">
-          <p class="eyebrow">Présence</p>
-          <p>L'identité<br>au bout des doigts.</p>
-        </div>
-      </div>
-      <!-- PJ6 : MacBook/créativité -->
-      <div class="ap-val-card reveal">
-        <img src="assets/IMG_9310.jpg" alt="Confiance — Agency A" loading="lazy">
-        <div class="ap-val-label">
-          <p class="eyebrow">Confiance</p>
-          <p>Des relations durables,<br>fondées sur l'écoute.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════
-       4. FONDATRICE — portrait PJ7
-  ══════════════════════════════════════════ -->
-  <section class="ap-founder">
-    <!-- PJ3 : portrait Anaïs assise, regard côté, bijoux dorés -->
-    <div class="ap-founder-visual">
-      <img src="assets/AnaisDescomps_AgencyA_CM-39.jpg" alt="Anaïs Descomps — Fondatrice Agency A" loading="lazy" style="object-position:center 20%">
-    </div>
-    <div class="ap-founder-text reveal">
-      <p class="eyebrow">Fondatrice</p>
-      <h2>Anaïs Descomps</h2>
-      <p class="lead">Photographe et directrice artistique, Anaïs a fondé Agency A avec la volonté de créer un lieu où l'image sert une intention. Arrivée seule à Paris, sans réseau, sans contacts, elle a construit un studio qui ressemble à sa vision : exigeant, humain, premium.</p>
-      <blockquote class="ap-founder-quote">« Une belle image attire l'œil.<br>Une image juste reste en mémoire. »</blockquote>
-      <a class="ap-founder-cta" href="portfolio.html">Parcours complet  →</a>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════
-       5. CE QUE VOUS POUVEZ ATTENDRE
+       6. CE QUE VOUS POUVEZ ATTENDRE
   ══════════════════════════════════════════ -->
   <section class="ap-segments section">
     <div class="container">
@@ -323,6 +334,31 @@
 </main>
 
 <script src="js/shared.js"></script>
+<script>
+(function(){
+  var pairs=[
+    ['Pourquoi « Agency A » ?','Agency pour agence — l’ambition de devenir le studio incontournable de la photographie. A pour Anaïs, et pour la première lettre de l’alphabet, là où tout commence.'],
+    ['Quelle est la vision derrière le studio ?','Avoir tout à portée de main : des opportunités, une équipe, une direction artistique. Tout ce qu’on aurait aimé trouver en arrivant seule à Paris.'],
+    ['La promesse d’Agency A en une phrase ?','Offrir des opportunités. Faciliter la gestion. Libérer la création.'],
+    ['Quelles valeurs associe-t-on à Agency A ?','Confiance et sérénité. Toujours.'],
+    ['Dans 5 ans, Agency A c’est quoi ?','L’agence que l’on appelle pour la mode, les événements sportifs, les mariages — et les grandes soirées : Cannes, les Flammes, les Césars.']
+  ];
+  var i=0;
+  var qEl=document.getElementById('apQrQ');
+  var aEl=document.getElementById('apQrA');
+  if(!qEl||!aEl)return;
+  function run(){
+    var p=pairs[i%pairs.length];
+    qEl.style.opacity='0';aEl.style.opacity='0';
+    setTimeout(function(){qEl.textContent=p[0];aEl.textContent=p[1];},150);
+    setTimeout(function(){qEl.style.opacity='1';},300);
+    setTimeout(function(){aEl.style.opacity='1';},1900);
+    setTimeout(function(){qEl.style.opacity='0';aEl.style.opacity='0';},5800);
+    setTimeout(function(){i++;run();},7200);
+  }
+  run();
+})();
+</script>
 
 <div class="reviews-band ap-reviews" aria-label="Avis clients">
   <div class="container">

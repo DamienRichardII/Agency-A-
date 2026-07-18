@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parcours — Anaïs Descomps · Agency A</title>
+  <meta name="description" content="Le parcours d'Anaïs Descomps, fondatrice d'Agency A — de la photographie adolescente à la création du studio parisien.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/shared.css">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <style>
+    /* ══════════════════════════════════════════
+       PARCOURS — styles spécifiques
+    ══════════════════════════════════════════ */
+
+    /* ── HERO ── */
+    .pc-hero{background:var(--ink);padding:clamp(80px,10vw,140px) clamp(32px,5vw,80px) clamp(64px,8vw,110px);display:flex;flex-direction:column;justify-content:flex-end;min-height:clamp(380px,50vh,560px)}
+    .pc-hero-eyebrow{color:var(--sand);margin-bottom:20px}
+    .pc-hero-name{font-family:var(--display);font-size:clamp(52px,8vw,120px);font-weight:300;letter-spacing:-.02em;color:var(--cream);line-height:.88;margin:0 0 28px;display:block}
+    .pc-hero-lead{font-family:var(--display);font-style:italic;font-size:clamp(18px,2vw,26px);color:rgba(248,242,234,.6);line-height:1.55;max-width:560px;margin:0}
+
+    /* ── CHAPITRES ── */
+    .pc-chapters{background:var(--cream)}
+    .pc-chapter{display:grid;grid-template-columns:200px 1fr;gap:clamp(32px,5vw,72px);padding:clamp(48px,6vw,80px) clamp(32px,5vw,80px);border-bottom:1px solid var(--beige)}
+    .pc-chapter:last-child{border-bottom:none}
+    .pc-chapter-aside{display:flex;flex-direction:column;gap:8px;padding-top:4px}
+    .pc-chapter-num{font-family:var(--display);font-size:clamp(52px,5vw,72px);font-weight:300;color:var(--beige);line-height:1;display:block}
+    .pc-chapter-year{font-family:var(--body);font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:var(--sand)}
+    .pc-chapter-body h2{font-family:var(--display);font-size:clamp(24px,3vw,40px);font-weight:400;font-style:italic;color:var(--ink);line-height:1.15;margin:0 0 20px}
+    .pc-chapter-body p{font-size:16px;line-height:1.9;color:var(--ink-soft);margin:0 0 16px;max-width:600px}
+    .pc-chapter-body p:last-child{margin-bottom:0}
+
+    /* ── CITATION ── */
+    .pc-quote-band{background:var(--ink);padding:clamp(56px,7vw,90px) clamp(32px,5vw,80px);text-align:center}
+    .pc-quote{font-family:var(--display);font-style:italic;font-size:clamp(22px,3vw,42px);color:var(--cream);line-height:1.45;max-width:720px;margin:0 auto 24px}
+    .pc-quote-attr{font-family:var(--body);font-size:11px;text-transform:uppercase;letter-spacing:.2em;color:var(--sand)}
+
+    /* ── CTA RETOUR ── */
+    .pc-back{padding:clamp(48px,6vw,72px) clamp(32px,5vw,80px);background:var(--cream);display:flex;gap:32px;align-items:center;flex-wrap:wrap}
+    .pc-back-link{font-family:var(--body);font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--ink);padding-bottom:3px;transition:opacity .2s}
+    .pc-back-link:hover{opacity:.55}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:860px){
+      .pc-chapter{grid-template-columns:1fr;gap:16px}
+      .pc-chapter-num{font-size:clamp(36px,10vw,52px)}
+    }
+  </style>
+</head>
+<body>
+<div class="page-shell">
+
+<header class="header">
+  <nav class="nav">
+    <a href="index.html" class="brand" aria-label="Agency A">
+      <img src="assets/logo/logo-dark-transparent.png" alt="Agency A" class="brand-logo">
+    </a>
+    <div class="nav-links"><a href="portfolio.html" class="">Portfolio</a>
+<a href="a-propos.html" class="">À propos</a>
+<a href="tarifs.html" class="">Tarifs</a>
+<a href="humanitaire.html" class="">Humanitaire</a>
+<a href="collaborateurs-partenaires.html" class="">Collaborateurs</a>
+<a href="boutique.html" class="">Boutique</a>
+<a href="espace-client.html" class="">Connexion client</a>
+<a href="contact.html" class="">Contact</a></div>
+    <button class="hamburger" id="menuToggle" aria-label="Ouvrir le menu">
+      <svg width="28" height="18" viewBox="0 0 28 18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 1h26M1 9h26M1 17h26"/></svg>
+    </button>
+  </nav>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-inner">
+    <div class="mobile-menu-head"><button class="menu-close" id="menuClose" aria-label="Fermer" style="display:block;color:var(--cream);font-size:34px">×</button></div>
+    <a href="index.html" class="mobile-nav-link">Accueil</a>
+<a href="portfolio.html" class="mobile-nav-link">Portfolio</a>
+<a href="a-propos.html" class="mobile-nav-link">À propos</a>
+<a href="tarifs.html" class="mobile-nav-link">Tarifs</a>
+<a href="humanitaire.html" class="mobile-nav-link">Humanitaire</a>
+<a href="collaborateurs-partenaires.html" class="mobile-nav-link">Collaborateurs</a>
+<a href="boutique.html" class="mobile-nav-link">Boutique</a>
+<a href="espace-client.html" class="mobile-nav-link">Connexion client</a>
+<a href="contact.html" class="mobile-nav-link">Contact</a>
+  </div>
+</div>
+
+<main>
+
+  <!-- ── HERO ── -->
+  <section class="pc-hero">
+    <p class="eyebrow pc-hero-eyebrow">Fondatrice · Parcours</p>
+    <span class="pc-hero-name">Anaïs<br>Descomps</span>
+    <p class="pc-hero-lead">De la photographie adolescente à la création d'Agency A — un chemin tracé par la conviction que l'image peut tout changer.</p>
+  </section>
+
+  <!-- ── CHAPITRES ── -->
+  <div class="pc-chapters">
+
+    <div class="pc-chapter reveal">
+      <div class="pc-chapter-aside">
+        <span class="pc-chapter-num">01</span>
+        <span class="pc-chapter-year">L'éveil</span>
+      </div>
+      <div class="pc-chapter-body">
+        <h2>Des étoiles plein les yeux</h2>
+        <p>La photographie est entrée très tôt dans la vie d'Anaïs — presque avant qu'elle ne sache la nommer. Un selfie retrouvé sur un vieil appareil, des vidéos filmées en famille. Puis au collège, une proposition inattendue : couvrir un tournoi de basket dans la cour. Elle dit oui sans hésiter.</p>
+        <p>À la fin de l'année, l'établissement expose ses photos. Quand elle découvre ses images accrochées dans la cour, quelque chose se décide. Elle commence à se renseigner, à chercher les formations, à écrire des lettres de motivation. Son objectif : Orthez, le Lycée des Métiers Molière, et plus tard Paris.</p>
+      </div>
+    </div>
+
+    <div class="pc-chapter reveal">
+      <div class="pc-chapter-aside">
+        <span class="pc-chapter-num">02</span>
+        <span class="pc-chapter-year">2019 · Formation</span>
+      </div>
+      <div class="pc-chapter-body">
+        <h2>Bac pro photographie</h2>
+        <p>Anaïs intègre le Lycée des Métiers Molière à Orthez, spécialité photographie. Elle y obtient son Bac professionnel et est distinguée Meilleur apprenti de France — le MAF — récompense nationale qui salue l'excellence du travail en formation.</p>
+        <p>Puis une spécialisation en infographie : design, post-production, regard éditorial. Une double compétence qui deviendra l'une des signatures d'Agency A — maîtriser l'image de la prise de vue à la retouche finale.</p>
+      </div>
+    </div>
+
+    <div class="pc-chapter reveal">
+      <div class="pc-chapter-aside">
+        <span class="pc-chapter-num">03</span>
+        <span class="pc-chapter-year">2022 · Paris</span>
+      </div>
+      <div class="pc-chapter-body">
+        <h2>Arrivée seule dans la capitale</h2>
+        <p>Paris. Sans réseau, sans contacts, sans amie dans la ville. Elle enchaîne les petits jobs pour tenir — le prêt-à-porter, d'autres emplois alimentaires — tout en continuant à se former, à chercher sa place dans l'industrie de l'image.</p>
+        <p>Elle intègre l'école MJM Graphic Design pour un Bachelor en photographie. Mais la pression finit par céder : un burnout la contraint à tout remettre à plat. De quoi as-tu peur ? Qu'est-ce qui te plaît vraiment ? Pourquoi reviens-tu toujours à la photographie ? Ces questions, elle y répond avec honnêteté.</p>
+      </div>
+    </div>
+
+    <div class="pc-chapter reveal">
+      <div class="pc-chapter-aside">
+        <span class="pc-chapter-num">04</span>
+        <span class="pc-chapter-year">Avant Agency A</span>
+      </div>
+      <div class="pc-chapter-body">
+        <h2>L'école du terrain</h2>
+        <p>Assistante de photographe dans le sud de la France. Assistante plateau. Expériences en retouche photo. Anaïs accumule les pratiques, affine sa technique, comprend les rouages des tournages et des équipes créatives.</p>
+        <p>Ce qu'elle observe, aussi : l'absence d'une structure qui centralise tout — les opportunités, les profils créatifs, la coordination des équipes. L'idée d'Agency A commence à prendre forme.</p>
+      </div>
+    </div>
+
+    <div class="pc-chapter reveal">
+      <div class="pc-chapter-aside">
+        <span class="pc-chapter-num">05</span>
+        <span class="pc-chapter-year">2024 · Fondation</span>
+      </div>
+      <div class="pc-chapter-body">
+        <h2>Agency A</h2>
+        <p>En 2024, Anaïs crée Agency A. L'ambition est claire : construire ce qu'elle n'a jamais trouvé en arrivant à Paris. Un studio indépendant qui rassemble les talents, propose une direction artistique exigeante et accompagne chaque projet de A à Z.</p>
+        <p>Agency A — AGENCY pour agence, A pour Anaïs, et pour la première lettre de l'alphabet. Là où tout commence.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── CITATION ── -->
+  <div class="pc-quote-band">
+    <blockquote class="pc-quote">« Une belle image attire l'œil.<br>Une image juste reste en mémoire. »</blockquote>
+    <p class="pc-quote-attr">— Anaïs Descomps, fondatrice d'Agency A</p>
+  </div>
+
+  <!-- ── CTA RETOUR ── -->
+  <div class="pc-back">
+    <a class="pc-back-link" href="a-propos.html">← À propos</a>
+    <a class="pc-back-link" href="portfolio.html">Voir le portfolio →</a>
+    <a class="pc-back-link" href="contact.html">Prendre contact →</a>
+  </div>
+
+</main>
+
+<script src="js/shared.js"></script>
+
+<div class="marquee-band" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Mode</span><span class="marquee-sep">·</span><span>Produit</span><span class="marquee-sep">·</span><span>Beauté</span><span class="marquee-sep">·</span><span>Culinaire</span><span class="marquee-sep">·</span><span>Éditorial</span><span class="marquee-sep">·</span><span>Sport</span><span class="marquee-sep">·</span><span>Mode</span><span class="marquee-sep">·</span><span>Produit</span><span class="marquee-sep">·</span><span>Beauté</span><span class="marquee-sep">·</span><span>Culinaire</span><span class="marquee-sep">·</span><span>Éditorial</span><span class="marquee-sep">·</span><span>Sport</span><span class="marquee-sep">·</span>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="brand" style="margin-bottom:16px"><img src="assets/logo/logo-white-transparent.png" alt="Agency A" class="brand-logo-footer"></div>
+        <p>Donner vie aux images qui racontent votre univers. Studio visuel premium, direction artistique et accompagnement sensible des talents.</p>
+      </div>
+      <div class="footer-columns"><div><h4 class="footer-title">Navigation</h4><div class="footer-links"><a href="index.html">Accueil</a><a href="portfolio.html">Portfolio</a><a href="a-propos.html">À propos</a><a href="tarifs.html">Tarifs</a></div></div><div><h4 class="footer-title">Informations</h4><div class="footer-links"><a href="humanitaire.html">Humanitaire</a><a href="collaborateurs-partenaires.html">Collaborateurs</a><a href="boutique.html">Boutique</a><a href="espace-client.html">Connexion client</a><a href="contact.html">Contact</a><a href="faq.html">FAQ</a><a href="mentions-legales.html">Mentions légales</a><a href="cgv.html">CGV</a></div></div><div><h4 class="footer-title">Réseaux</h4><div class="footer-links"><a href="https://www.instagram.com/agencya_paris/" target="_blank" rel="noopener">Instagram</a><a href="https://www.instagram.com/agency_a__/" target="_blank" rel="noopener">Instagram ②</a><a href="https://www.linkedin.com/company/agency-a-paris" target="_blank" rel="noopener">LinkedIn</a></div></div></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© Agency A · Tous droits réservés</span>
+      <span>Paris · Sur rendez-vous · Accès client limité dans le temps</span>
+    </div>
+  </div>
+</footer>
+
+</div>
+</body>
+</html>
