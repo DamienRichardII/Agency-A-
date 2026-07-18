@@ -1,0 +1,160 @@
+/* ══════════════════════════════════════════════════════
+   AGENCY A — Palette Brand Book
+   Variante colorielle — ne pas modifier shared.css
+   Marine #1E4C9A · Sable #FF6A3D · Baie #D6156C
+   Encre #12141C · Papier #FBF2EC
+══════════════════════════════════════════════════════ */
+
+/* ── VARIABLES ── */
+:root {
+  --cream:      #FBF2EC;
+  --beige:      #EBE6F7;
+  --beige-2:    #DDD8EE;
+  --sand:       #FF6A3D;
+  --ink:        #12141C;
+  --ink-soft:   #2A2D45;
+  --muted:      #6C6F8A;
+  --line:       rgba(18,20,28,.1);
+  --line-strong:rgba(18,20,28,.18);
+  --card:       rgba(255,255,255,.55);
+  --card-dark:  #0D1F42;
+  --shadow:     0 20px 60px rgba(18,20,28,.1);
+  --marine:     #1E4C9A;
+  --baie:       #D6156C;
+  --sable:      #FF6A3D;
+}
+
+/* ── EYEBROW ── */
+.eyebrow { color: #FF6A3D; }
+
+/* ── HEADER ── */
+.header { background: rgba(251,242,236,.88); }
+
+/* ── NAV UNDERLINE HOVER/ACTIVE → Baie ── */
+.nav-links a::after { background: #D6156C; }
+
+/* ── MOBILE MENU → Marine ── */
+.mobile-menu { background: rgba(18,28,66,.97); }
+
+/* ── BOUTONS ── */
+.btn-primary {
+  background: #D6156C;
+  border-color: #D6156C;
+  color: #FBF2EC;
+}
+.btn-primary:hover {
+  background: #A80F53;
+  border-color: #A80F53;
+  transform: translateY(-1px);
+}
+.btn-secondary:hover {
+  background: #1E4C9A;
+  border-color: #1E4C9A;
+  color: #FBF2EC;
+}
+.chip.active, .chip:hover {
+  background: #1E4C9A;
+  border-color: #1E4C9A;
+  color: #FBF2EC;
+}
+
+/* ── HERO INDEX (gradient) ── */
+.hero-minimal {
+  background:
+    radial-gradient(circle at 50% 12%, rgba(30,76,154,.13), transparent 34%),
+    radial-gradient(circle at 10% 80%, rgba(214,21,108,.07), transparent 30%),
+    radial-gradient(circle at 90% 72%, rgba(255,106,61,.06), transparent 28%),
+    linear-gradient(180deg, #fbf2ec 0%, #ede8f9 100%);
+}
+
+/* ── KPI / PRICE INDEX accents ── */
+.kpi-card strong  { color: #1E4C9A; }
+.price-index      { color: #1E4C9A; }
+.pc-index         { color: #1E4C9A; }
+.parcours-card    { border-left-color: #1E4C9A; }
+.ap-step-dot      { background: #1E4C9A !important; border-color: #1E4C9A !important; }
+
+/* ── MARQUEE / SÉPARATEURS ── */
+.marquee-sep  { color: #FF6A3D !important; }
+.univers-sep  { color: #FF6A3D !important; }
+
+/* ── SIDEBAR ── */
+.sidebar-nav a:hover { background: #D6156C; border-color: #D6156C; color: #FBF2EC; }
+.field input:focus,
+.field textarea:focus,
+.field select:focus { border-color: #1E4C9A; }
+
+/* ── REVIEWS BAND → Marine ── */
+.reviews-band              { background: #1E4C9A; }
+.rv-card                   { background: #1E4C9A; }
+.rv-card:hover             { background: #163C7A; }
+.rv-stars                  { color: #FF6A3D; }
+.rv-header .eyebrow        { color: #FF6A3D; }
+.rv-total                  { color: rgba(255,255,255,.4); }
+.rv-grid                   { background: rgba(255,255,255,.08); }
+.rv-author                 { color: rgba(255,255,255,.7); }
+.rv-role                   { color: #FF6A3D; }
+
+/* ── REVIEW CARD (version static) ── */
+.review-card::before { color: #1E4C9A; }
+.review-role         { color: #FF6A3D; }
+
+/* ── SCROLLING REVIEWS (ap-reviews / pf-reviews) ── */
+.ap-reviews,
+.pf-reviews { background: #1E4C9A; }
+.ap-rv-item,
+.pf-rv-item {
+  border-right-color: rgba(255,255,255,.1);
+}
+.ap-rv-item:hover,
+.pf-rv-item:hover { background: #163C7A; }
+
+/* ── SCOUTING BAND ── */
+.scouting-band { background: #0D1F42; }
+
+/* ── FOOTER → Marine foncé ── */
+.footer               { background: #0D1F42; }
+.footer-grid          { border-bottom-color: rgba(255,255,255,.1); }
+.footer-brand p       { color: rgba(255,255,255,.7); }
+.footer-title         { color: rgba(255,255,255,.5); }
+.footer-links a,
+.footer-links span    { color: rgba(255,255,255,.8); }
+.footer-bottom        { color: rgba(255,255,255,.45); }
+
+/* ── A-PROPOS : sections dark → Marine ── */
+.ap-qr         { background: #1E4C9A !important; }
+.ap-values     { background: #1E4C9A !important; }
+.ap-accent     { color: #D6156C !important; }
+.ap-rv-item:hover { background: #163C7A !important; }
+
+/* ── A-PROPOS : valeurs — labels et cartes ── */
+.ap-val-label  { background: rgba(30,76,154,.45); }
+
+/* ── A-PROPOS : frise ── */
+.ap-year       { color: #1E4C9A !important; }
+
+/* ── A-PROPOS : fondatrice CTA ── */
+.ap-founder-cta {
+  color: #fff;
+  border-bottom-color: rgba(255,255,255,.5);
+}
+
+/* ── PARCOURS : sections dark → Marine ── */
+.pc-hero        { background: #1E4C9A !important; }
+.pc-quote-band  { background: #1E4C9A !important; }
+.pc-chapter-num { color: #DDD8EE; }
+.pc-chapter-year{ color: #1E4C9A; }
+.pc-back-link   { color: #1E4C9A; border-bottom-color: #1E4C9A; }
+
+/* ── PORTFOLIO : modal accents ── */
+.gmodal-cat     { color: #FF6A3D !important; }
+.gthumb.active  { border-color: #D6156C !important; }
+
+/* ── TARIFS : accent ── */
+.price-note     { color: var(--muted); }
+
+/* ── ESPACE CLIENT : inline dark buttons ── */
+.btn[style*="rgba(234,217,199"] {
+  border-color: rgba(255,255,255,.45) !important;
+  color: #FBF2EC !important;
+}
