@@ -72,8 +72,17 @@
     .ap-founder-cta{display:inline-flex;align-items:center;gap:10px;font-family:var(--body);font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.5);padding-bottom:3px;align-self:flex-start;transition:opacity .2s}
     .ap-founder-cta:hover{opacity:.65}
 
-    /* ── SEGMENTS ── */
-    .ap-segments{padding:clamp(60px,8vw,100px) 0;background:linear-gradient(180deg,#fbf7f2 0%,#f4ece0 100%)}
+    /* ── HERO — captions colonne droite ── */
+    .ap-hero-caption{font-family:var(--body);font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);margin:0;line-height:2.4;text-align:center}
+
+    /* ── BLOC ÉDITORIAL NOIR ── */
+    .ap-editorial{background:var(--ink);padding:clamp(60px,7vw,96px) 0}
+    .ap-editorial-inner{max-width:680px;margin:0 auto;padding:0 clamp(24px,5vw,60px);display:flex;flex-direction:column;gap:clamp(20px,2.5vw,30px);text-align:center}
+    .ap-editorial-p{font-family:var(--display);font-size:clamp(16px,1.6vw,20px);font-style:italic;font-weight:300;color:rgba(255,255,255,.82);line-height:1.9;margin:0}
+
+    /* ── SEGMENTS — inversion fond / cartes ── */
+    .ap-segments{padding:clamp(60px,8vw,100px) 0;background:#fdfaf7}
+    .ap-segments .segment-card{background:linear-gradient(180deg,#fbf7f2 0%,#f4ece0 100%);border-color:rgba(17,17,17,.1)}
 
     /* ── REVIEWS défilants a-propos ── */
     .ap-reviews{overflow:hidden}
@@ -102,7 +111,7 @@
       .ap-hero{grid-template-columns:1fr}
       .ap-hero-text{padding:clamp(28px,5vw,48px) clamp(20px,4vw,36px) clamp(18px,3vw,28px)}
       .ap-hero-right{border-left:none;border-top:1px solid rgba(17,17,17,.035);padding:clamp(18px,3vw,28px) clamp(20px,4vw,36px) clamp(28px,5vw,48px)}
-      .ap-hero-heading-zone{min-height:clamp(72px,16vw,110px)}
+      .ap-hero-heading-zone{min-height:auto}
       .ap-hero-logo-img{width:clamp(72px,16vw,110px)}
       .ap-founder{grid-template-columns:1fr}
       .ap-founder-visual{height:75vw;max-height:520px}
@@ -194,9 +203,7 @@
         <span class="ap-hero-name">AGENCY</span>
       </div>
       <div class="ap-hero-content">
-        <p class="ap-hero-desc">Agency A est née d’un manque. Arrivée à Paris sans réseau ni repères, Anaïs Descomps a cherché quelqu’un capable d’avoir tout à portée de main — des opportunités, des équipes créatives, une coordination qui simplifie. Cette structure n’existait pas. Elle l’a créée.</p>
-        <p class="ap-hero-desc">L’agence réunit photographes, directeurs artistiques, talents et prestataires autour d’une même ambition : produire des images qui comptent, dans des conditions qui inspirent.</p>
-        <p class="ap-hero-desc">Offrir des opportunités. Faciliter la gestion. Devenir une référence dans le monde de la photographie.</p>
+        <p class="ap-hero-desc">Agency pour « agence » — le studio parisien qui place l’image au cœur de chaque projet.</p>
       </div>
     </div>
         <div class="ap-hero-right reveal">
@@ -204,14 +211,22 @@
         <img src="assets/logo/logo-icon-square.png" class="ap-hero-logo-img" alt="" aria-hidden="true" role="presentation">
       </div>
       <div class="ap-hero-content">
-        <p class="ap-hero-desc">A pour Anaïs — la fondatrice, le regard, l’identité derrière chaque image.</p>
-        <p class="ap-hero-desc">A pour la première lettre de l’alphabet — là où tout commence, là où tout est possible.</p>
-        <p class="ap-hero-desc">A pour l’ambition de devenir une agence indispensable dans le monde de la photographie.</p>
+        <p class="ap-hero-caption">A POUR LA FONDATRICE, ANAÏS.</p>
+        <p class="ap-hero-caption">A POUR LA PREMIÈRE LETTRE DE L’ALPHABET.</p>
       </div>
     </div>
   </section>
 
-
+  <!-- ═══════════════════════════════════════
+       2. BLOC ÉDITORIAL
+  ══════════════════════════════════════════ -->
+  <section class="ap-editorial">
+    <div class="ap-editorial-inner reveal">
+      <p class="ap-editorial-p">Des opportunités, des équipes créatives, une coordination qui simplifie. Cette structure n’existait pas. Elle l’a créée.</p>
+      <p class="ap-editorial-p">L’agence réunit photographes, directeurs artistiques, talents et prestataires autour d’une même ambition : produire des images qui comptent, dans des conditions qui inspirent.</p>
+      <p class="ap-editorial-p">Offrir des opportunités. Faciliter la gestion. Devenir une référence dans le monde de la photographie.</p>
+    </div>
+  </section>
 
   <!-- ═══════════════════════════════════════
        3. VALEURS — 4 VISUELS
