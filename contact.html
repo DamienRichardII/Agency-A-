@@ -26,6 +26,18 @@
   <meta name="twitter:title" content="Contact — Agency A">
   <meta name="twitter:description" content="Contactez Agency A pour votre projet photo ou de direction artistique à Paris.">
   <meta name="twitter:image" content="assets/og-image-twitter.jpg">
+  <style>
+    /* ── Bande avis défilante ── */
+    .rv-grid{display:none!important}
+    .rv-overflow{overflow:hidden;padding-bottom:clamp(48px,6vw,72px)}
+    .rv-track{display:flex;width:max-content;animation:rv-move 55s linear infinite}
+    .rv-track:hover{animation-play-state:paused}
+    @keyframes rv-move{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    .rv-item{flex:0 0 clamp(300px,30vw,420px);padding:clamp(32px,3.5vw,52px) clamp(28px,3vw,44px);border-right:1px solid rgba(212,184,155,.15);display:flex;flex-direction:column;gap:20px;transition:background .25s}
+    .rv-item:hover{background:#1a1714}
+    @media(max-width:860px){.rv-item{flex:0 0 clamp(260px,72vw,360px)}}
+    @media(max-width:600px){.rv-item{flex:0 0 82vw}}
+  </style>
 </head>
 <body>
 <div class="page-shell">
@@ -137,40 +149,76 @@
       <p class="eyebrow">Ce qu'ils disent</p>
       <span class="rv-total">Avis clients vérifiés</span>
     </div>
-    <div class="rv-grid">
-      <div class="rv-card">
-        <div class="rv-stars">★ ★ ★ ★ ★</div>
-        <p class="rv-quote">« Anaïs a su me mettre à l'aise dès la première seconde. Les photos ont dépassé toutes mes attentes — mon book a changé de niveau du jour au lendemain. »</p>
-        <span class="rv-author">Elfie · Book signature</span>
+    <div class="rv-grid"></div>
+  </div>
+  <!-- Bande défilante -->
+  <div class="rv-overflow">
+    <div class="rv-track">
+      <!-- Set 1 -->
+      <div class="rv-item">
+        <div class="rv-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+        <p class="rv-quote">&#171;&nbsp;Anaïs a su me mettre à l'aise dès la première seconde. Les photos ont dépassé toutes mes attentes&nbsp;— mon book a changé de niveau du jour au lendemain.&nbsp;&#187;</p>
+        <span class="rv-author">Elfie &middot; Book signature</span>
       </div>
-      <div class="rv-card">
-        <div class="rv-stars">★ ★ ★ ★ ★</div>
-        <p class="rv-quote">« Les images racontent notre univers de marque mieux qu'on ne l'aurait imaginé. On les utilise sur tous nos supports depuis le lancement — elles travaillent encore pour nous. »</p>
-        <span class="rv-author">Clémence · Image de marque</span>
+      <div class="rv-item">
+        <div class="rv-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+        <p class="rv-quote">&#171;&nbsp;Les images racontent notre univers de marque mieux qu'on ne l'aurait imaginé. On les utilise sur tous nos supports depuis le lancement.&nbsp;&#187;</p>
+        <span class="rv-author">Clémence &middot; Image de marque</span>
       </div>
-      <div class="rv-card">
-        <div class="rv-stars">★ ★ ★ ★ ★</div>
-        <p class="rv-quote">« Je ne m'étais jamais sentie aussi à l'aise devant un objectif. Le résultat est exactement moi — pas une version arrangée, la vraie. »</p>
-        <span class="rv-author">Léane · Portrait personnel</span>
+      <div class="rv-item">
+        <div class="rv-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+        <p class="rv-quote">&#171;&nbsp;Je ne m'étais jamais sentie aussi à l'aise devant un objectif. Le résultat est exactement moi&nbsp;— pas une version arrangée, la vraie.&nbsp;&#187;</p>
+        <span class="rv-author">Léane &middot; Portrait personnel</span>
       </div>
-      <div class="rv-card">
-        <div class="rv-stars">★ ★ ★ ★ ★</div>
-        <p class="rv-quote">« Un regard unique, une préparation sans faille. Ce n'est pas juste une séance photo — c'est une vraie direction artistique, du brief jusqu'à la livraison. »</p>
-        <span class="rv-author">Céline · Éditorial mode</span>
+      <div class="rv-item">
+        <div class="rv-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+        <p class="rv-quote">&#171;&nbsp;Un regard unique, une préparation sans faille. Ce n'est pas juste une séance photo&nbsp;— c'est une vraie direction artistique, du brief jusqu'à la livraison.&nbsp;&#187;</p>
+        <span class="rv-author">Céline &middot; Éditorial mode</span>
       </div>
-      <div class="rv-card">
-        <div class="rv-stars">★ ★ ★ ★ ★</div>
-        <p class="rv-quote">« Professionnelle, attentive, créative. Agency A a transformé notre communication visuelle en une seule séance. Je recommande les yeux fermés. »</p>
-        <span class="rv-author">Lucie · Campagne produit</span>
+      <div class="rv-item">
+        <div class="rv-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+        <p class="rv-quote">&#171;&nbsp;Professionnelle, attentive, créative. Agency A a transformé notre communication visuelle en une seule séance. Je recommande les yeux fermés.&nbsp;&#187;</p>
+        <span class="rv-author">Lucie &middot; Campagne produit</span>
       </div>
-      <div class="rv-card">
-        <div class="rv-stars">★ ★ ★ ★ ★</div>
-        <p class="rv-quote">« Une expérience premium de bout en bout. Anaïs écoute vraiment avant de cadrer — et ça change absolument tout au résultat final. »</p>
-        <span class="rv-author">Jade · Shooting marque</span>
+      <div class="rv-item">
+        <div class="rv-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+        <p class="rv-quote">&#171;&nbsp;Une expérience premium de bout en bout. Anaïs écoute vraiment avant de cadrer&nbsp;— et ça change absolument tout au résultat final.&nbsp;&#187;</p>
+        <span class="rv-author">Jade &middot; Shooting marque</span>
+      </div>
+      <!-- Set 2 — copie exacte pour boucle infinie -->
+      <div class="rv-item">
+        <div class="rv-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+        <p class="rv-quote">&#171;&nbsp;Anaïs a su me mettre à l'aise dès la première seconde. Les photos ont dépassé toutes mes attentes&nbsp;— mon book a changé de niveau du jour au lendemain.&nbsp;&#187;</p>
+        <span class="rv-author">Elfie &middot; Book signature</span>
+      </div>
+      <div class="rv-item">
+        <div class="rv-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+        <p class="rv-quote">&#171;&nbsp;Les images racontent notre univers de marque mieux qu'on ne l'aurait imaginé. On les utilise sur tous nos supports depuis le lancement.&nbsp;&#187;</p>
+        <span class="rv-author">Clémence &middot; Image de marque</span>
+      </div>
+      <div class="rv-item">
+        <div class="rv-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+        <p class="rv-quote">&#171;&nbsp;Je ne m'étais jamais sentie aussi à l'aise devant un objectif. Le résultat est exactement moi&nbsp;— pas une version arrangée, la vraie.&nbsp;&#187;</p>
+        <span class="rv-author">Léane &middot; Portrait personnel</span>
+      </div>
+      <div class="rv-item">
+        <div class="rv-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+        <p class="rv-quote">&#171;&nbsp;Un regard unique, une préparation sans faille. Ce n'est pas juste une séance photo&nbsp;— c'est une vraie direction artistique, du brief jusqu'à la livraison.&nbsp;&#187;</p>
+        <span class="rv-author">Céline &middot; Éditorial mode</span>
+      </div>
+      <div class="rv-item">
+        <div class="rv-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+        <p class="rv-quote">&#171;&nbsp;Professionnelle, attentive, créative. Agency A a transformé notre communication visuelle en une seule séance. Je recommande les yeux fermés.&nbsp;&#187;</p>
+        <span class="rv-author">Lucie &middot; Campagne produit</span>
+      </div>
+      <div class="rv-item">
+        <div class="rv-stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+        <p class="rv-quote">&#171;&nbsp;Une expérience premium de bout en bout. Anaïs écoute vraiment avant de cadrer&nbsp;— et ça change absolument tout au résultat final.&nbsp;&#187;</p>
+        <span class="rv-author">Jade &middot; Shooting marque</span>
       </div>
     </div>
   </div>
-</div></div>
+</div>
 </div>
 
 <div class="marquee-band" aria-hidden="true">
