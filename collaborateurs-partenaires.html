@@ -118,8 +118,8 @@
 
     /* ── Proof band ── */
     .collab-band {
-      background: var(--ink);
-      color: var(--cream);
+      background: #fdfaf7;
+      color: var(--ink);
       padding: clamp(52px, 6vw, 88px) 0;
     }
     .collab-band .container {
@@ -134,7 +134,7 @@
       font-weight: 400;
       font-style: italic;
       line-height: 1.2;
-      color: var(--cream);
+      color: var(--ink);
       margin: 0;
     }
     .collab-tags {
@@ -143,18 +143,19 @@
       gap: 10px;
     }
     .collab-tag {
-      border: 1px solid rgba(212,184,155,.3);
+      background: #6a4e3b;
+      border: 1px solid #6a4e3b;
       border-radius: 20px;
       padding: 8px 18px;
       font-family: var(--body);
       font-size: 12px;
       letter-spacing: .07em;
-      color: rgba(248,242,234,.7);
-      transition: border-color .2s, color .2s;
+      color: var(--cream);
+      transition: background .2s, border-color .2s;
     }
     .collab-tag:hover {
-      border-color: var(--sand);
-      color: var(--cream);
+      background: #5a3f2e;
+      border-color: #5a3f2e;
     }
 
     /* ── Responsive ── */
@@ -355,7 +356,7 @@
     <div class="container">
       <h2>Un réseau construit<br>projet après projet.</h2>
       <div>
-        <p style="font-size:13px;color:rgba(248,242,234,.5);text-transform:uppercase;letter-spacing:.1em;margin:0 0 18px">Univers couverts ensemble</p>
+        <p style="font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin:0 0 18px">Univers couverts ensemble</p>
         <div class="collab-tags">
           <span class="collab-tag">Mode &amp; Fashion</span>
           <span class="collab-tag">Beauté &amp; Cosmétique</span>
