@@ -41,7 +41,7 @@ main{display:block}
 .btn-primary{background:#6a4e3b;border-color:#6a4e3b;color:var(--cream)}
 .btn-primary:hover{background:#5a3f2e;border-color:#5a3f2e;transform:translateY(-1px)}
 .btn-secondary:hover{background:#fdfaf7;color:var(--ink);border-color:var(--ink);transform:translateY(-1px)}
-.chip{display:inline-flex;align-items:center;padding:11px 16px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.48);font-size:10px;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;transition:.25s var(--ease)}
+.chip{display:inline-flex;align-items:center;padding:11px 16px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.48);font-size:10px;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;transition:.25s var(--ease);color:var(--ink)}
 .chip.active,.chip:hover{border-color:var(--ink);background:var(--ink);color:var(--cream)}
 .card{background:var(--card);border:1px solid rgba(17,17,17,.08);box-shadow:var(--shadow);backdrop-filter:blur(10px)}
 .soft-panel{background:linear-gradient(180deg, rgba(255,255,255,.5), rgba(255,255,255,.3));border:1px solid rgba(17,17,17,.08);box-shadow:var(--shadow)}
