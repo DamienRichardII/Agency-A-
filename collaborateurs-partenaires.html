@@ -15,7 +15,9 @@
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-bottom: 44px;
+      justify-content: center;
+      margin-bottom: 0;
+      margin-top: 32px;
     }
 
     /* ── Profiles grid ── */
@@ -228,26 +230,23 @@
   <!-- ═══════════════════════════════════════
        HERO
   ══════════════════════════════════════════ -->
-  <section class="page-hero">
-    <div class="container page-hero-grid">
-      <div class="reveal">
-        <p class="eyebrow">Collaborateurs Agency A</p>
-        <h1 class="display-lg">Le cercle créatif du studio.</h1>
-        <p class="lead">Mannequins, comédiens, photographes, stylistes, hair stylists — les profils qui font les projets d'Agency A. Sélectionnés pour leur sérieux, leur esthétique et leur engagement sur chaque mission.</p>
-        <div class="hero-ctas" style="margin-top:28px;display:flex;gap:14px;flex-wrap:wrap">
-          <a href="#partner-form" class="btn btn-primary">Rejoindre le réseau</a>
-          <a href="#profiles" class="btn btn-secondary" style="border-color:rgba(17,17,17,.25);color:var(--ink-soft)">Voir les profils</a>
+<section class="page-hero" style="text-align:center">
+    <div class="container">
+      <p class="eyebrow reveal" style="text-align:left;margin-bottom:clamp(16px,2vw,28px)">Collaborateurs Agency A</p>
+      <div class="reveal" style="max-width:720px;margin:0 auto">
+        <h1 class="display-lg">Le cercle créatif du studio.</h1>
+        <p class="lead">Mannequins, comédiens, photographes, stylistes, hair stylists — les profils qui font les projets d’Agency A. Sélectionnés pour leur sérieux, leur esthétique et leur engagement sur chaque mission.</p>
+        <div class="hero-ctas" style="margin-top:28px;display:flex;gap:14px;flex-wrap:wrap;justify-content:center">
+          <a href="#partner-form" class="btn btn-primary">Rejoignez-nous</a>
+        </div>
+        <div class="collab-filters" role="group" aria-label="Filtrer par catégorie">
+          <button class="chip" data-filter="mannequin">Mannequins</button>
+          <button class="chip" data-filter="comedien">Comédiens</button>
+          <button class="chip" data-filter="photographe">Photographes</button>
+          <button class="chip" data-filter="styliste">Stylistes</button>
+          <button class="chip" data-filter="hair">Hair Stylists</button>
         </div>
       </div>
-      <aside class="page-hero-aside reveal">
-        <p class="kicker">Réseau</p>
-        <div class="stats-inline">
-          <span>Mannequins</span>
-          <span>Comédiens</span>
-          <span>Créatifs</span>
-          <span>Sur mesure</span>
-        </div>
-      </aside>
     </div>
   </section>
 
@@ -257,19 +256,10 @@
   <section id="profiles" class="section" style="padding-top:8px">
     <div class="container">
 
-      <div class="collab-filters reveal" role="group" aria-label="Filtrer par catégorie">
-        <button class="chip active" data-filter="all">Tous</button>
-        <button class="chip" data-filter="mannequin">Mannequins</button>
-        <button class="chip" data-filter="comedien">Comédiens</button>
-        <button class="chip" data-filter="photographe">Photographes</button>
-        <button class="chip" data-filter="styliste">Stylistes</button>
-        <button class="chip" data-filter="hair">Hair Stylists</button>
-      </div>
-
       <div class="collab-profiles-grid reveal">
 
         <!-- ── Mannequins ── -->
-        <div class="cp-card" data-cat="mannequin">
+        <div class="cp-card cp-card--hidden" data-cat="mannequin">
           <div class="cp-photo">
             <img src="assets/nos talents - galerie/29012026_Elfie_AnaisDescomps_AgencyA_-9.jpg" alt="Elfie Daniel — Mannequin Agency A" loading="lazy">
           </div>
@@ -280,7 +270,7 @@
           </div>
         </div>
 
-        <div class="cp-card" data-cat="mannequin">
+        <div class="cp-card cp-card--hidden" data-cat="mannequin">
           <div class="cp-photo">
             <img src="assets/nos talents - galerie/celine-polas-25.jpg" alt="Céline Polas — Mannequin Agency A" loading="lazy">
           </div>
@@ -291,7 +281,7 @@
           </div>
         </div>
 
-        <div class="cp-card" data-cat="mannequin">
+        <div class="cp-card cp-card--hidden" data-cat="mannequin">
           <div class="cp-photo">
             <img src="assets/photos/mode/2025-11-03_Chaimaa_mannequin_agence_mademoiselle_04.jpg" alt="Chaimaa — Mannequin Agency A" loading="lazy">
           </div>
@@ -303,7 +293,7 @@
         </div>
 
         <!-- ── Comédiens ── -->
-        <div class="cp-card" data-cat="comedien">
+        <div class="cp-card cp-card--hidden" data-cat="comedien">
           <div class="cp-photo cp-photo--placeholder">
             <span class="cp-initial">C</span>
             <span class="cp-coming-badge">Profil à venir</span>
@@ -316,7 +306,7 @@
         </div>
 
         <!-- ── Photographes ── -->
-        <div class="cp-card" data-cat="photographe">
+        <div class="cp-card cp-card--hidden" data-cat="photographe">
           <div class="cp-photo cp-photo--placeholder">
             <span class="cp-initial">P</span>
             <span class="cp-coming-badge">Profil à venir</span>
@@ -329,7 +319,7 @@
         </div>
 
         <!-- ── Stylistes ── -->
-        <div class="cp-card" data-cat="styliste">
+        <div class="cp-card cp-card--hidden" data-cat="styliste">
           <div class="cp-photo cp-photo--placeholder">
             <span class="cp-initial">S</span>
             <span class="cp-coming-badge">Profil à venir</span>
@@ -342,7 +332,7 @@
         </div>
 
         <!-- ── Hair Stylists ── -->
-        <div class="cp-card" data-cat="hair">
+        <div class="cp-card cp-card--hidden" data-cat="hair">
           <div class="cp-photo cp-photo--placeholder">
             <span class="cp-initial">H</span>
             <span class="cp-coming-badge">Profil à venir</span>
@@ -437,37 +427,60 @@
       <p class="eyebrow">Ce qu'ils disent</p>
       <span class="rv-total">Avis clients vérifiés</span>
     </div>
-    <div class="rv-grid">
-      <div class="rv-card">
-        <div class="rv-stars">★ ★ ★ ★ ★</div>
-        <p class="rv-quote">« Anaïs a su me mettre à l'aise dès la première seconde. Les photos ont dépassé toutes mes attentes — mon book a changé de niveau du jour au lendemain. »</p>
-        <span class="rv-author">Elfie · Book signature</span>
+        <div class="rv-overflow">
+      <div class="rv-track">
+        <!-- Set 1 -->
+      <div class="rv-item">
+        <p class="rv-quote">&#171;&nbsp;Ana&#239;s a su me mettre &#224; l&#8217;aise d&#232;s la premi&#232;re seconde. Les photos ont d&#233;pass&#233; toutes mes attentes&nbsp;&#8212; mon book a chang&#233; de niveau du jour au lendemain.&nbsp;&#187;</p>
+        <span class="rv-author">Elfie &middot; Book signature</span>
       </div>
-      <div class="rv-card">
-        <div class="rv-stars">★ ★ ★ ★ ★</div>
-        <p class="rv-quote">« Les images racontent notre univers de marque mieux qu'on ne l'aurait imaginé. On les utilise sur tous nos supports depuis le lancement — elles travaillent encore pour nous. »</p>
-        <span class="rv-author">Clémence · Image de marque</span>
+      <div class="rv-item">
+        <p class="rv-quote">&#171;&nbsp;Les images racontent notre univers de marque mieux qu&#8217;on ne l&#8217;aurait imagin&#233;. On les utilise sur tous nos supports depuis le lancement&nbsp;&#8212; elles travaillent encore pour nous.&nbsp;&#187;</p>
+        <span class="rv-author">Cl&#233;mence &middot; Image de marque</span>
       </div>
-      <div class="rv-card">
-        <div class="rv-stars">★ ★ ★ ★ ★</div>
-        <p class="rv-quote">« Je ne m'étais jamais sentie aussi à l'aise devant un objectif. Le résultat est exactement moi — pas une version arrangée, la vraie. »</p>
-        <span class="rv-author">Léane · Portrait personnel</span>
+      <div class="rv-item">
+        <p class="rv-quote">&#171;&nbsp;Je ne m&#8217;&#233;tais jamais sentie aussi &#224; l&#8217;aise devant un objectif. Le r&#233;sultat est exactement moi&nbsp;&#8212; pas une version arrang&#233;e, la vraie.&nbsp;&#187;</p>
+        <span class="rv-author">L&#233;ane &middot; Portrait personnel</span>
       </div>
-      <div class="rv-card">
-        <div class="rv-stars">★ ★ ★ ★ ★</div>
-        <p class="rv-quote">« Un regard unique, une préparation sans faille. Ce n'est pas juste une séance photo — c'est une vraie direction artistique, du brief jusqu'à la livraison. »</p>
-        <span class="rv-author">Céline · Éditorial mode</span>
+      <div class="rv-item">
+        <p class="rv-quote">&#171;&nbsp;Un regard unique, une pr&#233;paration sans faille. Ce n&#8217;est pas juste une s&#233;ance photo&nbsp;&#8212; c&#8217;est une vraie direction artistique, du brief jusqu&#8217;&#224; la livraison.&nbsp;&#187;</p>
+        <span class="rv-author">C&#233;line &middot; &#201;ditorial mode</span>
       </div>
-      <div class="rv-card">
-        <div class="rv-stars">★ ★ ★ ★ ★</div>
-        <p class="rv-quote">« Professionnelle, attentive, créative. Agency A a transformé notre communication visuelle en une seule séance. Je recommande les yeux fermés. »</p>
-        <span class="rv-author">Lucie · Campagne produit</span>
+      <div class="rv-item">
+        <p class="rv-quote">&#171;&nbsp;Professionnelle, attentive, cr&#233;ative. Agency A a transform&#233; notre communication visuelle en une seule s&#233;ance. Je recommande les yeux ferm&#233;s.&nbsp;&#187;</p>
+        <span class="rv-author">Lucie &middot; Campagne produit</span>
       </div>
-      <div class="rv-card">
-        <div class="rv-stars">★ ★ ★ ★ ★</div>
-        <p class="rv-quote">« Une expérience premium de bout en bout. Anaïs écoute vraiment avant de cadrer — et ça change absolument tout au résultat final. »</p>
-        <span class="rv-author">Jade · Shooting marque</span>
+      <div class="rv-item">
+        <p class="rv-quote">&#171;&nbsp;Une exp&#233;rience premium de bout en bout. Ana&#239;s &#233;coute vraiment avant de cadrer&nbsp;&#8212; et &#231;a change absolument tout au r&#233;sultat final.&nbsp;&#187;</p>
+        <span class="rv-author">Jade &middot; Shooting marque</span>
       </div>
+        <!-- Set 2 — boucle infinie -->
+      <div class="rv-item">
+        <p class="rv-quote">&#171;&nbsp;Ana&#239;s a su me mettre &#224; l&#8217;aise d&#232;s la premi&#232;re seconde. Les photos ont d&#233;pass&#233; toutes mes attentes&nbsp;&#8212; mon book a chang&#233; de niveau du jour au lendemain.&nbsp;&#187;</p>
+        <span class="rv-author">Elfie &middot; Book signature</span>
+      </div>
+      <div class="rv-item">
+        <p class="rv-quote">&#171;&nbsp;Les images racontent notre univers de marque mieux qu&#8217;on ne l&#8217;aurait imagin&#233;. On les utilise sur tous nos supports depuis le lancement&nbsp;&#8212; elles travaillent encore pour nous.&nbsp;&#187;</p>
+        <span class="rv-author">Cl&#233;mence &middot; Image de marque</span>
+      </div>
+      <div class="rv-item">
+        <p class="rv-quote">&#171;&nbsp;Je ne m&#8217;&#233;tais jamais sentie aussi &#224; l&#8217;aise devant un objectif. Le r&#233;sultat est exactement moi&nbsp;&#8212; pas une version arrang&#233;e, la vraie.&nbsp;&#187;</p>
+        <span class="rv-author">L&#233;ane &middot; Portrait personnel</span>
+      </div>
+      <div class="rv-item">
+        <p class="rv-quote">&#171;&nbsp;Un regard unique, une pr&#233;paration sans faille. Ce n&#8217;est pas juste une s&#233;ance photo&nbsp;&#8212; c&#8217;est une vraie direction artistique, du brief jusqu&#8217;&#224; la livraison.&nbsp;&#187;</p>
+        <span class="rv-author">C&#233;line &middot; &#201;ditorial mode</span>
+      </div>
+      <div class="rv-item">
+        <p class="rv-quote">&#171;&nbsp;Professionnelle, attentive, cr&#233;ative. Agency A a transform&#233; notre communication visuelle en une seule s&#233;ance. Je recommande les yeux ferm&#233;s.&nbsp;&#187;</p>
+        <span class="rv-author">Lucie &middot; Campagne produit</span>
+      </div>
+      <div class="rv-item">
+        <p class="rv-quote">&#171;&nbsp;Une exp&#233;rience premium de bout en bout. Ana&#239;s &#233;coute vraiment avant de cadrer&nbsp;&#8212; et &#231;a change absolument tout au r&#233;sultat final.&nbsp;&#187;</p>
+        <span class="rv-author">Jade &middot; Shooting marque</span>
+      </div>
+      </div>
+    </div>
     </div>
   </div>
 </div></div>
@@ -541,7 +554,7 @@
       chip.classList.add('active');
       var filter = chip.dataset.filter;
       cards.forEach(function(card){
-        if (filter === 'all' || card.dataset.cat === filter) {
+        if (card.dataset.cat === filter) {
           card.classList.remove('cp-card--hidden');
         } else {
           card.classList.add('cp-card--hidden');
