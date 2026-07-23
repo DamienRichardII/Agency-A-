@@ -1,10 +1,45 @@
 // admin.js — Agency A
 // Back-office administration : clients, projets, images, documents, messages, accès
 
+// ── Carte d'erreur fatale ──
+function showFatalError(reason) {
+  const el = document.getElementById('adminLoading');
+  if (!el) return;
+  el.innerHTML = `
+    <div style="max-width:480px;margin:0 auto;padding:40px 32px;background:#fff;border:1px solid rgba(17,17,17,.08);border-radius:8px;text-align:left">
+      <p style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#786d63;margin:0 0 12px">Administration</p>
+      <h2 style="font-family:Georgia,serif;font-size:22px;font-weight:400;color:#111;margin:0 0 12px">Impossible de charger l'administration</h2>
+      <p style="font-size:14px;color:#39332e;line-height:1.6;margin:0 0 24px">${reason || 'Une erreur inattendue s\'est produite.'}</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <button onclick="location.reload()" style="padding:10px 20px;background:#111;color:#f8f2ea;border:none;font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer">Réessayer</button>
+        <a href="espace-client.html" style="padding:10px 20px;border:1px solid rgba(17,17,17,.25);color:#111;font-size:11px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;display:inline-flex;align-items:center">Retour à la connexion</a>
+      </div>
+    </div>`;
+}
+
 (async function () {
+  console.log('[ADMIN] Initialisation');
+
+  // ── Guard window.sb ──
+  if (!window.sb) {
+    console.error('[ADMIN] window.sb non disponible — supabase/config.js absent ou mal chargé');
+    showFatalError('Client Supabase non initialisé. Vérifiez que <code>supabase/config.js</code> est bien présent.');
+    return;
+  }
+
   // ── Protection admin ──
-  const ctx = await Auth.protect({ adminOnly: true });
-  if (!ctx) return;
+  let ctx;
+  try {
+    ctx = await Auth.protect({ adminOnly: true });
+  } catch (err) {
+    console.error('[ADMIN] Auth.protect() erreur :', err);
+    showFatalError('Erreur d\'authentification : ' + (err.message || err));
+    return;
+  }
+  if (!ctx) return; // Auth.protect a redirigé
+
+  console.log('[ADMIN] Session récupérée');
+  console.log('[ADMIN] Profil récupéré :', ctx.profile?.role);
 
   const { profile: adminProfile } = ctx;
   const adminId = adminProfile.id;
@@ -867,16 +902,27 @@
   });
 
   // ════════════════════════════════════════
-  // INIT
+  // INIT — chargement parallèle robuste
   // ════════════════════════════════════════
-  await Promise.all([
-    loadOverview(),
-    loadClients(),
-    loadProjects(),
-    loadAllMessages(),
-    loadAllAccess(),
-    loadInquiries()
+  async function safeLoad(name, fn) {
+    console.log('[ADMIN] Chargement ' + name);
+    try {
+      await fn();
+    } catch (err) {
+      console.error('[ADMIN] Erreur ' + name + ' :', err.message, err.stack);
+    }
+  }
+
+  await Promise.allSettled([
+    safeLoad('Overview',  loadOverview),
+    safeLoad('Clients',   loadClients),
+    safeLoad('Projects',  loadProjects),
+    safeLoad('Messages',  loadAllMessages),
+    safeLoad('Access',    loadAllAccess),
+    safeLoad('Inquiries', loadInquiries),
   ]);
+
+  console.log('[ADMIN] Initialisation terminée');
 
   // Realtime : nouveaux messages
   window.sb

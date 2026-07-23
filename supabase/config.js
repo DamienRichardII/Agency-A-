@@ -1,0 +1,4 @@
+window.AGENCY_A_SUPABASE_CONFIG = {
+  url: 'https://ehxwuhxedrjmsncbhtvn.supabase.co',
+  anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVoeHd1aHhlZHJqbXNuY2JodHZuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU3NDUwNTksImV4cCI6MjA5MTMyMTA1OX0.O8yIvAZdAaxGmfCqIeuQuAplgj0fwOgre4udx9IlHVg'
+};
