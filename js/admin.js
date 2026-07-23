@@ -1,6 +1,8 @@
 // admin.js — Agency A
 // Back-office administration : clients, projets, images, documents, messages, accès
 
+const BACKEND = 'https://web-production-b0b3e.up.railway.app';
+
 // ── Carte d'erreur fatale ──
 function showFatalError(reason) {
   const el = document.getElementById('adminLoading');
@@ -103,6 +105,35 @@ function showFatalError(reason) {
     if (isOk) setTimeout(() => { el.textContent = ''; }, 4000);
   }
 
+  // ── Appels API backend admin (avec JWT Supabase) ──
+  async function callAdminAPI(endpoint, body) {
+    const { data: { session } } = await window.sb.auth.getSession();
+    const token = session?.access_token;
+    if (!token) throw new Error('Session expirée. Reconnectez-vous.');
+    const resp = await fetch(BACKEND + endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token,
+      },
+      body: JSON.stringify(body),
+    });
+    const json = await resp.json();
+    if (!resp.ok || json.error) throw new Error(json.error || 'Erreur serveur.');
+    return json;
+  }
+
+  // ── Badge statut compte client ──
+  function accountStatusBadge(c) {
+    if (c.last_sign_in_at) {
+      return '<span style="display:inline-block;padding:3px 10px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;border-radius:20px;background:rgba(76,175,134,.12);color:#2a7a5a;border:1px solid rgba(76,175,134,.3)">Actif</span>';
+    }
+    if (c.invitation_sent_at) {
+      return '<span style="display:inline-block;padding:3px 10px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;border-radius:20px;background:rgba(212,184,155,.25);color:#6a4e3b;border:1px solid rgba(212,184,155,.5)">Invitation envoyée</span>';
+    }
+    return '<span style="display:inline-block;padding:3px 10px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;border-radius:20px;background:rgba(17,17,17,.06);color:#786d63;border:1px solid rgba(17,17,17,.1)">Non invité</span>';
+  }
+
   // ── Shared state ──
   let allClients  = [];
   let allProjects = [];
@@ -172,19 +203,35 @@ function showFatalError(reason) {
 
     const tbody = document.getElementById('clientsTableBody');
     if (!allClients.length) {
-      tbody.innerHTML = '<tr><td colspan="5" class="empty-state">Aucun client.</td></tr>';
+      tbody.innerHTML = '<tr><td colspan="6" class="empty-state">Aucun client.</td></tr>';
       return;
     }
 
     tbody.innerHTML = allClients.map(c => {
-      const name = [c.first_name, c.last_name].filter(Boolean).join(' ') || '—';
+      const name     = [c.first_name, c.last_name].filter(Boolean).join(' ') || '—';
+      const emailSafe = esc(c.email || '');
+      const firstSafe = esc(c.first_name || '');
+      const idSafe   = esc(c.id);
+
+      // Bouton d'action selon le statut du compte
+      let inviteBtn;
+      if (!c.invitation_sent_at) {
+        inviteBtn = `<button class="action-btn" onclick="sendClientInvite('${idSafe}','${emailSafe}','${firstSafe}')">Envoyer invitation</button>`;
+      } else if (!c.last_sign_in_at) {
+        inviteBtn = `<button class="action-btn" onclick="resendClientInvite('${emailSafe}','${firstSafe}')">Renvoyer invitation</button>`;
+      } else {
+        inviteBtn = `<button class="action-btn" onclick="resetClientPassword('${emailSafe}','${firstSafe}')">Réinitialiser MDP</button>`;
+      }
+
       return `<tr>
         <td><strong>${esc(name)}</strong></td>
         <td>${esc(c.email || '—')}</td>
         <td>${pMap[c.id] || 0}</td>
+        <td>${accountStatusBadge(c)}</td>
         <td>${fmtDate(c.created_at)}</td>
-        <td>
-          <button class="action-btn" onclick="viewClientProjects('${c.id}','${esc(name)}')">Voir projets →</button>
+        <td style="display:flex;gap:6px;flex-wrap:wrap">
+          ${inviteBtn}
+          <button class="action-btn" onclick="viewClientProjects('${idSafe}','${esc(name)}')">Voir projets →</button>
         </td>
       </tr>`;
     }).join('');
@@ -197,48 +244,68 @@ function showFatalError(reason) {
     renderProjectsTable(allProjects.filter(p => p.client_id === clientId));
   };
 
-  // Nouveau client
+  // Nouveau client — invitation via backend (service role)
   document.getElementById('newClientBtn')?.addEventListener('click', () => openModal('modalNewClient'));
   document.getElementById('newClientForm')?.addEventListener('submit', async e => {
     e.preventDefault();
-    const email = document.getElementById('nc_email').value.trim();
+    const email      = document.getElementById('nc_email').value.trim();
+    const first_name = document.getElementById('nc_first_name').value.trim();
+    const last_name  = document.getElementById('nc_last_name').value.trim();
+    const phone      = document.getElementById('nc_phone').value.trim();
+    const company    = document.getElementById('nc_company').value.trim();
     if (!email) return;
 
-    const meta = {
-      first_name: document.getElementById('nc_first_name').value.trim(),
-      last_name:  document.getElementById('nc_last_name').value.trim(),
-      role: 'client'
-    };
+    const btn = e.target.querySelector('button[type="submit"]');
+    if (btn) btn.disabled = true;
 
     try {
-      // signUp crée le compte et envoie l'email de confirmation
-      const { error } = await window.sb.auth.signUp({
-        email,
-        password: crypto.randomUUID(), // mot de passe temporaire aléatoire
-        options: {
-          data: meta,
-          emailRedirectTo: window.location.origin + '/espace-client.html'
-        }
-      });
-      if (error) throw error;
+      await callAdminAPI('/api/admin/invite-client', { email, first_name, last_name, phone, company });
 
-      // Mettre à jour le profil avec les infos supplémentaires
-      await window.sb.from('profiles').upsert({
-        email,
-        first_name: meta.first_name,
-        last_name:  meta.last_name,
-        phone:      document.getElementById('nc_phone').value.trim(),
-        company:    document.getElementById('nc_company').value.trim(),
-        role: 'client'
-      }, { onConflict: 'email' });
-
-      feedback('newClientFeedback', 'Compte créé. Un email de confirmation a été envoyé à ' + email, true);
+      feedback('newClientFeedback',
+        'Invitation envoyée à ' + email + '. Le client définira son mot de passe via le lien reçu.', true);
       document.getElementById('newClientForm').reset();
-      setTimeout(() => { closeModal('modalNewClient'); loadClients(); }, 2500);
+      setTimeout(() => { closeModal('modalNewClient'); loadClients(); }, 3000);
     } catch (err) {
-      feedback('newClientFeedback', 'Erreur : ' + (err.message || 'Impossible de créer le compte.'), false);
+      feedback('newClientFeedback', 'Erreur : ' + (err.message || 'Impossible d\'envoyer l\'invitation.'), false);
+    } finally {
+      if (btn) btn.disabled = false;
     }
   });
+
+  // ── Envoyer invitation (client sans invitation_sent_at) ──
+  window.sendClientInvite = async function(clientId, email, firstName) {
+    if (!confirm('Envoyer une invitation à ' + email + ' ?')) return;
+    try {
+      await callAdminAPI('/api/admin/invite-client', { email, first_name: firstName });
+      alert('Invitation envoyée à ' + email);
+      loadClients();
+    } catch (err) {
+      alert('Erreur : ' + err.message);
+    }
+  };
+
+  // ── Renvoyer invitation (client invité mais pas activé) ──
+  window.resendClientInvite = async function(email, firstName) {
+    if (!confirm('Renvoyer l\'invitation à ' + email + ' ?')) return;
+    try {
+      await callAdminAPI('/api/admin/resend-invite', { email, first_name: firstName });
+      alert('Invitation renvoyée à ' + email);
+      loadClients();
+    } catch (err) {
+      alert('Erreur : ' + err.message);
+    }
+  };
+
+  // ── Réinitialiser mot de passe (client actif) ──
+  window.resetClientPassword = async function(email, firstName) {
+    if (!confirm('Envoyer un lien de réinitialisation de mot de passe à ' + email + ' ?')) return;
+    try {
+      await callAdminAPI('/api/admin/reset-password', { email, first_name: firstName });
+      alert('Email de réinitialisation envoyé à ' + email);
+    } catch (err) {
+      alert('Erreur : ' + err.message);
+    }
+  };
 
   // ════════════════════════════════════════
   // PROJETS

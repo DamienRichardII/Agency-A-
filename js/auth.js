@@ -48,6 +48,13 @@ const Auth = {
     const { data, error } = await window.sb.auth.signInWithPassword({ email, password });
     if (error) throw error;
 
+    // Mettre à jour last_sign_in_at dans profiles
+    try {
+      await window.sb.from('profiles')
+        .update({ last_sign_in_at: new Date().toISOString() })
+        .eq('id', data.user.id);
+    } catch (_) { /* non bloquant */ }
+
     const profile = await Auth.getProfile(data.user.id);
     if (profile?.role === 'admin') {
       window.location.href = 'admin.html';

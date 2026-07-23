@@ -82,6 +82,15 @@
       margin-top: 10px;
     }
     .reset-success.visible { display: block; }
+
+    /* Formulaire de définition de mot de passe (invitation / récupération) */
+    #setPasswordSection { max-width: 560px; }
+    .sp-hint {
+      font-size: 12px;
+      color: var(--sand);
+      opacity: .65;
+      margin-top: 8px;
+    }
   </style>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -160,7 +169,37 @@
   </section>
 
   <section class="section" style="padding-top:0;padding-bottom:64px">
-    <div class="container login-grid">
+
+    <!-- Formulaire de définition de mot de passe (invitation / réinitialisation) -->
+    <div class="container" id="setPasswordSection" style="display:none">
+      <div class="login-block dark reveal">
+        <p class="eyebrow">Première connexion</p>
+        <h3>Définissez votre mot de passe</h3>
+        <p class="lead">Choisissez un mot de passe sécurisé pour accéder à votre espace client Agency A.</p>
+
+        <form id="setPasswordForm" style="margin-top:22px" novalidate>
+          <div class="form-grid">
+            <div class="field">
+              <label for="spPassword">Nouveau mot de passe</label>
+              <input type="password" id="spPassword" placeholder="········" autocomplete="new-password" required>
+              <p class="sp-hint">8 caractères minimum</p>
+            </div>
+            <div class="field">
+              <label for="spConfirm">Confirmer le mot de passe</label>
+              <input type="password" id="spConfirm" placeholder="········" autocomplete="new-password" required>
+            </div>
+          </div>
+          <div id="spError" class="login-error" role="alert"></div>
+          <div style="margin-top:20px">
+            <button type="submit" id="spBtn" class="btn" style="border-color:rgba(234,217,199,.45);color:#ead9c7">
+              Accéder à mon espace
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="container login-grid" id="loginGrid">
 
       <!-- Bloc connexion -->
       <div class="login-block dark reveal">
@@ -331,74 +370,143 @@
 <script src="js/auth.js"></script>
 <script>
 (async function () {
-  // Redirige vers dashboard si déjà connecté
-  await Auth.redirectIfLoggedIn();
+  // ── Détecter le flux d'invitation ou de récupération de mot de passe ──
+  const hashParams = new URLSearchParams(window.location.hash.slice(1));
+  const authType   = hashParams.get('type');
+  const isAuthFlow = authType === 'invite' || authType === 'recovery';
 
-  const form     = document.getElementById('loginForm');
-  const btn      = document.getElementById('loginBtn');
-  const errBox   = document.getElementById('loginError');
-  const forgotBtn = document.getElementById('forgotBtn');
-  const resetMsg  = document.getElementById('resetSuccess');
+  if (isAuthFlow) {
+    // ──────────────────────────────────────────────────────────────
+    // FLUX INVITATION / RÉINITIALISATION — définir un nouveau mot de passe
+    // Supabase (detectSessionInUrl:true) traite automatiquement le hash
+    // et établit une session via onAuthStateChange
+    // ──────────────────────────────────────────────────────────────
+    document.getElementById('loginGrid').style.display          = 'none';
+    document.getElementById('setPasswordSection').style.display = 'block';
 
-  function showError(msg) {
-    errBox.textContent = msg;
-    errBox.classList.add('visible');
-  }
-  function clearError() {
-    errBox.classList.remove('visible');
-    errBox.textContent = '';
-  }
+    const spForm  = document.getElementById('setPasswordForm');
+    const spBtn   = document.getElementById('spBtn');
+    const spError = document.getElementById('spError');
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    clearError();
+    spForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      spError.classList.remove('visible');
 
-    const email    = document.getElementById('loginEmail').value.trim();
-    const password = document.getElementById('loginPassword').value;
+      const password = document.getElementById('spPassword').value;
+      const confirm  = document.getElementById('spConfirm').value;
 
-    if (!email || !password) {
-      showError('Veuillez renseigner votre email et votre mot de passe.');
-      return;
-    }
-
-    btn.classList.add('btn-loading');
-    btn.textContent = 'Connexion en cours';
-
-    try {
-      await Auth.login(email, password);
-      // Auth.login redirige — on n'arrive pas ici en cas de succès
-    } catch (err) {
-      btn.classList.remove('btn-loading');
-      btn.textContent = 'Accéder à mon espace';
-
-      if (err.message?.includes('Invalid login credentials')) {
-        showError('Identifiants incorrects. Vérifiez votre email et votre mot de passe.');
-      } else if (err.message?.includes('Email not confirmed')) {
-        showError('Votre compte n\'est pas encore confirmé. Vérifiez votre boîte mail.');
-      } else if (err.message?.includes('Too many requests')) {
-        showError('Trop de tentatives. Veuillez patienter quelques minutes avant de réessayer.');
-      } else {
-        showError('Une erreur est survenue. Veuillez réessayer ou contacter Agency A.');
+      if (password.length < 8) {
+        spError.textContent = 'Le mot de passe doit contenir au moins 8 caractères.';
+        spError.classList.add('visible');
+        return;
       }
-    }
-  });
+      if (password !== confirm) {
+        spError.textContent = 'Les deux mots de passe ne correspondent pas.';
+        spError.classList.add('visible');
+        return;
+      }
 
-  forgotBtn.addEventListener('click', async () => {
-    const email = document.getElementById('loginEmail').value.trim();
-    if (!email) {
-      showError('Saisissez votre adresse email dans le champ ci-dessus, puis cliquez sur « Mot de passe oublié ».');
-      return;
+      spBtn.disabled    = true;
+      spBtn.textContent = 'Enregistrement…';
+
+      try {
+        // Mettre à jour le mot de passe (l'utilisateur est signé via le lien)
+        const { error: updateErr } = await window.sb.auth.updateUser({ password });
+        if (updateErr) throw updateErr;
+
+        // Marquer le compte comme activé dans profiles
+        const { data: { user } } = await window.sb.auth.getUser();
+        if (user) {
+          await window.sb.from('profiles')
+            .update({ last_sign_in_at: new Date().toISOString() })
+            .eq('id', user.id);
+          const profile = await Auth.getProfile(user.id);
+          window.location.href = profile?.role === 'admin' ? 'admin.html' : 'dashboard-client.html';
+        } else {
+          window.location.href = 'dashboard-client.html';
+        }
+      } catch (err) {
+        spBtn.disabled    = false;
+        spBtn.textContent = 'Accéder à mon espace';
+        spError.textContent = err.message?.includes('expired')
+          ? 'Ce lien a expiré. Contactez Agency A pour recevoir un nouveau lien.'
+          : (err.message || 'Une erreur est survenue. Le lien a peut-être expiré.');
+        spError.classList.add('visible');
+      }
+    });
+
+  } else {
+    // ──────────────────────────────────────────────────────────────
+    // FLUX NORMAL — connexion par email + mot de passe
+    // ──────────────────────────────────────────────────────────────
+    await Auth.redirectIfLoggedIn();
+
+    const form      = document.getElementById('loginForm');
+    const btn       = document.getElementById('loginBtn');
+    const errBox    = document.getElementById('loginError');
+    const forgotBtn = document.getElementById('forgotBtn');
+    const resetMsg  = document.getElementById('resetSuccess');
+
+    function showError(msg) {
+      errBox.textContent = msg;
+      errBox.classList.add('visible');
     }
-    clearError();
-    try {
-      await window.sb.auth.resetPasswordForEmail(email, {
-        redirectTo: window.location.origin + '/espace-client.html'
-      });
-      resetMsg.classList.add('visible');
-    } catch (err) {
-      showError('Impossible d\'envoyer l\'email de réinitialisation. Réessayez plus tard.');
+    function clearError() {
+      errBox.classList.remove('visible');
+      errBox.textContent = '';
     }
-  });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      clearError();
+
+      const email    = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value;
+
+      if (!email || !password) {
+        showError('Veuillez renseigner votre email et votre mot de passe.');
+        return;
+      }
+
+      btn.classList.add('btn-loading');
+      btn.textContent = 'Connexion en cours';
+
+      try {
+        await Auth.login(email, password);
+        // Auth.login redirige — on n'arrive pas ici en cas de succès
+      } catch (err) {
+        btn.classList.remove('btn-loading');
+        btn.textContent = 'Accéder à mon espace';
+
+        if (err.message?.includes('Invalid login credentials')) {
+          showError('Identifiants incorrects. Vérifiez votre email et votre mot de passe.');
+        } else if (err.message?.includes('Email not confirmed')) {
+          showError('Votre compte n\'est pas encore confirmé. Vérifiez votre boîte mail.');
+        } else if (err.message?.includes('Too many requests')) {
+          showError('Trop de tentatives. Veuillez patienter quelques minutes avant de réessayer.');
+        } else {
+          showError('Une erreur est survenue. Veuillez réessayer ou contacter Agency A.');
+        }
+      }
+    });
+
+    forgotBtn.addEventListener('click', async () => {
+      const email = document.getElementById('loginEmail').value.trim();
+      if (!email) {
+        showError('Saisissez votre adresse email dans le champ ci-dessus, puis cliquez sur « Mot de passe oublié ».');
+        return;
+      }
+      clearError();
+      try {
+        await window.sb.auth.resetPasswordForEmail(email, {
+          redirectTo: window.location.origin + '/espace-client.html'
+        });
+        resetMsg.classList.add('visible');
+      } catch (err) {
+        showError('Impossible d\'envoyer l\'email de réinitialisation. Réessayez plus tard.');
+      }
+    });
+  }
 })();
 </script>
 </div>
