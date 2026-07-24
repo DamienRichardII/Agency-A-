@@ -170,6 +170,23 @@
     @media (max-width: 480px) {
       .collab-profiles-grid { grid-template-columns: 1fr; }
     }
+
+    /* ── Hero subtitle ── */
+    .cp-subtitle {
+      font-family: var(--display);
+      font-size: clamp(16px, 2vw, 24px);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--ink-soft);
+      margin: 12px 0 0;
+      line-height: 1.4;
+    }
+
+    /* ── Chips desktop : une seule ligne ── */
+    @media (min-width: 861px) {
+      .collab-filters { flex-wrap: nowrap; gap: 6px; }
+      .collab-filters .chip { padding: 6px 10px; letter-spacing: .1em; }
+    }
   </style>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -237,7 +254,7 @@
       <p class="eyebrow reveal" style="text-align:left;margin-bottom:clamp(16px,2vw,28px)">Collaborateurs Agency A</p>
       <div class="reveal" style="max-width:720px;margin:0 auto">
         <h1 class="display-lg">Le cercle créatif du studio.</h1>
-        <p class="lead">Mannequins, comédiens, photographes, stylistes, hair stylists — les profils qui font les projets d’Agency A. Sélectionnés pour leur sérieux, leur esthétique et leur engagement sur chaque mission.</p>
+        <p class="cp-subtitle">Le cercle créatif du studio c’est tout un réseau qui s’est construit au fil des projets et des collaborations. Un réseau fondé sur la confiance, la fiabilité et la créativité de chacun pour répondre au besoin spécifique de chaque client.</p>
         <div class="hero-ctas" style="margin-top:28px;display:flex;gap:14px;flex-wrap:wrap;justify-content:center">
           <a href="#partner-form" class="btn btn-primary">Rejoignez-nous</a>
         </div>
@@ -374,6 +391,7 @@
           <span class="collab-tag">Événementiel</span>
         </div>
       </div>
+      <p style="font-family:var(--body);font-size:clamp(13px,1.2vw,15px);color:var(--muted);line-height:1.7;margin:0">Chaque créatif a sa spécialisation et son univers artistique, permettant de satisfaire chacune de vos demandes.</p>
     </div>
   </section>
 
