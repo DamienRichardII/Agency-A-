@@ -263,10 +263,10 @@ main{display:block}
 .rv-track{display:flex;width:max-content;animation:rv-move 90s linear infinite}
 .rv-track:hover{animation-play-state:paused}
 @keyframes rv-move{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.rv-item{flex:0 0 clamp(380px,42vw,580px);padding:clamp(32px,3.5vw,52px) clamp(28px,3vw,44px);border-right:1px solid rgba(248,242,234,.15);display:flex;flex-direction:column;gap:20px;transition:background .25s}
+.rv-item{flex:0 0 clamp(600px,72vw,960px);padding:clamp(32px,3.5vw,52px) clamp(28px,3vw,44px);border-right:1px solid rgba(248,242,234,.15);display:flex;flex-direction:column;gap:20px;transition:background .25s}
 .rv-item:hover{background:#5a3f2e}
-@media(max-width:860px){.rv-item{flex:0 0 clamp(280px,75vw,400px)}}
-@media(max-width:600px){.rv-item{flex:0 0 85vw}}
+@media(max-width:860px){.rv-item{flex:0 0 clamp(320px,85vw,600px)}}
+@media(max-width:600px){.rv-item{flex:0 0 92vw}}
 .rv-stars{font-size:11px;letter-spacing:3px;color:var(--sand);opacity:.85}
 .rv-quote{font-family:var(--display);font-size:clamp(16px,1.6vw,21px);font-style:italic;font-weight:300;color:var(--cream);line-height:1.65;margin:0;flex:1}
 .rv-author{font-family:var(--body);font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:rgba(248,242,234,.6);border-top:1px solid rgba(248,242,234,.12);padding-top:16px;margin-top:auto}
