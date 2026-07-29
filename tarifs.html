@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tarifs — Agency A</title>
-  <meta name="description" content="Tarifs Agency A — Image de marque, Book Signature, Digitals, Formule Beauté, Formule Edito, Reportage. Demandes sur devis.">
+  <title>Catalogue Prestations — Agency A</title>
+  <meta name="description" content="Découvrez le catalogue de prestations Agency A — Books, Portraits, Mode, Marques & Produits, Événements. Direction artistique premium, Paris.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -13,19 +13,570 @@
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Agency A">
-  <meta property="og:title" content="Tarifs — Agency A">
-  <meta property="og:description" content="Découvrez les formules et tarifs Agency A pour books mannequin, shooting corporate, shooting mode.">
+  <meta property="og:title" content="Catalogue Prestations — Agency A">
+  <meta property="og:description" content="Découvrez le catalogue de prestations Agency A — Books, Portraits, Mode, Marques & Produits, Événements.">
   <meta property="og:image" content="assets/og-image.jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Tarifs — Agency A">
-  <meta name="twitter:description" content="Découvrez les formules et tarifs Agency A pour books mannequin, shooting corporate, shooting mode.">
-  <meta name="twitter:image" content="assets/og-image-twitter.jpg">
+  <style>
+    /* ══════════════════════════════════════════════════
+       TARIFS — Catalogue Premium Agency A
+    ══════════════════════════════════════════════════ */
+
+    /* ── Hero ── */
+    .tr-hero-intro {
+      max-width: 560px;
+    }
+    .tr-hero-intro .display-lg {
+      margin: 0;
+    }
+    .tr-hero-intro .lead {
+      color: var(--ink-soft);
+      margin: 18px 0 0;
+      max-width: 460px;
+    }
+
+    /* ── Category sticky nav ── */
+    .tr-cat-nav {
+      position: sticky;
+      top: 78px;
+      z-index: 90;
+      background: rgba(253,250,247,.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+    .tr-cat-nav-inner {
+      width: min(calc(100% - 40px), var(--max));
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 0;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .tr-cat-nav-inner::-webkit-scrollbar { display: none; }
+    .tr-cat-link {
+      display: inline-flex;
+      align-items: center;
+      padding: 18px 24px;
+      font-family: var(--body);
+      font-size: 10px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: color .2s, border-color .2s;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    .tr-cat-link:hover { color: var(--ink); }
+    .tr-cat-link.active { color: var(--ink); border-bottom-color: #6a4e3b; }
+
+    /* ── Category section ── */
+    .tr-category {
+      padding: clamp(64px, 8vw, 112px) 0;
+      border-top: 1px solid var(--line);
+    }
+    .tr-category:first-of-type { border-top: none; }
+    .tr-cat-header {
+      margin-bottom: clamp(36px, 5vw, 56px);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: end;
+    }
+    .tr-cat-header-left .eyebrow { margin-bottom: 12px; }
+    .tr-cat-title {
+      font-family: var(--display);
+      font-size: clamp(28px, 4vw, 52px);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--ink);
+      margin: 0;
+      line-height: 1.1;
+    }
+    .tr-cat-tagline {
+      font-family: var(--body);
+      font-size: clamp(14px, 1.4vw, 17px);
+      font-weight: 300;
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.7;
+      max-width: 360px;
+    }
+
+    /* ── Cards grid ── */
+    .tr-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(14px, 2vw, 22px);
+    }
+
+    /* ── Card ── */
+    .tr-card {
+      background: linear-gradient(160deg, #fbf7f2 0%, #f2e8da 100%);
+      border: 1px solid rgba(17,17,17,.09);
+      padding: clamp(28px, 3vw, 40px) clamp(24px, 2.5vw, 36px) clamp(24px, 2.5vw, 32px);
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      cursor: pointer;
+      transition: transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .tr-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: #6a4e3b;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .35s var(--ease);
+    }
+    .tr-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(17,17,17,.1);
+      border-color: rgba(106,78,59,.2);
+    }
+    .tr-card:hover::before { transform: scaleX(1); }
+
+    .tr-card-eye {
+      font-family: var(--body);
+      font-size: 9px;
+      letter-spacing: .26em;
+      text-transform: uppercase;
+      color: #8d684f;
+      margin: 0 0 14px;
+    }
+    .tr-card-name {
+      font-family: var(--display);
+      font-size: clamp(20px, 2.2vw, 28px);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--ink);
+      margin: 0 0 14px;
+      line-height: 1.15;
+    }
+    .tr-card-summary {
+      font-family: var(--body);
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--ink-soft);
+      line-height: 1.75;
+      margin: 0 0 24px;
+      flex: 1;
+    }
+    .tr-card-divider {
+      height: 1px;
+      background: rgba(17,17,17,.08);
+      margin-bottom: 20px;
+    }
+    .tr-card-price {
+      font-family: var(--body);
+      font-size: 11px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 16px;
+    }
+    .tr-card-price strong {
+      color: var(--ink);
+      font-weight: 500;
+    }
+    .tr-card-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--body);
+      font-size: 10px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: #6a4e3b;
+      font-weight: 500;
+      transition: gap .25s var(--ease);
+    }
+    .tr-card:hover .tr-card-cta { gap: 14px; }
+    .tr-card-cta svg { transition: transform .25s var(--ease); }
+    .tr-card:hover .tr-card-cta svg { transform: translateX(4px); }
+
+    /* ── CTA band ── */
+    .tr-cta-band {
+      background: linear-gradient(135deg, #6a4e3b 0%, #5a3f2e 100%);
+      padding: clamp(64px, 8vw, 96px) 0;
+      text-align: center;
+    }
+    .tr-cta-band .eyebrow { color: var(--sand); margin-bottom: 16px; }
+    .tr-cta-band h2 {
+      font-family: var(--display);
+      font-size: clamp(26px, 3.5vw, 46px);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--cream);
+      margin: 0 0 12px;
+    }
+    .tr-cta-band p {
+      color: rgba(248,242,234,.72);
+      font-size: 15px;
+      line-height: 1.7;
+      max-width: 440px;
+      margin: 0 auto 32px;
+    }
+    .tr-cta-band .btn-outline-light {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      border: 1px solid rgba(248,242,234,.4);
+      color: var(--cream);
+      font-family: var(--body);
+      font-size: 11px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background .25s, border-color .25s;
+      margin: 0 8px;
+    }
+    .tr-cta-band .btn-outline-light:hover {
+      background: rgba(248,242,234,.1);
+      border-color: rgba(248,242,234,.7);
+    }
+
+    /* ══════════════════════════════════════════════════
+       MODAL PREMIUM
+    ══════════════════════════════════════════════════ */
+    .tr-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      background: rgba(11,9,7,.78);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(16px, 3vw, 40px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s var(--ease);
+    }
+    .tr-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .tr-modal {
+      background: #fdfaf7;
+      max-width: 900px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      transform: translateY(32px) scale(.98);
+      transition: transform .35s var(--ease);
+      scrollbar-width: thin;
+      scrollbar-color: rgba(17,17,17,.1) transparent;
+    }
+    .tr-overlay.open .tr-modal {
+      transform: translateY(0) scale(1);
+    }
+    .tr-modal::-webkit-scrollbar { width: 4px; }
+    .tr-modal::-webkit-scrollbar-track { background: transparent; }
+    .tr-modal::-webkit-scrollbar-thumb { background: rgba(17,17,17,.15); border-radius: 2px; }
+
+    /* ── Modal image placeholder ── */
+    .tr-modal-img {
+      width: 100%;
+      aspect-ratio: 16 / 5;
+      background: linear-gradient(135deg, #4a3326 0%, #6a4e3b 45%, #d4b89b 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .tr-modal-img-letter {
+      font-family: 'Montserrat', var(--body);
+      font-size: clamp(64px, 10vw, 120px);
+      font-weight: 800;
+      color: rgba(253,250,247,.12);
+      letter-spacing: .15em;
+      user-select: none;
+    }
+    .tr-modal-img-label {
+      position: absolute;
+      bottom: 20px;
+      left: 28px;
+      font-family: var(--body);
+      font-size: 9px;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: rgba(248,242,234,.55);
+    }
+
+    /* ── Modal close ── */
+    .tr-modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 40px;
+      height: 40px;
+      background: rgba(11,9,7,.4);
+      border: none;
+      color: var(--cream);
+      font-size: 22px;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      transition: background .2s;
+      border-radius: 0;
+    }
+    .tr-modal-close:hover { background: rgba(11,9,7,.65); }
+
+    /* ── Modal body ── */
+    .tr-modal-body {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 0;
+    }
+    .tr-modal-main {
+      padding: clamp(32px, 4vw, 52px) clamp(28px, 3.5vw, 48px);
+      border-right: 1px solid var(--line);
+    }
+    .tr-modal-sidebar {
+      padding: clamp(28px, 3vw, 40px) clamp(24px, 2.5vw, 36px);
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .tr-modal-eyebrow {
+      font-family: var(--body);
+      font-size: 9px;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: #8d684f;
+      margin: 0 0 12px;
+    }
+    .tr-modal-title {
+      font-family: var(--display);
+      font-size: clamp(26px, 3.5vw, 44px);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--ink);
+      margin: 0 0 20px;
+      line-height: 1.1;
+    }
+    .tr-modal-desc {
+      font-family: var(--body);
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--ink-soft);
+      line-height: 1.85;
+      margin: 0 0 36px;
+    }
+
+    /* Sections inside modal main */
+    .tr-section {
+      margin-bottom: 32px;
+    }
+    .tr-section-title {
+      font-family: var(--body);
+      font-size: 9px;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line);
+    }
+    .tr-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .tr-list li {
+      font-family: var(--body);
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--ink-soft);
+      line-height: 1.6;
+      padding-left: 16px;
+      position: relative;
+    }
+    .tr-list li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--sand);
+      font-size: 11px;
+    }
+    .tr-step {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .tr-step-num {
+      font-family: var(--display);
+      font-size: 13px;
+      color: var(--sand);
+      flex-shrink: 0;
+      width: 20px;
+      margin-top: 1px;
+    }
+    .tr-step-text {
+      font-family: var(--body);
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--ink-soft);
+      line-height: 1.6;
+    }
+    .tr-variable {
+      background: linear-gradient(180deg, #f8f2ea, #ede3d5);
+      border: 1px solid rgba(17,17,17,.08);
+      padding: 16px 20px;
+      font-family: var(--body);
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--ink-soft);
+      line-height: 1.7;
+    }
+    .tr-faq-item { margin-bottom: 16px; }
+    .tr-faq-q {
+      font-family: var(--body);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--ink);
+      margin: 0 0 6px;
+    }
+    .tr-faq-a {
+      font-family: var(--body);
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    /* ── Modal sidebar ── */
+    .tr-price-block {
+      background: linear-gradient(160deg, #6a4e3b, #5a3f2e);
+      padding: 24px;
+      color: var(--cream);
+      text-align: center;
+    }
+    .tr-price-label {
+      font-family: var(--body);
+      font-size: 9px;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: rgba(248,242,234,.55);
+      margin: 0 0 8px;
+    }
+    .tr-price-value {
+      font-family: var(--display);
+      font-size: clamp(22px, 2.5vw, 30px);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--cream);
+      margin: 0 0 20px;
+    }
+    .tr-price-block .btn {
+      width: 100%;
+      text-align: center;
+      justify-content: center;
+      background: rgba(253,250,247,.15);
+      border: 1px solid rgba(253,250,247,.3);
+      color: var(--cream);
+      margin-bottom: 10px;
+    }
+    .tr-price-block .btn:hover {
+      background: rgba(253,250,247,.25);
+      border-color: rgba(253,250,247,.6);
+    }
+    .tr-price-block .btn-ghost {
+      display: block;
+      width: 100%;
+      text-align: center;
+      font-family: var(--body);
+      font-size: 10px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(248,242,234,.6);
+      text-decoration: none;
+      padding: 10px 0;
+      transition: color .2s;
+    }
+    .tr-price-block .btn-ghost:hover { color: var(--cream); }
+
+    .tr-variantes-block { }
+    .tr-variantes-title {
+      font-family: var(--body);
+      font-size: 9px;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line);
+    }
+    .tr-variante {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .tr-variante:last-child { border-bottom: none; }
+    .tr-variante-label {
+      font-family: var(--body);
+      font-size: 10px;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--ink);
+      font-weight: 500;
+      margin: 0 0 4px;
+    }
+    .tr-variante-desc {
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.5;
+      margin: 0 0 4px;
+    }
+    .tr-variante-price {
+      font-size: 11px;
+      color: #6a4e3b;
+      font-weight: 500;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 860px) {
+      .tr-cards { grid-template-columns: repeat(2, 1fr); }
+      .tr-cat-header { grid-template-columns: 1fr; }
+      .tr-modal-body { grid-template-columns: 1fr; }
+      .tr-modal-main { border-right: none; border-bottom: 1px solid var(--line); }
+      .tr-modal-sidebar {
+        position: static;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+      .tr-price-block { flex: 1 1 240px; }
+      .tr-variantes-block { flex: 1 1 240px; }
+    }
+    @media (max-width: 520px) {
+      .tr-cards { grid-template-columns: 1fr; }
+      .tr-cat-link { padding: 14px 16px; }
+      .tr-overlay { padding: 0; align-items: flex-end; }
+      .tr-modal { max-height: 92vh; }
+      .tr-modal-sidebar { flex-direction: column; }
+    }
+  </style>
 </head>
 <body>
 <div class="page-shell">
@@ -35,155 +586,169 @@
     <a href="index.html" class="brand" aria-label="Agency A">
       <img src="assets/logo/logo-dark-transparent.png" alt="Agency A" class="brand-logo">
     </a>
-    <div class="nav-links"><a href="portfolio.html" class="">Portfolio</a>
-<a href="a-propos.html" class="">À propos</a>
-<a href="tarifs.html" class="active">Tarifs</a>
-<a href="humanitaire.html" class="">Humanitaire</a>
-<a href="collaborateurs-partenaires.html">Collaborateurs</a>
-<a href="boutique.html" class="">Boutique</a>
-<a href="espace-client.html" class="">Connexion client</a>
-<a href="contact.html" class="">Contact</a></div>
+    <div class="nav-links">
+      <a href="portfolio.html">Portfolio</a>
+      <a href="a-propos.html">À propos</a>
+      <a href="tarifs.html" class="active">Tarifs</a>
+      <a href="humanitaire.html">Humanitaire</a>
+      <a href="collaborateurs-partenaires.html">Collaborateurs</a>
+      <a href="boutique.html">Boutique</a>
+      <a href="espace-client.html">Connexion client</a>
+      <a href="contact.html">Contact</a>
+    </div>
     <button class="hamburger" id="menuToggle" aria-label="Ouvrir le menu">
       <svg width="28" height="18" viewBox="0 0 28 18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 1h26M1 9h26M1 17h26"/></svg>
     </button>
   </nav>
 </header>
+
 <div class="mobile-menu" id="mobileMenu">
   <div class="mobile-menu-inner">
     <div class="mobile-menu-head"><button class="menu-close" id="menuClose" aria-label="Fermer" style="display:block;color:var(--cream);font-size:34px">×</button></div>
     <a href="index.html" class="mobile-nav-link">Accueil</a>
-<a href="portfolio.html" class="mobile-nav-link">Portfolio</a>
-<a href="a-propos.html" class="mobile-nav-link">À propos</a>
-<a href="tarifs.html" class="mobile-nav-link">Tarifs</a>
-<a href="humanitaire.html" class="mobile-nav-link">Humanitaire</a>
-<a href="collaborateurs-partenaires.html" class="mobile-nav-link">Collaborateurs</a>
-<a href="boutique.html" class="mobile-nav-link">Boutique</a>
-<a href="espace-client.html" class="mobile-nav-link">Connexion client</a>
-<a href="contact.html" class="mobile-nav-link">Contact</a>
+    <a href="portfolio.html" class="mobile-nav-link">Portfolio</a>
+    <a href="a-propos.html" class="mobile-nav-link">À propos</a>
+    <a href="tarifs.html" class="mobile-nav-link">Tarifs</a>
+    <a href="humanitaire.html" class="mobile-nav-link">Humanitaire</a>
+    <a href="collaborateurs-partenaires.html" class="mobile-nav-link">Collaborateurs</a>
+    <a href="boutique.html" class="mobile-nav-link">Boutique</a>
+    <a href="espace-client.html" class="mobile-nav-link">Connexion client</a>
+    <a href="contact.html" class="mobile-nav-link">Contact</a>
   </div>
 </div>
 
-
 <main>
+  <!-- ── Hero ────────────────────────────────────────── -->
   <section class="page-hero">
     <div class="container page-hero-grid">
-      <div class="reveal">
-        <p class="eyebrow">Tarifs</p>
+      <div class="tr-hero-intro reveal">
+        <p class="eyebrow">Catalogue de prestations</p>
+        <h1 class="display-lg">Ce que nous créons ensemble.</h1>
+        <p class="lead">Chaque prestation est pensée comme un projet à part entière — une intention, une mise en scène, un résultat à votre image.</p>
       </div>
       <aside class="page-hero-aside reveal">
         <p class="kicker">Approche</p>
-        <div class="stats-inline"><span>Sur devis</span><span>Sur demande</span><span>Préparation</span><span>Livraison premium</span></div>
+        <div class="stats-inline">
+          <span>Sur mesure</span>
+          <span>Direction artistique</span>
+          <span>Premium</span>
+          <span>Paris & alentours</span>
+        </div>
       </aside>
     </div>
   </section>
-  <section class="section" style="padding-top:24px">
-    <div class="container price-grid" style="grid-template-columns:repeat(3,1fr)"><article class="price-card reveal"><div><div class="price-top"><span class="price-index">01</span><p class="eyebrow">Prestation</p></div><h3>Image de marque</h3><p class="lead">Des images conçues pour installer un univers de marque cohérent, lisible et durable.</p><ul><li>Direction artistique complète</li><li>Shooting studio ou extérieur</li><li>Portraits, produit, détails, ambiance</li><li>Retouche premium & livraison HD</li></ul></div><div class="price-note">Sur devis</div><div style="margin-top:16px"><a href="contact.html" class="btn btn-secondary">Je veux échanger</a></div></article><article class="price-card reveal"><div><div class="price-top"><span class="price-index">02</span><p class="eyebrow">Prestation</p></div><h3>Book Signature</h3><p class="lead">Un book éditorial pour présenter un talent avec justesse, personnalité et exigence.</p><ul><li>Préparation de séance</li><li>Direction de pose</li><li>Sélection d’images fortes</li><li>Livraison pensée pour candidatures</li></ul></div><div class="price-note">Sur demande</div><div style="margin-top:16px"><a href="contact.html" class="btn btn-secondary">Je veux échanger</a></div></article><article class="price-card reveal"><div><div class="price-top"><span class="price-index">03</span><p class="eyebrow">Prestation</p></div><h3>Models Digitals</h3><p class="lead">Des digitals nets, propres et efficaces pour les agences et les castings.</p><ul><li>Fond neutre</li><li>Face, profil, plein pied</li><li>Rendu naturel</li><li>Format standardisé</li></ul></div><div class="price-note">Sur devis</div><div style="margin-top:16px"><a href="contact.html" class="btn btn-secondary">Je veux échanger</a></div></article><article class="price-card reveal"><div><div class="price-top"><span class="price-index">04</span><p class="eyebrow">Prestation</p></div><h3>Formule Beauté</h3><p class="lead">Un portrait beauté plus incarné, plus précis, plus soigné dans son traitement.</p><ul><li>Lumière travaillée</li><li>Direction douce</li><li>Retouche peau avancée</li><li>Livraison éditoriale</li></ul></div><div class="price-note">Sur demande</div><div style="margin-top:16px"><a href="contact.html" class="btn btn-secondary">Je veux échanger</a></div></article><article class="price-card reveal"><div><div class="price-top"><span class="price-index">05</span><p class="eyebrow">Prestation</p></div><h3>Formule Edito</h3><p class="lead">Un projet éditorial complet, de l’intention au rendu final.</p><ul><li>Concept visuel</li><li>Moodboard</li><li>Casting ou coordination</li><li>Livraison finale premium</li></ul></div><div class="price-note">Sur devis</div><div style="margin-top:16px"><a href="contact.html" class="btn btn-secondary">Je veux échanger</a></div></article><article class="price-card reveal"><div><div class="price-top"><span class="price-index">06</span><p class="eyebrow">Prestation</p></div><h3>Reportage</h3><p class="lead">Couvrir un événement, un défilé, une action ou un projet avec l’œil juste et la capacité de restituer une atmosphère.</p><ul><li>Préparation et briefing</li><li>Couverture événementielle ou terrain</li><li>Sélection éditoriale</li><li>Livraison d’une série complète</li><li>Utilisation presse, web ou archives</li></ul></div><div class="price-note">Sur devis</div><div style="margin-top:16px"><a href="contact.html" class="btn btn-secondary">Je veux échanger</a></div></article>
-</div>
-  </section>
-  <section class="section" style="padding-top:0">
-    <div class="container">
-      <div class="reveal" style="max-width:640px;margin-bottom:32px">
-        <p class="eyebrow">Retours clients</p>
-        <h2 class="display-lg">Ce qu’ils en disent.</h2>
-      </div>
-      <div class="reviews-grid">
-        <article class="review-card reveal">
-          <p class="review-text">Anaïs a su me mettre à l’aise dès la première minute. Le résultat dépasse largement ce que j’espérais — j’ai des photos que je vais utiliser pendant des années.</p>
-          <span class="review-author">Elfie D.</span>
-          <span class="review-role">Talent — book signature</span>
-        </article>
-        <article class="review-card reveal">
-          <p class="review-text">Les images sont d’une qualité remarquable. Elles racontent vraiment notre univers de marque — on les utilise sur tous nos supports depuis le lancement.</p>
-          <span class="review-author">Sarah M.</span>
-          <span class="review-role">Fondatrice — image de marque</span>
-        </article>
-        <article class="review-card reveal">
-          <p class="review-text">Un regard juste, une préparation minutieuse, une livraison soignée. Ce n’est pas juste une séance photo — c’est une vraie direction artistique.</p>
-          <span class="review-author">Laura R.</span>
-          <span class="review-role">Créatrice — éditorial beauté</span>
-        </article>
-      </div>
-    </div>
-  </section>
 
-  <section class="section" style="padding-top:0">
-    <div class="container soft-panel reveal" style="padding:34px">
-      <p class="eyebrow">Cadre</p>
-      <h2 class="display-md">Chaque proposition finale dépend du projet, du temps de préparation, du nombre d’images, des usages et du niveau de direction artistique demandé.</h2>
-      <div style="margin-top:20px"><a href="contact.html" class="btn btn-primary">Demander une proposition</a></div>
+  <!-- ── Category nav ────────────────────────────────── -->
+  <nav class="tr-cat-nav" aria-label="Catégories de prestations">
+    <div class="tr-cat-nav-inner" id="catNav">
+      <!-- Injected by JS -->
+    </div>
+  </nav>
+
+  <!-- ── Catalog ─────────────────────────────────────── -->
+  <div id="catalogContainer"></div>
+
+  <!-- ── CTA band ─────────────────────────────────────── -->
+  <section class="tr-cta-band reveal">
+    <div class="container">
+      <p class="eyebrow">Parlons de votre projet</p>
+      <h2>Chaque projet mérite une réponse sur mesure.</h2>
+      <p>Partagez votre vision, nous construisons ensemble la prestation qui lui correspond.</p>
+      <a href="contact.html" class="btn btn-primary btn-outline-light">Prendre contact</a>
+      <a href="contact.html#devis" class="btn btn-outline-light">Demander un devis</a>
     </div>
   </section>
 </main>
 
+<!-- ── Modal ──────────────────────────────────────────── -->
+<div class="tr-overlay" id="trOverlay" role="dialog" aria-modal="true" aria-labelledby="trModalTitle">
+  <div class="tr-modal" id="trModal">
+    <button class="tr-modal-close" id="trClose" aria-label="Fermer">×</button>
+    <div class="tr-modal-img" id="trModalImg">
+      <span class="tr-modal-img-letter" id="trModalLetter">A</span>
+      <span class="tr-modal-img-label" id="trModalImgLabel">Agency A · Catalogue Premium</span>
+    </div>
+    <div class="tr-modal-body">
+      <!-- Main content -->
+      <div class="tr-modal-main">
+        <p class="tr-modal-eyebrow" id="trModalEyebrow"></p>
+        <h2 class="tr-modal-title" id="trModalTitle"></h2>
+        <p class="tr-modal-desc" id="trModalDesc"></p>
 
+        <div class="tr-section">
+          <p class="tr-section-title">Pour qui</p>
+          <ul class="tr-list" id="trModalAudience"></ul>
+        </div>
+
+        <div class="tr-section">
+          <p class="tr-section-title">Déroulement d'une séance</p>
+          <div id="trModalDeroulement"></div>
+        </div>
+
+        <div class="tr-section">
+          <p class="tr-section-title">Ce qui est inclus</p>
+          <ul class="tr-list" id="trModalInclus"></ul>
+        </div>
+
+        <div class="tr-section">
+          <p class="tr-section-title">Pourquoi le prix varie</p>
+          <div class="tr-variable" id="trModalVariable"></div>
+        </div>
+
+        <div class="tr-section">
+          <p class="tr-section-title">Questions fréquentes</p>
+          <div id="trModalFaq"></div>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="tr-modal-sidebar">
+        <div class="tr-price-block">
+          <p class="tr-price-label">Tarif indicatif</p>
+          <p class="tr-price-value" id="trModalPrice"></p>
+          <a href="contact.html" class="btn">Prendre contact</a>
+          <a href="contact.html#devis" class="btn-ghost">Demander un devis</a>
+        </div>
+
+        <div class="tr-variantes-block">
+          <p class="tr-variantes-title">Variantes disponibles</p>
+          <div id="trModalVariantes"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Reviews band ────────────────────────────────────── -->
 <div class="reviews-band" aria-label="Avis clients">
   <div class="container">
     <div class="rv-header">
       <p class="eyebrow">Ce qu'ils disent</p>
       <span class="rv-total">Avis clients vérifiés</span>
     </div>
-        <div class="rv-overflow">
+    <div class="rv-overflow">
       <div class="rv-track">
-        <!-- Set 1 -->
-      <div class="rv-item">
-        <p class="rv-quote">&#171;&nbsp;Ana&#239;s a su me mettre &#224; l&#8217;aise d&#232;s la premi&#232;re seconde. Les photos ont d&#233;pass&#233; toutes mes attentes&nbsp;&#8212; mon book a chang&#233; de niveau du jour au lendemain.&nbsp;&#187;</p>
-        <span class="rv-author">Elfie &middot; Book signature</span>
+        <div class="rv-item"><p class="rv-quote">&#171;&nbsp;Ana&#239;s a su me mettre &#224; l&#8217;aise d&#232;s la premi&#232;re seconde. Les photos ont d&#233;pass&#233; toutes mes attentes&nbsp;&#8212; mon book a chang&#233; de niveau du jour au lendemain.&nbsp;&#187;</p><span class="rv-author">Elfie &middot; Book signature</span></div>
+        <div class="rv-item"><p class="rv-quote">&#171;&nbsp;Les images racontent notre univers de marque mieux qu&#8217;on ne l&#8217;aurait imagin&#233;. On les utilise sur tous nos supports depuis le lancement&nbsp;&#8212; elles travaillent encore pour nous.&nbsp;&#187;</p><span class="rv-author">Cl&#233;mence &middot; Image de marque</span></div>
+        <div class="rv-item"><p class="rv-quote">&#171;&nbsp;Je ne m&#8217;&#233;tais jamais sentie aussi &#224; l&#8217;aise devant un objectif. Le r&#233;sultat est exactement moi&nbsp;&#8212; pas une version arrang&#233;e, la vraie.&nbsp;&#187;</p><span class="rv-author">L&#233;ane &middot; Portrait personnel</span></div>
+        <div class="rv-item"><p class="rv-quote">&#171;&nbsp;Un regard unique, une pr&#233;paration sans faille. Ce n&#8217;est pas juste une s&#233;ance photo&nbsp;&#8212; c&#8217;est une vraie direction artistique, du brief jusqu&#8217;&#224; la livraison.&nbsp;&#187;</p><span class="rv-author">C&#233;line &middot; &#201;ditorial mode</span></div>
+        <div class="rv-item"><p class="rv-quote">&#171;&nbsp;Professionnelle, attentive, cr&#233;ative. Agency A a transform&#233; notre communication visuelle en une seule s&#233;ance. Je recommande les yeux ferm&#233;s.&nbsp;&#187;</p><span class="rv-author">Lucie &middot; Campagne produit</span></div>
+        <div class="rv-item"><p class="rv-quote">&#171;&nbsp;Une exp&#233;rience premium de bout en bout. Ana&#239;s &#233;coute vraiment avant de cadrer&nbsp;&#8212; et &#231;a change absolument tout au r&#233;sultat final.&nbsp;&#187;</p><span class="rv-author">Jade &middot; Shooting marque</span></div>
+        <!-- Set 2 boucle infinie -->
+        <div class="rv-item"><p class="rv-quote">&#171;&nbsp;Ana&#239;s a su me mettre &#224; l&#8217;aise d&#232;s la premi&#232;re seconde. Les photos ont d&#233;pass&#233; toutes mes attentes&nbsp;&#8212; mon book a chang&#233; de niveau du jour au lendemain.&nbsp;&#187;</p><span class="rv-author">Elfie &middot; Book signature</span></div>
+        <div class="rv-item"><p class="rv-quote">&#171;&nbsp;Les images racontent notre univers de marque mieux qu&#8217;on ne l&#8217;aurait imagin&#233;. On les utilise sur tous nos supports depuis le lancement&nbsp;&#8212; elles travaillent encore pour nous.&nbsp;&#187;</p><span class="rv-author">Cl&#233;mence &middot; Image de marque</span></div>
+        <div class="rv-item"><p class="rv-quote">&#171;&nbsp;Je ne m&#8217;&#233;tais jamais sentie aussi &#224; l&#8217;aise devant un objectif. Le r&#233;sultat est exactement moi&nbsp;&#8212; pas une version arrang&#233;e, la vraie.&nbsp;&#187;</p><span class="rv-author">L&#233;ane &middot; Portrait personnel</span></div>
+        <div class="rv-item"><p class="rv-quote">&#171;&nbsp;Un regard unique, une pr&#233;paration sans faille. Ce n&#8217;est pas juste une s&#233;ance photo&nbsp;&#8212; c&#8217;est une vraie direction artistique, du brief jusqu&#8217;&#224; la livraison.&nbsp;&#187;</p><span class="rv-author">C&#233;line &middot; &#201;ditorial mode</span></div>
+        <div class="rv-item"><p class="rv-quote">&#171;&nbsp;Professionnelle, attentive, cr&#233;ative. Agency A a transform&#233; notre communication visuelle en une seule s&#233;ance. Je recommande les yeux ferm&#233;s.&nbsp;&#187;</p><span class="rv-author">Lucie &middot; Campagne produit</span></div>
+        <div class="rv-item"><p class="rv-quote">&#171;&nbsp;Une exp&#233;rience premium de bout en bout. Ana&#239;s &#233;coute vraiment avant de cadrer&nbsp;&#8212; et &#231;a change absolument tout au r&#233;sultat final.&nbsp;&#187;</p><span class="rv-author">Jade &middot; Shooting marque</span></div>
       </div>
-      <div class="rv-item">
-        <p class="rv-quote">&#171;&nbsp;Les images racontent notre univers de marque mieux qu&#8217;on ne l&#8217;aurait imagin&#233;. On les utilise sur tous nos supports depuis le lancement&nbsp;&#8212; elles travaillent encore pour nous.&nbsp;&#187;</p>
-        <span class="rv-author">Cl&#233;mence &middot; Image de marque</span>
-      </div>
-      <div class="rv-item">
-        <p class="rv-quote">&#171;&nbsp;Je ne m&#8217;&#233;tais jamais sentie aussi &#224; l&#8217;aise devant un objectif. Le r&#233;sultat est exactement moi&nbsp;&#8212; pas une version arrang&#233;e, la vraie.&nbsp;&#187;</p>
-        <span class="rv-author">L&#233;ane &middot; Portrait personnel</span>
-      </div>
-      <div class="rv-item">
-        <p class="rv-quote">&#171;&nbsp;Un regard unique, une pr&#233;paration sans faille. Ce n&#8217;est pas juste une s&#233;ance photo&nbsp;&#8212; c&#8217;est une vraie direction artistique, du brief jusqu&#8217;&#224; la livraison.&nbsp;&#187;</p>
-        <span class="rv-author">C&#233;line &middot; &#201;ditorial mode</span>
-      </div>
-      <div class="rv-item">
-        <p class="rv-quote">&#171;&nbsp;Professionnelle, attentive, cr&#233;ative. Agency A a transform&#233; notre communication visuelle en une seule s&#233;ance. Je recommande les yeux ferm&#233;s.&nbsp;&#187;</p>
-        <span class="rv-author">Lucie &middot; Campagne produit</span>
-      </div>
-      <div class="rv-item">
-        <p class="rv-quote">&#171;&nbsp;Une exp&#233;rience premium de bout en bout. Ana&#239;s &#233;coute vraiment avant de cadrer&nbsp;&#8212; et &#231;a change absolument tout au r&#233;sultat final.&nbsp;&#187;</p>
-        <span class="rv-author">Jade &middot; Shooting marque</span>
-      </div>
-        <!-- Set 2 — boucle infinie -->
-      <div class="rv-item">
-        <p class="rv-quote">&#171;&nbsp;Ana&#239;s a su me mettre &#224; l&#8217;aise d&#232;s la premi&#232;re seconde. Les photos ont d&#233;pass&#233; toutes mes attentes&nbsp;&#8212; mon book a chang&#233; de niveau du jour au lendemain.&nbsp;&#187;</p>
-        <span class="rv-author">Elfie &middot; Book signature</span>
-      </div>
-      <div class="rv-item">
-        <p class="rv-quote">&#171;&nbsp;Les images racontent notre univers de marque mieux qu&#8217;on ne l&#8217;aurait imagin&#233;. On les utilise sur tous nos supports depuis le lancement&nbsp;&#8212; elles travaillent encore pour nous.&nbsp;&#187;</p>
-        <span class="rv-author">Cl&#233;mence &middot; Image de marque</span>
-      </div>
-      <div class="rv-item">
-        <p class="rv-quote">&#171;&nbsp;Je ne m&#8217;&#233;tais jamais sentie aussi &#224; l&#8217;aise devant un objectif. Le r&#233;sultat est exactement moi&nbsp;&#8212; pas une version arrang&#233;e, la vraie.&nbsp;&#187;</p>
-        <span class="rv-author">L&#233;ane &middot; Portrait personnel</span>
-      </div>
-      <div class="rv-item">
-        <p class="rv-quote">&#171;&nbsp;Un regard unique, une pr&#233;paration sans faille. Ce n&#8217;est pas juste une s&#233;ance photo&nbsp;&#8212; c&#8217;est une vraie direction artistique, du brief jusqu&#8217;&#224; la livraison.&nbsp;&#187;</p>
-        <span class="rv-author">C&#233;line &middot; &#201;ditorial mode</span>
-      </div>
-      <div class="rv-item">
-        <p class="rv-quote">&#171;&nbsp;Professionnelle, attentive, cr&#233;ative. Agency A a transform&#233; notre communication visuelle en une seule s&#233;ance. Je recommande les yeux ferm&#233;s.&nbsp;&#187;</p>
-        <span class="rv-author">Lucie &middot; Campagne produit</span>
-      </div>
-      <div class="rv-item">
-        <p class="rv-quote">&#171;&nbsp;Une exp&#233;rience premium de bout en bout. Ana&#239;s &#233;coute vraiment avant de cadrer&nbsp;&#8212; et &#231;a change absolument tout au r&#233;sultat final.&nbsp;&#187;</p>
-        <span class="rv-author">Jade &middot; Shooting marque</span>
-      </div>
-      </div>
-    </div>
     </div>
   </div>
-</div></div>
 </div>
 
 <div class="marquee-band" aria-hidden="true">
   <div class="marquee-track">
-    <span>Mode</span><span class="marquee-sep">·</span><span>Produit</span><span class="marquee-sep">·</span><span>Beauté</span><span class="marquee-sep">·</span><span>Culinaire</span><span class="marquee-sep">·</span><span>Talents</span><span class="marquee-sep">·</span><span>Sport</span><span class="marquee-sep">·</span><span>Mode</span><span class="marquee-sep">·</span><span>Produit</span><span class="marquee-sep">·</span><span>Beauté</span><span class="marquee-sep">·</span><span>Culinaire</span><span class="marquee-sep">·</span><span>Talents</span><span class="marquee-sep">·</span><span>Sport</span><span class="marquee-sep">·</span>
+    <span>Mode</span><span class="marquee-sep">·</span><span>Produit</span><span class="marquee-sep">·</span><span>Beauté</span><span class="marquee-sep">·</span><span>Portraits</span><span class="marquee-sep">·</span><span>Talents</span><span class="marquee-sep">·</span><span>Événements</span><span class="marquee-sep">·</span><span>Mode</span><span class="marquee-sep">·</span><span>Produit</span><span class="marquee-sep">·</span><span>Beauté</span><span class="marquee-sep">·</span><span>Portraits</span><span class="marquee-sep">·</span><span>Talents</span><span class="marquee-sep">·</span><span>Événements</span><span class="marquee-sep">·</span>
   </div>
 </div>
 
@@ -194,17 +759,482 @@
         <div class="brand" style="margin-bottom:16px"><img src="assets/logo/logo-white-transparent.png" alt="Agency A" class="brand-logo-footer"></div>
         <p>Donner vie aux images qui racontent votre univers. Studio visuel premium, direction artistique et accompagnement sensible des talents.</p>
       </div>
-      <div class="footer-columns"><div><h4 class="footer-title">Navigation</h4><div class="footer-links"><a href="index.html">Accueil</a><a href="portfolio.html">Portfolio</a><a href="a-propos.html">À propos</a><a href="tarifs.html">Tarifs</a></div></div><div><h4 class="footer-title">Informations</h4><div class="footer-links"><a href="humanitaire.html">Humanitaire</a>
-<a href="collaborateurs-partenaires.html">Collaborateurs</a><a href="boutique.html">Boutique</a><a href="espace-client.html">Connexion client</a><a href="contact.html">Contact</a><a href="faq.html">FAQ</a><a href="mentions-legales.html">Mentions légales</a><a href="cgv.html">CGV</a></div></div><div><h4 class="footer-title">Réseaux</h4><div class="footer-links"><a href="https://www.instagram.com/agencya_paris/" target="_blank" rel="noopener">Instagram</a><a href="https://www.instagram.com/agency_a__/" target="_blank" rel="noopener">Instagram ②</a><a href="https://www.linkedin.com/company/agency-a-paris" target="_blank" rel="noopener">LinkedIn</a></div></div></div>
+      <div class="footer-columns">
+        <div><h4 class="footer-title">Navigation</h4><div class="footer-links"><a href="index.html">Accueil</a><a href="portfolio.html">Portfolio</a><a href="a-propos.html">À propos</a><a href="tarifs.html">Tarifs</a></div></div>
+        <div><h4 class="footer-title">Informations</h4><div class="footer-links"><a href="humanitaire.html">Humanitaire</a><a href="collaborateurs-partenaires.html">Collaborateurs</a><a href="boutique.html">Boutique</a><a href="espace-client.html">Connexion client</a><a href="contact.html">Contact</a><a href="faq.html">FAQ</a><a href="mentions-legales.html">Mentions légales</a><a href="cgv.html">CGV</a></div></div>
+        <div><h4 class="footer-title">Réseaux</h4><div class="footer-links"><a href="https://www.instagram.com/agencya_paris/" target="_blank" rel="noopener">Instagram</a><a href="https://www.instagram.com/agency_a__/" target="_blank" rel="noopener">Instagram ②</a><a href="https://www.linkedin.com/company/agency-a-paris" target="_blank" rel="noopener">LinkedIn</a></div></div>
+      </div>
     </div>
-    <div class="footer-bottom">
-      <span>© Agency A · Tous droits réservés</span>
-      <span>Paris · Sur rendez-vous · Accès client limité dans le temps</span>
-    </div>
+    <div class="footer-bottom"><span>© 2025 Agency A</span><span>Paris, France</span><span>Tous droits réservés</span></div>
   </div>
 </footer>
-<script src="js/shared.js"></script>
+</div><!-- .page-shell -->
 
+<script src="js/shared.js"></script>
+<script>
+/* ══════════════════════════════════════════════════════════════════
+   CATALOG — source de données pilotée par objet JS
+   Pour connecter Supabase : remplacer CATALOG par un fetch()
+   vers /api/catalog et appeler renderCatalog(data) avec la réponse.
+   Structure identique : { categories: [...], prestations: [...] }
+══════════════════════════════════════════════════════════════════ */
+const CATALOG = {
+  categories: [
+    { id: 'portraits',   label: 'Portraits',          tagline: "L'image juste. La personne vraie." },
+    { id: 'mode',        label: 'Mode',               tagline: 'Du concept au visuel éditorial.' },
+    { id: 'marques',     label: 'Marques & Produits',  tagline: 'Votre univers, notre regard.' },
+    { id: 'evenements',  label: 'Événements',          tagline: 'Capturer ce qui ne se répète pas.' }
+  ],
+  prestations: [
+    /* ── PORTRAITS ─────────────────────────────────── */
+    {
+      id: 'book-signature',
+      category: 'portraits',
+      name: 'Book Signature',
+      summary: 'Un book éditorial qui révèle votre personnalité. Pour les castings, agences et projets personnels.',
+      price_label: 'À partir de 390 €',
+      description: "Le Book Signature est conçu pour les talents qui souhaitent un book complet, narratif et personnel. Chaque image est pensée pour raconter qui vous êtes — pas seulement à quoi vous ressemblez. Direction de pose, ambiances multiples, rendu éditorial.",
+      audience: ["Mannequins en début ou milieu de carrière","Comédien·ne·s et artistes","Talents en recherche d'agence","Profils créatifs et artistiques"],
+      deroulement: ["Consultation préparatoire — personnalité, objectifs, codes visuels","Sélection des ambiances et des looks","Séance multi-ambiances (2 à 4 univers selon le pack)","Direction de pose personnalisée tout au long de la séance","Sélection des images assistée","Retouche éditoriale et livraison HD"],
+      inclus: ["Consultation préparatoire incluse","Direction de pose et d'ambiance","20 à 60 images selon le pack","Retouche éditoriale incluse","Livraison pensée pour agences et castings"],
+      prix_variable: "Le tarif varie selon le nombre d'ambiances souhaitées, la durée de séance, l'utilisation de décors ou de lieux extérieurs, et le niveau de direction artistique.",
+      variantes: [
+        { label: '1 Ambiance',     desc: "1 univers · Studio · 20 images · 2h de séance",               price: 'À partir de 390 €' },
+        { label: '2 Ambiances',    desc: "2 univers · Studio + extérieur · 35 images · demi-journée",   price: 'Sur devis' },
+        { label: 'Book Complet',   desc: "3 à 4 univers · Lieux multiples · 60 images · journée",       price: 'Sur devis' }
+      ],
+      faq: [
+        { q: "Que faut-il apporter pour la séance ?", a: "Vos looks, accessoires et tout ce qui reflète votre personnalité. Nous vous guidons dans la préparation lors de l'échange préparatoire." },
+        { q: "Les images sont-elles retouchées ?", a: "Oui, la retouche éditoriale est incluse dans toutes les formules. Le rendu reste naturel et fidèle à votre image." },
+        { q: "Peut-on faire le book en extérieur ?", a: "Absolument. Le choix du lieu fait partie du processus créatif — nous sélectionnons ensemble les environnements qui correspondent à votre univers." }
+      ]
+    },
+    {
+      id: 'portrait-corporate',
+      category: 'portraits',
+      name: 'Portrait Corporate',
+      summary: 'Votre image professionnelle, construite avec soin. Studio ou extérieur, fond épuré, lumière maîtrisée.',
+      price_label: 'À partir de 290 €',
+      description: "Le portrait corporate Agency A, c'est une image qui vous ressemble et qui raconte ce que vous faites — sans artifice, sans posture figée. Nous travaillons la lumière, le cadrage et la direction de regard pour obtenir un résultat qui inspire confiance.",
+      audience: ["Entrepreneur·e·s et dirigeant·e·s","Consultants, freelances et professions libérales","Équipes et comités de direction","Profils LinkedIn, sites web, presse professionnelle"],
+      deroulement: ["Échange préparatoire — objectifs, codes visuels, usage prévu","Séance en studio ou en extérieur (1h à 2h30)","Direction de pose et de regard personnalisée","Sélection assistée des meilleures prises","Retouche premium — rendu naturel et professionnel","Livraison HD + formats web optimisés"],
+      inclus: ["Préparation et brief personnalisés","Direction de pose et de regard","10 à 30 images sélectionnées selon le pack","Retouche premium incluse","Livraison HD + formats web"],
+      prix_variable: "Le tarif varie selon le nombre de portraits souhaités, le lieu (studio vs extérieur), la durée de séance et le niveau de direction artistique. Les équipes et projets multi-profils font l'objet d'un devis sur mesure.",
+      variantes: [
+        { label: 'Essentiel', desc: "1 portrait · Studio · Fond neutre · 5 images livrées",               price: 'À partir de 290 €' },
+        { label: 'Signature', desc: "2 à 3 portraits · Studio + extérieur · 15 images",                   price: 'Sur devis' },
+        { label: 'Équipe',    desc: "Portraits d'équipe · Journée ou demi-journée · Individuels + groupe", price: 'Sur devis' }
+      ],
+      faq: [
+        { q: "Faut-il venir maquillé·e ?", a: "Nous recommandons un maquillage naturel, proche de votre quotidien. Nous pouvons vous mettre en relation avec une maquilleuse partenaire si besoin." },
+        { q: "Peut-on choisir le fond ou le lieu ?", a: "Oui. Studio fond uni, fond coloré, extérieur urbain ou naturel — nous adaptons l'environnement à votre image." }
+      ]
+    },
+    {
+      id: 'portrait-beaute',
+      category: 'portraits',
+      name: 'Formule Beauté',
+      summary: 'Un portrait beauté précis et incarné. Pour les marques cosmétiques, les talents et les portfolios.',
+      price_label: 'Sur demande',
+      description: "La Formule Beauté Agency A est conçue pour mettre en lumière les détails qui font la différence — la peau, le regard, le geste. Une prestation pensée pour les talents, marques cosmétiques et professionnels de la beauté qui souhaitent des images de référence.",
+      audience: ["Maquilleur·se·s et coiffeur·se·s","Marques cosmétiques et soins","Mannequins pour portfolios beauté","Prestataires beauté en développement"],
+      deroulement: ["Briefing — rendu souhaité, couleurs, codes visuels","Collaboration avec maquilleur·se partenaire si besoin","Séance studio beauté (1h30 à 3h)","Direction technique — lumière, angles, skin tone","Sélection et retouche peau avancée","Livraison HD format éditorial et réseaux"],
+      inclus: ["Direction artistique beauté","Éclairage studio spécialisé","10 à 25 images livrées","Retouche peau avancée","Livraison multi-formats"],
+      prix_variable: "Le tarif varie selon le nombre de looks, la collaboration avec des professionnels de la beauté partenaires, et la complexité du rendu souhaité.",
+      variantes: [
+        { label: 'Portrait Beauté', desc: "1 look · Studio · 10 images · Retouche avancée",             price: 'Sur demande' },
+        { label: 'Série Beauté',    desc: "2 à 3 looks · Collaboration maquilleur·se · 25 images",       price: 'Sur devis' }
+      ],
+      faq: [
+        { q: "Travaillez-vous avec des maquilleurs partenaires ?", a: "Oui, nous avons un réseau de maquilleurs et coiffeurs partenaires que nous pouvons intégrer à la séance selon vos besoins." },
+        { q: "Quelle est la différence avec un portrait classique ?", a: "La Formule Beauté met l'accent sur les détails — texture de peau, regard, gestes — avec un éclairage et une retouche spécialisés." }
+      ]
+    },
+    {
+      id: 'modeles-digitals',
+      category: 'portraits',
+      name: 'Modèles Digitals',
+      summary: 'Des digitals nets et efficaces pour les agences de casting. Fond neutre, rendu standardisé.',
+      price_label: 'Sur devis',
+      description: "Les digitals Agency A sont conçus pour répondre aux standards des agences de mannequins et castings. Face, profil, plein pied, fond neutre — des images claires, naturelles et immédiatement utilisables pour les dossiers et plateformes.",
+      audience: ["Mannequins en début de carrière","Talents envoyant des candidatures en agence","Agences de casting","Acteur·rice·s pour dossiers"],
+      deroulement: ["Accueil et préparation (maquillage naturel recommandé)","Shooting fond neutre standardisé","Vues face, profil, plein pied, mi-corps","Sélection immédiate","Livraison le jour même ou le lendemain"],
+      inclus: ["Shooting fond neutre","Toutes les vues standards (face, profil, plein pied)","Sélection et livraison rapide","Formats agence et digital"],
+      prix_variable: "Le tarif varie selon le nombre de talents, les vues supplémentaires demandées et le délai de livraison.",
+      variantes: [
+        { label: 'Pack Digital',  desc: "1 talent · Toutes vues standards · Livraison J+1",          price: 'Sur devis' },
+        { label: 'Pack Agence',   desc: "3 à 5 talents · Traitement groupé · Tarif préférentiel",     price: 'Sur devis' }
+      ],
+      faq: [
+        { q: "Les digitals respectent-ils les standards des agences ?", a: "Oui, nous connaissons les standards des principales agences — fond blanc ou gris, poses définies, format et résolution adaptés." },
+        { q: "Faut-il venir maquillé·e ?", a: "Nous recommandons un maquillage très naturel, voire pas de maquillage. L'objectif est de montrer le talent tel qu'il est." }
+      ]
+    },
+
+    /* ── MODE ──────────────────────────────────────── */
+    {
+      id: 'formule-edito',
+      category: 'mode',
+      name: 'Éditorial Mode',
+      summary: 'Un projet mode de A à Z. Concept, casting, direction artistique, rendu éditorial.',
+      price_label: 'Sur devis',
+      description: "L'éditorial mode est la prestation la plus créative que nous proposons. De la conception du moodboard à la livraison des images finales, nous pilotons l'intégralité du projet visuel. Chaque série raconte une histoire, installe un univers, et porte une intention artistique claire.",
+      audience: ["Créateurs et marques de mode indépendants","Magazines et médias mode","Agences créatives","Projets artistiques et personnels"],
+      deroulement: ["Réunion créative — brief, références, intentions","Conception du moodboard et de la direction artistique","Casting mannequins si nécessaire","Coordination équipe (styliste, maquilleur·se, coiffeur·se)","Production et tournage (journée ou multi-jours)","Sélection, post-production et livraison finale"],
+      inclus: ["Direction artistique complète","Moodboard et conception visuelle","Coordination équipe créative","Production complète","Post-production éditoriale","Livraison multi-formats"],
+      prix_variable: "Le tarif dépend du nombre de looks, de la taille de l'équipe, de la durée de production, des lieux et des droits d'utilisation. Chaque projet fait l'objet d'un devis personnalisé.",
+      variantes: [
+        { label: 'Éditorial Court',    desc: "1 journée · 4 à 6 looks · Équipe réduite",               price: 'Sur devis' },
+        { label: 'Éditorial Complet',  desc: "2 journées · 8 à 12 looks · Équipe complète",             price: 'Sur devis' },
+        { label: 'Série Artistique',   desc: "Projet sur mesure · Direction artistique intégrale",       price: 'Sur devis' }
+      ],
+      faq: [
+        { q: "Fournissez-vous les vêtements et accessoires ?", a: "Les pièces sont généralement fournies par le client ou le créateur. Nous pouvons coordonner avec un styliste pour la sélection si nécessaire." },
+        { q: "Peut-on intégrer un projet éditorial dans un book ?", a: "Absolument. Certains clients combinent éditorial et book dans une même production pour maximiser le résultat." }
+      ]
+    },
+    {
+      id: 'lookbook',
+      category: 'mode',
+      name: 'Lookbook',
+      summary: 'Vos pièces mises en scène avec intention. Pour les marques, créateurs et showrooms.',
+      price_label: 'À partir de 590 €',
+      description: "Le lookbook Agency A met vos pièces en valeur dans un contexte cohérent avec votre identité de marque. Épuré ou immersif, studio ou extérieur — chaque image est pensée pour séduire vos acheteurs et raconter votre collection.",
+      audience: ["Créateurs de mode et marques","Boutiques et showrooms","Marques en lancement","Projets capsule et collections limitées"],
+      deroulement: ["Brief et analyse de la collection","Proposition de direction artistique et de casting","Organisation du tournage (lieu, équipe)","Shooting (demi-journée à journée entière)","Sélection et post-production","Livraison lookbook complet"],
+      inclus: ["Direction artistique","Casting et coordination mannequin","Lieu ou studio","Post-production","Livraison format digital et print"],
+      prix_variable: "Le tarif varie selon le nombre de looks, la durée de production, le lieu et les droits d'utilisation. Les collections importantes font l'objet d'un devis dédié.",
+      variantes: [
+        { label: 'Lookbook Essentiel',   desc: "8 à 12 looks · Demi-journée · Studio ou extérieur",    price: 'À partir de 590 €' },
+        { label: 'Lookbook Collection',  desc: "15 à 25 looks · Journée entière · Lieux multiples",     price: 'Sur devis' },
+        { label: 'Lookbook Premium',     desc: "Collection complète · Multi-jours · DA intégrale",       price: 'Sur devis' }
+      ],
+      faq: [
+        { q: "Combien de looks peut-on couvrir en une journée ?", a: "En moyenne 12 à 18 looks sur une journée complète, selon la complexité des mises en scène et les changements." },
+        { q: "Fournissez-vous le mannequin ?", a: "Nous pouvons proposer des mannequins partenaires ou travailler avec vos contacts. Le casting est inclus dans les formules avancées." }
+      ]
+    },
+    {
+      id: 'campagne-mode',
+      category: 'mode',
+      name: 'Campagne Mode',
+      summary: 'Images de campagne pour vos collections, supports de communication et réseaux sociaux.',
+      price_label: 'Sur devis',
+      description: "La campagne mode est conçue pour une diffusion large — affichage, digital, presse. Des images avec une signature forte, pensées pour durer et représenter votre marque dans sa meilleure lumière.",
+      audience: ["Marques de mode établies ou en croissance","Agences de communication","Projets de lancement ou rebranding","Marques souhaitant une campagne multicanal"],
+      deroulement: ["Stratégie visuelle et positionnement de la campagne","Création du concept et moodboard","Production complète (casting, lieux, équipe)","Tournage sur une ou plusieurs journées","Post-production et déclinaisons formats","Livraison pack campagne complet"],
+      inclus: ["Conception créative complète","Production et logistique","Équipe créative coordonnée","Post-production avancée","Déclinaisons formats (print, digital, réseaux)","Droits d'utilisation définis"],
+      prix_variable: "Le budget d'une campagne dépend de sa durée, du nombre de concepts, de l'équipe mobilisée, des lieux de tournage et des droits d'utilisation prévus.",
+      variantes: [
+        { label: 'Campagne Digitale',       desc: "Réseaux sociaux + site · 1 journée · Formats optimisés",  price: 'Sur devis' },
+        { label: 'Campagne Print & Digital', desc: "Supports variés · Multi-jours · Droits étendus",          price: 'Sur devis' }
+      ],
+      faq: [
+        { q: "Gérez-vous les droits à l'image des mannequins ?", a: "Oui, nous vous accompagnons dans la définition et la gestion des droits à l'image selon l'usage prévu." },
+        { q: "Peut-on intégrer de la vidéo à la campagne ?", a: "Absolument. Nous travaillons avec des vidéastes partenaires pour des productions hybrides photo + vidéo." }
+      ]
+    },
+
+    /* ── MARQUES & PRODUITS ────────────────────────── */
+    {
+      id: 'image-de-marque',
+      category: 'marques',
+      name: 'Image de Marque',
+      summary: 'Un univers visuel cohérent pour installer votre marque. Direction artistique, shooting multi-formats.',
+      price_label: 'Sur devis',
+      description: "L'Image de Marque est notre prestation la plus stratégique. Elle consiste à construire ou repositionner l'identité visuelle photographique de votre marque — avec une direction artistique claire, un univers cohérent, et des images pensées pour durer.",
+      audience: ["Marques en lancement ou en rebranding","Entreprises souhaitant élever leur communication","Startups et scale-ups","Marques premium et luxe"],
+      deroulement: ["Audit visuel et analyse du positionnement","Définition de la direction artistique photographique","Production multi-sessions (portraits équipe, produits, ambiances)","Post-production et cohérence visuelle globale","Livraison bibliothèque d'images complète","Guide d'utilisation des visuels"],
+      inclus: ["Direction artistique complète","Shooting multi-univers","Portraits équipe","Visuels produits et ambiances","Bibliothèque d'images livrée","Guide d'usage visuel"],
+      prix_variable: "Chaque projet image de marque est unique. Le budget dépend du nombre de sessions, de la taille de l'équipe, des produits à photographier et de l'ampleur de la bibliothèque souhaitée.",
+      variantes: [
+        { label: 'Essentiel', desc: "Direction artistique + 1 session portraits + 1 session produit",    price: 'Sur devis' },
+        { label: 'Premium',   desc: "DA complète + 3 sessions + bibliothèque 80 images + guide",          price: 'Sur devis' }
+      ],
+      faq: [
+        { q: "Combien de temps dure un projet image de marque ?", a: "Un projet complet s'étend généralement sur 3 à 6 semaines, du brief à la livraison finale." },
+        { q: "Pouvez-vous travailler avec notre charte graphique existante ?", a: "Absolument. Nous intégrons votre identité visuelle existante comme point de départ pour créer des images cohérentes." }
+      ]
+    },
+    {
+      id: 'photo-produit',
+      category: 'marques',
+      name: 'Photographie Produit',
+      summary: 'Vos produits mis en scène avec précision. Fond uni, ambiance créative ou lifestyle.',
+      price_label: 'À partir de 190 €',
+      description: "La photographie produit Agency A va au-delà du simple packshot. Chaque image est pensée pour valoriser votre produit, le mettre en contexte et séduire votre client cible. Du fond épuré à la mise en scène lifestyle, nous adaptons le traitement à votre univers.",
+      audience: ["Marques e-commerce","Créateurs et artisans","Boutiques et marketplaces","Agences et studios de production"],
+      deroulement: ["Réception et inspection des produits","Définition du traitement (packshot, lifestyle, créatif)","Shooting produit en studio","Post-production et retouche","Livraison HD + formats e-commerce optimisés"],
+      inclus: ["Nettoyage et préparation des produits","Direction artistique par produit","Retouche et détourage si besoin","Livraison HD + formats web","Formats e-commerce standards si demandés"],
+      prix_variable: "Le tarif unitaire décroît avec le volume. Les finitions spéciales (détourage, ombre portée, fond coloré, mise en scène), ainsi que la nature du produit (bijoux, textile, cosmétique) peuvent influencer le prix.",
+      variantes: [
+        { label: '1 à 10 produits',  desc: "Packshot fond blanc ou ambiance · 2 à 3 vues par produit",  price: 'À partir de 190 €' },
+        { label: '10 à 50 produits', desc: "Volume · Tarif dégressif · Traitement standardisé",          price: 'Sur devis' },
+        { label: 'Catalogue',        desc: "50 produits et plus · Production multi-jours",               price: 'Sur devis' }
+      ],
+      faq: [
+        { q: "Peut-on mixer packshot et lifestyle dans la même commande ?", a: "Tout à fait. Nous pouvons produire les deux types d'images lors d'une même session selon vos besoins." },
+        { q: "Quelle est la différence entre packshot et lifestyle ?", a: "Le packshot met le produit seul sur fond neutre pour la clarté e-commerce. Le lifestyle le met en scène dans un contexte de vie pour l'émotion et l'aspiration." }
+      ]
+    },
+    {
+      id: 'pack-ecommerce',
+      category: 'marques',
+      name: 'Pack E-commerce',
+      summary: 'Des visuels produits optimisés pour la vente en ligne. Cohérence, clarté, impact.',
+      price_label: 'À partir de 290 €',
+      description: "Le Pack E-commerce est conçu pour les marques qui ont besoin de visuels produits clairs, cohérents et immédiatement utilisables sur leurs canaux de vente. Format standardisé, fond blanc, détourages précis — pensé pour convertir.",
+      audience: ["Boutiques en ligne et marketplaces","Marques multi-produits","Revendeurs et distributeurs","Marques en lancement e-commerce"],
+      deroulement: ["Inventaire et catégorisation des produits","Shooting standardisé (fond blanc, angles définis)","Post-production et détourage","Export dans vos formats e-commerce (Shopify, WooCommerce, Amazon…)","Livraison batch et contrôle qualité"],
+      inclus: ["Shooting fond blanc standardisé","3 à 5 vues par produit","Détourage précis inclus","Export formats e-commerce","Livraison classée par produit"],
+      prix_variable: "Le tarif varie selon le volume de produits, le nombre de vues par produit, le niveau de mise en scène et les formats de livraison requis.",
+      variantes: [
+        { label: 'Pack Starter',   desc: "Jusqu'à 20 produits · Fond blanc · 3 vues · Détourage inclus",       price: 'À partir de 290 €' },
+        { label: 'Pack Growth',    desc: "20 à 100 produits · Tarif dégressif · Traitement standardisé",        price: 'Sur devis' },
+        { label: 'Pack Catalogue', desc: "100+ produits · Production planifiée · Livraison catalogue complet",  price: 'Sur devis' }
+      ],
+      faq: [
+        { q: "Les images sont-elles livrées détourées ?", a: "Oui, le détourage est inclus dans le Pack E-commerce. Fond blanc pur, adapté à toutes les plateformes de vente." },
+        { q: "Pouvez-vous reproduire un style visuel existant ?", a: "Oui, si vous avez déjà un gabarit ou une charte photo, nous pouvons l'appliquer à vos nouveaux produits pour maintenir la cohérence." }
+      ]
+    },
+
+    /* ── ÉVÉNEMENTS ────────────────────────────────── */
+    {
+      id: 'reportage',
+      category: 'evenements',
+      name: 'Reportage Événement',
+      summary: 'Couverture photographique de vos événements professionnels, soirées et lancements.',
+      price_label: 'À partir de 390 €',
+      description: "Le Reportage Événement capture l'atmosphère, les moments forts et les détails qui font la singularité de votre événement. Une couverture complète, de l'installation jusqu'aux derniers échanges — pour une archive et une communication de qualité.",
+      audience: ["Entreprises et agences événementielles","Marques pour leurs lancements et soirées","Institutions et associations","Organisateurs d'événements privés"],
+      deroulement: ["Briefing préalable — moments clés, personnalités à photographier","Repérage du lieu si nécessaire","Couverture complète de l'événement","Sélection éditoriale des meilleures images","Retouche et livraison rapide","Galerie privée en ligne pour téléchargement"],
+      inclus: ["Couverture de A à Z","Sélection éditoriale incluse","Retouche de base incluse","Galerie privée en ligne","Livraison sous 5 jours ouvrés"],
+      prix_variable: "Le tarif varie selon la durée de l'événement, le nombre de photographes nécessaires, les délais de livraison et les droits d'utilisation.",
+      variantes: [
+        { label: 'Demi-journée',          desc: "Jusqu'à 4h · 1 photographe · 80 à 120 images",          price: 'À partir de 390 €' },
+        { label: 'Journée complète',      desc: "Jusqu'à 8h · 1 photographe · 150 à 250 images",         price: 'Sur devis' },
+        { label: 'Événement Multi-jours', desc: "Festival, conférence, salon · Équipe dédiée",            price: 'Sur devis' }
+      ],
+      faq: [
+        { q: "Livrez-vous rapidement ?", a: "La galerie préliminaire peut être livrée sous 24h. La sélection retouchée est livrée sous 5 jours ouvrés." },
+        { q: "Peut-on vous demander de couvrir des moments spécifiques ?", a: "Oui, nous établissons ensemble un planning des moments clés avant l'événement pour ne rien manquer." }
+      ]
+    },
+    {
+      id: 'corporate-event',
+      category: 'evenements',
+      name: 'Couverture Corporate',
+      summary: 'Portraits d\'équipe, ambiance bureau, séminaires — une couverture complète de votre univers d\'entreprise.',
+      price_label: 'Sur devis',
+      description: "La Couverture Corporate intègre portraits individuels, photos d'équipe, ambiances de travail et moments de vie d'entreprise. Idéale pour les rapports annuels, sites web, communications RH et réseaux professionnels.",
+      audience: ["Entreprises et grandes organisations","Startups en croissance","Projets RH et marque employeur","Directions de communication"],
+      deroulement: ["Brief et planification des sessions avec les équipes","Session portraits individuels et d'équipe","Reportage ambiances (open space, réunions, workshops)","Retouche cohérente et livrables organisés","Livraison bibliothèque entreprise complète"],
+      inclus: ["Portraits individuels","Photos d'équipe","Ambiances et reportage","Retouche cohérente","Bibliothèque entreprise livrée"],
+      prix_variable: "Le tarif dépend du nombre de collaborateurs, du nombre de sessions, des lieux et du périmètre de la couverture souhaitée.",
+      variantes: [
+        { label: 'Petite Équipe',    desc: "Jusqu'à 10 personnes · Portraits + groupe · Demi-journée",   price: 'Sur devis' },
+        { label: 'Grande Entreprise', desc: "10 à 50 personnes · Multi-sessions · Bibliothèque complète", price: 'Sur devis' }
+      ],
+      faq: [
+        { q: "Peut-on organiser la séance dans nos locaux ?", a: "Oui, nous venons dans vos locaux. Nous repérons l'espace avec vous au préalable pour optimiser l'organisation." },
+        { q: "Quelle est la durée nécessaire par collaborateur ?", a: "En moyenne 5 à 10 minutes par portrait individuel. Les portraits de groupe et ambiances s'organisent par blocs." }
+      ]
+    },
+    {
+      id: 'defilé',
+      category: 'evenements',
+      name: 'Couverture Défilé',
+      summary: 'Couverture photographique complète de vos défilés et présentations de collections.',
+      price_label: 'Sur devis',
+      description: "La couverture défilé Agency A capture chaque passage avec précision — les silhouettes, les détails, les ambiances backstage et les réactions du public. Un travail rythmé et réactif pour des images qui restituent l'énergie et l'intention de votre show.",
+      audience: ["Créateurs de mode et maisons","Showrooms et agences","Écoles de mode","Événements et associations mode"],
+      deroulement: ["Brief créatif et technique avant le défilé","Repérage du lieu et positionnement","Couverture runway — passages, détails, ambiances","Backstage si autorisé","Sélection et livraison express","Post-production éditoriale"],
+      inclus: ["Couverture runway complète","Backstage sur autorisation","Sélection éditoriale","Post-production","Livraison express (48h disponible)"],
+      prix_variable: "Le tarif dépend de la durée du show, du nombre de passages, du format (backstage inclus ou non) et des délais de livraison.",
+      variantes: [
+        { label: 'Show seul',           desc: "Couverture runway · Sélection · Livraison 5j",          price: 'Sur devis' },
+        { label: 'Show + Backstage',    desc: "Runway + coulisses · Portraits · Livraison express",    price: 'Sur devis' }
+      ],
+      faq: [
+        { q: "Peut-on avoir les images le lendemain ?", a: "Oui, une livraison express 24h ou 48h est disponible moyennant un supplément. Idéal pour les équipes presse et réseaux." },
+        { q: "Pouvez-vous couvrir plusieurs shows en une journée ?", a: "Selon les horaires et les lieux, c'est possible. Contactez-nous pour organiser la logistique." }
+      ]
+    }
+  ]
+};
+
+/* ══════════════════════════════════════════════════════════════════
+   RENDER ENGINE
+   Pour connecter Supabase : fetch('/api/catalog').then(data => renderCatalog(data))
+══════════════════════════════════════════════════════════════════ */
+
+function renderCatalog(catalog) {
+  const navEl  = document.getElementById('catNav');
+  const contEl = document.getElementById('catalogContainer');
+
+  // Build category nav
+  catalog.categories.forEach((cat, i) => {
+    const a = document.createElement('button');
+    a.className = 'tr-cat-link' + (i === 0 ? ' active' : '');
+    a.dataset.cat = cat.id;
+    a.textContent = cat.label;
+    a.addEventListener('click', () => {
+      document.getElementById('cat-' + cat.id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    navEl.appendChild(a);
+  });
+
+  // Build category sections
+  catalog.categories.forEach(cat => {
+    const prestations = catalog.prestations.filter(p => p.category === cat.id);
+    if (!prestations.length) return;
+
+    const section = document.createElement('section');
+    section.className = 'tr-category';
+    section.id = 'cat-' + cat.id;
+    section.innerHTML = `
+      <div class="container">
+        <div class="tr-cat-header reveal">
+          <div class="tr-cat-header-left">
+            <p class="eyebrow">${cat.label}</p>
+            <h2 class="tr-cat-title">${cat.label}.</h2>
+          </div>
+          <p class="tr-cat-tagline">${cat.tagline}</p>
+        </div>
+        <div class="tr-cards" id="cards-${cat.id}"></div>
+      </div>
+    `;
+    contEl.appendChild(section);
+
+    const cardsEl = section.querySelector('#cards-' + cat.id);
+    prestations.forEach((p, idx) => {
+      const card = document.createElement('article');
+      card.className = 'tr-card reveal';
+      card.style.transitionDelay = (idx * 80) + 'ms';
+      card.setAttribute('role', 'button');
+      card.setAttribute('tabindex', '0');
+      card.setAttribute('aria-label', 'Découvrir ' + p.name);
+      card.dataset.id = p.id;
+      card.innerHTML = `
+        <p class="tr-card-eye">${cat.label}</p>
+        <h3 class="tr-card-name">${p.name}</h3>
+        <p class="tr-card-summary">${p.summary}</p>
+        <div class="tr-card-divider"></div>
+        <p class="tr-card-price"><strong>${p.price_label}</strong></p>
+        <span class="tr-card-cta">Découvrir la prestation <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5h12M9 1l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      `;
+      card.addEventListener('click', () => openModal(p.id, catalog));
+      card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(p.id, catalog); }});
+      cardsEl.appendChild(card);
+    });
+  });
+
+  // Activate IntersectionObserver for newly added .reveal elements
+  const io2 = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); io2.unobserve(e.target); }});
+  }, { threshold: .1 });
+  document.querySelectorAll('.tr-card.reveal, .tr-cat-header.reveal').forEach(el => io2.observe(el));
+
+  // Category nav active state on scroll
+  const catSections = catalog.categories.map(c => document.getElementById('cat-' + c.id)).filter(Boolean);
+  const navLinks = navEl.querySelectorAll('.tr-cat-link');
+  const navObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id.replace('cat-', '');
+        navLinks.forEach(l => l.classList.toggle('active', l.dataset.cat === id));
+      }
+    });
+  }, { rootMargin: '-20% 0px -60% 0px' });
+  catSections.forEach(s => navObserver.observe(s));
+}
+
+/* ══════════════════════════════════════════════════════
+   MODAL
+══════════════════════════════════════════════════════ */
+function openModal(id, catalog) {
+  const p = catalog.prestations.find(x => x.id === id);
+  if (!p) return;
+  const cat = catalog.categories.find(c => c.id === p.category);
+
+  document.getElementById('trModalEyebrow').textContent   = cat?.label || '';
+  document.getElementById('trModalTitle').textContent     = p.name;
+  document.getElementById('trModalDesc').textContent      = p.description;
+  document.getElementById('trModalPrice').textContent     = p.price_label;
+  document.getElementById('trModalImgLabel').textContent  = 'Agency A · ' + (cat?.label || '') + ' · ' + p.name;
+
+  // Audience
+  const aud = document.getElementById('trModalAudience');
+  aud.innerHTML = '';
+  p.audience.forEach(a => { const li = document.createElement('li'); li.textContent = a; aud.appendChild(li); });
+
+  // Déroulement
+  const der = document.getElementById('trModalDeroulement');
+  der.innerHTML = '';
+  p.deroulement.forEach((step, i) => {
+    const d = document.createElement('div');
+    d.className = 'tr-step';
+    d.innerHTML = `<span class="tr-step-num">0${i+1}</span><span class="tr-step-text">${step}</span>`;
+    der.appendChild(d);
+    if (i < p.deroulement.length - 1) {
+      const sep = document.createElement('div');
+      sep.style.cssText = 'height:1px;background:var(--line);margin:10px 0 10px 34px';
+      der.appendChild(sep);
+    }
+  });
+
+  // Inclus
+  const inc = document.getElementById('trModalInclus');
+  inc.innerHTML = '';
+  p.inclus.forEach(item => { const li = document.createElement('li'); li.textContent = item; inc.appendChild(li); });
+
+  // Variable
+  document.getElementById('trModalVariable').textContent = p.prix_variable;
+
+  // FAQ
+  const faq = document.getElementById('trModalFaq');
+  faq.innerHTML = '';
+  p.faq.forEach(item => {
+    const d = document.createElement('div');
+    d.className = 'tr-faq-item';
+    d.innerHTML = `<p class="tr-faq-q">${item.q}</p><p class="tr-faq-a">${item.a}</p>`;
+    faq.appendChild(d);
+  });
+
+  // Variantes
+  const vars = document.getElementById('trModalVariantes');
+  vars.innerHTML = '';
+  p.variantes.forEach(v => {
+    const d = document.createElement('div');
+    d.className = 'tr-variante';
+    d.innerHTML = `<p class="tr-variante-label">${v.label}</p><p class="tr-variante-desc">${v.desc}</p><p class="tr-variante-price">${v.price}</p>`;
+    vars.appendChild(d);
+  });
+
+  // Open overlay
+  const overlay = document.getElementById('trOverlay');
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  overlay.querySelector('.tr-modal').scrollTop = 0;
+}
+
+function closeModal() {
+  document.getElementById('trOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('trClose').addEventListener('click', closeModal);
+document.getElementById('trOverlay').addEventListener('click', e => { if (e.target === document.getElementById('trOverlay')) closeModal(); });
+window.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+/* ══════════════════════════════════════════════════════
+   INIT — remplacer par fetch Supabase pour rendre dynamique
+   Exemple futur :
+   fetch('/api/catalog').then(r=>r.json()).then(renderCatalog)
+══════════════════════════════════════════════════════ */
+renderCatalog(CATALOG);
+</script>
 </div>
 </body>
 </html>
