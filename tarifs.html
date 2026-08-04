@@ -1081,17 +1081,19 @@ function renderCatalog(catalog) {
   const navEl  = document.getElementById('catNav');
   const contEl = document.getElementById('catalogContainer');
 
-  // Build category nav
-  catalog.categories.forEach((cat, i) => {
-    const a = document.createElement('button');
-    a.className = 'tr-cat-link' + (i === 0 ? ' active' : '');
-    a.dataset.cat = cat.id;
-    a.textContent = cat.label;
-    a.addEventListener('click', () => {
-      document.getElementById('cat-' + cat.id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // Build category nav (guard si nav supprimée)
+  if (navEl) {
+    catalog.categories.forEach((cat, i) => {
+      const a = document.createElement('button');
+      a.className = 'tr-cat-link' + (i === 0 ? ' active' : '');
+      a.dataset.cat = cat.id;
+      a.textContent = cat.label;
+      a.addEventListener('click', () => {
+        document.getElementById('cat-' + cat.id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+      navEl.appendChild(a);
     });
-    navEl.appendChild(a);
-  });
+  }
 
   // Build category sections
   catalog.categories.forEach(cat => {
@@ -1144,18 +1146,20 @@ function renderCatalog(catalog) {
   }, { threshold: .1 });
   document.querySelectorAll('.tr-card.reveal, .tr-cat-header.reveal').forEach(el => io2.observe(el));
 
-  // Category nav active state on scroll
-  const catSections = catalog.categories.map(c => document.getElementById('cat-' + c.id)).filter(Boolean);
-  const navLinks = navEl.querySelectorAll('.tr-cat-link');
-  const navObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const id = entry.target.id.replace('cat-', '');
-        navLinks.forEach(l => l.classList.toggle('active', l.dataset.cat === id));
-      }
-    });
-  }, { rootMargin: '-20% 0px -60% 0px' });
-  catSections.forEach(s => navObserver.observe(s));
+  // Category nav active state on scroll (guard si nav supprimée)
+  if (navEl) {
+    const catSections = catalog.categories.map(c => document.getElementById('cat-' + c.id)).filter(Boolean);
+    const navLinks = navEl.querySelectorAll('.tr-cat-link');
+    const navObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id.replace('cat-', '');
+          navLinks.forEach(l => l.classList.toggle('active', l.dataset.cat === id));
+        }
+      });
+    }, { rootMargin: '-20% 0px -60% 0px' });
+    catSections.forEach(s => navObserver.observe(s));
+  }
 }
 
 /* ══════════════════════════════════════════════════════
