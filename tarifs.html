@@ -24,7 +24,7 @@
     ══════════════════════════════════════════════════ */
 
     /* ── Hero (structure identique Collaborateurs) ── */
-    .page-hero { background: var(--cream); }
+    .page-hero { background: #fdfaf7; }
     .tr-subtitle {
       font-family: var(--display);
       font-size: clamp(16px, 2vw, 24px);
@@ -575,6 +575,20 @@
       .tr-modal { max-height: 92vh; }
       .tr-modal-sidebar { flex-direction: column; }
     }
+
+    /* ── Chips catégories (même structure que Collaborateurs) ── */
+    .collab-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 0;
+      margin-top: 32px;
+    }
+    @media (min-width: 861px) {
+      .collab-filters { flex-wrap: nowrap; gap: 6px; }
+      .collab-filters .chip { padding: 6px 10px; letter-spacing: .1em; }
+    }
   </style>
 </head>
 <body>
@@ -626,6 +640,12 @@
         <p class="tr-subtitle">Chaque prestation est pensée comme un projet à part entière — une intention, une mise en scène, un résultat à votre image.</p>
         <div class="hero-ctas" style="margin-top:28px;display:flex;gap:14px;flex-wrap:wrap;justify-content:center">
           <a href="contact.html" class="btn btn-primary">Prendre contact</a>
+        </div>
+        <div class="collab-filters" role="group" aria-label="Catégories de prestations">
+          <button class="chip" data-scroll="cat-portraits">Portraits</button>
+          <button class="chip" data-scroll="cat-mode">Mode</button>
+          <button class="chip" data-scroll="cat-marques">Marques &amp; Produits</button>
+          <button class="chip" data-scroll="cat-evenements">Événements</button>
         </div>
       </div>
     </div>
