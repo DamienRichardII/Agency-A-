@@ -493,6 +493,35 @@
 </head>
 <body>
 
+<!-- ── OVERLAY LOGIN ADMIN ─────────────────────────────── -->
+<div id="adminLoginOverlay" style="display:none;position:fixed;inset:0;z-index:9999;background:#1a1714;align-items:center;justify-content:center">
+  <div style="width:100%;max-width:420px;padding:48px 40px;background:#211e1a;border:1px solid rgba(212,184,155,.12)">
+    <div style="text-align:center;margin-bottom:36px">
+      <img src="assets/logo/logo-white-transparent.png" alt="Agency A" style="height:32px;opacity:.9;margin-bottom:18px;display:block;margin-left:auto;margin-right:auto">
+      <p style="font-family:var(--body);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--sand);margin:0">Administration</p>
+    </div>
+    <div id="adminLoginError" style="display:none;background:rgba(220,50,50,.15);border:1px solid rgba(220,50,50,.3);color:#f87171;font-size:12px;padding:10px 14px;margin-bottom:18px;border-radius:2px"></div>
+    <div style="margin-bottom:16px">
+      <label style="display:block;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(212,184,155,.6);margin-bottom:8px">Email</label>
+      <input id="adminLoginEmail" type="email" autocomplete="email" placeholder="contact@agency-a.fr"
+        style="width:100%;box-sizing:border-box;background:rgba(255,255,255,.05);border:1px solid rgba(212,184,155,.2);color:var(--cream);font-family:var(--body);font-size:14px;padding:12px 14px;outline:none;transition:border-color .2s"
+        onfocus="this.style.borderColor='rgba(212,184,155,.5)'" onblur="this.style.borderColor='rgba(212,184,155,.2)'">
+    </div>
+    <div style="margin-bottom:28px">
+      <label style="display:block;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(212,184,155,.6);margin-bottom:8px">Mot de passe</label>
+      <input id="adminLoginPassword" type="password" autocomplete="current-password" placeholder="••••••••"
+        style="width:100%;box-sizing:border-box;background:rgba(255,255,255,.05);border:1px solid rgba(212,184,155,.2);color:var(--cream);font-family:var(--body);font-size:14px;padding:12px 14px;outline:none;transition:border-color .2s"
+        onfocus="this.style.borderColor='rgba(212,184,155,.5)'" onblur="this.style.borderColor='rgba(212,184,155,.2)'"
+        onkeydown="if(event.key==='Enter')adminLogin()">
+    </div>
+    <button onclick="adminLogin()" id="adminLoginBtn"
+      style="width:100%;background:#6a4e3b;color:var(--cream);border:none;font-family:var(--body);font-size:11px;letter-spacing:.18em;text-transform:uppercase;padding:14px;cursor:pointer;transition:background .2s"
+      onmouseover="this.style.background='#5a3f2e'" onmouseout="this.style.background='#6a4e3b'">
+      Accéder à l'administration
+    </button>
+  </div>
+</div>
+
 <div class="admin-shell">
 
   <!-- ── Sidebar ── -->

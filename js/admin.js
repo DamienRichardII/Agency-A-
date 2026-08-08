@@ -3,6 +3,47 @@
 
 const BACKEND = 'https://web-production-b0b3e.up.railway.app';
 
+// ── Overlay de connexion admin ──────────────────────────────────────────────
+function showAdminLogin() {
+  const overlay = document.getElementById('adminLoginOverlay');
+  if (overlay) overlay.style.display = 'flex';
+}
+
+function hideAdminLogin() {
+  const overlay = document.getElementById('adminLoginOverlay');
+  if (overlay) overlay.style.display = 'none';
+}
+
+window.adminLogin = async function () {
+  const email    = document.getElementById('adminLoginEmail').value.trim();
+  const password = document.getElementById('adminLoginPassword').value;
+  const errEl    = document.getElementById('adminLoginError');
+  const btn      = document.getElementById('adminLoginBtn');
+
+  errEl.style.display = 'none';
+  btn.textContent = 'Connexion…';
+  btn.disabled = true;
+
+  try {
+    const { data, error } = await window.sb.auth.signInWithPassword({ email, password });
+    if (error) throw error;
+
+    const { data: profileData } = await window.sb.from('profiles').select('role').eq('id', data.user.id).single();
+    if (profileData?.role !== 'admin') {
+      await window.sb.auth.signOut();
+      throw new Error('Accès réservé aux administrateurs.');
+    }
+
+    hideAdminLogin();
+    location.reload(); // Recharge la page avec la session active
+  } catch (err) {
+    errEl.textContent = err.message || 'Email ou mot de passe incorrect.';
+    errEl.style.display = 'block';
+    btn.textContent = 'Accéder à l\'administration';
+    btn.disabled = false;
+  }
+};
+
 // ── Carte d'erreur fatale ──
 function showFatalError(reason) {
   const el = document.getElementById('adminLoading');
@@ -29,16 +70,32 @@ function showFatalError(reason) {
     return;
   }
 
-  // ── Protection admin ──
+  // ── Protection admin (overlay intégré, sans redirection) ──
   let ctx;
   try {
-    ctx = await Auth.protect({ adminOnly: true });
+    const { data: { session }, error: sessErr } = await window.sb.auth.getSession();
+    if (sessErr) throw sessErr;
+
+    if (!session) {
+      showAdminLogin();
+      return;
+    }
+
+    const profile = await Auth.getProfile(session.user.id);
+    if (profile?.role !== 'admin') {
+      await window.sb.auth.signOut();
+      showAdminLogin();
+      const errEl = document.getElementById('adminLoginError');
+      if (errEl) { errEl.textContent = 'Accès réservé aux administrateurs.'; errEl.style.display = 'block'; }
+      return;
+    }
+
+    ctx = { session, profile };
   } catch (err) {
-    console.error('[ADMIN] Auth.protect() erreur :', err);
+    console.error('[ADMIN] Erreur auth :', err);
     showFatalError('Erreur d\'authentification : ' + (err.message || err));
     return;
   }
-  if (!ctx) return; // Auth.protect a redirigé
 
   console.log('[ADMIN] Session récupérée');
   console.log('[ADMIN] Profil récupéré :', ctx.profile?.role);
