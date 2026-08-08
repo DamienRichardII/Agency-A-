@@ -485,6 +485,349 @@
       .admin-sidebar { display: none; }
       .admin-main { padding: 18px 16px; }
     }
+
+    /* ════════════════════════════════════════════
+       GESTION DES MÉDIAS — CSS complet
+    ════════════════════════════════════════════ */
+
+    /* ── Tabs Parcourir / Médiathèque ── */
+    .media-view-tabs {
+      display: flex; gap: 3px;
+      background: rgba(212,184,155,.13);
+      border-radius: 9px; padding: 4px;
+      width: fit-content; margin-bottom: 28px;
+    }
+    .media-view-tab {
+      padding: 8px 22px;
+      background: none; border: none; border-radius: 6px;
+      font-family: var(--body); font-size: 11px; font-weight: 500;
+      letter-spacing: .08em; text-transform: uppercase;
+      color: var(--muted); cursor: pointer; transition: all .18s;
+    }
+    .media-view-tab.active {
+      background: #fff; color: var(--ink);
+      box-shadow: 0 1px 6px rgba(0,0,0,.08);
+    }
+
+    /* ── Breadcrumb ── */
+    .media-breadcrumb {
+      display: flex; align-items: center; gap: 6px;
+      margin-bottom: 22px; font-size: 12px; color: var(--muted);
+      min-height: 20px;
+    }
+    .media-breadcrumb button {
+      background: none; border: none; padding: 0;
+      font-family: var(--body); font-size: 12px;
+      color: #6a4e3b; cursor: pointer;
+      text-decoration: underline; text-underline-offset: 2px;
+      transition: color .15s;
+    }
+    .media-breadcrumb button:hover { color: var(--ink); }
+    .media-breadcrumb .sep { color: rgba(106,78,59,.3); user-select: none; }
+
+    /* ── Grille de pages ── */
+    .page-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 12px;
+    }
+    .page-card {
+      background: #fff; border: 1px solid rgba(212,184,155,.22);
+      border-radius: 12px; padding: 26px 18px 20px;
+      cursor: pointer; text-align: center;
+      transition: box-shadow .2s, transform .2s, border-color .2s;
+    }
+    .page-card:hover {
+      border-color: rgba(212,184,155,.6);
+      box-shadow: 0 6px 20px rgba(106,78,59,.12);
+      transform: translateY(-3px);
+    }
+    .page-card-icon { font-size: 30px; margin-bottom: 12px; display: block; }
+    .page-card-name {
+      font-family: var(--display); font-size: 15px; font-weight: 400;
+      color: var(--ink); margin: 0 0 5px;
+    }
+    .page-card-count { font-size: 11px; color: var(--muted); margin: 0; }
+
+    /* ── Grille de sections ── */
+    .section-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 10px;
+    }
+    .section-card {
+      background: #fff; border: 1px solid rgba(212,184,155,.22);
+      border-radius: 10px; padding: 18px 20px;
+      display: flex; align-items: center; gap: 14px;
+      cursor: pointer; transition: box-shadow .18s, border-color .18s;
+    }
+    .section-card:hover {
+      border-color: rgba(212,184,155,.55);
+      box-shadow: 0 3px 14px rgba(106,78,59,.1);
+    }
+    .section-card-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: #6a4e3b; flex-shrink: 0;
+    }
+    .section-card-info { min-width: 0; }
+    .section-card-name {
+      font-size: 14px; font-weight: 500; color: var(--ink);
+      margin: 0 0 3px;
+    }
+    .section-card-count { font-size: 11px; color: var(--muted); margin: 0; }
+
+    /* ── Grille de médias ── */
+    .media-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 16px;
+    }
+    .media-card {
+      background: #fff; border: 1px solid rgba(212,184,155,.2);
+      border-radius: 12px; overflow: hidden;
+      transition: box-shadow .2s;
+    }
+    .media-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,.09); }
+    .media-card-preview {
+      position: relative; aspect-ratio: 4/3;
+      background: #ede8e1; overflow: hidden;
+    }
+    .media-card-preview img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform .35s;
+    }
+    .media-card:hover .media-card-preview img { transform: scale(1.04); }
+    .media-card-slot {
+      position: absolute; top: 8px; left: 8px;
+      background: rgba(17,17,17,.7); color: #fff;
+      font-size: 9px; letter-spacing: .09em; text-transform: uppercase;
+      padding: 3px 8px; border-radius: 4px;
+    }
+    .media-card-structural {
+      position: absolute; top: 8px; right: 8px;
+      background: rgba(106,78,59,.88); color: #fff;
+      font-size: 9px; letter-spacing: .08em; text-transform: uppercase;
+      padding: 3px 8px; border-radius: 4px;
+    }
+    .media-card-body { padding: 14px 16px 16px; }
+    .media-card-name {
+      font-size: 13px; font-weight: 500; color: var(--ink);
+      margin: 0 0 3px;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .media-card-meta { font-size: 11px; color: var(--muted); margin: 0 0 12px; }
+    .media-card-actions { display: flex; gap: 5px; }
+    .media-card-actions button {
+      flex: 1; background: none;
+      border: 1px solid rgba(212,184,155,.4); border-radius: 6px;
+      padding: 6px 8px; font-size: 11px; font-family: var(--body);
+      font-weight: 500; color: var(--ink); cursor: pointer;
+      transition: all .15s; white-space: nowrap;
+    }
+    .media-card-actions button:hover {
+      background: var(--ink); color: var(--cream); border-color: var(--ink);
+    }
+    .media-card-actions button.danger { color: #b91c1c; border-color: rgba(185,28,28,.3); }
+    .media-card-actions button.danger:hover { background: #b91c1c; color: #fff; border-color: #b91c1c; }
+
+    /* ── Modals médias ── */
+    .media-modal {
+      display: none; position: fixed; inset: 0; z-index: 500;
+      background: rgba(17,17,17,.55);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      align-items: center; justify-content: center;
+      padding: 20px;
+    }
+    .media-modal.open { display: flex; }
+    .media-modal-box {
+      background: #fff; border-radius: 16px;
+      width: 100%; max-width: 560px; max-height: 90vh;
+      overflow: hidden; display: flex; flex-direction: column;
+      box-shadow: 0 32px 80px rgba(0,0,0,.22);
+      animation: mmSlideIn .22s ease;
+    }
+    .media-modal-box.wide { max-width: 720px; }
+    @keyframes mmSlideIn {
+      from { opacity: 0; transform: translateY(12px) scale(.98); }
+      to   { opacity: 1; transform: none; }
+    }
+    .media-modal-head {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 28px 18px;
+      border-bottom: 1px solid rgba(212,184,155,.16);
+      flex-shrink: 0;
+    }
+    .media-modal-head h2 {
+      font-family: var(--display); font-size: 20px; font-weight: 400;
+      color: var(--ink); margin: 0;
+    }
+    .media-modal-close {
+      background: rgba(212,184,155,.1); border: none;
+      color: var(--muted); font-size: 20px; line-height: 1;
+      width: 32px; height: 32px; border-radius: 8px;
+      cursor: pointer; transition: all .15s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .media-modal-close:hover { background: rgba(212,184,155,.3); color: var(--ink); }
+    .media-modal-body {
+      padding: 24px 28px; overflow-y: auto; flex: 1;
+    }
+    .media-modal-foot {
+      padding: 16px 28px 22px;
+      border-top: 1px solid rgba(212,184,155,.16);
+      display: flex; gap: 10px; justify-content: flex-end;
+      flex-shrink: 0;
+    }
+
+    /* ── Preview box ── */
+    .media-preview-box {
+      border-radius: 10px; overflow: hidden;
+      aspect-ratio: 4/3; background: #ede8e1;
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid rgba(212,184,155,.2);
+    }
+    .media-preview-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* ── Upload zone ── */
+    .media-upload-zone {
+      border: 2px dashed rgba(212,184,155,.45);
+      border-radius: 12px; padding: 36px 24px;
+      text-align: center; cursor: pointer;
+      transition: border-color .2s, background .2s;
+      color: var(--muted); display: block;
+    }
+    .media-upload-zone:hover, .media-upload-zone.drag-over {
+      border-color: #6a4e3b; background: rgba(106,78,59,.04);
+    }
+    .media-upload-zone svg { opacity: .45; margin-bottom: 4px; }
+    .media-upload-zone input[type="file"] { display: none; }
+
+    /* ── Position picker ── */
+    .position-picker-label {
+      font-size: 11px; text-transform: uppercase;
+      letter-spacing: .07em; color: var(--muted);
+      margin: 0 0 10px; display: block;
+    }
+    .position-grid {
+      display: grid; grid-template-columns: repeat(3, 38px);
+      gap: 4px;
+    }
+    .position-btn {
+      width: 38px; height: 38px;
+      background: rgba(212,184,155,.12); border: 2px solid transparent;
+      border-radius: 7px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all .15s;
+    }
+    .position-btn:hover { background: rgba(212,184,155,.28); }
+    .position-btn.active {
+      background: var(--ink); border-color: var(--ink);
+    }
+    .position-btn svg { pointer-events: none; }
+    .position-btn svg circle { fill: var(--muted); transition: fill .15s; }
+    .position-btn:hover svg circle { fill: var(--ink); }
+    .position-btn.active svg circle { fill: #fff; }
+
+    /* ── Médiathèque ── */
+    .media-library-controls {
+      display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;
+    }
+    .media-library-search {
+      flex: 1; min-width: 180px;
+      border: 1px solid rgba(212,184,155,.4); border-radius: 8px;
+      padding: 9px 14px; font-family: var(--body); font-size: 13px;
+      color: var(--ink); outline: none; transition: border-color .2s;
+      background: #fff;
+    }
+    .media-library-search:focus { border-color: #6a4e3b; }
+    .media-library-filter {
+      border: 1px solid rgba(212,184,155,.4); border-radius: 8px;
+      padding: 9px 12px; font-family: var(--body); font-size: 13px;
+      color: var(--ink); outline: none; background: #fff; cursor: pointer;
+    }
+    .media-library-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 8px;
+    }
+    .lib-thumb {
+      position: relative; aspect-ratio: 1;
+      border-radius: 9px; overflow: hidden;
+      cursor: pointer; background: #ede8e1;
+      border: 1px solid rgba(212,184,155,.2);
+    }
+    .lib-thumb img {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block; transition: transform .3s;
+    }
+    .lib-thumb:hover img { transform: scale(1.07); }
+    .lib-thumb-used {
+      position: absolute; top: 7px; right: 7px;
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #10b981; box-shadow: 0 0 0 2px #fff;
+    }
+    .lib-thumb-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(17,17,17,.72) 0%, transparent 55%);
+      opacity: 0; transition: opacity .2s;
+      display: flex; align-items: flex-end; padding: 8px;
+    }
+    .lib-thumb:hover .lib-thumb-overlay { opacity: 1; }
+    .lib-thumb-label {
+      font-size: 9px; color: #fff; line-height: 1.3;
+      text-transform: uppercase; letter-spacing: .06em;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+
+    /* ── Upload progress ── */
+    .upload-progress-list { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+    .upload-progress-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 14px; background: #faf7f3;
+      border-radius: 8px; font-size: 12px; color: var(--ink);
+      border: 1px solid rgba(212,184,155,.15);
+    }
+    .upload-progress-bar {
+      flex: 0 0 80px; height: 3px;
+      background: rgba(212,184,155,.3); border-radius: 2px; overflow: hidden;
+    }
+    .upload-progress-bar-fill {
+      height: 100%; background: #6a4e3b; transition: width .35s;
+    }
+
+    /* ── Statut édition ── */
+    .media-info-status { font-size: 12px; color: #059669; margin-top: 10px; min-height: 16px; }
+    .media-info-status.err { color: #dc2626; }
+
+    /* ── Pagination médiathèque ── */
+    .media-pagination {
+      display: flex; gap: 4px; justify-content: center;
+      margin-top: 24px; flex-wrap: wrap;
+    }
+    .media-pagination button {
+      min-width: 34px; height: 34px;
+      background: #fff; border: 1px solid rgba(212,184,155,.3);
+      border-radius: 7px; font-family: var(--body); font-size: 12px;
+      color: var(--ink); cursor: pointer; transition: all .15s;
+    }
+    .media-pagination button:hover { border-color: #6a4e3b; }
+    .media-pagination button.active { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+    .media-pagination button:disabled { opacity: .38; cursor: default; }
+
+    /* ── Replace preview columns ── */
+    .replace-previews {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 16px; margin-bottom: 20px;
+    }
+    .replace-preview-label {
+      font-size: 10px; text-transform: uppercase;
+      letter-spacing: .1em; color: var(--muted); margin: 0 0 8px;
+    }
+    .replace-preview-new-box {
+      cursor: pointer; transition: opacity .2s;
+    }
+    .replace-preview-new-box:hover { opacity: .85; }
   </style>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -537,6 +880,7 @@
       <a href="#messages"   data-panel="messages">Messages</a>
       <a href="#inquiries"  data-panel="inquiries">Demandes</a>
       <a href="#access"     data-panel="access">Accès</a>
+      <a href="#media"      data-panel="media">Médias</a>
     </nav>
     <div class="admin-logout">
       <button id="adminLogout">Déconnexion</button>
@@ -851,43 +1195,78 @@
       <div class="media-modal" id="modalMediaReplace">
         <div class="media-modal-box">
           <div class="media-modal-head">
-            <h2>Remplacer le média</h2>
+            <h2>Remplacer la photo</h2>
             <button class="media-modal-close" data-media-close="modalMediaReplace">×</button>
           </div>
           <div class="media-modal-body">
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+
+            <!-- Previews côte à côte -->
+            <div class="replace-previews">
               <div>
-                <p style="font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin:0 0 8px">Photo actuelle</p>
-                <div class="media-preview-box" id="replacePreviewCurrent" style="background:#f5f0ea">
+                <p class="replace-preview-label">Actuelle</p>
+                <div class="media-preview-box" id="replacePreviewCurrent">
                   <span style="font-size:12px;color:var(--muted)">Aucune photo</span>
                 </div>
               </div>
               <div>
-                <p style="font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin:0 0 8px">Nouvelle photo</p>
-                <div class="media-preview-box" id="replacePreviewNew" style="background:#f5f0ea;cursor:pointer" onclick="document.getElementById('replaceFileInput').click()">
-                  <span id="replacePreviewNewPlaceholder" style="font-size:12px;color:var(--muted)">Cliquez pour choisir</span>
+                <p class="replace-preview-label">Nouvelle</p>
+                <div class="media-preview-box replace-preview-new-box" id="replacePreviewNew"
+                     onclick="document.getElementById('replaceFileInput').click()" title="Cliquer pour choisir">
+                  <span id="replacePreviewNewPlaceholder" style="font-size:12px;color:var(--muted);text-align:center;padding:12px">
+                    Cliquez<br>pour choisir
+                  </span>
                 </div>
               </div>
             </div>
-            <input type="file" id="replaceFileInput" accept="image/jpeg,image/jpg,image/png,image/webp,image/avif" style="display:none">
-            <label class="media-upload-zone" for="replaceFileInput" style="padding:16px;margin-bottom:12px">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
-              <p>Sélectionner ou glisser une image — JPG, PNG, WEBP, AVIF</p>
+
+            <!-- Zone de drop -->
+            <input type="file" id="replaceFileInput" accept="image/jpeg,image/jpg,image/png,image/webp,image/avif">
+            <label class="media-upload-zone" for="replaceFileInput" style="padding:20px;margin-bottom:14px">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+                <polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/>
+                <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/>
+              </svg>
+              <p style="margin:8px 0 2px;font-size:13px;color:var(--ink-soft)">Glisser une image ici ou cliquer</p>
+              <p style="margin:0;font-size:11px">JPG · PNG · WEBP · AVIF — max 50 Mo</p>
             </label>
-            <div id="replaceFileInfo" style="font-size:12px;color:var(--muted);margin-bottom:12px"></div>
-            <div class="f-field" style="margin-bottom:0">
-              <label>Position de l'image</label>
+            <div id="replaceFileInfo" style="font-size:12px;color:var(--muted);margin-bottom:18px;min-height:16px"></div>
+
+            <!-- Position picker visuel -->
+            <span class="position-picker-label">Cadrage de l'image</span>
+            <div style="display:flex;align-items:flex-start;gap:18px;flex-wrap:wrap">
               <div class="position-grid">
-                <button class="position-btn" data-pos="top left">↖ Haut gauche</button>
-                <button class="position-btn active" data-pos="top center">↑ Haut centre</button>
-                <button class="position-btn" data-pos="top right">↗ Haut droite</button>
-                <button class="position-btn" data-pos="center left">← Milieu</button>
-                <button class="position-btn active" data-pos="center">· Centre</button>
-                <button class="position-btn" data-pos="center right">→ Milieu</button>
-                <button class="position-btn" data-pos="bottom left">↙ Bas gauche</button>
-                <button class="position-btn" data-pos="bottom center">↓ Bas centre</button>
-                <button class="position-btn" data-pos="bottom right">↘ Bas droite</button>
+                <!-- SVG dot = petit cercle dans chaque case pour visualiser la position -->
+                <button class="position-btn" data-pos="top left" title="Haut gauche">
+                  <svg width="14" height="14" viewBox="0 0 14 14"><circle cx="3" cy="3" r="2.5"/></svg>
+                </button>
+                <button class="position-btn" data-pos="top center" title="Haut centre">
+                  <svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="3" r="2.5"/></svg>
+                </button>
+                <button class="position-btn" data-pos="top right" title="Haut droite">
+                  <svg width="14" height="14" viewBox="0 0 14 14"><circle cx="11" cy="3" r="2.5"/></svg>
+                </button>
+                <button class="position-btn" data-pos="center left" title="Milieu gauche">
+                  <svg width="14" height="14" viewBox="0 0 14 14"><circle cx="3" cy="7" r="2.5"/></svg>
+                </button>
+                <button class="position-btn active" data-pos="center" title="Centre">
+                  <svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="7" r="2.5"/></svg>
+                </button>
+                <button class="position-btn" data-pos="center right" title="Milieu droite">
+                  <svg width="14" height="14" viewBox="0 0 14 14"><circle cx="11" cy="7" r="2.5"/></svg>
+                </button>
+                <button class="position-btn" data-pos="bottom left" title="Bas gauche">
+                  <svg width="14" height="14" viewBox="0 0 14 14"><circle cx="3" cy="11" r="2.5"/></svg>
+                </button>
+                <button class="position-btn" data-pos="bottom center" title="Bas centre">
+                  <svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="11" r="2.5"/></svg>
+                </button>
+                <button class="position-btn" data-pos="bottom right" title="Bas droite">
+                  <svg width="14" height="14" viewBox="0 0 14 14"><circle cx="11" cy="11" r="2.5"/></svg>
+                </button>
               </div>
+              <p style="font-size:12px;color:var(--muted);margin:0;line-height:1.6;max-width:220px">
+                Choisissez où placer le sujet principal de la photo dans son cadre.
+              </p>
             </div>
           </div>
           <div class="media-modal-foot">
@@ -943,17 +1322,24 @@
       <div class="media-modal" id="modalMediaUpload">
         <div class="media-modal-box wide">
           <div class="media-modal-head">
-            <h2>Ajouter des médias</h2>
+            <h2>Ajouter des photos</h2>
             <button class="media-modal-close" data-media-close="modalMediaUpload">×</button>
           </div>
           <div class="media-modal-body">
-            <div class="media-upload-zone" id="mediaUploadZone">
+
+            <!-- Zone de drop -->
+            <div class="media-upload-zone" id="mediaUploadZone" style="margin-bottom:20px">
               <input type="file" id="mediaUploadInput" multiple accept="image/jpeg,image/jpg,image/png,image/webp,image/avif">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
-              <p style="font-size:14px;margin-top:12px">Cliquez ou glissez vos photos ici</p>
-              <p style="font-size:12px;color:var(--muted);margin:4px 0 0">JPG, PNG, WEBP, AVIF — max 50 Mo par fichier</p>
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                <polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/>
+                <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/>
+              </svg>
+              <p style="font-size:14px;margin:12px 0 4px;color:var(--ink-soft)">Glisser vos photos ici ou cliquer</p>
+              <p style="font-size:11px;color:var(--muted);margin:0">JPG · PNG · WEBP · AVIF — max 50 Mo par fichier</p>
             </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
+
+            <!-- Destination -->
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px">
               <div class="f-field">
                 <label>Page de destination</label>
                 <select id="uploadDestPage">
@@ -972,6 +1358,8 @@
                 </select>
               </div>
             </div>
+
+            <!-- Progress list -->
             <div class="upload-progress-list" id="uploadProgressList"></div>
           </div>
           <div class="media-modal-foot">

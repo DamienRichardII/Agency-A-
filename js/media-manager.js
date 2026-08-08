@@ -304,9 +304,9 @@ function buildMediaCard(record) {
         ${record.caption ? ' · ' + escHtml(record.caption.slice(0, 28)) : ''}
       </p>
       <div class="media-card-actions">
-        <button onclick="openReplace('${record.id}')">Remplacer</button>
-        <button onclick="openEdit('${record.id}')">Modifier</button>
-        ${!record.is_structural ? `<button class="danger" onclick="openDelete('${record.id}')">Supprimer</button>` : ''}
+        <button onclick="openReplace('${record.id}')" title="Remplacer la photo">↑ Photo</button>
+        <button onclick="openEdit('${record.id}')" title="Modifier les infos">✎ Infos</button>
+        ${!record.is_structural ? `<button class="danger" onclick="openDelete('${record.id}')" title="Supprimer">✕</button>` : ''}
       </div>
     </div>
   `;
