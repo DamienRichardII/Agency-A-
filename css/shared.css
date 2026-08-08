@@ -259,13 +259,13 @@ footer .container{width:min(calc(100% - 24px),1420px)}
 .rv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(248,242,234,.08)}
 .rv-card{background:#6a4e3b;padding:clamp(28px,3.5vw,48px) clamp(22px,3vw,40px);display:flex;flex-direction:column;gap:20px;transition:background .25s}
 .rv-card:hover{background:#6a4e3b}
-/* Avis défilants */
+/* Avis défilants — générique */
 .rv-overflow{overflow:hidden;padding-bottom:clamp(48px,6vw,72px)}
-.rv-track{display:flex;width:max-content;animation:rv-move 160s linear infinite}
-/* rv-track hover pause supprimée */
+.rv-track{display:flex;width:max-content;animation:rv-move 220s linear infinite}
+.rv-track:hover{animation-play-state:paused}
 @keyframes rv-move{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.rv-item{flex:0 0 clamp(600px,72vw,960px);padding:clamp(32px,3.5vw,52px) clamp(28px,3vw,44px);border-right:1px solid rgba(248,242,234,.15);display:flex;flex-direction:column;gap:20px;transition:background .25s}
-.rv-item:hover{background:transparent}
+.rv-item{flex:0 0 clamp(600px,72vw,960px);padding:clamp(32px,3.5vw,52px) clamp(28px,3vw,44px);border-right:1px solid rgba(248,242,234,.15);display:flex;flex-direction:column;gap:20px}
+.rv-item:hover{background:inherit}
 @media(max-width:860px){.rv-item{flex:0 0 clamp(320px,85vw,600px)}}
 @media(max-width:600px){.rv-item{flex:0 0 92vw}}
 .rv-stars{font-size:11px;letter-spacing:3px;color:var(--sand);opacity:.85}
@@ -273,6 +273,21 @@ footer .container{width:min(calc(100% - 24px),1420px)}
 .rv-author{font-family:var(--body);font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:rgba(248,242,234,.6);border-top:1px solid rgba(248,242,234,.12);padding-top:16px;margin-top:auto}
 @media(max-width:860px){.rv-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:520px){.rv-grid{grid-template-columns:1fr}}
+/* Avis défilants — format multi-colonnes (ap-rv-*) */
+.ap-reviews{overflow:hidden}
+.ap-reviews .rv-grid{display:none!important}
+.ap-reviews .rv-header{margin-bottom:clamp(28px,4vw,44px)}
+.ap-rv-overflow{overflow:hidden;padding-bottom:clamp(48px,6vw,72px)}
+.ap-rv-track{display:flex;width:max-content;animation:ap-rv-move 220s linear infinite}
+.ap-rv-track:hover{animation-play-state:paused}
+@keyframes ap-rv-move{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ap-rv-item{flex:0 0 clamp(300px,30vw,420px);padding:clamp(32px,3.5vw,52px) clamp(28px,3vw,44px);border-right:1px solid rgba(212,184,155,.15);display:flex;flex-direction:column;gap:20px}
+.ap-rv-item:hover{background:inherit}
+.ap-rv-quote{font-family:var(--display);font-size:clamp(17px,1.7vw,22px);font-style:italic;font-weight:300;color:var(--cream);line-height:1.65;margin:0;flex:1}
+.ap-rv-author{font-family:var(--body);font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:rgba(212,184,155,.6);border-top:1px solid rgba(212,184,155,.12);padding-top:16px;margin-top:auto}
+@media(max-width:1024px){.ap-rv-item{flex:0 0 clamp(280px,42vw,400px)}}
+@media(max-width:860px){.ap-rv-item{flex:0 0 clamp(260px,72vw,360px)}}
+@media(max-width:600px){.ap-rv-item{flex:0 0 82vw}}
 
 /* ── Tooltip hover (talents keywords) ────────────── */
 .kw-wrap{position:relative;display:inline-block;cursor:help}

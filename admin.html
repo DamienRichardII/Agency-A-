@@ -741,6 +741,237 @@
         </div>
       </section>
 
+
+      <!-- ════════════════════════════════════════════
+           PANEL — GESTION DES MÉDIAS
+      ════════════════════════════════════════════ -->
+      <section class="admin-panel" id="panel-media">
+        <div class="admin-topbar">
+          <h1>Gestion des médias</h1>
+          <div style="display:flex;gap:10px;align-items:center">
+            <button class="btn-primary-sm" id="mediaOpenUploadBtn">+ Ajouter des médias</button>
+          </div>
+        </div>
+
+        <!-- Tabs Parcourir / Médiathèque -->
+        <div class="media-view-tabs">
+          <button class="media-view-tab active" data-view="browse">Parcourir</button>
+          <button class="media-view-tab" data-view="library">Médiathèque</button>
+        </div>
+
+        <!-- ── Vue Parcourir ── -->
+        <div id="mediaViewBrowse">
+          <!-- Breadcrumb -->
+          <div class="media-breadcrumb" id="mediaBreadcrumb">
+            <span>Sélectionnez une page</span>
+          </div>
+
+          <!-- Grille pages -->
+          <div id="mediaBrowsePages">
+            <div class="page-cards-grid" id="pageCardsGrid">
+              <!-- généré par media-manager.js -->
+              <div class="empty-state">Chargement…</div>
+            </div>
+          </div>
+
+          <!-- Grille sections (masquée par défaut) -->
+          <div id="mediaBrowseSections" style="display:none">
+            <div class="section-cards-grid" id="sectionCardsGrid">
+              <!-- généré par media-manager.js -->
+            </div>
+          </div>
+
+          <!-- Grille médias (masquée par défaut) -->
+          <div id="mediaBrowseSlots" style="display:none">
+            <div class="media-cards-grid" id="mediaCardsGrid">
+              <!-- généré par media-manager.js -->
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Vue Médiathèque ── -->
+        <div id="mediaViewLibrary" style="display:none">
+          <div class="media-library-controls">
+            <input type="text" class="media-library-search" id="librarySearch" placeholder="Rechercher…">
+            <select class="media-library-filter" id="libraryFilterPage">
+              <option value="">Toutes les pages</option>
+              <option value="a-propos">À propos</option>
+              <option value="portfolio">Portfolio</option>
+              <option value="collaborateurs">Collaborateurs</option>
+              <option value="boutique">Boutique</option>
+              <option value="accueil">Accueil</option>
+            </select>
+            <select class="media-library-filter" id="libraryFilterUsed">
+              <option value="">Tous les médias</option>
+              <option value="used">Utilisés sur le site</option>
+              <option value="unused">Non utilisés</option>
+            </select>
+          </div>
+          <div class="media-library-grid" id="libraryGrid">
+            <div class="empty-state" style="grid-column:1/-1">Chargement de la médiathèque…</div>
+          </div>
+          <div class="media-pagination" id="libraryPagination"></div>
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════════════════
+           MODALS MÉDIAS (hors panels pour z-index)
+      ════════════════════════════════════════════ -->
+
+      <!-- Modal Remplacer -->
+      <div class="media-modal" id="modalMediaReplace">
+        <div class="media-modal-box">
+          <div class="media-modal-head">
+            <h2>Remplacer le média</h2>
+            <button class="media-modal-close" data-media-close="modalMediaReplace">×</button>
+          </div>
+          <div class="media-modal-body">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+              <div>
+                <p style="font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin:0 0 8px">Photo actuelle</p>
+                <div class="media-preview-box" id="replacePreviewCurrent" style="background:#f5f0ea">
+                  <span style="font-size:12px;color:var(--muted)">Aucune photo</span>
+                </div>
+              </div>
+              <div>
+                <p style="font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin:0 0 8px">Nouvelle photo</p>
+                <div class="media-preview-box" id="replacePreviewNew" style="background:#f5f0ea;cursor:pointer" onclick="document.getElementById('replaceFileInput').click()">
+                  <span id="replacePreviewNewPlaceholder" style="font-size:12px;color:var(--muted)">Cliquez pour choisir</span>
+                </div>
+              </div>
+            </div>
+            <input type="file" id="replaceFileInput" accept="image/jpeg,image/jpg,image/png,image/webp,image/avif" style="display:none">
+            <label class="media-upload-zone" for="replaceFileInput" style="padding:16px;margin-bottom:12px">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
+              <p>Sélectionner ou glisser une image — JPG, PNG, WEBP, AVIF</p>
+            </label>
+            <div id="replaceFileInfo" style="font-size:12px;color:var(--muted);margin-bottom:12px"></div>
+            <div class="f-field" style="margin-bottom:0">
+              <label>Position de l'image</label>
+              <div class="position-grid">
+                <button class="position-btn" data-pos="top left">↖ Haut gauche</button>
+                <button class="position-btn active" data-pos="top center">↑ Haut centre</button>
+                <button class="position-btn" data-pos="top right">↗ Haut droite</button>
+                <button class="position-btn" data-pos="center left">← Milieu</button>
+                <button class="position-btn active" data-pos="center">· Centre</button>
+                <button class="position-btn" data-pos="center right">→ Milieu</button>
+                <button class="position-btn" data-pos="bottom left">↙ Bas gauche</button>
+                <button class="position-btn" data-pos="bottom center">↓ Bas centre</button>
+                <button class="position-btn" data-pos="bottom right">↘ Bas droite</button>
+              </div>
+            </div>
+          </div>
+          <div class="media-modal-foot">
+            <button class="btn-secondary-sm" data-media-close="modalMediaReplace">Annuler</button>
+            <button class="btn-primary-sm" id="replaceConfirmBtn" disabled>Confirmer le remplacement</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Modifier informations -->
+      <div class="media-modal" id="modalMediaEdit">
+        <div class="media-modal-box">
+          <div class="media-modal-head">
+            <h2>Modifier les informations</h2>
+            <button class="media-modal-close" data-media-close="modalMediaEdit">×</button>
+          </div>
+          <div class="media-modal-body">
+            <div class="media-preview-box" id="editPreview" style="margin-bottom:18px">
+              <span style="font-size:12px;color:var(--muted)">—</span>
+            </div>
+            <div class="form-row">
+              <div class="f-field">
+                <label>Titre éditorial</label>
+                <input type="text" id="editTitle" placeholder="Titre de la photo…">
+              </div>
+              <div class="f-field">
+                <label>Texte alternatif (ALT)</label>
+                <input type="text" id="editAlt" placeholder="Description pour accessibilité…">
+              </div>
+            </div>
+            <div class="form-row full">
+              <div class="f-field">
+                <label>Légende</label>
+                <input type="text" id="editCaption" placeholder="Légende visible sur le site…">
+              </div>
+            </div>
+            <div class="form-row full">
+              <div class="f-field">
+                <label>Description</label>
+                <textarea id="editDescription" rows="3" placeholder="Description longue (optionnel)…"></textarea>
+              </div>
+            </div>
+            <div class="media-info-status" id="editStatus"></div>
+          </div>
+          <div class="media-modal-foot">
+            <button class="btn-secondary-sm" data-media-close="modalMediaEdit">Annuler</button>
+            <button class="btn-primary-sm" id="editSaveBtn">Sauvegarder</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Upload multi-médias -->
+      <div class="media-modal" id="modalMediaUpload">
+        <div class="media-modal-box wide">
+          <div class="media-modal-head">
+            <h2>Ajouter des médias</h2>
+            <button class="media-modal-close" data-media-close="modalMediaUpload">×</button>
+          </div>
+          <div class="media-modal-body">
+            <div class="media-upload-zone" id="mediaUploadZone">
+              <input type="file" id="mediaUploadInput" multiple accept="image/jpeg,image/jpg,image/png,image/webp,image/avif">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
+              <p style="font-size:14px;margin-top:12px">Cliquez ou glissez vos photos ici</p>
+              <p style="font-size:12px;color:var(--muted);margin:4px 0 0">JPG, PNG, WEBP, AVIF — max 50 Mo par fichier</p>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
+              <div class="f-field">
+                <label>Page de destination</label>
+                <select id="uploadDestPage">
+                  <option value="">— Médiathèque générale —</option>
+                  <option value="a-propos">À propos</option>
+                  <option value="portfolio">Portfolio</option>
+                  <option value="collaborateurs">Collaborateurs</option>
+                  <option value="boutique">Boutique</option>
+                  <option value="accueil">Accueil</option>
+                </select>
+              </div>
+              <div class="f-field">
+                <label>Section</label>
+                <select id="uploadDestSection" disabled>
+                  <option value="">— Choisir une page d'abord —</option>
+                </select>
+              </div>
+            </div>
+            <div class="upload-progress-list" id="uploadProgressList"></div>
+          </div>
+          <div class="media-modal-foot">
+            <button class="btn-secondary-sm" data-media-close="modalMediaUpload">Fermer</button>
+            <button class="btn-primary-sm" id="uploadStartBtn" disabled>Uploader les fichiers</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Confirmer suppression -->
+      <div class="media-modal" id="modalMediaDelete">
+        <div class="media-modal-box" style="max-width:420px">
+          <div class="media-modal-head">
+            <h2>Supprimer ce média</h2>
+            <button class="media-modal-close" data-media-close="modalMediaDelete">×</button>
+          </div>
+          <div class="media-modal-body">
+            <p style="font-size:14px;color:var(--ink-soft);line-height:1.7;margin:0 0 12px">
+              Cette action est irréversible. Le fichier sera supprimé du Storage Supabase et la référence retirée du site.
+            </p>
+            <div class="media-preview-box" id="deletePreview" style="height:120px"></div>
+          </div>
+          <div class="media-modal-foot">
+            <button class="btn-secondary-sm" data-media-close="modalMediaDelete">Annuler</button>
+            <button class="action-btn danger" id="deleteConfirmBtn" style="padding:8px 18px">Supprimer définitivement</button>
+          </div>
+        </div>
+      </div>
+
     </div><!-- /adminContent -->
   </main>
 </div><!-- /admin-shell -->
@@ -897,5 +1128,6 @@
 <script src="js/supabase-client.js"></script>
 <script src="js/auth.js"></script>
 <script src="js/admin.js"></script>
+<script src="js/media-manager.js"></script>
 </body>
 </html>

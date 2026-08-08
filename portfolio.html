@@ -67,11 +67,11 @@
   .pf-reviews .rv-grid{display:none!important}
   .pf-reviews .rv-header{margin-bottom:clamp(28px,4vw,44px)}
   .pf-rv-overflow{overflow:hidden;padding-bottom:clamp(48px,6vw,72px)}
-  .pf-rv-track{display:flex;width:max-content;animation:pf-rv-move 55s linear infinite}
+  .pf-rv-track{display:flex;width:max-content;animation:pf-rv-move 220s linear infinite}
   .pf-rv-track:hover{animation-play-state:paused}
   @keyframes pf-rv-move{from{transform:translateX(0)}to{transform:translateX(-50%)}}
   .pf-rv-item{flex:0 0 clamp(300px,30vw,420px);padding:clamp(32px,3.5vw,52px) clamp(28px,3vw,44px);border-right:1px solid rgba(212,184,155,.15);display:flex;flex-direction:column;gap:20px;transition:background .25s}
-  .pf-rv-item:hover{background:#1a1714}
+  .pf-rv-item:hover{background:inherit}
   .pf-rv-quote{font-family:var(--display);font-size:clamp(17px,1.7vw,22px);font-style:italic;font-weight:300;color:var(--cream);line-height:1.65;margin:0;flex:1}
   .pf-rv-author{font-family:var(--body);font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:rgba(212,184,155,.6);border-top:1px solid rgba(212,184,155,.12);padding-top:16px;margin-top:auto}
   @media(max-width:1024px){.pf-rv-item{flex:0 0 clamp(280px,42vw,400px)}}
@@ -161,7 +161,7 @@
         data-cat-label="Mode"
         data-text="Couverture de défilé, regards backstage et silhouettes en mouvement lors de la Paris Fashion Week."
         data-details="Défilés|Backstage|Éditorial mode">
-        <img src="assets/photos/paris-fashion-week/PFW25-11MARS-32.JPG" alt="Paris Fashion Week" loading="lazy">
+        <img src="assets/photos/paris-fashion-week/PFW25-11MARS-32.JPG" alt="Paris Fashion Week" loading="lazy" data-media-slot="portfolio:galerie:photo-1" data-media-src-fallback="assets/photos/paris-fashion-week/PFW25-11MARS-32.JPG">
         <div class="portfolio-meta">
           <div class="cat">Mode</div>
           <h3>Paris Fashion Week</h3>
@@ -175,7 +175,7 @@
         data-cat-label="Mode"
         data-text="Portraits de mode, silhouettes et direction artistique pour une image cohérente et élégante."
         data-details="Éditorial|Portraits|Direction artistique">
-        <img src="assets/photos/mode/081225_Elfie_AgencyA_Nocollection0-21.jpg" alt="Mode Éditoriale" loading="lazy">
+        <img src="assets/photos/mode/081225_Elfie_AgencyA_Nocollection0-21.jpg" alt="Mode Éditoriale" loading="lazy" data-media-slot="portfolio:galerie:photo-2" data-media-src-fallback="assets/photos/mode/081225_Elfie_AgencyA_Nocollection0-21.jpg">
         <div class="portfolio-meta">
           <div class="cat">Mode</div>
           <h3>Mode Éditoriale</h3>
@@ -189,7 +189,7 @@
         data-cat-label="Mode"
         data-text="Reportage complet du défilé Monteiro, mars 2025 — mouvement, ambiance et mise en scène."
         data-details="Défilé|Reportage|Mise en scène">
-        <img src="assets/photos/defile-monteiro/defile-mars-2025-436.jpg" alt="Défilé Monteiro" loading="lazy">
+        <img src="assets/photos/defile-monteiro/defile-mars-2025-436.jpg" alt="Défilé Monteiro" loading="lazy" data-media-slot="portfolio:galerie:photo-3" data-media-src-fallback="assets/photos/defile-monteiro/defile-mars-2025-436.jpg">
         <div class="portfolio-meta">
           <div class="cat">Mode</div>
           <h3>Défilé Monteiro</h3>
@@ -203,7 +203,7 @@
         data-cat-label="Produit"
         data-text="Images pensées pour traduire une identité de marque sans surcharger le cadre — packshot raffiné et narration visuelle."
         data-details="Packshot raffiné|Textures|Narration visuelle">
-        <img src="assets/photos/produit/BVLGARI-rose-goldea_AnaisDescomps_AgencyA_0.jpg" alt="Objet & matière" loading="lazy">
+        <img src="assets/photos/produit/BVLGARI-rose-goldea_AnaisDescomps_AgencyA_0.jpg" alt="Objet & matière" loading="lazy" data-media-slot="portfolio:galerie:photo-4" data-media-src-fallback="assets/photos/produit/BVLGARI-rose-goldea_AnaisDescomps_AgencyA_0.jpg">
         <div class="portfolio-meta">
           <div class="cat">Produit</div>
           <h3>Objet & matière</h3>
@@ -217,7 +217,7 @@
         data-cat-label="Beauté"
         data-text="Beauté éditoriale, cadrage précis, peau lumineuse et direction douce."
         data-details="Beauté|Portrait|Retouche premium">
-        <img src="assets/portraits/Anais-22.jpg" alt="Portrait lumière" loading="lazy">
+        <img src="assets/portraits/Anais-22.jpg" alt="Portrait lumière" loading="lazy" data-media-slot="portfolio:galerie:photo-5" data-media-src-fallback="assets/portraits/Anais-22.jpg">
         <div class="portfolio-meta">
           <div class="cat">Beauté</div>
           <h3>Portrait lumière</h3>
@@ -231,7 +231,7 @@
         data-cat-label="Talents"
         data-text="Books, digitals et portraits de développement pour modèles et artistes."
         data-details="Book signature|Digitals|Accompagnement">
-        <img src="assets/nos talents - galerie/celine-polas-25.jpg" alt="Scouting & books" loading="lazy">
+        <img src="assets/nos talents - galerie/celine-polas-25.jpg" alt="Scouting & books" loading="lazy" data-media-slot="portfolio:galerie:photo-6" data-media-src-fallback="assets/nos talents - galerie/celine-polas-25.jpg">
         <div class="portfolio-meta">
           <div class="cat">Talents</div>
           <h3>Scouting & books</h3>
@@ -245,7 +245,7 @@
         data-cat-label="Culinaire"
         data-text="Une image qui ouvre l'appétit, sans perdre l'élégance du geste photographique."
         data-details="Food styling|Lumière douce|Image de marque">
-        <img src="assets/photos/culinaire/AnaisDescomps_AgencyA_Culinaire_0.jpg" alt="Still life culinaire" loading="lazy">
+        <img src="assets/photos/culinaire/AnaisDescomps_AgencyA_Culinaire_0.jpg" alt="Still life culinaire" loading="lazy" data-media-slot="portfolio:galerie:photo-7" data-media-src-fallback="assets/photos/culinaire/AnaisDescomps_AgencyA_Culinaire_0.jpg">
         <div class="portfolio-meta">
           <div class="cat">Culinaire</div>
           <h3>Still life culinaire</h3>
@@ -259,7 +259,7 @@
         data-cat-label="Sport"
         data-text="Reportage sportif NM1 — énergie, mouvement et intensité des matchs en images."
         data-details="Reportage|NM1|Action">
-        <img src="assets/photos/sport/NM1-28MARS.JPG" alt="Sport & action" loading="lazy">
+        <img src="assets/photos/sport/NM1-28MARS.JPG" alt="Sport & action" loading="lazy" data-media-slot="portfolio:galerie:photo-8" data-media-src-fallback="assets/photos/sport/NM1-28MARS.JPG">
         <div class="portfolio-meta">
           <div class="cat">Sport</div>
           <h3>Sport & action</h3>
@@ -450,5 +450,6 @@
 </script>
 
 </div>
+<script src="js/media-loader.js"></script>
 </body>
 </html>
