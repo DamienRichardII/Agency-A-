@@ -37,7 +37,7 @@ Les textes éditables ont l'attribut `data-content-key="page.section.key"` sur l
 
 ## Déploiement
 
-Git push sur `main` → Vercel déploie automatiquement. Le fichier `.git/index.lock` peut bloquer les commits depuis le sandbox — supprimer manuellement depuis Windows si nécessaire.
+Git push sur `main` → Vercel déploie automatiquement.
 
 ---
 
@@ -73,3 +73,20 @@ for f in *.html; do tail -1 "$f"; done
 # Vérifier fichiers JS (dernière ligne)
 for f in js/*.js; do echo "$f:"; tail -1 "$f"; done
 ```
+
+### 8. Gestion des verrous Git (`.git/index.lock`)
+Le fichier `.git/index.lock` est un mécanisme normal de protection de Git contre les écritures concurrentes. Ne jamais le supprimer aveuglément.
+
+Avant toute opération Git nécessitant un verrouillage, vérifier qu'aucun processus Git légitime n'est en cours.
+
+Si une opération échoue avec `fatal: Unable to create '.git/index.lock': File exists.` :
+1. Vérifier qu'aucun processus Git actif n'est en cours (`ps aux | grep git` ou équivalent Windows).
+2. Ne jamais supprimer automatiquement le lock si un processus Git actif est détecté.
+3. Si aucun processus Git actif n'est détecté et que le verrou est manifestement résiduel, le supprimer uniquement alors.
+4. Relancer l'opération Git qui avait échoué.
+5. Vérifier le résultat avant de continuer.
+6. Ne jamais considérer "Everything up-to-date" comme la preuve qu'un commit précédent a été effectué — vérifier explicitement avec `git status` et/ou `git log`.
+7. Ne jamais lancer plusieurs opérations Git concurrentes sur le même dépôt.
+8. Éviter les commandes Git parallèles ou simultanées qui peuvent provoquer des conflits de verrouillage.
+9. Après un `git commit`, vérifier que le commit a réellement été créé avant de lancer `git push`.
+10. Après un `git push`, vérifier que la branche distante a bien été mise à jour.
