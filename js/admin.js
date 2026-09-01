@@ -122,6 +122,8 @@ function showFatalError(reason) {
     allLinks.forEach(a => { if (a.dataset.panel === id) a.classList.add('active'); });
   }
 
+  window.showPanel = showPanel; // expose pour les onclick inline du HTML
+
   allLinks.forEach(l => {
     l.addEventListener('click', e => {
       e.preventDefault();

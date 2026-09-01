@@ -366,8 +366,8 @@
   <section class="hum-hero">
     <div class="container hum-hero-content reveal">
       <p class="eyebrow">Humanitaire</p>
-      <h1 class="display-lg">Documenter les causes<br>avec justesse, dignité<br>et mémoire.</h1>
-      <p class="lead">Agency A accompagne les associations, ONG et projets solidaires dans la création d’images sensibles, utiles et respectueuses des personnes photographiées.</p>
+      <h1 class="display-lg" data-content-key="humanitaire.hero.titre">Documenter les causes<br>avec justesse, dignité<br>et mémoire.</h1>
+      <p class="lead" data-content-key="humanitaire.hero.sous_titre">Agency A accompagne les associations, ONG et projets solidaires dans la création d’images sensibles, utiles et respectueuses des personnes photographiées.</p>
       <div class="hum-hero-ctas">
         <a href="contact.html" class="btn" style="border-color:rgba(234,217,199,.45);color:#ead9c7">Présenter une mission</a>
         <a href="#approche" class="btn" style="border-color:rgba(234,217,199,.3);color:rgba(234,217,199,.7)">Voir l’approche</a>
@@ -686,6 +686,10 @@
 </footer>
 
 <script src="js/shared.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase/config.js"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/content-loader.js"></script>
 </div>
 </body>
 </html>

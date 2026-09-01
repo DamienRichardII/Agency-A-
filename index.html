@@ -86,10 +86,10 @@
       <div class="hero-logo-wrap reveal">
         <img src="assets/logo/logo-dark-transparent.png" alt="Agency A" class="hero-logo-img">
       </div>
-      <h1 class="hero-baseline reveal">Donner vie aux images qui racontent votre univers.</h1>
+      <h1 class="hero-baseline reveal" data-content-key="accueil.hero.titre">Donner vie aux images qui racontent votre univers.</h1>
       <div class="hero-ctas reveal">
-        <a href="portfolio.html" class="btn btn-primary">Découvrir le portfolio</a>
-        <a href="contact.html" class="btn btn-secondary">Réserver une séance</a>
+        <a href="portfolio.html" class="btn btn-primary" data-content-key="accueil.hero.cta_portfolio">Découvrir le portfolio</a>
+        <a href="contact.html" class="btn btn-secondary" data-content-key="accueil.hero.cta_contact">Réserver une séance</a>
       </div>
     </div>
   </section>
@@ -183,6 +183,10 @@
   </div>
 </footer>
 <script src="js/shared.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase/config.js"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/content-loader.js"></script>
 
 </div>
 </body>
