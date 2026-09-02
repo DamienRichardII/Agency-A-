@@ -43,6 +43,15 @@
       .gthumb{width:54px;height:54px}
       .gmodal-head{padding:14px 16px}
     }
+
+    /* ── Hero subtitle ── */
+    .pf-subtitle{font-size:clamp(14px,1.4vw,17px);color:var(--muted);line-height:1.7;max-width:600px;margin:14px auto 0;text-align:center}
+
+    /* ── Grille uniforme (toutes cartes identiques) ── */
+    .portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .portfolio-card,.portfolio-card.tall,.portfolio-card.wide{grid-column:span 1!important;aspect-ratio:3/4;min-height:unset}
+    @media(max-width:900px){.portfolio-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:560px){.portfolio-grid{grid-template-columns:1fr}}
   </style>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -117,20 +126,19 @@
 
 
 <main>
-  <section class="page-hero">
+  <section class="page-hero" style="text-align:center">
     <div class="container">
-      <div class="reveal">
-        <p class="eyebrow">Portfolio</p>
-      </div>
-      <div class="portfolio-univers-band reveal">
-        <p class="kicker">Univers couverts</p>
-        <div class="univers-row">
-          <span>Mode</span><span class="univers-sep">·</span>
-          <span>Produit</span><span class="univers-sep">·</span>
-          <span>Beauté</span><span class="univers-sep">·</span>
-          <span>Culinaire</span><span class="univers-sep">·</span>
-          <span>Talents</span><span class="univers-sep">·</span>
-          <span>Sport</span>
+      <p class="eyebrow reveal" style="text-align:left;margin-bottom:clamp(16px,2vw,28px)">Portfolio</p>
+      <div class="reveal" style="max-width:960px;margin:0 auto">
+        <h1 class="display-lg">Nos projets en images.</h1>
+        <p class="pf-subtitle">Découvrez nos réalisations à travers photos, vidéos et projets qui racontent notre passion et notre engagement.</p>
+        <div class="collab-filters" role="group" aria-label="Filtrer par univers" style="margin-top:28px">
+          <button class="chip" data-filter="mode">Mode</button>
+          <button class="chip" data-filter="produit">Produit</button>
+          <button class="chip" data-filter="beaute">Beauté</button>
+          <button class="chip" data-filter="culinaire">Culinaire</button>
+          <button class="chip" data-filter="talents">Talents</button>
+          <button class="chip" data-filter="sport">Sport</button>
         </div>
       </div>
     </div>
@@ -138,23 +146,8 @@
 
   <section class="section" style="padding-top:24px">
     <div class="container">
-      <div class="portfolio-toolbar reveal">
-        <div>
-          <p class="eyebrow">Filtrer par univers</p>
-          <p class="text-muted" style="margin-bottom:10px;font-size:11px;letter-spacing:.06em">Chaque univers regroupe plusieurs séries, shootings ou projets éditoriaux.</p>
-          <div class="filter-row">
-            <button class="chip" data-filter="mode">Mode</button>
-            <button class="chip" data-filter="produit">Produit</button>
-            <button class="chip" data-filter="beaute">Beauté</button>
-            <button class="chip" data-filter="culinaire">Culinaire</button>
-            <button class="chip" data-filter="talents">Talents</button>
-            <button class="chip" data-filter="sport">Sport</button>
-          </div>
-        </div>
-        
-      </div>
       <div class="portfolio-grid">
-      <article class="portfolio-card tall reveal" data-category="mode" data-gallery-trigger
+      <article class="portfolio-card reveal" data-category="mode" data-gallery-trigger
         data-gallery='["assets/photos/paris-fashion-week/PFW25-11MARS-32.JPG", "assets/photos/paris-fashion-week/PFW-25-7mars-71.JPG", "assets/photos/paris-fashion-week/PFW-25-7mars-76.JPG", "assets/photos/paris-fashion-week/PFW25-11MARS-89.JPG", "assets/photos/paris-fashion-week/PFW25-11MARS-90.JPG", "assets/photos/paris-fashion-week/PFW25-11MARS-110.JPG", "assets/photos/paris-fashion-week/PFW25-11MARS-111.JPG", "assets/photos/paris-fashion-week/PFW25-11MARS-130.JPG", "assets/photos/paris-fashion-week/PFW25-11MARS-167.JPG", "assets/photos/paris-fashion-week/pfw25-11mars-111-2.jpg", "assets/photos/paris-fashion-week/pfw25-11mars-112-2.jpg", "assets/photos/paris-fashion-week/pfw25-11mars-116-2.jpg", "assets/photos/paris-fashion-week/pfw25-11mars-126-2.jpg"]'
         data-cover="assets/photos/paris-fashion-week/PFW25-11MARS-32.JPG"
         data-title="Paris Fashion Week"
@@ -168,7 +161,7 @@
           <span class="portfolio-count">13 photos</span>
         </div>
       </article>
-      <article class="portfolio-card wide reveal" data-category="mode" data-gallery-trigger
+      <article class="portfolio-card reveal" data-category="mode" data-gallery-trigger
         data-gallery='["assets/photos/mode/081225_Elfie_AgencyA_Nocollection0-21.jpg", "assets/photos/mode/081225_elfie_agencya_nocollection0-2-2.jpg", "assets/photos/mode/081225_elfie_agencya_nocollection0-3-2.jpg", "assets/photos/mode/081225_elfie_agencya_nocollection0-4-2.jpg", "assets/photos/mode/2025-11-03_Chaimaa_mannequin_agence_mademoiselle_01.jpg", "assets/photos/mode/2025-11-03_Chaimaa_mannequin_agence_mademoiselle_04.jpg", "assets/photos/mode/2025-11-03_Chaimaa_mannequin_agence_mademoiselle_05.jpg", "assets/photos/mode/IMG_0108-Modifier.JPG", "assets/photos/mode/IMG_0217-Modifier.JPG", "assets/photos/mode/IMG_0571-Modifier.JPG", "assets/photos/mode/IMG_0578-Modifier.JPG", "assets/photos/mode/IMG_0583-Modifier.JPG", "assets/photos/mode/IMG_0584-Modifier.JPG", "assets/photos/mode/IMG_3574.JPG", "assets/photos/mode/IMG_9548-Modifier.JPG", "assets/photos/mode/IMG_9684-Modifier.JPG", "assets/photos/mode/IMG_9801-Modifier.JPG", "assets/photos/mode/IMG_9816-Modifier.JPG"]'
         data-cover="assets/photos/mode/081225_Elfie_AgencyA_Nocollection0-21.jpg"
         data-title="Mode Éditoriale"
@@ -182,7 +175,7 @@
           <span class="portfolio-count">18 photos</span>
         </div>
       </article>
-      <article class="portfolio-card  reveal" data-category="mode" data-gallery-trigger
+      <article class="portfolio-card reveal" data-category="mode" data-gallery-trigger
         data-gallery='["assets/photos/defile-monteiro/defile-mars-2025-426.jpg", "assets/photos/defile-monteiro/defile-mars-2025-427.jpg", "assets/photos/defile-monteiro/defile-mars-2025-428.jpg", "assets/photos/defile-monteiro/defile-mars-2025-429.jpg", "assets/photos/defile-monteiro/defile-mars-2025-433.jpg", "assets/photos/defile-monteiro/defile-mars-2025-434.jpg", "assets/photos/defile-monteiro/defile-mars-2025-435.jpg", "assets/photos/defile-monteiro/defile-mars-2025-436.jpg", "assets/photos/defile-monteiro/defile-mars-2025-437.jpg", "assets/photos/defile-monteiro/defile-mars-2025-438.jpg", "assets/photos/defile-monteiro/defile-mars-2025-439.jpg", "assets/photos/defile-monteiro/defile-mars-2025-440.jpg", "assets/photos/defile-monteiro/defile-mars-2025-441.jpg", "assets/photos/defile-monteiro/defile-mars-2025-442.jpg", "assets/photos/defile-monteiro/defile-mars-2025-443.jpg", "assets/photos/defile-monteiro/defile-mars-2025-444.jpg", "assets/photos/defile-monteiro/defile-mars-2025-445.jpg", "assets/photos/defile-monteiro/defile-mars-2025-446.jpg", "assets/photos/defile-monteiro/defile-mars-2025-447.jpg", "assets/photos/defile-monteiro/defile-mars-2025-448.jpg", "assets/photos/defile-monteiro/defile-mars-2025-456.jpg"]'
         data-cover="assets/photos/defile-monteiro/defile-mars-2025-436.jpg"
         data-title="Défilé Monteiro"
@@ -196,7 +189,7 @@
           <span class="portfolio-count">21 photos</span>
         </div>
       </article>
-      <article class="portfolio-card  reveal" data-category="produit" data-gallery-trigger
+      <article class="portfolio-card reveal" data-category="produit" data-gallery-trigger
         data-gallery='["assets/photos/produit/BVLGARI-rose-goldea_AnaisDescomps_AgencyA_0.jpg", "assets/photos/produit/rouge-a-levre-chanel.jpg", "assets/photos/produit/26-01-12_wisky_Anais-Descomps.JPG"]'
         data-cover="assets/photos/produit/BVLGARI-rose-goldea_AnaisDescomps_AgencyA_0.jpg"
         data-title="Objet & matière"
@@ -210,7 +203,7 @@
           <span class="portfolio-count">3 photos</span>
         </div>
       </article>
-      <article class="portfolio-card  reveal" data-category="beaute" data-gallery-trigger
+      <article class="portfolio-card reveal" data-category="beaute" data-gallery-trigger
         data-gallery='["assets/portraits/Anais-22.jpg"]'
         data-cover="assets/portraits/Anais-22.jpg"
         data-title="Portrait lumière"
@@ -224,7 +217,7 @@
           <span class="portfolio-count">1 photo</span>
         </div>
       </article>
-      <article class="portfolio-card  reveal" data-category="talents" data-gallery-trigger
+      <article class="portfolio-card reveal" data-category="talents" data-gallery-trigger
         data-gallery='["assets/nos talents - galerie/celine-polas-25.jpg", "assets/nos talents - galerie/29012026_Elfie_AnaisDescomps_AgencyA_-9.jpg"]'
         data-cover="assets/nos talents - galerie/celine-polas-25.jpg"
         data-title="Scouting & books"
@@ -238,7 +231,7 @@
           <span class="portfolio-count">2 photos</span>
         </div>
       </article>
-      <article class="portfolio-card tall reveal" data-category="culinaire" data-gallery-trigger
+      <article class="portfolio-card reveal" data-category="culinaire" data-gallery-trigger
         data-gallery='["assets/photos/culinaire/AnaisDescomps_AgencyA_Culinaire_0.jpg", "assets/photos/culinaire/AnaisDescomps_AgencyA_Culinaire_0-9.jpg", "assets/photos/culinaire/AnaisDescomps_AgencyA_Culinaire--5.jpg", "assets/photos/culinaire/AnaisDescomps_AgencyA_Culinaire--7.jpg", "assets/photos/culinaire/AnaisDescomps_AgencyA_Culinaire--8.jpg", "assets/photos/culinaire/AnaisDescomps_AgencyA_Culinaire--9.jpg", "assets/photos/culinaire/AnaisDescomps_AgencyA_Culinaire--10.jpg", "assets/photos/culinaire/AnaisDescomps_AgencyA_Culinaire--11.jpg"]'
         data-cover="assets/photos/culinaire/AnaisDescomps_AgencyA_Culinaire_0.jpg"
         data-title="Still life culinaire"
@@ -252,7 +245,7 @@
           <span class="portfolio-count">8 photos</span>
         </div>
       </article>
-      <article class="portfolio-card wide reveal" data-category="sport" data-gallery-trigger
+      <article class="portfolio-card reveal" data-category="sport" data-gallery-trigger
         data-gallery='["assets/photos/sport/NM1-28MARS.JPG", "assets/photos/sport/NM1-28MARS-3.JPG", "assets/photos/sport/NM1-28MARS-45.JPG", "assets/photos/sport/NM1-28MARS-46.JPG", "assets/photos/sport/NM1-28MARS-47.JPG", "assets/photos/sport/NM1-LEVALLOIS-HAVRE-14.JPG", "assets/photos/sport/NM1-LEVALLOIS-HAVRE-15.JPG", "assets/photos/sport/NM1-LEVALLOIS-HAVRE-16.JPG", "assets/photos/sport/NM1-LEVALLOIS-HAVRE-26.JPG", "assets/photos/sport/NM1-LEVALLOIS-HAVRE-27.JPG", "assets/photos/sport/NM1-LEVALLOIS-HAVRE-31.JPG", "assets/photos/sport/NM1-LEVALLOIS-HAVRE-33.JPG", "assets/photos/sport/NM1-LEVALLOIS-HAVRE-40.JPG", "assets/photos/sport/NM1-LEVALLOIS-HAVRE-42.JPG", "assets/photos/sport/NM1-LEVALLOIS-HAVRE-47.JPG", "assets/photos/sport/NM1-LEVALLOIS-SCABB-12.jpg", "assets/photos/sport/NM1-LEVALLOIS-SCABB-13.jpg", "assets/photos/sport/NM1-LEVALLOIS-SCABB-44.jpg", "assets/photos/sport/NM1-LEVALLOIS-SCABB-46.jpg", "assets/photos/sport/NM1-LEVALLOIS-SCABB-79.jpg", "assets/photos/sport/NM1-LEVALLOIS-SCABB-115.jpg"]'
         data-cover="assets/photos/sport/NM1-28MARS.JPG"
         data-title="Sport & action"
