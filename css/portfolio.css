@@ -808,6 +808,7 @@
     min-height: auto;
     padding: 20px 0 28px;
     gap: 0;
+    align-items: stretch; /* annule align-items:center hérité du desktop */
   }
 
   /* display:contents hisse les enfants directs dans le flex parent
@@ -834,25 +835,13 @@
   /* Supprimer le <br> interne pour tenir sur une ligne */
   .pf-hero-left > .display-lg br { display: none; }
 
-  /* 3 — Chips univers */
+  /* 3 — Chips univers (réutilise la classe .chip de shared.css) */
   .pf-hero-chips {
     order: 3;
     display: flex;
     flex-wrap: wrap;
     gap: 7px;
     padding: 14px 24px 4px;
-  }
-  .pf-chip {
-    font-family: var(--body);
-    font-size: 8px;
-    letter-spacing: .2em;
-    text-transform: uppercase;
-    color: var(--sand);
-    border: 1px solid rgba(106,78,59,.28);
-    border-radius: 100px;
-    padding: 5px 12px;
-    line-height: 1;
-    white-space: nowrap;
   }
 
   /* Paragraphe descriptif : masqué sur mobile */
