@@ -265,7 +265,7 @@ function buildUniverseCards() {
         <div class="pf-universe-num">${u.number}</div>
         <h3 class="pf-universe-name">${u.title}</h3>
         <div class="pf-universe-tag">${u.tagline}</div>
-        <a class="pf-universe-link" href="portfolio-${u.id}.html" aria-label="Page dédiée ${u.title}" title="Voir la page ${u.title}">↗</a>
+        <a class="pf-universe-link" href="portfolio-${u.id}.html" aria-label="Page dédiée ${u.title}" title="Voir la page ${u.title}"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M1 9L9 1M9 1H2M9 1V8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </div>`;
     card.addEventListener('click', () => openUniverse(u.id));
     card.addEventListener('keydown', e => {

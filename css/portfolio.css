@@ -85,6 +85,9 @@
   font-family: var(--body);
 }
 
+/* Chips mobiles — cachées sur desktop */
+.pf-hero-chips { display: none; }
+
 .pf-hero-signature {
   font-family: var(--display);
   font-size: clamp(15px, 1.55vw, 20px);
@@ -795,12 +798,99 @@
 }
 
 @media (max-width: 600px) {
-  .pf-gallery-grid { grid-template-columns: 1fr; }
-  .pf-lb-stage { max-width: 100vw; }
-  .pf-lb-prev { left: 8px; }
-  .pf-lb-next { right: 8px; }
 
-  /* Marquee mobile : bande horizontale infinie des univers */
+  /* ── HERO MOBILE ─────────────────────────────────────────── */
+  /* Ordre cible : PORTFOLIO → h1 → chips → livre → CTA         */
+
+  .pf-hero {
+    display: flex;
+    flex-direction: column;
+    min-height: auto;
+    padding: 20px 0 28px;
+    gap: 0;
+  }
+
+  /* display:contents hisse les enfants directs dans le flex parent
+     sans toucher ni le desktop ni le DOM                       */
+  .pf-hero-left {
+    display: contents;
+  }
+
+  /* 1 — « PORTFOLIO » */
+  .pf-hero-left > .eyebrow {
+    order: 1;
+    padding: 0 24px;
+    margin-bottom: 6px;
+  }
+
+  /* 2 — « Un journal en images. » sur UNE seule ligne */
+  .pf-hero-left > .display-lg {
+    order: 2;
+    padding: 0 24px;
+    font-size: clamp(28px, 7.8vw, 40px);
+    line-height: 1.08;
+    margin-bottom: 0;
+  }
+  /* Supprimer le <br> interne pour tenir sur une ligne */
+  .pf-hero-left > .display-lg br { display: none; }
+
+  /* 3 — Chips univers */
+  .pf-hero-chips {
+    order: 3;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    padding: 14px 24px 4px;
+  }
+  .pf-chip {
+    font-family: var(--body);
+    font-size: 8px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--sand);
+    border: 1px solid rgba(106,78,59,.28);
+    border-radius: 100px;
+    padding: 5px 12px;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  /* Paragraphe descriptif : masqué sur mobile */
+  .pf-hero-desc { display: none; }
+
+  /* 4 — Livre (droite) : vient après les chips */
+  .pf-hero-right {
+    order: 4;
+    padding: 20px 0 12px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* 5 — CTA : sous le livre */
+  .pf-hero-left > .pf-open-btn {
+    order: 5;
+    padding: 0 24px;
+    margin-top: 4px;
+  }
+
+  /* Livre légèrement réduit */
+  .pf-book-wrap { width: 180px; height: 250px; }
+
+  /* ── SECTION UNIVERS ─────────────────────────────────────── */
+  .pf-universes {
+    padding: clamp(28px, 5vw, 40px) 0;
+    overflow-x: hidden;
+  }
+  .pf-universes-header {
+    margin-bottom: clamp(14px, 3vw, 20px);
+  }
+  .pf-universes-header .display-md {
+    font-size: clamp(24px, 6.5vw, 32px);
+  }
+
+  /* ── MARQUEE UNIVERS MOBILE ──────────────────────────────── */
   .pf-universes-grid.pf-mob-active {
     overflow: hidden;
     display: block;
@@ -812,12 +902,13 @@
     gap: 10px;
     animation: pf-uni-scroll 24s linear infinite;
   }
+  /* ≈ 2 cartes + une tranche de la suivante */
   .pf-universes-grid.pf-mob-active .pf-universe-card {
-    flex: 0 0 55vw;
-    width: 55vw;
+    flex: 0 0 46vw;
+    width: 46vw;
   }
 
-  /* prefers-reduced-motion : scroll manuel à la place du marquee */
+  /* prefers-reduced-motion : scroll horizontal manuel */
   .pf-universes-grid.pf-mob-scroll {
     display: flex;
     overflow-x: auto;
@@ -825,9 +916,44 @@
     gap: 10px;
   }
   .pf-universes-grid.pf-mob-scroll .pf-universe-card {
-    flex: 0 0 55vw;
-    width: 55vw;
+    flex: 0 0 46vw;
+    width: 46vw;
   }
+
+  /* ── GALERIE OVERLAY MOBILE ──────────────────────────────── */
+  /* Bouton fermer en position fixe en haut-droite du header   */
+  /* (.pf-gallery a transform → fixed positionné relatif à lui) */
+  .pf-gallery-close {
+    position: fixed;
+    top: 12px;
+    right: 12px;
+    z-index: 201;
+    width: 36px;
+    height: 36px;
+    font-size: 17px;
+  }
+  /* Sidebar condensée — padding-right évite l'overlap avec le × */
+  .pf-gallery-sidebar {
+    padding: 10px 52px 10px 16px;
+    gap: 10px;
+  }
+  /* Topbar : uniquement le compteur, aligné à gauche */
+  .pf-gallery-topbar {
+    padding: 5px 16px 9px;
+    justify-content: flex-start;
+    border-bottom: 1px solid rgba(212,184,155,.05);
+  }
+  /* Grille photos : 1 colonne, marges réduites */
+  .pf-gallery-grid {
+    grid-template-columns: 1fr;
+    padding: 10px 14px;
+    gap: 5px;
+  }
+
+  /* ── LIGHTBOX ─────────────────────────────────────────────── */
+  .pf-lb-stage { max-width: 100vw; }
+  .pf-lb-prev { left: 8px; }
+  .pf-lb-next { right: 8px; }
 }
 
 @keyframes pf-uni-scroll {
