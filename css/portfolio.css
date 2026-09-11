@@ -319,12 +319,6 @@
   gap: 20px;
 }
 
-.pf-universes-header::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--line);
-}
 
 .pf-universes-grid {
   display: grid;
