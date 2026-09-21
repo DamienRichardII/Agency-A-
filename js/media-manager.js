@@ -87,6 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
   initEditModal();
   initDeleteModal();
   initModalCloseHandlers();
+  initMediaEditor();
 
   // Bouton "+ Ajouter des médias"
   const uploadBtn = document.getElementById('mediaOpenUploadBtn');
@@ -286,28 +287,20 @@ async function renderMediaCards(pageId, sectionId) {
 
 function buildMediaCard(record) {
   const imgSrc = record.public_url || record.local_fallback || '';
-  const hasSupabaseUrl = !!record.public_url;
+  const name = record.title || humanizeSlot(record.slot);
   const card = document.createElement('div');
   card.className = 'media-card';
   card.innerHTML = `
-    <div class="media-card-preview">
+    <div class="media-card-preview" style="cursor:pointer" onclick="openMediaEditor('${record.id}')">
       <img src="${escHtml(imgSrc)}" alt="${escHtml(record.alt_text || record.slot)}"
            onerror="this.style.display='none'" loading="lazy"
            style="object-position:${escHtml(record.object_position || 'center')}">
-      <span class="media-card-slot">${escHtml(record.slot)}</span>
-      ${record.is_structural ? '<span class="media-card-structural">Structurel</span>' : ''}
+      <div class="media-card-edit-overlay"><span>Modifier</span></div>
     </div>
     <div class="media-card-body">
-      <p class="media-card-name">${escHtml(record.title || record.slot)}</p>
-      <p class="media-card-meta">
-        ${hasSupabaseUrl ? '✓ Supabase' : '⚪ Fichier local'}
-        ${record.caption ? ' · ' + escHtml(record.caption.slice(0, 28)) : ''}
-      </p>
-      <div class="media-card-actions">
-        <button onclick="openReplace('${record.id}')" title="Remplacer la photo">↑ Photo</button>
-        <button onclick="openEdit('${record.id}')" title="Modifier les infos">✎ Infos</button>
-        ${!record.is_structural ? `<button class="danger" onclick="openDelete('${record.id}')" title="Supprimer">✕</button>` : ''}
-      </div>
+      <p class="media-card-name">${escHtml(name)}</p>
+      <p class="media-card-meta">${record.caption ? escHtml(record.caption.slice(0, 44)) : '—'}</p>
+      <button class="mm-modify-btn" onclick="openMediaEditor('${record.id}')">Modifier</button>
     </div>
   `;
   return card;
@@ -832,6 +825,123 @@ function renderUploadList(files) {
 }
 
 /* ════════════════════════════════════════════════════════════════
+   MODAL — ÉDITEUR UNIFIÉ (simplifié Anaïs)
+════════════════════════════════════════════════════════════════ */
+function humanizeSlot(slot) {
+  if (!slot) return 'Photo';
+  return slot.replace(/[-_]/g, ' ').replace(/\d+$/, match => ' ' + match).trim()
+    .replace(/\b\w/g, c => c.toUpperCase());
+}
+
+function initMediaEditor() {
+  const fileInput = document.getElementById('mmFileInput');
+  if (fileInput) {
+    fileInput.addEventListener('change', () => {
+      const file = fileInput.files[0];
+      if (!file) return;
+      if (!validateImageFile(file)) return;
+      mm.replaceFile = file;
+      const reader = new FileReader();
+      reader.onload = e => {
+        document.getElementById('mmPhotoPreview').innerHTML =
+          `<img src="${e.target.result}" style="width:100%;height:100%;object-fit:cover;display:block;object-position:${mm.replacePosition}">`;
+        const nameEl = document.getElementById('mmNewPhotoName');
+        if (nameEl) nameEl.textContent = `Nouvelle photo : ${file.name} (${formatFileSize(file.size)})`;
+        const posRow = document.getElementById('mmPositionRow');
+        if (posRow) posRow.style.display = '';
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+  document.querySelectorAll('#mmPositionGrid .position-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#mmPositionGrid .position-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      mm.replacePosition = btn.dataset.pos;
+      const img = document.querySelector('#mmPhotoPreview img');
+      if (img) img.style.objectPosition = mm.replacePosition;
+    });
+  });
+  const saveBtn = document.getElementById('mmSaveBtn');
+  if (saveBtn) saveBtn.addEventListener('click', doSaveMediaEditor);
+  const deleteBtn = document.getElementById('mmDeleteBtn');
+  if (deleteBtn) deleteBtn.addEventListener('click', () => {
+    closeMediaModal('modalMediaEditor');
+    openDelete(mm.selectedId);
+  });
+}
+
+async function openMediaEditor(id) {
+  const { data, error } = await window.sb.from('site_media').select('*').eq('id', id).single();
+  if (error || !data) return;
+  mm.selectedId = id;
+  mm.selectedRecord = data;
+  mm.replaceFile = null;
+  mm.replacePosition = data.object_position || 'center';
+  const titleEl = document.getElementById('mmEditorTitle');
+  if (titleEl) titleEl.textContent = data.title || humanizeSlot(data.slot);
+  const preview = document.getElementById('mmPhotoPreview');
+  const src = data.public_url || data.local_fallback || '';
+  preview.innerHTML = src
+    ? `<img src="${escHtml(src)}" style="width:100%;height:100%;object-fit:cover;display:block;object-position:${escHtml(data.object_position || 'center')}">`
+    : '<span class="mm-photo-placeholder">Aucune photo</span>';
+  const fileInput = document.getElementById('mmFileInput');
+  if (fileInput) fileInput.value = '';
+  const nameEl = document.getElementById('mmNewPhotoName');
+  if (nameEl) nameEl.textContent = '';
+  const posRow = document.getElementById('mmPositionRow');
+  if (posRow) posRow.style.display = 'none';
+  document.querySelectorAll('#mmPositionGrid .position-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.pos === mm.replacePosition);
+  });
+  document.getElementById('mmCaption').value     = data.caption     || '';
+  document.getElementById('mmDescription').value = data.description || '';
+  document.getElementById('mmTitle').value       = data.title       || '';
+  document.getElementById('mmAlt').value         = data.alt_text    || '';
+  const deleteBtn = document.getElementById('mmDeleteBtn');
+  if (deleteBtn) deleteBtn.style.display = data.is_structural ? 'none' : 'block';
+  openMediaModal('modalMediaEditor');
+}
+
+async function doSaveMediaEditor() {
+  if (!mm.selectedId || !mm.selectedRecord) return;
+  const btn = document.getElementById('mmSaveBtn');
+  btn.disabled = true;
+  btn.textContent = 'Enregistrement…';
+  try {
+    let updateData = {
+      caption:     document.getElementById('mmCaption').value.trim()     || null,
+      description: document.getElementById('mmDescription').value.trim() || null,
+      title:       document.getElementById('mmTitle').value.trim()       || null,
+      alt_text:    document.getElementById('mmAlt').value.trim()         || null,
+    };
+    if (mm.replaceFile) {
+      const rec = mm.selectedRecord;
+      const ext = mm.replaceFile.name.split('.').pop().toLowerCase();
+      const storagePath = `${rec.page}/${rec.section}/${rec.slot}.${ext}`;
+      const { error: upErr } = await window.sb.storage
+        .from(MM.BUCKET)
+        .upload(storagePath, mm.replaceFile, { upsert: true, contentType: mm.replaceFile.type });
+      if (upErr) throw upErr;
+      const { data: urlData } = window.sb.storage.from(MM.BUCKET).getPublicUrl(storagePath);
+      updateData.storage_path    = storagePath;
+      updateData.public_url      = urlData?.publicUrl;
+      updateData.object_position = mm.replacePosition;
+    }
+    const { error } = await window.sb.from('site_media').update(updateData).eq('id', mm.selectedId);
+    if (error) throw error;
+    closeMediaModal('modalMediaEditor');
+    showAdminToast('Modification enregistrée.');
+    if (mm.browsePage && mm.browseSection) renderMediaCards(mm.browsePage, mm.browseSection);
+  } catch (err) {
+    showAdminToast('Impossible d\'enregistrer la modification. Réessayez.', true);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Enregistrer';
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
    HELPERS MODAUX
 ════════════════════════════════════════════════════════════════ */
 function initModalCloseHandlers() {
@@ -915,6 +1025,7 @@ function debounce(fn, delay) {
 }
 
 // Expose pour les onclick inline dans le HTML généré dynamiquement
-window.openReplace = openReplace;
-window.openEdit    = openEdit;
-window.openDelete  = openDelete;
+window.openMediaEditor = openMediaEditor;
+window.openReplace     = openReplace;
+window.openEdit        = openEdit;
+window.openDelete      = openDelete;

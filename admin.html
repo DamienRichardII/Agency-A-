@@ -910,6 +910,120 @@
       cursor: pointer; transition: opacity .2s;
     }
     .replace-preview-new-box:hover { opacity: .85; }
+
+    /* ════════════════════════════════════════════
+       MÉDIAS SIMPLIFIÉS — UX Anaïs
+    ════════════════════════════════════════════ */
+
+    .mm-header {
+      display: flex; align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 28px; flex-wrap: wrap; gap: 12px;
+    }
+    .mm-title {
+      font-family: var(--display); font-size: 28px; font-weight: 400;
+      color: var(--ink); margin: 0 0 6px;
+    }
+    .mm-subtitle {
+      font-size: 14px; color: var(--muted);
+      margin: 0; line-height: 1.6; max-width: 560px;
+    }
+
+    /* ── Media card simplifiée : survol overlay ── */
+    .media-card-edit-overlay {
+      position: absolute; inset: 0;
+      background: rgba(17,17,17,.45);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; transition: opacity .2s; cursor: pointer;
+    }
+    .media-card:hover .media-card-edit-overlay { opacity: 1; }
+    .media-card-edit-overlay span {
+      font-family: var(--body); font-size: 11px;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: #fff; background: rgba(17,17,17,.6);
+      padding: 8px 18px; border-radius: 100px;
+    }
+    .mm-modify-btn {
+      width: 100%; background: var(--ink); color: var(--cream);
+      border: none; border-radius: 7px; padding: 9px 16px;
+      font-family: var(--body); font-size: 11px; font-weight: 500;
+      letter-spacing: .08em; text-transform: uppercase;
+      cursor: pointer; transition: background .2s; margin-top: 10px;
+    }
+    .mm-modify-btn:hover { background: #5a3f2e; }
+
+    /* ── Zone photo dans la modale éditeur ── */
+    .mm-photo-area {
+      position: relative; aspect-ratio: 4/3;
+      border-radius: 12px; overflow: hidden;
+      background: #ede8e1; cursor: pointer;
+      border: 1px solid rgba(212,184,155,.2);
+    }
+    .mm-photo-preview {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .mm-photo-preview img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .mm-photo-placeholder { font-size: 13px; color: var(--muted); }
+    .mm-photo-overlay {
+      position: absolute; inset: 0;
+      background: rgba(17,17,17,.5);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; transition: opacity .2s;
+    }
+    .mm-photo-area:hover .mm-photo-overlay { opacity: 1; }
+    .mm-photo-overlay span {
+      font-family: var(--body); font-size: 12px;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: #fff; background: rgba(17,17,17,.65);
+      padding: 10px 22px; border-radius: 100px;
+    }
+
+    /* ── Options avancées (details/summary) ── */
+    .mm-advanced {
+      margin-top: 20px; border: 1px solid rgba(212,184,155,.2);
+      border-radius: 8px; overflow: hidden;
+    }
+    .mm-advanced summary {
+      font-family: var(--body); font-size: 11px;
+      text-transform: uppercase; letter-spacing: .1em;
+      color: var(--muted); padding: 12px 16px; cursor: pointer;
+      list-style: none; display: flex; align-items: center; gap: 8px;
+      user-select: none; transition: color .2s;
+    }
+    .mm-advanced summary::-webkit-details-marker { display: none; }
+    .mm-advanced summary::before {
+      content: '›'; font-size: 16px;
+      transition: transform .2s; display: inline-block;
+    }
+    .mm-advanced[open] summary::before { transform: rotate(90deg); }
+    .mm-advanced summary:hover { color: var(--ink); }
+    .mm-advanced-body {
+      padding: 16px 16px 20px;
+      border-top: 1px solid rgba(212,184,155,.15);
+    }
+
+    /* ── Bouton supprimer ── */
+    .mm-delete-btn {
+      background: none; border: 1px solid rgba(185,28,28,.3);
+      color: #b91c1c; border-radius: 6px; padding: 8px 16px;
+      font-family: var(--body); font-size: 11px; font-weight: 500;
+      letter-spacing: .06em; text-transform: uppercase;
+      cursor: pointer; transition: all .2s;
+    }
+    .mm-delete-btn:hover { background: #b91c1c; color: #fff; }
+
+    /* ── Responsive mobile ── */
+    @media (max-width: 600px) {
+      .mm-photo-overlay { opacity: 1 !important; }
+      .mm-modify-btn { padding: 12px; font-size: 13px; letter-spacing: .05em; }
+      .media-cards-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 12px;
+      }
+    }
   </style>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -1323,75 +1437,40 @@
 
 
       <!-- ════════════════════════════════════════════
-           PANEL — GESTION DES MÉDIAS
+           PANEL — PHOTOS DU SITE
       ════════════════════════════════════════════ -->
       <section class="admin-panel" id="panel-media">
-        <div class="admin-topbar">
-          <h1>Gestion des médias</h1>
-          <div style="display:flex;gap:10px;align-items:center">
-            <button class="btn-primary-sm" id="mediaOpenUploadBtn">+ Ajouter des médias</button>
+
+        <!-- En-tête simplifié -->
+        <div class="mm-header">
+          <div>
+            <h1 class="mm-title">Photos de votre site</h1>
+            <p class="mm-subtitle">Modifiez simplement les photos et les textes de chaque page. Choisissez une page, puis une section.</p>
           </div>
         </div>
 
-        <!-- Tabs Parcourir / Médiathèque -->
-        <div class="media-view-tabs">
-          <button class="media-view-tab active" data-view="browse">Parcourir</button>
-          <button class="media-view-tab" data-view="library">Médiathèque</button>
+        <!-- Fil d'Ariane (navigation Page → Section → Photos) -->
+        <div class="media-breadcrumb" id="mediaBreadcrumb">
+          <span>Choisissez une page</span>
         </div>
 
-        <!-- ── Vue Parcourir ── -->
-        <div id="mediaViewBrowse">
-          <!-- Breadcrumb -->
-          <div class="media-breadcrumb" id="mediaBreadcrumb">
-            <span>Sélectionnez une page</span>
-          </div>
-
-          <!-- Grille pages -->
-          <div id="mediaBrowsePages">
-            <div class="page-cards-grid" id="pageCardsGrid">
-              <!-- généré par media-manager.js -->
-              <div class="empty-state">Chargement…</div>
-            </div>
-          </div>
-
-          <!-- Grille sections (masquée par défaut) -->
-          <div id="mediaBrowseSections" style="display:none">
-            <div class="section-cards-grid" id="sectionCardsGrid">
-              <!-- généré par media-manager.js -->
-            </div>
-          </div>
-
-          <!-- Grille médias (masquée par défaut) -->
-          <div id="mediaBrowseSlots" style="display:none">
-            <div class="media-cards-grid" id="mediaCardsGrid">
-              <!-- généré par media-manager.js -->
-            </div>
+        <!-- Grille pages -->
+        <div id="mediaBrowsePages">
+          <div class="page-cards-grid" id="pageCardsGrid">
+            <div class="empty-state">Chargement…</div>
           </div>
         </div>
 
-        <!-- ── Vue Médiathèque ── -->
-        <div id="mediaViewLibrary" style="display:none">
-          <div class="media-library-controls">
-            <input type="text" class="media-library-search" id="librarySearch" placeholder="Rechercher…">
-            <select class="media-library-filter" id="libraryFilterPage">
-              <option value="">Toutes les pages</option>
-              <option value="a-propos">À propos</option>
-              <option value="portfolio">Portfolio</option>
-              <option value="collaborateurs">Collaborateurs</option>
-              <option value="boutique">Boutique</option>
-              <option value="accueil">Accueil</option>
-            </select>
-            <select class="media-library-filter" id="libraryFilterUsed">
-              <option value="">Tous les médias</option>
-              <option value="used">Utilisés sur le site</option>
-              <option value="unused">Non utilisés</option>
-            </select>
-          </div>
-          <div class="media-library-grid" id="libraryGrid">
-            <div class="empty-state" style="grid-column:1/-1">Chargement de la médiathèque…</div>
-          </div>
-          <div class="media-pagination" id="libraryPagination"></div>
+        <!-- Grille sections (masquée par défaut) -->
+        <div id="mediaBrowseSections" style="display:none">
+          <div class="section-cards-grid" id="sectionCardsGrid"></div>
         </div>
+
+        <!-- Grille médias (masquée par défaut) -->
+        <div id="mediaBrowseSlots" style="display:none">
+          <div class="media-cards-grid" id="mediaCardsGrid"></div>
+        </div>
+
       </section>
 
       <!-- ════════════════════════════════════════════
@@ -1592,6 +1671,100 @@
           <div class="media-modal-foot">
             <button class="btn-secondary-sm" data-media-close="modalMediaDelete">Annuler</button>
             <button class="action-btn danger" id="deleteConfirmBtn" style="padding:8px 18px">Supprimer définitivement</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ════════════════════════════════════════════
+           MODALE ÉDITEUR UNIFIÉ — simplifié Anaïs
+      ════════════════════════════════════════════ -->
+      <div class="media-modal" id="modalMediaEditor">
+        <div class="media-modal-box">
+          <div class="media-modal-head">
+            <h2 id="mmEditorTitle">Modifier la photo</h2>
+            <button class="media-modal-close" data-media-close="modalMediaEditor">×</button>
+          </div>
+          <div class="media-modal-body">
+
+            <!-- Grande photo cliquable pour remplacer -->
+            <div class="mm-photo-area" id="mmPhotoArea"
+                 onclick="document.getElementById('mmFileInput').click()"
+                 title="Cliquez pour changer la photo">
+              <div class="mm-photo-preview" id="mmPhotoPreview">
+                <span class="mm-photo-placeholder">Aucune photo</span>
+              </div>
+              <div class="mm-photo-overlay">
+                <span>Changer la photo</span>
+              </div>
+              <input type="file" id="mmFileInput"
+                     accept="image/jpeg,image/jpg,image/png,image/webp,image/avif"
+                     style="display:none">
+            </div>
+            <p id="mmNewPhotoName" style="font-size:12px;color:#059669;margin:8px 0 0;min-height:16px;text-align:center"></p>
+
+            <!-- Cadrage (visible uniquement après sélection d'une nouvelle photo) -->
+            <div id="mmPositionRow" style="display:none;margin-top:16px">
+              <span class="position-picker-label">Cadrage de la photo</span>
+              <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:6px">
+                <div class="position-grid" id="mmPositionGrid">
+                  <button class="position-btn" data-pos="top left" title="Haut gauche"><svg width="14" height="14" viewBox="0 0 14 14"><circle cx="3" cy="3" r="2.5"/></svg></button>
+                  <button class="position-btn" data-pos="top center" title="Haut centre"><svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="3" r="2.5"/></svg></button>
+                  <button class="position-btn" data-pos="top right" title="Haut droite"><svg width="14" height="14" viewBox="0 0 14 14"><circle cx="11" cy="3" r="2.5"/></svg></button>
+                  <button class="position-btn" data-pos="center left" title="Milieu gauche"><svg width="14" height="14" viewBox="0 0 14 14"><circle cx="3" cy="7" r="2.5"/></svg></button>
+                  <button class="position-btn active" data-pos="center" title="Centre"><svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="7" r="2.5"/></svg></button>
+                  <button class="position-btn" data-pos="center right" title="Milieu droite"><svg width="14" height="14" viewBox="0 0 14 14"><circle cx="11" cy="7" r="2.5"/></svg></button>
+                  <button class="position-btn" data-pos="bottom left" title="Bas gauche"><svg width="14" height="14" viewBox="0 0 14 14"><circle cx="3" cy="11" r="2.5"/></svg></button>
+                  <button class="position-btn" data-pos="bottom center" title="Bas centre"><svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="11" r="2.5"/></svg></button>
+                  <button class="position-btn" data-pos="bottom right" title="Bas droite"><svg width="14" height="14" viewBox="0 0 14 14"><circle cx="11" cy="11" r="2.5"/></svg></button>
+                </div>
+                <p style="font-size:12px;color:var(--muted);margin:0;line-height:1.6;max-width:200px">
+                  Choisissez où placer le sujet principal de la photo dans son cadre.
+                </p>
+              </div>
+            </div>
+
+            <hr style="border:none;border-top:1px solid rgba(212,184,155,.18);margin:22px 0 20px">
+
+            <!-- Légende -->
+            <div class="cm-field">
+              <label class="cm-label">Légende</label>
+              <p class="cm-help">Texte affiché sous l'image sur le site.</p>
+              <input type="text" class="cm-input" id="mmCaption"
+                     placeholder="Ex : Portrait en lumière naturelle, Paris 2024">
+            </div>
+
+            <!-- Description -->
+            <div class="cm-field">
+              <label class="cm-label">Description</label>
+              <p class="cm-help">Contexte ou informations complémentaires (optionnel).</p>
+              <textarea class="cm-input" id="mmDescription" rows="3"
+                        placeholder="Description longue…"></textarea>
+            </div>
+
+            <!-- Options avancées repliées -->
+            <details class="mm-advanced">
+              <summary>Options avancées</summary>
+              <div class="mm-advanced-body">
+                <div class="cm-field">
+                  <label class="cm-label">Titre éditorial</label>
+                  <input type="text" class="cm-input" id="mmTitle" placeholder="Titre interne de la photo…">
+                </div>
+                <div class="cm-field">
+                  <label class="cm-label">Texte alternatif</label>
+                  <p class="cm-help">Décrivez brièvement ce que montre l'image (pour l'accessibilité).</p>
+                  <input type="text" class="cm-input" id="mmAlt"
+                         placeholder="Ex : Portrait femme fond blanc studio Paris">
+                </div>
+                <div id="mmDeleteZone" style="margin-top:16px;padding-top:16px;border-top:1px solid rgba(212,184,155,.15)">
+                  <button class="mm-delete-btn" id="mmDeleteBtn">Supprimer cette photo</button>
+                </div>
+              </div>
+            </details>
+
+          </div>
+          <div class="media-modal-foot">
+            <button class="btn-secondary-sm" data-media-close="modalMediaEditor">Annuler</button>
+            <button class="btn-primary-sm" id="mmSaveBtn">Enregistrer</button>
           </div>
         </div>
       </div>
