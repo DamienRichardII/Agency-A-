@@ -213,10 +213,10 @@ function showFatalError(reason) {
       window.sb.from('project_images').select('id', { count: 'exact', head: true }),
       window.sb.from('project_messages').select('id', { count: 'exact', head: true }).is('read_at', null)
     ]);
-    document.getElementById('countClients').textContent  = nClients  ?? '—';
-    document.getElementById('countProjects').textContent = nProjects ?? '—';
-    document.getElementById('countImages').textContent   = nImages   ?? '—';
-    document.getElementById('countMessages').textContent = nMessages ?? '—';
+    const elClients  = document.getElementById('countClients');  if (elClients)  elClients.textContent  = nClients  ?? '—';
+    const elProjects = document.getElementById('countProjects'); if (elProjects) elProjects.textContent = nProjects ?? '—';
+    const elImages   = document.getElementById('countImages');   if (elImages)   elImages.textContent   = nImages   ?? '—';
+    const elMessages = document.getElementById('countMessages'); if (elMessages) elMessages.textContent = nMessages ?? '—';
 
     // Activité récente — 5 derniers messages
     const { data: recent } = await window.sb
